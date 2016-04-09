@@ -15,7 +15,7 @@
 
 
     <artifactId>ianal-but-maven-plugin</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
     <packaging>maven-plugin</packaging>
 
     <name>ianal-but-maven-plugin</name>
@@ -120,7 +120,7 @@
         <dependency>
             <groupId>de.pfabulist</groupId>
             <artifactId>kleinod</artifactId>
-            <version>0.34</version>
+            <version>0.34.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

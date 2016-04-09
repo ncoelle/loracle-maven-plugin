@@ -1,0 +1,2128 @@
+<tr>
+<td>3dfx Glide License             </td>
+<td>   Glide        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.users.on.net/~triforce/glidexp/COPYING.txt">http://www.users.on.net/~triforce/glidexp/COPYING.txt</a>
+</td></tr>
+<tr>
+<td>4Suite Copyright License       </td>
+<td>   ASL 1.1      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://4suite.org/COPYRIGHT">http://4suite.org/COPYRIGHT</a>
+</td></tr>
+<tr>
+<td>Abstyles License               </td>
+<td>   Abstyles     </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Abstyles">https://fedoraproject.org/wiki/Licensing/Abstyles</a>
+</td></tr>
+<tr>
+<td>Academic Free License          </td>
+<td>   AFL          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://opensource.org/licenses/afl-3.0.php">http://opensource.org/licenses/afl-3.0.php</a>
+</td></tr>
+<tr>
+<td>Academy of Motion Picture Arts and Sciences BSD </td>
+<td>AMPAS BSD</td>
+<td> Yes </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/BSD#AMPASBSD">https://fedoraproject.org/wiki/Licensing/BSD#AMPASBSD</a>
+</td></tr>
+<tr>
+<td>Adobe Systems Incorporated Source Code License Agreement</td>
+<td> Adobe  </td>
+<td> Yes </td>
+<td> Yes         </td>
+<td>Yes             </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/AdobeLicense">https://fedoraproject.org/wiki/Licensing/AdobeLicense</a>
+</td></tr>
+<tr>
+<td>Adobe Postscript AFM License   </td>
+<td>   APAFML       </td>
+<td>   Yes         </td>
+<td> Yes               </td>
+<td>Yes     </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/AdobePostscriptAFM">https://fedoraproject.org/wiki/Licensing/AdobePostscriptAFM</a>
+</td></tr>
+<tr>
+<td>Adobe Glyph List License       </td>
+<td>   MIT          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MIT#AdobeGlyph">https://fedoraproject.org/wiki/Licensing/MIT#AdobeGlyph</a>
+</td></tr>
+<tr>
+<td>Affero General Public License 1.0</td>
+<td>   AGPLv1   </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.affero.org/oagpl.html">http://www.affero.org/oagpl.html</a>
+</td></tr>
+<tr>
+<td>Affero General Public License 3.0</td>
+<td>   AGPLv3     </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b><a class="external text" href="http://www.fsf.org/licensing/licenses/gpl-faq.html#v3Notwithstanding">Sortof</a> </b>           </td>
+<td><a class="external free" href="http://www.fsf.org/licensing/licenses/agpl-3.0.html">http://www.fsf.org/licensing/licenses/agpl-3.0.html</a>
+</td></tr>
+<tr>
+<td>Affero General Public License 3.0 or later</td>
+<td>  AGPLv3+ </td>
+<td> Yes      </td>
+<td><b>NO</b>           </td>
+<td><b><a class="external text" href="http://www.fsf.org/licensing/licenses/gpl-faq.html#v3Notwithstanding">Sortof</a> </b>           </td>
+<td><a class="external free" href="http://www.fsf.org/licensing/licenses/agpl-3.0.html">http://www.fsf.org/licensing/licenses/agpl-3.0.html</a>
+</td></tr>
+<tr>
+<td>Affero General Public License 3.0 with Zarafa trademark exceptions </td>
+<td>  AGPLv3 with exceptions </td>
+<td> Yes </td>
+<td><b>NO</b></td>
+<td> <b><a class="external text" href="http://www.fsf.org/licensing/licenses/gpl-faq.html#v3Notwithstanding">Sortof</a> </b>           </td>
+<td><a class="external free" href="http://www.zarafa.com/content/affero-gplv3">http://www.zarafa.com/content/affero-gplv3</a>
+</td></tr>
+<tr>
+<td>Afmparse License               </td>
+<td>   Afmparse     </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Afmparse">https://fedoraproject.org/wiki/Licensing/Afmparse</a>
+</td></tr>
+<tr>
+<td>Amazon Digital Services License</td>
+<td>   ADSL         </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/AmazonDigitalServicesLicense">https://fedoraproject.org/wiki/Licensing/AmazonDigitalServicesLicense</a>
+</td></tr>
+<tr>
+<td>AMD's plpa_map.c License       </td>
+<td>   AMDPLPA      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/AMD_plpa_map_License">https://fedoraproject.org/wiki/Licensing/AMD_plpa_map_License</a>
+</td></tr>
+<tr>
+<td>Apache Software License 1.0    </td>
+<td>   ASL 1.0      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.apache.org/licenses/LICENSE-1.0">http://www.apache.org/licenses/LICENSE-1.0</a>
+</td></tr>
+<tr>
+<td>Apache Software License 1.1    </td>
+<td>   ASL 1.1      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.apache.org/licenses/LICENSE-1.1">http://www.apache.org/licenses/LICENSE-1.1</a>
+</td></tr>
+<tr>
+<td>Apache Software License 2.0    </td>
+<td>   ASL 2.0      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a>
+</td></tr>
+<tr>
+<td>App::s2p License               </td>
+<td>   App-s2p      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/App-s2p">https://fedoraproject.org/wiki/Licensing/App-s2p</a>
+</td></tr>
+<tr>
+<td>Apple MIT License </td>
+<td> AML </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> <a class="external free" href="https://fedoraproject.org/wiki/Licensing/Apple_MIT_License">https://fedoraproject.org/wiki/Licensing/Apple_MIT_License</a>
+</td></tr>
+<tr>
+<td>Apple Public Source License 2.0</td>
+<td>   APSL 2.0     </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.opensource.apple.com/apsl/2.0.txt">http://www.opensource.apple.com/apsl/2.0.txt</a>
+</td></tr>
+<tr>
+<td>Artistic (clarified)           </td>
+<td>   Artistic clarified</td>
+<td>   Yes    </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/ArtisticClarified">https://fedoraproject.org/wiki/Licensing/ArtisticClarified</a>
+</td></tr>
+<tr>
+<td>Artistic 2.0                   </td>
+<td>   Artistic 2.0 </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.perlfoundation.org/artistic_license_2_0">http://www.perlfoundation.org/artistic_license_2_0</a>
+</td></tr>
+<tr>
+<td>Aspell-ru License              </td>
+<td>   ARL          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/AspellRu">https://fedoraproject.org/wiki/Licensing/AspellRu</a>
+</td></tr>
+<tr>
+<td>Attribution Assurance License  </td>
+<td>   AAL          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://opensource.org/licenses/attribution.php">http://opensource.org/licenses/attribution.php</a>
+</td></tr>
+<tr>
+<td>Bahyph License                 </td>
+<td>   Bahyph       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Bahyph">https://fedoraproject.org/wiki/Licensing/Bahyph</a>
+</td></tr>
+<tr>
+<td>Barr License                   </td>
+<td>   Barr         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Barr">https://fedoraproject.org/wiki/Licensing/Barr</a>
+</td></tr>
+<tr>
+<td>Beerware License               </td>
+<td>   Beerware </td>
+<td> Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Beerware">https://fedoraproject.org/wiki/Licensing/Beerware</a>
+</td></tr>
+<tr>
+<td>BeOpen Open Source License Agreement Version 1 </td>
+<td> BeOpen </td>
+<td> Yes   </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/BeOpen">https://fedoraproject.org/wiki/Licensing/BeOpen</a>
+</td></tr>
+<tr>
+<td>Bibtex License                 </td>
+<td>   Bibtex       </td>
+<td>   Yes (but only for tex)</td>
+<td><b>NO</b> </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Bibtex">https://fedoraproject.org/wiki/Licensing/Bibtex</a>
+</td></tr>
+<tr>
+<td>BitTorrent License             </td>
+<td>   BitTorrent   </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/BitTorrent_Open_Source_License">https://fedoraproject.org/wiki/Licensing/BitTorrent_Open_Source_License</a>
+</td></tr>
+<tr>
+<td>Boost Software License         </td>
+<td>   Boost        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.boost.org/LICENSE_1_0.txt">http://www.boost.org/LICENSE_1_0.txt</a>
+</td></tr>
+<tr>
+<td>Borceux license                </td>
+<td>   Borceux      </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Borceux">https://fedoraproject.org/wiki/Licensing/Borceux</a>
+</td></tr>
+<tr>
+<td>BSD License (original)         </td>
+<td>   BSD with advertising</td>
+<td> Yes    </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/BSD#BSDwithAdvertising">https://fedoraproject.org/wiki/Licensing/BSD#BSDwithAdvertising</a>
+</td></tr>
+<tr>
+<td>BSD with attribution           </td>
+<td>   BSD with attribution</td>
+<td> Yes    </td>
+<td>                   </td>
+<td>                   </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/BSD_with_Attribution">https://fedoraproject.org/wiki/Licensing/BSD_with_Attribution</a>
+</td></tr>
+<tr>
+<td>BSD License (no advertising)   </td>
+<td>   BSD          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/BSD#3ClauseBSD">https://fedoraproject.org/wiki/Licensing/BSD#3ClauseBSD</a>
+</td></tr>
+<tr>
+<td>BSD License (two clause)       </td>
+<td>   BSD          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/BSD#2ClauseBSD">https://fedoraproject.org/wiki/Licensing/BSD#2ClauseBSD</a>
+</td></tr>
+<tr>
+<td>BSD Protection License         </td>
+<td>   BSD Protection </td>
+<td>  Yes        </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/BSD_Protection_License">https://fedoraproject.org/wiki/Licensing/BSD_Protection_License</a>
+</td></tr>
+<tr>
+<td>Computer Associates Trusted Open Source License 1.1</td>
+<td> CATOSL </td>
+<td> Yes</td>
+<td><b>NO</b>          </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://opensource.org/licenses/ca-tosl1.1.php">http://opensource.org/licenses/ca-tosl1.1.php</a>
+</td></tr>
+<tr>
+<td>CeCILL License v1.1            </td>
+<td>   CeCILL       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.cecill.info/licences/Licence_CeCILL_V1.1-US.html">http://www.cecill.info/licences/Licence_CeCILL_V1.1-US.html</a>
+</td></tr>
+<tr>
+<td>CeCILL License v2              </td>
+<td>   CeCILL       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.cecill.info/licences.en.html">http://www.cecill.info/licences.en.html</a>
+</td></tr>
+<tr>
+<td>CeCILL-B License               </td>
+<td>   CeCILL-B     </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.cecill.info/licences.en.html">http://www.cecill.info/licences.en.html</a>
+</td></tr>
+<tr>
+<td>CeCILL-C License               </td>
+<td>   CeCILL-C     </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.cecill.info/licences.en.html">http://www.cecill.info/licences.en.html</a>
+</td></tr>
+<tr>
+<td>Celtx Public License (CePL)    </td>
+<td>   Netscape     </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.celtx.com/CePL/">http://www.celtx.com/CePL/</a>
+</td></tr>
+<tr>
+<td>CMU License (BSD like)         </td>
+<td>   MIT          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MIT">https://fedoraproject.org/wiki/Licensing/MIT</a>
+</td></tr>
+<tr>
+<td>CNRI License (Old Python)      </td>
+<td>   CNRI         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.handle.net/python_licenses/python1.6_9-5-00.html">http://www.handle.net/python_licenses/python1.6_9-5-00.html</a>
+</td></tr>
+<tr>
+<td>Common Development Distribution License </td>
+<td> CDDL  </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/CDDL">https://fedoraproject.org/wiki/Licensing/CDDL</a>
+</td></tr>
+<tr>
+<td>Common Public License          </td>
+<td>   CPL          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.eclipse.org/legal/cpl-v10.html">http://www.eclipse.org/legal/cpl-v10.html</a>
+</td></tr>
+<tr>
+<td>Condor Public License          </td>
+<td>   Condor       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.cs.wisc.edu/condor/condor-public-license.html">http://www.cs.wisc.edu/condor/condor-public-license.html</a>
+</td></tr>
+<tr>
+<td>Copyright Attribution Only     </td>
+<td>   Copyright only</td>
+<td>  Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/CopyrightOnly">https://fedoraproject.org/wiki/Licensing/CopyrightOnly</a>
+</td></tr>
+<tr>
+<td>CPAL License 1.0               </td>
+<td>   CPAL         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://www.socialtext.net/open/index.cgi?cpal_license_in_wikitext">https://www.socialtext.net/open/index.cgi?cpal_license_in_wikitext</a>
+</td></tr>
+<tr>
+<td>CRC32 License                  </td>
+<td>   CRC32        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/CRC32">https://fedoraproject.org/wiki/Licensing/CRC32</a>
+</td></tr>
+<tr>
+<td>Creative Commons BSD           </td>
+<td>   BSD          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://creativecommons.org/licenses/BSD/">http://creativecommons.org/licenses/BSD/</a>
+</td></tr>
+<tr>
+<td>Creative Commons GNU GPL       </td>
+<td>   GPLv2+       </td>
+<td>   Yes         </td>
+<td>N/A                </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a> </td>
+<td><a class="external free" href="http://creativecommons.org/choose/cc-gpl">http://creativecommons.org/choose/cc-gpl</a>
+</td></tr>
+<tr>
+<td>Creative Commons GNU LGPL      </td>
+<td>   LGPLv2+      </td>
+<td>   Yes         </td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a> </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a> </td>
+<td> <a class="external free" href="http://creativecommons.org/choose/cc-lgpl">http://creativecommons.org/choose/cc-lgpl</a>
+</td></tr>
+<tr>
+<td>Creative Commons Zero 1.0 Universal </td>
+<td> CC0       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://creativecommons.org/publicdomain/zero/1.0/legalcode">http://creativecommons.org/publicdomain/zero/1.0/legalcode</a>
+</td></tr>
+<tr>
+<td>Crossword License              </td>
+<td>   Crossword    </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Crossword">https://fedoraproject.org/wiki/Licensing/Crossword</a>
+</td></tr>
+<tr>
+<td>Cryptix General License        </td>
+<td>   BSD          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.cryptix.org/LICENSE.TXT">http://www.cryptix.org/LICENSE.TXT</a>
+</td></tr>
+<tr>
+<td>Crystal Stacker License        </td>
+<td>   Crystal Stacker</td>
+<td> Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/CrystalStacker">https://fedoraproject.org/wiki/Licensing/CrystalStacker</a>
+</td></tr>
+<tr>
+<td>CUA Office Public License Version 1.0 </td>
+<td> MPLv1.1 </td>
+<td>   Yes         </td>
+<td>Compatible if dual licensed with GPL, otherwise Incompatible</td>
+<td> </td>
+<td><a class="external free" href="http://opensource.org/licenses/cuaoffice.php">http://opensource.org/licenses/cuaoffice.php</a>
+</td></tr>
+<tr>
+<td>Cube License                   </td>
+<td>   Cube         </td>
+<td>   Yes         </td>
+<td>No                 </td>
+<td>No                 </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Cube">https://fedoraproject.org/wiki/Licensing/Cube</a>
+</td></tr>
+<tr>
+<td>diffmark license               </td>
+<td>   diffmark     </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes </td>
+<td> <a class="external free" href="https://fedoraproject.org/wiki/Licensing/diffmark">https://fedoraproject.org/wiki/Licensing/diffmark</a>
+</td></tr>
+<tr>
+<td>Do What The F*ck You Want To Public License</td>
+<td> WTFPL </td>
+<td> Yes        </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/WTFPL">https://fedoraproject.org/wiki/Licensing/WTFPL</a>
+</td></tr>
+<tr>
+<td>DOC License                    </td>
+<td>   DOC          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.cs.wustl.edu/~schmidt/ACE-copying.html">http://www.cs.wustl.edu/~schmidt/ACE-copying.html</a>
+</td></tr>
+<tr>
+<td>Docbook MIT License            </td>
+<td>   DMIT         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/DMIT">https://fedoraproject.org/wiki/Licensing/DMIT</a>
+</td></tr>
+<tr>
+<td>Dotseqn License                </td>
+<td>   Dotseqn      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Dotseqn">https://fedoraproject.org/wiki/Licensing/Dotseqn</a>
+</td></tr>
+<tr>
+<td>DSDP License                   </td>
+<td>   DSDP         </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/DSDP">https://fedoraproject.org/wiki/Licensing/DSDP</a>
+</td></tr>
+<tr>
+<td>dvipdfm License                </td>
+<td>   dvipdfm      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/dvipdfm">https://fedoraproject.org/wiki/Licensing/dvipdfm</a>
+</td></tr>
+<tr>
+<td>Eclipse Distribution License 1.0 </td>
+<td> BSD          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.eclipse.org/org/documents/edl-v10.php">http://www.eclipse.org/org/documents/edl-v10.php</a>
+</td></tr>
+<tr>
+<td>Eclipse Public License 1.0     </td>
+<td>   EPL          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</a>
+</td></tr>
+<tr>
+<td>eCos License v2.0              </td>
+<td>   eCos         </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.fsf.org/licensing/licenses/ecos-license.html">http://www.fsf.org/licensing/licenses/ecos-license.html</a>
+</td></tr>
+<tr>
+<td>Educational Community License 1.0</td>
+<td> ECL 1.0      </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://opensource.org/licenses/ecl1.php">http://opensource.org/licenses/ecl1.php</a>
+</td></tr>
+<tr>
+<td>Educational Community License 2.0</td>
+<td> ECL 2.0      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.osedu.org/licenses/ECL-2.0/">http://www.osedu.org/licenses/ECL-2.0/</a>
+</td></tr>
+<tr>
+<td>eGenix.com Public License 1.1.0 </td>
+<td> eGenix        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/eGenix.com_Public_License_1.1.0">https://fedoraproject.org/wiki/Licensing/eGenix.com_Public_License_1.1.0</a>
+</td></tr>
+<tr>
+<td>Eiffel Forum License 2.0       </td>
+<td>   EFL 2.0      </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.fsf.org/licensing/licenses/eiffel-forum-license-2.html">http://www.fsf.org/licensing/licenses/eiffel-forum-license-2.html</a>
+</td></tr>
+<tr>
+<td>enna License                   </td>
+<td>   MIT          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MIT#enna">https://fedoraproject.org/wiki/Licensing/MIT#enna</a>
+</td></tr>
+<tr>
+<td>Enlightenment License (e16)    </td>
+<td>   MIT with advertising </td>
+<td> Yes   </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MIT_With_Advertising">https://fedoraproject.org/wiki/Licensing/MIT_With_Advertising</a>
+</td></tr>
+<tr>
+<td>Entessa Public License         </td>
+<td>   Entessa      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://opensource.org/licenses/entessa.php">http://opensource.org/licenses/entessa.php</a>
+</td></tr>
+<tr>
+<td>EPICS Open License             </td>
+<td>   EPICS        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.aps.anl.gov/epics/license/open.php">http://www.aps.anl.gov/epics/license/open.php</a>
+</td></tr>
+<tr>
+<td>Erlang Public License 1.1      </td>
+<td>   ERPL         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/ErlangPublicLicense">https://fedoraproject.org/wiki/Licensing/ErlangPublicLicense</a>
+</td></tr>
+<tr>
+<td>EU Datagrid Software License   </td>
+<td>   EU Datagrid  </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.opensource.org/licenses/eudatagrid.php">http://www.opensource.org/licenses/eudatagrid.php</a>
+</td></tr>
+<tr>
+<td>European Union Public License 1.1 </td>
+<td>EUPL 1.1     </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://ec.europa.eu/idabc/en/document/7774.html">http://ec.europa.eu/idabc/en/document/7774.html</a>
+</td></tr>
+<tr>
+<td>Eurosym License                </td>
+<td>   Eurosym      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Eurosym">https://fedoraproject.org/wiki/Licensing/Eurosym</a>
+</td></tr>
+<tr>
+<td>Fedora Directory Server License</td>
+<td>   GPLv2 with exceptions </td>
+<td> Yes  </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://directory.fedoraproject.org/wiki/GPL_Exception_License_Text">http://directory.fedoraproject.org/wiki/GPL_Exception_License_Text</a>
+</td></tr>
+<tr>
+<td>Fair License                   </td>
+<td>   Fair         </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://opensource.org/licenses/fair.php">http://opensource.org/licenses/fair.php</a>
+</td></tr>
+<tr>
+<td>feh License                    </td>
+<td>   MIT          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MIT#feh">https://fedoraproject.org/wiki/Licensing/MIT#feh</a>
+</td></tr>
+<tr>
+<td>FLTK License                   </td>
+<td>   LGPLv2 with exceptions </td>
+<td> Yes </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.fltk.org/COPYING.php">http://www.fltk.org/COPYING.php</a>
+</td></tr>
+<tr>
+<td>FreeImage Public License       </td>
+<td>   MPLv1.0      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://freeimage.sourceforge.net/freeimage-license.txt">http://freeimage.sourceforge.net/freeimage-license.txt</a>
+</td></tr>
+<tr>
+<td>Freetype License               </td>
+<td>   FTL          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://freetype.fis.uniroma2.it/FTL.TXT">http://freetype.fis.uniroma2.it/FTL.TXT</a>
+</td></tr>
+<tr>
+<td>FSF Unlimited License          </td>
+<td>   FSFUL        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/FSF_Unlimited_License">https://fedoraproject.org/wiki/Licensing/FSF_Unlimited_License</a>
+</td></tr>
+<tr>
+<td>FSF Unlimited License (with License Retention) </td>
+<td> FSFULLR     </td>
+<td> Yes  </td>
+<td> Yes           </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/FSF_Unlimited_License#License_Retention_Variant">https://fedoraproject.org/wiki/Licensing/FSF_Unlimited_License#License_Retention_Variant</a>
+</td></tr>
+<tr>
+<td>Giftware License               </td>
+<td>   Giftware     </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.talula.demon.co.uk/allegro/license.html">http://www.talula.demon.co.uk/allegro/license.html</a>
+</td></tr>
+<tr>
+<td>GL2PS License                  </td>
+<td>   GL2PS        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.geuz.org/gl2ps/COPYING.GL2PS">http://www.geuz.org/gl2ps/COPYING.GL2PS</a>
+</td></tr>
+<tr>
+<td>Glulxe License                 </td>
+<td>   Glulxe       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Glulxe">https://fedoraproject.org/wiki/Licensing/Glulxe</a>
+</td></tr>
+<tr>
+<td>GNU General Public License (no version)</td>
+<td> GPL+   </td>
+<td>   Yes         </td>
+<td> Yes                </td>
+<td>Yes                 </td>
+<td>A GPL or LGPL licensed package that lacks any statement of what version that it's licensed under in the source code/program output/accompanying docs is technically licensed under *any* version of the GPL or LGPL, not just the version in whatever COPYING file they include.
+</td></tr>
+<tr>
+<td>GNU General Public License (no version), with Classpath exception</td>
+<td>GPL+ with exceptions</td>
+<td>Yes</td>
+<td>Yes </td>
+<td>Yes </td>
+<td>A GPL or LGPL licensed package that lacks any statement of what version that it's licensed under in the source code/program output/accompanying docs is technically licensed under *any* version of the GPL or LGPL, not just the version in whatever COPYING file they include. And if they manage to grant the <a class="external text" href="https://fedoraproject.org/wiki/Licensing/GPL_Classpath_Exception">Classpath exception</a> without specifying a version, you get this strange beast.
+</td></tr>
+<tr>
+<td>GNU General Public License (no version), with font embedding exception</td>
+<td>GPL+ with exceptions</td>
+<td>Yes</td>
+<td>Yes </td>
+<td>Yes </td>
+<td>A GPL or LGPL licensed package that lacks any statement of what version that it's licensed under in the source code/program output/accompanying docs is technically licensed under *any* version of the GPL or LGPL, not just the version in whatever COPYING file they include. And if they manage to grant the font embedding exception without specifying a version, you get this strange beast.
+</td></tr>
+<tr>
+<td>GNU General Public License v1.0 only</td>
+<td>GPLv1      </td>
+<td>   Yes         </td>
+<td><b>NO</b>             </td>
+<td> <b>NO</b>            </td>
+<td><a class="external free" href="http://www.gnu.org/licenses/old-licenses/gpl-1.0.txt">http://www.gnu.org/licenses/old-licenses/gpl-1.0.txt</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v1.0 or later </td>
+<td> GPL+ </td>
+<td>   Yes         </td>
+<td> Yes                 </td>
+<td> Yes                 </td>
+<td>Note that this is not GPLv1+, because 1+ is the same as any version.
+</td></tr>
+<tr>
+<td>GNU General Public License v2.0 only</td>
+<td>GPLv2      </td>
+<td>   Yes       </td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>          </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>         </td>
+<td><a class="external free" href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html">http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v2.0 only, with Classpath exception</td>
+<td>GPLv2 with exceptions</td>
+<td>Yes</td>
+<td>Yes, if exception is used. </td>
+<td>Yes, if exception is used. </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/GPL_Classpath_Exception">https://fedoraproject.org/wiki/Licensing/GPL_Classpath_Exception</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v2.0 only, with font embedding exception</td>
+<td>GPLv2 with exceptions</td>
+<td>Yes</td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a> </td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a> </td>
+<td><a class="external free" href="http://www.gnu.org/licenses/gpl-faq.html#FontException">http://www.gnu.org/licenses/gpl-faq.html#FontException</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v2.0 or later </td>
+<td>GPLv2+</td>
+<td> Yes   </td>
+<td>N/A                </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>         </td>
+<td><a class="external free" href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html">http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v2.0 or later, with Classpath exception</td>
+<td>GPLv2+ with exceptions</td>
+<td>Yes</td>
+<td>Yes, if exception is used. </td>
+<td>Yes, if exception is used. </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/GPL_Classpath_Exception">https://fedoraproject.org/wiki/Licensing/GPL_Classpath_Exception</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v2.0 or later, with font embedding exception</td>
+<td>GPLv2+ with exceptions</td>
+<td>Yes</td>
+<td>N/A</td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a> </td>
+<td><a class="external free" href="http://www.gnu.org/licenses/gpl-faq.html#FontException">http://www.gnu.org/licenses/gpl-faq.html#FontException</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v3.0 only</td>
+<td>GPLv3</td>
+<td>   Yes         </td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>          </td>
+<td> N/A               </td>
+<td><a class="external free" href="http://www.fsf.org/licensing/licenses/gpl.html">http://www.fsf.org/licensing/licenses/gpl.html</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v3.0 only, with Classpath exception</td>
+<td>GPLv3 with exceptions</td>
+<td>Yes</td>
+<td>Yes, if exception is used. </td>
+<td>N/A</td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/GPL_Classpath_Exception">https://fedoraproject.org/wiki/Licensing/GPL_Classpath_Exception</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v3.0 only, with font embedding exception</td>
+<td>GPLv3 with exceptions</td>
+<td>Yes</td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a> </td>
+<td>N/A</td>
+<td><a class="external free" href="http://www.gnu.org/licenses/gpl-faq.html#FontException">http://www.gnu.org/licenses/gpl-faq.html#FontException</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v3.0 or later</td>
+<td>GPLv3+</td>
+<td>   Yes  </td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>          </td>
+<td> N/A               </td>
+<td><a class="external free" href="http://www.fsf.org/licensing/licenses/gpl.html">http://www.fsf.org/licensing/licenses/gpl.html</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v3.0 or later, with Classpath exception</td>
+<td>GPLv3+ with exceptions</td>
+<td>   Yes  </td>
+<td> Yes, if exception is used.          </td>
+<td> N/A               </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/GPL_Classpath_Exception">https://fedoraproject.org/wiki/Licensing/GPL_Classpath_Exception</a>
+</td></tr>
+<tr>
+<td>GNU General Public License v3.0 or later, with font embedding exception</td>
+<td>GPLv3+ with exceptions</td>
+<td>   Yes  </td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>          </td>
+<td> N/A               </td>
+<td><a class="external free" href="http://www.gnu.org/licenses/gpl-faq.html#FontException">http://www.gnu.org/licenses/gpl-faq.html#FontException</a>
+</td></tr>
+<tr>
+<td>GNU Lesser General Public License (no version) </td>
+<td> LGPLv2+ </td>
+<td> Yes    </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td>A GPL or LGPL licensed package that lacks any statement of what version that it's licensed under in the source code/program output/accompanying docs is technically licensed under *any* version of the GPL or LGPL, not just the version in whatever COPYING file they include. Note that this is LGPLv2+, not LGPL+, because version 2 was the first version of LGPL. Note that this license was originally referred to as the GNU Library General Public License v2, but all current versions (v2.1 or newer) of the license are correctly known as the GNU Lesser General Public License.
+</td></tr>
+<tr>
+<td>GNU Lesser General Public License v2 (or 2.1) only</td>
+<td> LGPLv2 </td>
+<td> Yes  </td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>        </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>         </td>
+<td><a class="external free" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</a> Note that this license was originally referred to as the GNU Library General Public License v2, but all current versions (v2.1 or newer) of the license are correctly known as the GNU Lesser General Public License.
+</td></tr>
+<tr>
+<td>GNU Lesser General Public License v2 (or 2.1), with exceptions </td>
+<td> LGPLv2 with exceptions </td>
+<td> Yes </td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>   </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a> </td>
+<td> Please be sure that any exceptions are approved by emailing them to legal@lists.fedoraproject.org first.
+</td></tr>
+<tr>
+<td>GNU Lesser General Public License v2 (or 2.1) or later</td>
+<td> LGPLv2+</td>
+<td> Yes  </td>
+<td><a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a> </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>         </td>
+<td><a class="external free" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</a>
+</td></tr>
+<tr>
+<td>GNU Lesser General Public License v2 (or 2.1) or later, with exceptions </td>
+<td> LGPLv2+ with exceptions </td>
+<td> Yes </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>  </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>  </td>
+<td> Please be sure that any exceptions are approved by emailing them to legal@lists.fedoraproject.org first.
+</td></tr>
+<tr>
+<td>GNU Lesser General Public License v3.0 only</td>
+<td> LGPLv3</td>
+<td> Yes </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>          </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>         </td>
+<td><a class="external free" href="http://www.fsf.org/licensing/licenses/lgpl.html">http://www.fsf.org/licensing/licenses/lgpl.html</a>
+</td></tr>
+<tr>
+<td>GNU Lesser General Public License v3.0 only, with exceptions </td>
+<td> LGPLv3 with exceptions </td>
+<td> Yes </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>  </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>  </td>
+<td> Please be sure that any exceptions are approved by emailing them to legal@lists.fedoraproject.org first.
+</td></tr>
+<tr>
+<td>GNU Lesser General Public License v3.0 or later</td>
+<td> LGPLv3+</td>
+<td> Yes</td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>       </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>         </td>
+<td><a class="external free" href="http://www.fsf.org/licensing/licenses/lgpl.html">http://www.fsf.org/licensing/licenses/lgpl.html</a>
+</td></tr>
+<tr>
+<td>GNU Lesser General Public License v3.0 or later, with exceptions </td>
+<td> LGPLv3+ with exceptions </td>
+<td> Yes </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>  </td>
+<td> <a href="https://fedoraproject.org/wiki/Licensing#GPLCompatibilityMatrix" title="Licensing" class="mw-redirect">See Matrix</a>  </td>
+<td> Please be sure that any exceptions are approved by emailing them to legal@lists.fedoraproject.org first.
+</td></tr>
+<tr>
+<td>gnuplot License                </td>
+<td>   gnuplot      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Gnuplot">https://fedoraproject.org/wiki/Licensing/Gnuplot</a>
+</td></tr>
+<tr>
+<td>Haskell Language Report License </td>
+<td> HaskellReport  </td>
+<td>  Yes          </td>
+<td>Yes</td>
+<td>Yes</td>
+<td> <a class="external free" href="https://fedoraproject.org/wiki/Licensing/Haskell_Language_Report_License">https://fedoraproject.org/wiki/Licensing/Haskell_Language_Report_License</a>
+</td></tr>
+<tr>
+<td>Henry Spencer Reg-Ex Library License </td>
+<td> HSRL     </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Henry_Spencer_Reg-Ex_Library_License">https://fedoraproject.org/wiki/Licensing/Henry_Spencer_Reg-Ex_Library_License</a>
+</td></tr>
+<tr>
+<td>Historical Permission Notice and Disclaimer         </td>
+<td>   MIT      </td>
+<td>Yes</td>
+<td>Yes           </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://opensource.org/licenses/historical.php">http://opensource.org/licenses/historical.php</a>
+</td></tr>
+<tr>
+<td>IBM Public License             </td>
+<td>   IBM          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.opensource.org/licenses/ibmpl.php">http://www.opensource.org/licenses/ibmpl.php</a>
+</td></tr>
+<tr>
+<td>iMatix Standard Function Library Agreement</td>
+<td> iMatix</td>
+<td>   Yes       </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://legacy.imatix.com/html/sfl/sfl4.htm#license">http://legacy.imatix.com/html/sfl/sfl4.htm#license</a>
+</td></tr>
+<tr>
+<td>ImageMagick License            </td>
+<td>   ImageMagick  </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.imagemagick.org/script/license.php">http://www.imagemagick.org/script/license.php</a>
+</td></tr>
+<tr>
+<td>Imlib2 License                 </td>
+<td>   Imlib2       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Imlib2">https://fedoraproject.org/wiki/Licensing/Imlib2</a>
+</td></tr>
+<tr>
+<td>Independent JPEG Group License </td>
+<td>   IJG          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/IJG">https://fedoraproject.org/wiki/Licensing/IJG</a>
+</td></tr>
+<tr>
+<td>Intel ACPI Software License Agreement </td>
+<td> Intel ACPI</td>
+<td>   Yes       </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Intel_ACPI_Software_License_Agreement">https://fedoraproject.org/wiki/Licensing/Intel_ACPI_Software_License_Agreement</a>
+</td></tr>
+<tr>
+<td>Interbase Public License       </td>
+<td>   Interbase    </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.borland.com/devsupport/interbase/opensource/IPL.html">http://www.borland.com/devsupport/interbase/opensource/IPL.html</a>
+</td></tr>
+<tr>
+<td>ISC License (Bind, DHCP Server)</td>
+<td>   ISC          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.isc.org/downloads/software-support-policy/isc-license/">http://www.isc.org/downloads/software-support-policy/isc-license/</a>
+</td></tr>
+<tr>
+<td>Jabber Open Source License     </td>
+<td>   Jabber       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://opensource.org/licenses/jabberpl.php">http://opensource.org/licenses/jabberpl.php</a>
+</td></tr>
+<tr>
+<td>JasPer License                 </td>
+<td>   JasPer       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.ece.uvic.ca/~mdadams/jasper/LICENSE">http://www.ece.uvic.ca/~mdadams/jasper/LICENSE</a>
+</td></tr>
+<tr>
+<td>JPython License (old)          </td>
+<td>   JPython      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.jython.org/license.html">http://www.jython.org/license.html</a>
+</td></tr>
+<tr>
+<td>Julius License                 </td>
+<td>   Julius       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Julius">https://fedoraproject.org/wiki/Licensing/Julius</a>
+</td></tr>
+<tr>
+<td>Knuth License                  </td>
+<td>   Knuth        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://tug.org/TUGboat/Articles/tb11-4/tb30knut.pdf">http://tug.org/TUGboat/Articles/tb11-4/tb30knut.pdf</a>
+</td></tr>
+<tr>
+<td>LaTeX Project Public License   </td>
+<td>   LPPL         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.latex-project.org/lppl/lppl-1-3a.txt">http://www.latex-project.org/lppl/lppl-1-3a.txt</a>
+</td></tr>
+<tr>
+<td>Latex2e License                </td>
+<td>   Latex2e      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Latex2e">https://fedoraproject.org/wiki/Licensing/Latex2e</a>
+</td></tr>
+<tr>
+<td>Lawrence Berkeley National Labs BSD variant license </td>
+<td> LBNL BSD </td>
+<td> Yes </td>
+<td>Yes </td>
+<td>Yes</td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/LBNLBSD">https://fedoraproject.org/wiki/Licensing/LBNLBSD</a>
+</td></tr>
+<tr>
+<td>LEGO Open Source License Agreement</td>
+<td> LOSLA       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/LOSLA">https://fedoraproject.org/wiki/Licensing/LOSLA</a>
+</td></tr>
+<tr>
+<td>Leptonica License              </td>
+<td>   Leptonica    </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes</td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Leptonica">https://fedoraproject.org/wiki/Licensing/Leptonica</a>
+</td></tr>
+<tr>
+<td>Lhcyr License                  </td>
+<td>   Lhcyr        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Lhcyr">https://fedoraproject.org/wiki/Licensing/Lhcyr</a>
+</td></tr>
+<tr>
+<td>libtiff License                </td>
+<td>   libtiff      </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/libtiff">https://fedoraproject.org/wiki/Licensing/libtiff</a>
+</td></tr>
+<tr>
+<td>Lisp Library General Public License</td>
+<td> LLGPL      </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://opensource.franz.com/preamble.html">http://opensource.franz.com/preamble.html</a>
+</td></tr>
+<tr>
+<td>Logica Open Source License     </td>
+<td>   Logica       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://opensmpp.logica.com/CommonPart/Download/Download.htm">http://opensmpp.logica.com/CommonPart/Download/Download.htm</a>
+</td></tr>
+<tr>
+<td>Lucent Public License (Plan9)  </td>
+<td>   LPL          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://plan9.bell-labs.com/plan9dist/license.html">http://plan9.bell-labs.com/plan9dist/license.html</a>
+</td></tr>
+<tr>
+<td>MakeIndex License              </td>
+<td>   MakeIndex    </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MakeIndex">https://fedoraproject.org/wiki/Licensing/MakeIndex</a>
+</td></tr>
+<tr>
+<td>Matrix Template Library License </td>
+<td>  MTLL         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Matrix_Template_Library_License">https://fedoraproject.org/wiki/Licensing/Matrix_Template_Library_License</a>
+</td></tr>
+<tr>
+<td>mecab-ipadic license           </td>
+<td>   mecab-ipadic </td>
+<td>   Yes         </td>
+<td>?                  </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.icot.or.jp/ARCHIVE/terms-and-conditions-for-IFS-J.html">http://www.icot.or.jp/ARCHIVE/terms-and-conditions-for-IFS-J.html</a>
+</td></tr>
+<tr>
+<td>Metasploit Framework License (post 2006)   </td>
+<td>   BSD          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes    </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Metasploit_Framework_License">https://fedoraproject.org/wiki/Licensing/Metasploit_Framework_License</a>
+</td></tr>
+<tr>
+<td>Microsoft Public License       </td>
+<td>   MS-PL        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.microsoft.com/opensource/licenses.mspx#Ms-PL">http://www.microsoft.com/opensource/licenses.mspx#Ms-PL</a>
+</td></tr>
+<tr>
+<td>Microsoft Reciprocal License   </td>
+<td>   MS-RL        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.microsoft.com/opensource/licenses.mspx#Ms-RL">http://www.microsoft.com/opensource/licenses.mspx#Ms-RL</a>
+</td></tr>
+<tr>
+<td>midnight License               </td>
+<td>   midnight     </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/midnight">https://fedoraproject.org/wiki/Licensing/midnight</a>
+</td></tr>
+<tr>
+<td>MirOS License                  </td>
+<td>   MirOS        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://mirbsd.de/MirOS-Licence">http://mirbsd.de/MirOS-Licence</a>
+</td></tr>
+<tr>
+<td>MIT license (also X11)         </td>
+<td>   MIT          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MIT">https://fedoraproject.org/wiki/Licensing/MIT</a>
+</td></tr>
+<tr>
+<td>MIT +no-false-attribs license  </td>
+<td>   MITNFA       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MITNFA">https://fedoraproject.org/wiki/Licensing/MITNFA</a>
+</td></tr>
+<tr>
+<td>mod_macro License              </td>
+<td>   mod_macro    </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.cri.ensmp.fr/~coelho/mod_macro/mod_macro/LICENSE">http://www.cri.ensmp.fr/~coelho/mod_macro/mod_macro/LICENSE</a>
+</td></tr>
+<tr>
+<td>Motosoto License               </td>
+<td>   Motosoto     </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://opensource.org/licenses/motosoto.php">http://opensource.org/licenses/motosoto.php</a>
+</td></tr>
+<tr>
+<td>Mozilla Public License v1.0    </td>
+<td>   MPLv1.0      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://opensource.org/licenses/mozilla1.0.php">http://opensource.org/licenses/mozilla1.0.php</a>
+</td></tr>
+<tr>
+<td>Mozilla Public License v1.1    </td>
+<td>   MPLv1.1      </td>
+<td>   Yes         </td>
+<td>Compatible if dual licensed with GPL, otherwise Incompatible</td>
+<td>Compatible if dual licensed with GPL, otherwise Incompatible</td>
+<td><a class="external free" href="http://www.mozilla.org/MPL/MPL-1.1.html">http://www.mozilla.org/MPL/MPL-1.1.html</a>
+</td></tr>
+<tr>
+<td>Mozilla Public License v2.0    </td>
+<td>   MPLv2.0      </td>
+<td>   Yes         </td>
+<td>Sometimes          </td>
+<td>Sometimes          </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MPLv2.0">https://fedoraproject.org/wiki/Licensing/MPLv2.0</a>
+</td></tr>
+<tr>
+<td>mpich2 License                 </td>
+<td>   MIT          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MIT">https://fedoraproject.org/wiki/Licensing/MIT</a>
+</td></tr>
+<tr>
+<td>Mup License                    </td>
+<td>   Mup          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Mup">https://fedoraproject.org/wiki/Licensing/Mup</a>
+</td></tr>
+<tr>
+<td>MX4J License                   </td>
+<td>   ASL 1.1      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MX4J">https://fedoraproject.org/wiki/Licensing/MX4J</a>
+</td></tr>
+<tr>
+<td>MySQL License                  </td>
+<td>   GPLv2 with exceptions </td>
+<td> Yes  </td>
+<td>?                  </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.mysql.com/company/legal/licensing/foss-exception.html">http://www.mysql.com/company/legal/licensing/foss-exception.html</a>
+</td></tr>
+<tr>
+<td>Naumen Public License          </td>
+<td>   Naumen       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://opensource.org/licenses/naumen.php">http://opensource.org/licenses/naumen.php</a>
+</td></tr>
+<tr>
+<td>NCSA/University of Illinois Open Source License </td>
+<td>NCSA</td>
+<td>   Yes    </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://otm.illinois.edu/uiuc_openSource">http://otm.illinois.edu/uiuc_openSource</a>
+</td></tr>
+<tr>
+<td>Neotonic Clearsilver License   </td>
+<td>   ASL 1.1      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.clearsilver.net/license.hdf">http://www.clearsilver.net/license.hdf</a>
+</td></tr>
+<tr>
+<td>NetCDF license                 </td>
+<td>   NetCDF       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.unidata.ucar.edu/software/netcdf/copyright.html">http://www.unidata.ucar.edu/software/netcdf/copyright.html</a>
+</td></tr>
+<tr>
+<td>Nethack General Public License </td>
+<td>   NGPL         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://opensource.org/licenses/nethack.php">http://opensource.org/licenses/nethack.php</a>
+</td></tr>
+<tr>
+<td>Netizen Open Source License    </td>
+<td>   NOSL         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://bits.netizen.com.au/licenses/NOSL/nosl.txt">http://bits.netizen.com.au/licenses/NOSL/nosl.txt</a>
+</td></tr>
+<tr>
+<td>Netscape Public License        </td>
+<td>   Netscape     </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.mozilla.org/NPL/NPL-1.0.html">http://www.mozilla.org/NPL/NPL-1.0.html</a>
+</td></tr>
+<tr>
+<td>Newmat License                 </td>
+<td>   Newmat       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Newmat_License">https://fedoraproject.org/wiki/Licensing/Newmat_License</a>
+</td></tr>
+<tr>
+<td>Newsletr License               </td>
+<td>   Newsletr     </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Newsletr">https://fedoraproject.org/wiki/Licensing/Newsletr</a>
+</td></tr>
+<tr>
+<td>Nmap License                   </td>
+<td>   Nmap         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Nmap">https://fedoraproject.org/wiki/Licensing/Nmap</a>
+</td></tr>
+<tr>
+<td>Nokia Open Source License      </td>
+<td>   Nokia        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://opensource.org/licenses/nokia.html">http://opensource.org/licenses/nokia.html</a>
+</td></tr>
+<tr>
+<td>No Limit Public License        </td>
+<td>   NLPL         </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/NLPL">https://fedoraproject.org/wiki/Licensing/NLPL</a>
+</td></tr>
+<tr>
+<td>Noweb License                  </td>
+<td>   Noweb        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Noweb">https://fedoraproject.org/wiki/Licensing/Noweb</a>
+</td></tr>
+<tr>
+<td>NRL License                    </td>
+<td>   BSD with advertising</td>
+<td>  Yes   </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://web.mit.edu/network/isakmp/nrllicense.html">http://web.mit.edu/network/isakmp/nrllicense.html</a>
+</td></tr>
+<tr>
+<td>Nunit License                  </td>
+<td>   MIT with advertising</td>
+<td>  Yes   </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Nunit">https://fedoraproject.org/wiki/Licensing/Nunit</a>
+</td></tr>
+<tr>
+<td>Open Government License        </td>
+<td>   OGL          </td>
+<td>   Yes         </td>
+<td>                   </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/</a>
+</td></tr>
+<tr>
+<td>OpenLDAP License               </td>
+<td>   OpenLDAP     </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.openldap.org/software/release/license.html">http://www.openldap.org/software/release/license.html</a>
+</td></tr>
+<tr>
+<td>Open Market License            </td>
+<td>   OML          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Open_Market_License">https://fedoraproject.org/wiki/Licensing/Open_Market_License</a>
+</td></tr>
+<tr>
+<td>OpenPBS License                </td>
+<td>   OpenPBS      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/OpenPBS">https://fedoraproject.org/wiki/Licensing/OpenPBS</a>
+</td></tr>
+<tr>
+<td>Open Software License 1.0      </td>
+<td>   OSL 1.0      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.opensource.org/licenses/osl-1.0.txt">http://www.opensource.org/licenses/osl-1.0.txt</a>
+</td></tr>
+<tr>
+<td>Open Software License 1.1      </td>
+<td>   OSL 1.1      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/OSL1.1">https://fedoraproject.org/wiki/Licensing/OSL1.1</a>
+</td></tr>
+<tr>
+<td>Open Software License 2.0      </td>
+<td>   OSL 2.0      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.nexb.com/license/LICENSE-OSL-2.0.html">http://www.nexb.com/license/LICENSE-OSL-2.0.html</a>
+</td></tr>
+<tr>
+<td>Open Software License 2.1      </td>
+<td>   OSL 2.1      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/OSL2.1">https://fedoraproject.org/wiki/Licensing/OSL2.1</a>
+</td></tr>
+<tr>
+<td>Open Software License 3.0      </td>
+<td>   OSL 3.0      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://opensource.org/licenses/osl-3.0.php">http://opensource.org/licenses/osl-3.0.php</a>
+</td></tr>
+<tr>
+<td>OpenSSL License                </td>
+<td>   OpenSSL      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.sdisw.com/openssl.htm">http://www.sdisw.com/openssl.htm</a>
+</td></tr>
+<tr>
+<td>OReilly License                </td>
+<td>   OReilly      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/OReilly">https://fedoraproject.org/wiki/Licensing/OReilly</a>
+</td></tr>
+<tr>
+<td>Par License                    </td>
+<td>   Par          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes        </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Par">https://fedoraproject.org/wiki/Licensing/Par</a>
+</td></tr>
+<tr>
+<td>Perl License                   </td>
+<td>   GPL+ or Artistic</td>
+<td> Yes        </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://dev.perl.org/licenses/">http://dev.perl.org/licenses/</a>
+</td></tr>
+<tr>
+<td>Perl License (variant)         </td>
+<td>   GPLv2 or Artistic</td>
+<td>  Yes      </td>
+<td>Yes                </td>
+<td><b>NO</b>           </td>
+<td>Some perl packages explicitly state GPLv2, only use this license for those cases
+</td></tr>
+<tr>
+<td>Perl License (variant)         </td>
+<td>   GPLv2+ or Artistic</td>
+<td> Yes      </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td>Some perl packages explicitly state GPLv2+, only use this license for those cases
+</td></tr>
+<tr>
+<td>Perl License (variant)         </td>
+<td>   LGPLv2+ or Artistic</td>
+<td> Yes     </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td>Some perl packages explicitly state LGPLv2+ (extremely uncommon), only use this license for those cases
+</td></tr>
+<tr>
+<td>Phorum License                 </td>
+<td>   Phorum       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://phorum.org/license.txt">http://phorum.org/license.txt</a>
+</td></tr>
+<tr>
+<td>PHP License v3.0               </td>
+<td>   PHP          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>                   </td>
+<td><a class="external free" href="http://www.php.net/license/3_01.txt">http://www.php.net/license/3_01.txt</a>
+</td></tr>
+<tr>
+<td>PlainTeX License               </td>
+<td>   PlainTeX     </td>
+<td>   Yes (only on TeX, see license page)</td>
+<td><b>NO</b>        </td>
+<td><b>NO</b></td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/PlainTeX">https://fedoraproject.org/wiki/Licensing/PlainTeX</a>
+</td></tr>
+<tr>
+<td>Plexus Classworlds License     </td>
+<td>   Plexus       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Plexus_Classworlds_License">https://fedoraproject.org/wiki/Licensing/Plexus_Classworlds_License</a>
+</td></tr>
+<tr>
+<td>PostgreSQL License             </td>
+<td>   PostgreSQL   </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/PostgreSQL_License">https://fedoraproject.org/wiki/Licensing/PostgreSQL_License</a>
+</td></tr>
+<tr>
+<td>psfrag License                 </td>
+<td>   psfrag       </td>
+<td>   Yes (but only for tex) </td>
+<td><b>NO</b></td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/psfrag">https://fedoraproject.org/wiki/Licensing/psfrag</a>
+</td></tr>
+<tr>
+<td>psutils License                </td>
+<td>   psutils      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/psutils">https://fedoraproject.org/wiki/Licensing/psutils</a>
+</td></tr>
+<tr>
+<td>Public Domain                  </td>
+<td>   Public Domain</td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td>Being in the public domain is not a license; rather, it means the material is not copyrighted and no license is needed.
+</td></tr>
+<tr>
+<td>Python License                 </td>
+<td>   Python       </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://docs.python.org/2/license.html">https://docs.python.org/2/license.html</a>
+</td></tr>
+<tr>
+<td>Qhull License                  </td>
+<td>   Qhull        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Qhull">https://fedoraproject.org/wiki/Licensing/Qhull</a>
+</td></tr>
+<tr>
+<td>Q Public License               </td>
+<td>   QPL          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://doc.qt.digia.com/3.0/license.html">http://doc.qt.digia.com/3.0/license.html</a>
+</td></tr>
+<tr>
+<td>Qwt License 1.0                </td>
+<td>   LGPLv2+ with exceptions </td>
+<td> Yes </td>
+<td> Yes              </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://qwt.sourceforge.net/qwtlicense.html">http://qwt.sourceforge.net/qwtlicense.html</a>
+</td></tr>
+<tr>
+<td>QuickFix License               </td>
+<td>   ASL 1.1      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.quickfixengine.org/quickfix/doc/html/license.html">http://www.quickfixengine.org/quickfix/doc/html/license.html</a>
+</td></tr>
+<tr>
+<td>Rdisc License                  </td>
+<td>   Rdisc        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Rdisc_License">https://fedoraproject.org/wiki/Licensing/Rdisc_License</a>
+</td></tr>
+<tr>
+<td>RealNetworks Public Source License V1.0</td>
+<td> RPSL   </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.opensource.org/licenses/real.php">http://www.opensource.org/licenses/real.php</a>
+</td></tr>
+<tr>
+<td>REX License                    </td>
+<td>   REX          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/REX">https://fedoraproject.org/wiki/Licensing/REX</a>
+</td></tr>
+<tr>
+<td>Rice BSD                       </td>
+<td>   RiceBSD      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Rice_BSD_License">https://fedoraproject.org/wiki/Licensing/Rice_BSD_License</a>
+</td></tr>
+<tr>
+<td>Romio License                  </td>
+<td>   Romio        </td>
+<td>   Yes         </td>
+<td>Yes</td>
+<td>Yes</td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Romio_License">https://fedoraproject.org/wiki/Licensing/Romio_License</a>
+</td></tr>
+<tr>
+<td>Rsfs License                   </td>
+<td>   Rsfs         </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Rsfs">https://fedoraproject.org/wiki/Licensing/Rsfs</a>
+</td></tr>
+<tr>
+<td>Ruby License                   </td>
+<td>   Ruby         </td>
+<td>   Yes         </td>
+<td>Compatible if dual licensed with GPL, otherwise Incompatible</td>
+<td> </td>
+<td><a class="external free" href="http://www.ruby-lang.org/en/LICENSE.txt">http://www.ruby-lang.org/en/LICENSE.txt</a>
+</td></tr>
+<tr>
+<td>Saxpath License                </td>
+<td>   Saxpath      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Saxpath_License">https://fedoraproject.org/wiki/Licensing/Saxpath_License</a>
+</td></tr>
+<tr>
+<td>Sequence Library License       </td>
+<td>   Sequence     </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/SequenceLibraryLicense">https://fedoraproject.org/wiki/Licensing/SequenceLibraryLicense</a>
+</td></tr>
+<tr>
+<td>SCEA Shared Source License     </td>
+<td>   SCEA         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://research.scea.com/scea_shared_source_license.html">http://research.scea.com/scea_shared_source_license.html</a>
+</td></tr>
+<tr>
+<td>Scheme Widget Library (SWL) Software License Agreement</td>
+<td> SWL </td>
+<td> Yes  </td>
+<td> Yes            </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/SWL">https://fedoraproject.org/wiki/Licensing/SWL</a>
+</td></tr>
+<tr>
+<td>SciTech MGL Public License     </td>
+<td>   STMPL        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/STMPL">https://fedoraproject.org/wiki/Licensing/STMPL</a>
+</td></tr>
+<tr>
+<td>SCRIP License                  </td>
+<td>   SCRIP        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/SCRIP">https://fedoraproject.org/wiki/Licensing/SCRIP</a>
+</td></tr>
+<tr>
+<td>Sendmail License               </td>
+<td>   Sendmail     </td>
+<td>   Yes         </td>
+<td>Compatible if Eric Allman, Sendmail Inc. or the University of California is the copyright holder</td>
+<td>Compatible if Eric Allman, Sendmail Inc. or the University of California is the copyright holder</td>
+<td><a class="external free" href="http://www.sendmail.com/pdfs/open_source/sendmail_license.pdf">http://www.sendmail.com/pdfs/open_source/sendmail_license.pdf</a>
+</td></tr>
+<tr>
+<td>SGI Free Software License B 2.0 </td>
+<td>  MIT          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://oss.sgi.com/projects/FreeB/SGIFreeSWLicB.2.0.pdf">http://oss.sgi.com/projects/FreeB/SGIFreeSWLicB.2.0.pdf</a></td>
+<td>
+</td></tr>
+<tr>
+<td>Sleepycat Software Product License</td>
+<td> Sleepycat   </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Sleepycat">https://fedoraproject.org/wiki/Licensing/Sleepycat</a>
+</td></tr>
+<tr>
+<td>SLIB License                   </td>
+<td>   SLIB         </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www-swiss.ai.mit.edu/~jaffer/SLIB_COPYING.txt">http://www-swiss.ai.mit.edu/~jaffer/SLIB_COPYING.txt</a>
+</td></tr>
+<tr>
+<td>softSurfer License             </td>
+<td>   softSurfer   </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/softSurfer">https://fedoraproject.org/wiki/Licensing/softSurfer</a>
+</td></tr>
+<tr>
+<td>SNIA Public License 1.1        </td>
+<td>   SNIA         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/SNIA_Public_License">https://fedoraproject.org/wiki/Licensing/SNIA_Public_License</a>
+</td></tr>
+<tr>
+<td>Standard ML of New Jersey License</td>
+<td> MIT          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/MIT">https://fedoraproject.org/wiki/Licensing/MIT</a>
+</td></tr>
+<tr>
+<td>Sun Industry Standards Source License</td>
+<td> SISSL    </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.openoffice.org/licenses/sissl_license.html">http://www.openoffice.org/licenses/sissl_license.html</a>
+</td></tr>
+<tr>
+<td>Sun Public License             </td>
+<td>   SPL          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Sun_Public_License">https://fedoraproject.org/wiki/Licensing/Sun_Public_License</a>
+</td></tr>
+<tr>
+<td>TCL/TK License                 </td>
+<td>   TCL          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/TCL">https://fedoraproject.org/wiki/Licensing/TCL</a>
+</td></tr>
+<tr>
+<td>Teeworlds License              </td>
+<td>   Teeworlds    </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Teeworlds">https://fedoraproject.org/wiki/Licensing/Teeworlds</a>
+</td></tr>
+<tr>
+<td>Text-Tabs+Wrap License         </td>
+<td>   TTWL         </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/TTWL">https://fedoraproject.org/wiki/Licensing/TTWL</a>
+</td></tr>
+<tr>
+<td>Thor Public License            </td>
+<td>   TPL          </td>
+<td>   Yes         </td>
+<td>Compatible if dual licensed with GPL, otherwise Incompatible</td>
+<td> </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/ThorPublicLicense">https://fedoraproject.org/wiki/Licensing/ThorPublicLicense</a>
+</td></tr>
+<tr>
+<td>Threeparttable License         </td>
+<td>   Threeparttable</td>
+<td>  Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Threeparttable">https://fedoraproject.org/wiki/Licensing/Threeparttable</a>
+</td></tr>
+<tr>
+<td>Time::ParseDate License        </td>
+<td>   TPDL         </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/TPDL">https://fedoraproject.org/wiki/Licensing/TPDL</a>
+</td></tr>
+<tr>
+<td>TMate Open Source License      </td>
+<td>   TMate        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://svnkit.com/license.html">http://svnkit.com/license.html</a>
+</td></tr>
+<tr>
+<td>Tolua License                  </td>
+<td>   Tolua        </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Tolua">https://fedoraproject.org/wiki/Licensing/Tolua</a>
+</td></tr>
+<tr>
+<td>TORQUE v2.5+ Software License v1.1 </td>
+<td> TORQUEv1.1 </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/TORQUEv1.1">https://fedoraproject.org/wiki/Licensing/TORQUEv1.1</a>
+</td></tr>
+<tr>
+<td>Transitive Grace Period Public Licence </td>
+<td> TGPPL  </td>
+<td> Sortof        </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/TGPPL">https://fedoraproject.org/wiki/Licensing/TGPPL</a>
+</td></tr>
+<tr>
+<td>Trusster Open Source License   </td>
+<td>   TOSL         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/TOSL">https://fedoraproject.org/wiki/Licensing/TOSL</a>
+</td></tr>
+<tr>
+<td>Unicode Character Database Terms Of Use</td>
+<td>   UCD  </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/UCD">https://fedoraproject.org/wiki/Licensing/UCD</a>
+</td></tr>
+<tr>
+<td>Unicode License                </td>
+<td>   Unicode      </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Unicode">https://fedoraproject.org/wiki/Licensing/Unicode</a>
+</td></tr>
+<tr>
+<td>Unlicense                      </td>
+<td>   Unlicense    </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Unlicense">https://fedoraproject.org/wiki/Licensing/Unlicense</a>
+</td></tr>
+<tr>
+<td>Vim License                    </td>
+<td>   Vim          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://vimdoc.sourceforge.net/htmldoc/uganda.html">http://vimdoc.sourceforge.net/htmldoc/uganda.html</a>
+</td></tr>
+<tr>
+<td>Vita Nuova Liberal Source License</td>
+<td>  VNLSL       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Vita_Nuova_Liberal_Source_License">https://fedoraproject.org/wiki/Licensing/Vita_Nuova_Liberal_Source_License</a>
+</td></tr>
+<tr>
+<td>VOSTROM Public License for Open Source</td>
+<td>VOSTROM  </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/VOSTROM">https://fedoraproject.org/wiki/Licensing/VOSTROM</a>
+</td></tr>
+<tr>
+<td>Vovida Software License v. 1.0 </td>
+<td>   VSL          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://opensource.org/licenses/vovidapl.php">http://opensource.org/licenses/vovidapl.php</a>
+</td></tr>
+<tr>
+<td>W3C Software Notice and License</td>
+<td>   W3C          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231</a>
+</td></tr>
+<tr>
+<td>Webmin License                 </td>
+<td>   Webmin       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Webmin">https://fedoraproject.org/wiki/Licensing/Webmin</a>
+</td></tr>
+<tr>
+<td>Wsuipa License                 </td>
+<td>   Wsuipa       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Wsuipa">https://fedoraproject.org/wiki/Licensing/Wsuipa</a>
+</td></tr>
+<tr>
+<td>wxWidgets Library License      </td>
+<td>   wxWidgets    </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.wxwidgets.org/manuals/stable/wx_wxlicense.html">http://www.wxwidgets.org/manuals/stable/wx_wxlicense.html</a>
+</td></tr>
+<tr>
+<td>xinetd License                 </td>
+<td>   xinetd       </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Xinetd_License">https://fedoraproject.org/wiki/Licensing/Xinetd_License</a>
+</td></tr>
+<tr>
+<td>Xerox License                  </td>
+<td>   Xerox        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Xerox">https://fedoraproject.org/wiki/Licensing/Xerox</a>
+</td></tr>
+<tr>
+<td>XPP License                    </td>
+<td>   xpp          </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/xpp">https://fedoraproject.org/wiki/Licensing/xpp</a>
+</td></tr>
+<tr>
+<td>XSkat License                  </td>
+<td>   XSkat        </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/XSkat_License">https://fedoraproject.org/wiki/Licensing/XSkat_License</a>
+</td></tr>
+<tr>
+<td>Yahoo Public License v 1.1     </td>
+<td>   YPLv1.1      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://www.zimbra.com/license/yahoo_public_license_1.1.html">http://www.zimbra.com/license/yahoo_public_license_1.1.html</a>
+</td></tr>
+<tr>
+<td>Zed License                    </td>
+<td>   Zed          </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/Zed">https://fedoraproject.org/wiki/Licensing/Zed</a>
+</td></tr>
+<tr>
+<td>Zend License v2.0              </td>
+<td>   Zend         </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td>                   </td>
+<td><a class="external free" href="http://www.zend.com/license/2_00.txt">http://www.zend.com/license/2_00.txt</a>
+</td></tr>
+<tr>
+<td>Zope Public License v 1.0      </td>
+<td>   ZPLv1.0      </td>
+<td>   Yes         </td>
+<td><b>NO</b>           </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="http://old.zope.org/Resources/License/ZPL-1.1">http://old.zope.org/Resources/License/ZPL-1.1</a>
+</td></tr>
+<tr>
+<td>Zope Public License v 2.0      </td>
+<td>   ZPLv2.0      </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://old.zope.org/Resources/License/ZPL-2.0">http://old.zope.org/Resources/License/ZPL-2.0</a>
+</td></tr>
+<tr>
+<td>Zope Public License v 2.1      </td>
+<td>   ZPLv2.1      </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://old.zope.org/Resources/License/ZPL-2.1">http://old.zope.org/Resources/License/ZPL-2.1</a>
+</td></tr>
+<tr>
+<td>zlib/libpng License            </td>
+<td>   zlib         </td>
+<td>   Yes         </td>
+<td>Yes                </td>
+<td>Yes                </td>
+<td><a class="external free" href="http://www.gzip.org/zlib/zlib_license.html">http://www.gzip.org/zlib/zlib_license.html</a>
+</td></tr>
+<tr>
+<td>zlib/libpng License with Acknowledgement</td>
+<td> zlib with acknowledgement </td>
+<td> Yes </td>
+<td><b>NO</b> </td>
+<td><b>NO</b>           </td>
+<td><a class="external free" href="https://fedoraproject.org/wiki/Licensing/ZlibWithAcknowledgement">https://fedoraproject.org/wiki/Licensing/ZlibWithAcknowledgement</a>
