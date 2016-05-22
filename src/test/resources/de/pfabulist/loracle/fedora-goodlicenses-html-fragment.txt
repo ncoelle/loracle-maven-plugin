@@ -1796,8 +1796,7 @@
 <td>   Yes         </td>
 <td>Yes                </td>
 <td>Yes                </td>
-<td><a class="external free" href="http://oss.sgi.com/projects/FreeB/SGIFreeSWLicB.2.0.pdf">http://oss.sgi.com/projects/FreeB/SGIFreeSWLicB.2.0.pdf</a></td>
-<td>
+<td><a class="external free" href="http://oss.sgi.com/projects/FreeB/SGIFreeSWLicB.2.0.pdf">http://oss.sgi.com/projects/FreeB/SGIFreeSWLicB.2.0.pdf</a>
 </td></tr>
 <tr>
 <td>Sleepycat Software Product License</td>

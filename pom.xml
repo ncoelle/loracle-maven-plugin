@@ -9,18 +9,18 @@
     <parent>
         <groupId>de.pfabulist</groupId>
         <artifactId>pfabulist-parent</artifactId>
-        <version>2.0</version>
+        <version>2.1.1</version>
         <relativePath>../pfabulist-parent-v2/pom.xml</relativePath>
     </parent>
 
 
-    <artifactId>ianal-but-maven-plugin</artifactId>
-    <version>0.3</version>
+    <artifactId>loracle-maven-plugin</artifactId>
+    <version>1.0</version>
     <packaging>maven-plugin</packaging>
 
-    <name>ianal-but-maven-plugin</name>
+    <name>loracle-maven-plugin</name>
     <description>maven plugin to check the licenses of all dependencies and possible incompatibilities</description>
-    <url>http://www.github.com/openCage/ianal-but-maven-plugin</url>
+    <url>http://www.github.com/openCage/loracle-maven-plugin</url>
 
 
 
@@ -120,7 +120,7 @@
         <dependency>
             <groupId>de.pfabulist</groupId>
             <artifactId>kleinod</artifactId>
-            <version>0.34.1</version>
+            <version>0.34.2</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -132,6 +132,12 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3</version>
         </dependency>
 
     </dependencies>

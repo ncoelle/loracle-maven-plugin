@@ -1,7 +1,6 @@
-package de.pfabulist.ianalb.model.oracle;
+package de.pfabulist.loracle.mojo;
 
-import de.pfabulist.frex.Frex;
-import de.pfabulist.ianalb.model.oracle.Coordinates;
+import de.pfabulist.loracle.license.Coordinates;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.License;
 import org.apache.maven.plugin.logging.Log;
@@ -10,10 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import static de.pfabulist.frex.Frex.any;
 import static de.pfabulist.frex.Frex.txt;
 import static de.pfabulist.kleinod.text.Strings.newString;
 
@@ -33,7 +29,7 @@ public class MavenLicenseOracle {
     }
 
     public Optional<License> getMavenLicense( Artifact arti ) {
-        Coordinates coo = Coordinates.fromArtifact( arti );
+        Coordinates coo = Coordinates.valueOf( arti );
 
         while( true ) {
             try {
@@ -106,6 +102,9 @@ public class MavenLicenseOracle {
         final String nameTagStart = "<url>", nameTagStop = "</url>";
         if( raw.contains( licenseTagStart ) ) {
             final String licenseContents = raw.substring( raw.indexOf( licenseTagStart ) + licenseTagStart.length(), raw.indexOf( licenseTagStop ) );
+            if ( !licenseContents.contains( nameTagStart )) {
+                return Optional.empty();
+            }
             final String name = licenseContents.substring( licenseContents.indexOf( nameTagStart ) + nameTagStart.length(), licenseContents.indexOf( nameTagStop ) );
             return Optional.of( name );
         }
@@ -116,7 +115,7 @@ public class MavenLicenseOracle {
      * @param raw
      * @return
      */
-    // TODO obviously this code needs a lot of error protection and handling
+    // TODO obviously this code needs a lot of error protection getAnd handling
     Optional<Coordinates> extractParentCoords( final String raw ) {
         final String parentTagStart = "<parent>", parentTagStop = "</parent>";
         final String groupTagStart = "<groupId>", groupTagStop = "</groupId>";
@@ -133,41 +132,41 @@ public class MavenLicenseOracle {
         return Optional.of( new Coordinates( group, artifact, version ) );
     }
 
-    private Optional<String> extract( String raw, String outer, String tag ) {
-        Pattern pat = any().zeroOrMore().
-                        then( txt("<" + outer + ">")).
-                        then( any().zeroOrMore() ).
-                        then( txt("<" + tag + ">")).
-                        then( Frex.anyBut( txt('<') ).var( "content" )).
-                        then( txt("</" + tag + ">")).
-                        then( any().zeroOrMore() ).
-                        then( txt("</" + outer + ">")).
-                        then( any().zeroOrMore() ).
-                buildCaseInsensitivePattern();
-
-        Matcher matcher = pat.matcher( raw );
-
-        if ( !matcher.matches()) {
-            return Optional.empty();
-        }
-
-        return Optional.of( matcher.group( "content" ) );
-
-//        final String outerStart = "<" + outer + ">";
-//        //final String outerStop = "</" + outer + ">";
-//        final String tagStart = "<" + tag + ">";
-//        final String tagStop = "</" + tag + ">";
+//    private Optional<String> extract( String raw, String outer, String tag ) {
+//        Pattern pat = any().zeroOrMore().
+//                        then( txt("<" + outer + ">")).
+//                        then( any().zeroOrMore() ).
+//                        then( txt("<" + tag + ">")).
+//                        then( Frex.anyBut( txt('<') ).var( "content" )).
+//                        then( txt("</" + tag + ">")).
+//                        then( any().zeroOrMore() ).
+//                        then( txt("</" + outer + ">")).
+//                        then( any().zeroOrMore() ).
+//                buildCaseInsensitivePattern();
 //
-//        if( raw.contains( outerStart ) ) {
-//            final String outerBlock = raw.substring( raw.indexOf( outerStart ) + outerStart.length() ); //, raw.indexOf( outerStop ) );
-//            if ( !outerBlock.contains( tagStart  )) {
-//                return Optional.empty();
-//            }
+//        Matcher matcher = pat.matcher( raw );
 //
-//            final String tagContent = outerBlock.substring( outerBlock.indexOf( tagStart ) + tagStart.length(), outerBlock.indexOf( tagStop ) );
-//            return Optional.of( tagContent );
+//        if ( !matcher.matches()) {
+//            return Optional.empty();
 //        }
-//        return Optional.empty();
-    }
+//
+//        return Optional.of( matcher.group( "content" ) );
+//
+////        final String outerStart = "<" + outer + ">";
+////        //final String outerStop = "</" + outer + ">";
+////        final String tagStart = "<" + tag + ">";
+////        final String tagStop = "</" + tag + ">";
+////
+////        if( raw.contains( outerStart ) ) {
+////            final String outerBlock = raw.substring( raw.indexOf( outerStart ) + outerStart.length() ); //, raw.indexOf( outerStop ) );
+////            if ( !outerBlock.contains( tagStart  )) {
+////                return Optional.empty();
+////            }
+////
+////            final String tagContent = outerBlock.substring( outerBlock.indexOf( tagStart ) + tagStart.length(), outerBlock.indexOf( tagStop ) );
+////            return Optional.of( tagContent );
+////        }
+////        return Optional.empty();
+//    }
 
 }

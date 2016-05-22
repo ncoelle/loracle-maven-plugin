@@ -4,6 +4,6 @@
  */
 
 @NonnullByDefault
-package de.pfabulist.ianalb.model;
+package de.pfabulist.loracle.license;
 
 import de.pfabulist.nonnullbydefault.NonnullByDefault;

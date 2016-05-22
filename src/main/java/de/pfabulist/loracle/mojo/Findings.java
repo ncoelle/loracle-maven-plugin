@@ -1,4 +1,4 @@
-package de.pfabulist.ianalb.model;
+package de.pfabulist.loracle.mojo;
 
 import de.pfabulist.unchecked.Unchecked;
 import org.apache.maven.plugin.MojoFailureException;
