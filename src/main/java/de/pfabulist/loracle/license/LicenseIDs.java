@@ -10,4 +10,8 @@ public class LicenseIDs {
     public static boolean isOr( LicenseID license ) {
         return license instanceof CompositeLicense && ( (CompositeLicense) license ).isOr();
     }
+
+    public static boolean isAnd( LicenseID license ) {
+        return license instanceof CompositeLicense && ( (CompositeLicense) license ).isAnd();
+    }
 }

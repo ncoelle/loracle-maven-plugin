@@ -1,23 +1,26 @@
 package de.pfabulist.loracle.license;
 
+import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
-import de.pfabulist.unchecked.functiontypes.SupplierE;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._orElseExpectedThrow;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._orElseGet;
-import static de.pfabulist.unchecked.Unchecked.u;
+import static de.pfabulist.unchecked.NullCheck._orElseGet;
+import static de.pfabulist.unchecked.NullCheck._orElseThrow;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -34,26 +37,35 @@ public class LOracle {
             buildCaseInsensitivePattern();
 
     @SuppressFBWarnings( "URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" )
-    private static class More {
+    public static class More {
         public boolean spdx;
         public boolean osiApproved;
+        public Optional<Boolean> fedoraApproved = Optional.empty();
+        public Optional<Boolean> gpl2Compatible = Optional.empty();
+        public Optional<Boolean> gpl3Compatible = Optional.empty();
         public List<String> urls = new ArrayList<>();
         public List<String> longNames = new ArrayList<>();
         public List<Coordinates> specific = new ArrayList<>();
+        public Set<String> couldbeName = new HashSet<>();
+        public Set<String> couldbeUrl = new HashSet<>();
 
         public More( boolean spdx ) {
             this.spdx = spdx;
         }
     }
 
+    private Map<String, More> singles = new HashMap<>();
+    private Map<String, Boolean> licenseExceptions = new HashMap<>();
+    private Map<String, More> composites = new HashMap<>();
+
+    private final transient Map<String, Set<LicenseID>> couldbeNames = new HashMap<>();
+    private final transient Map<String, Set<LicenseID>> couldbeUrls = new HashMap<>();
+
     private final transient SPDXParser parser;
     private final transient AliasBuilder aliasBuilder = new AliasBuilder();
-    private Map<String, More> singles = new HashMap<>();
     private transient Map<Coordinates, LicenseID> coordinatesMap = new HashMap<>();
     private transient Map<String, LicenseID> longNameMapper = new HashMap<>();
-    private Map<String, Boolean> licenseExceptions = new HashMap<>();
     private transient Map<String, LicenseID> urls = new HashMap<>();
-    private Map<String, More> composites = new HashMap<>();
 
     public LOracle() {
         parser = new SPDXParser( this );
@@ -72,6 +84,8 @@ public class LOracle {
                     more.urls.stream().forEach( u -> urls.put( u, lid ) );
                     more.longNames.stream().forEach( l -> longNameMapper.putIfAbsent( l, lid ) );
                     more.specific.stream().forEach( coo -> coordinatesMap.putIfAbsent( coo, lid ) );
+                    more.couldbeName.stream().forEach( n -> { couldbeNames.putIfAbsent( n, new HashSet<>() ); couldbeNames.get( n ).add( lid ); });
+                    more.couldbeUrl.stream().forEach( n -> { couldbeUrls.putIfAbsent( n, new HashSet<>() ); couldbeUrls.get( n ).add( lid ); });
                 }
         );
 
@@ -84,8 +98,12 @@ public class LOracle {
                     more.urls.stream().forEach( u -> urls.put( u, lid ) );
                     more.longNames.stream().forEach( l -> longNameMapper.putIfAbsent( l, lid ) );
                     more.specific.stream().forEach( coo -> coordinatesMap.putIfAbsent( coo, lid ) );
+                    more.couldbeName.stream().forEach( n -> { couldbeNames.putIfAbsent( n, new HashSet<>() ); couldbeNames.get( n ).add( lid ); });
+                    more.couldbeUrl.stream().forEach( n -> { couldbeUrls.putIfAbsent( n, new HashSet<>() ); couldbeUrls.get( n ).add( lid ); });
                 }
         );
+
+        // todo couldbes
 
         return this;
     }
@@ -110,50 +128,90 @@ public class LOracle {
         throw new IllegalArgumentException( "no such exception: " + ex );
     }
 
+    //private static Pattern WS = Frex.txt( ',' ).or( Frex.txt( '-' )).buildPattern();
+
+    public static String trim( String in ) {
+        return _nn( in.toLowerCase( Locale.US ) ).replaceAll( ",", " " ).trim();
+    }
+
     public SingleLicense newSingle( String name, boolean spdx ) {
         // todo test for extensions ( getAnd ... ?
 
-        String lower = name.trim().toLowerCase( Locale.US );
+        String lower = trim( name );
 
-        if( singles.containsKey( lower ) ) {
-            throw new IllegalArgumentException( "no a new single license: " + name );
+//        if( singles.containsKey( lower ) ) {
+//            throw new IllegalArgumentException( "not a new single license: " + name );
+//        }
+//
+        if( getByName( lower ).isPresent() ) {
+            throw new IllegalArgumentException( "not a new single license: " + name );
         }
 
-        singles.put( lower, new More( true ) );
-        return new SingleLicense( lower );
+        Set<LicenseID> guesses = guessByName( lower );
+        if( !guesses.isEmpty() ) {
+            removeNameGuess( lower );
+        }
+
+        singles.put( lower, new More( spdx ) );
+
+        SingleLicense ret = new SingleLicense( lower );
+
+        String lng = Arrays.stream( lower.split( "[- ]" ) ).collect( Collectors.joining( " " ) );
+
+        addLongName( ret, lng );
+
+        return ret;
+    }
+
+    private void removeNameGuess( String name ) {
+        Log.warn( "removing could be (so that it can be a new single id) " + name );
+        Set<LicenseID> guesses = guessByName( name );
+        couldbeNames.remove( name );
+        guesses.stream().forEach( l -> getMore( l ).couldbeName.remove( name ) );
     }
 
     public More getMore( LicenseID licenseID ) {
 
-        @Nullable More ret = singles.get( licenseID.getId() );
-        if( ret != null ) {
-            return ret;
-        }
-
-        ret = composites.get( licenseID.getId() );
-        if( ret != null ) {
-            return ret;
-        }
-
-        throw new IllegalArgumentException( "no such license: " + licenseID );
-
-//        try {
-//            return _orElseGet( singles.get( licenseID.getId() ),
-//                               SupplierE.u( () -> Optional.ofNullable( composites.get( licenseID.getId() )).orElseThrow(
-//                                                           () -> new IllegalArgumentException( "no such license: " + licenseID ) ) ));
-//        } catch( Exception ex ) {
-//            throw u(ex);
-//        }
+        return _orElseGet( singles.get( licenseID.getId() ),
+                           () -> _orElseThrow( composites.get( licenseID.getId() ),
+                                               () -> new IllegalArgumentException( "no such license: " + licenseID ) ) );
     }
+
+    private static Pattern withVersion = Frex.any().oneOrMore().lazy().var( "base" ).
+            then( Frex.txt( ' ' ) ).then( Frex.or( Frex.number(), Frex.txt( '.' ) ).oneOrMore() ).buildCaseInsensitivePattern();
 
     public void addLongName( LicenseID license, String longName ) {
         String reduced = aliasBuilder.reduce( longName );
         if( longNameMapper.containsKey( reduced ) ) {
-            throw new IllegalArgumentException( "mapped already " + longName + " (" + reduced + ") " + license + " " + longNameMapper.get( reduced ) );
+            if( license.equals( longNameMapper.get( reduced ) ) ) {
+                return;
+            }
+            throw new IllegalArgumentException( "mapped already <" + longName + "> (" + reduced + ") as " + license + " <" + longNameMapper.get( reduced ) + ">" );
         }
 
         longNameMapper.put( reduced, license );
         getMore( license ).longNames.add( reduced );
+
+        Matcher versioned = withVersion.matcher( reduced );
+        if( versioned.matches() ) {
+            addCouldbeName( license, _nn( versioned.group( "base" ) ) );
+        }
+
+        if( reduced.contains( "gnu" ) ) {
+            if( reduced.contains( "lesser" ) ) {
+                addCouldbeName( license, "gnu lesser" );
+            } else {
+                if( reduced.contains( "affero" ) ) {
+                    addCouldbeName( license, "affero gnu" );
+                    addCouldbeName( license, "affero" );
+                } else {
+                    addCouldbeName( license, "gnu" );
+                }
+            }
+        } else if( reduced.contains( "affero" ) ) {
+            addCouldbeName( license, "affero gnu" );
+            addCouldbeName( license, "affero" );
+        }
     }
 
     public Optional<SingleLicense> getSingle( String name ) {
@@ -167,7 +225,7 @@ public class LOracle {
 
     }
 
-    public Optional<LicenseID> getByName( String name ) {
+    public Optional<LicenseID> getByName1( String name ) {
         try {
             return Optional.of( parser.parse( name ) );
         } catch( Exception e ) {
@@ -175,6 +233,26 @@ public class LOracle {
         }
 
         return Optional.ofNullable( longNameMapper.get( aliasBuilder.reduce( name ) ) );
+    }
+
+    public Optional<LicenseID> getByName( String name ) {
+        try {
+            return Optional.of( parser.parse( name ) );
+        } catch( Exception e ) {
+            // not found
+        }
+
+        Optional<LicenseID> ret = Optional.ofNullable( longNameMapper.get( aliasBuilder.reduce( name ) ) );
+
+        if( ret.isPresent() ) {
+            return ret;
+        }
+
+        try {
+            return Optional.of( new FuzzyParser( this ).parse( name ) );
+        } catch( Exception e ) {
+            return Optional.empty();
+        }
     }
 
     public LicenseID getOrThrowByName( String name ) {
@@ -198,25 +276,6 @@ public class LOracle {
         }
 
         licenseExceptions.put( lower, spdx );
-    }
-
-    public void addUrl( LicenseID license, String url ) {
-        Matcher matcher = urlPattern.matcher( url );
-        if( !matcher.matches() ) {
-            throw new IllegalArgumentException( "not a url: " + url );
-        }
-
-        String rel = _nn( matcher.group( "relevant" ) ).toLowerCase( Locale.US );
-
-        if( urls.containsKey( rel ) ) {
-            if( _nn( urls.get( rel ) ).equals( license ) ) {
-                return;
-            }
-            throw new IllegalArgumentException( "known url: " + url );
-        }
-
-        getMore( license ).urls.add( rel );
-        urls.put( rel, license );
     }
 
     public Optional<LicenseID> getByUrl( String url ) {
@@ -245,6 +304,66 @@ public class LOracle {
         CompositeLicense ret = new CompositeLicense( true, left, right );
         composites.putIfAbsent( ret.getId(), new More( false ) ); // todo
         return ret;
+    }
+
+    public void addCouldbeName( LicenseID license, String couldbe ) {
+        getByName( couldbe ).ifPresent(
+                l -> new IllegalArgumentException( "name is already set to definitive license: " + couldbe + " -> " + l ) );
+
+        getMore( license ).couldbeName.add( couldbe );
+
+        couldbeNames.putIfAbsent( couldbe, new HashSet<>() );
+        //noinspection ConstantConditions
+        couldbeNames.get( couldbe ).add( license );
+
+    }
+
+    public Set<LicenseID> guessByName( String name ) {
+        return Optional.ofNullable( couldbeNames.get( aliasBuilder.reduce( name ) ) ).orElseGet( Collections::emptySet );
+    }
+
+    public void addUrl( LicenseID license, String url ) {
+        Matcher matcher = urlPattern.matcher( url );
+        if( !matcher.matches() ) {
+            throw new IllegalArgumentException( "not a url: " + url );
+        }
+
+        String rel = _nn( matcher.group( "relevant" ) ).toLowerCase( Locale.US );
+
+        if( urls.containsKey( rel ) ) {
+
+            LicenseID old = _nn( urls.get( rel ) );
+
+            if( old.equals( license ) ) {
+                return;
+            }
+
+            Log.info( "known url: " + url + " as: " + old + "  moving it to couldbe, together with " + license );
+
+            urls.remove( rel );
+
+            getMore( license ).couldbeName.add( license.toString() );
+
+            couldbeUrls.putIfAbsent( rel, new HashSet<>() );
+            //noinspection ConstantConditions
+            couldbeUrls.get( rel ).add( license );
+            //noinspection ConstantConditions
+            couldbeUrls.get( rel ).add( old );
+
+            getMore( license ).urls.add( rel );
+
+            return;
+        }
+
+        if( couldbeUrls.containsKey( rel ) ) {
+            couldbeUrls.get( rel ).add( license );
+            getMore( license ).urls.add( rel );
+            Log.info( "known couldbe url: " + url + " for " + license );
+            return;
+        }
+
+        getMore( license ).urls.add( rel );
+        urls.put( rel, license );
     }
 
 }

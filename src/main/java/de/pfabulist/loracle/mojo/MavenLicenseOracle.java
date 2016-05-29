@@ -115,7 +115,7 @@ public class MavenLicenseOracle {
      * @param raw
      * @return
      */
-    // TODO obviously this code needs a lot of error protection getAnd handling
+    // TODO obviously this code needs a lot of error protection and handling
     Optional<Coordinates> extractParentCoords( final String raw ) {
         final String parentTagStart = "<parent>", parentTagStop = "</parent>";
         final String groupTagStart = "<groupId>", groupTagStop = "</groupId>";

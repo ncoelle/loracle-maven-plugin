@@ -3,651 +3,1026 @@
     "zlib-acknowledgement": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "fedoraproject.org/wiki/licensing/zlibwithacknowledgement"
       ],
       "longNames": [
+        "zlib acknowledgement",
         "zlib/libpng with acknowledgement"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "mit-advertising": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/mit_with_advertising"
       ],
       "longNames": [
-        "enlightenment (e16)"
+        "mit advertising",
+        "enlightenment (e16)",
+        "mit with advertising"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "frameworx-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/frameworx-1.0"
       ],
       "longNames": [
-        "frameworx 1.0"
+        "frameworx 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "frameworx"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nc-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc/2.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial 2.0"
+        "cc by nc 2",
+        "creative commons attribution non commercial 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "creative commons attribution non commercial",
+        "cc by nc"
+      ],
+      "couldbeUrl": []
     },
     "clartistic": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "ncftp.com/ncftp/doc/license"
       ],
       "longNames": [
+        "clartistic",
         "clarified artistic"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "spl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/spl-1.0"
       ],
       "longNames": [
-        "sun 1.0"
+        "spl 1",
+        "sun 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "sun",
+        "spl"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nc-2.5": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc/2.5/legalcode"
       ],
       "longNames": [
+        "cc by nc 2.5",
         "creative commons attribution non commercial 2.5"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "creative commons attribution non commercial",
+        "cc by nc"
+      ],
+      "couldbeUrl": []
     },
     "nlpl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/nlpl"
       ],
       "longNames": [
+        "nlpl",
         "no limit"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "smlnj": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "smlnj.org//license"
       ],
       "longNames": [
+        "smlnj",
         "standard ml of new jersey"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "motosoto": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "opensource.org/licenses/motosoto"
       ],
       "longNames": [
         "motosoto"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "crossword": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/crossword"
       ],
       "longNames": [
         "crossword"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "diffmark": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/diffmark"
       ],
       "longNames": [
         "diffmark"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "agpl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "affero.org/oagpl"
       ],
       "longNames": [
-        "affero general 1.0"
+        "agpl 1",
+        "affero 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "affero",
+        "affero gnu",
+        "agpl"
+      ],
+      "couldbeUrl": []
     },
     "netcdf": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "unidata.ucar.edu/software/netcdf/copyright"
       ],
       "longNames": [
         "netcdf"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "libtiff": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/libtiff"
       ],
       "longNames": [
         "libtiff"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "bittorrent-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "directory.fsf.org/wiki/license:bittorrentosl1.1"
       ],
       "longNames": [
+        "bittorrent 1.1",
         "bittorrent source 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "bittorrent source",
+        "bittorrent"
+      ],
+      "couldbeUrl": []
     },
     "0bsd": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "landley.net/toybox/license.html "
       ],
       "longNames": [
+        "0bsd",
         "bsd zero clause"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cecill-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "cecill.info/licences/licence_cecill_v1.1-us"
       ],
       "longNames": [
         "cecill 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cecill"
+      ],
+      "couldbeUrl": []
     },
     "cecill-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "cecill.info/licences/licence_cecill_v1-fr"
       ],
       "longNames": [
-        "cecill 1.0"
+        "cecill 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cecill"
+      ],
+      "couldbeUrl": []
     },
     "odbl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "opendatacommons.org/licenses/odbl/1.0/"
       ],
       "longNames": [
-        "odc database 1.0"
+        "odbl 1",
+        "odc database 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "odc database",
+        "odbl"
+      ],
+      "couldbeUrl": []
     },
     "bittorrent-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/licenses/bittorrent?r1\u003d1.1\u0026r2\u003d1.1.1.1\u0026diff_format\u003ds"
       ],
       "longNames": [
-        "bittorrent source 1.0"
+        "bittorrent 1",
+        "bittorrent source 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "bittorrent source",
+        "bittorrent"
+      ],
+      "couldbeUrl": []
     },
     "xinetd": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/xinetd_license"
       ],
       "longNames": [
         "xinetd"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cube": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/cube"
       ],
       "longNames": [
         "cube"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "ipa": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/ipa"
       ],
       "longNames": [
+        "ipa",
         "ipa font"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "vim": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "vimdoc.sourceforge.net/htmldoc/uganda"
       ],
       "longNames": [
         "vim"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "xnet": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/xnet"
       ],
       "longNames": [
+        "xnet",
         "x.net"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "afl-3.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "rosenlaw.com/afl3.0",
         "opensource.org/licenses/afl-3.0"
       ],
       "longNames": [
-        "academic 3.0"
+        "afl 3",
+        "academic 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "afl",
+        "academic"
+      ],
+      "couldbeUrl": []
     },
     "cddl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/cddl1"
       ],
       "longNames": [
-        "common development and distribution 1.0"
+        "cddl 1",
+        "common development and distribution 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "common development and distribution",
+        "cddl"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nc-sa-4.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc-sa/4.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial share alike 4.0"
+        "cc by nc sa 4",
+        "creative commons attribution non commercial share alike 4"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by nc sa",
+        "creative commons attribution non commercial share alike"
+      ],
+      "couldbeUrl": []
     },
     "mpl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "mozilla.org/mpl/mpl-1.0",
-        "opensource.org/licenses/mpl-1.0"
+        "opensource.org/licenses/mpl-1.0",
+        "opensource.org/licenses/mozilla1.0"
       ],
       "longNames": [
-        "mozilla 1.0"
+        "mpl 1",
+        "mozilla 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "mpl",
+        "mozilla"
+      ],
+      "couldbeUrl": []
     },
     "tosl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/tosl"
       ],
       "longNames": [
+        "tosl",
         "trusster source"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "newsletr": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/newsletr"
       ],
       "longNames": [
         "newsletr"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "wtfpl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "sam.zoy.org/wtfpl/copying"
+        "sam.zoy.org/wtfpl/copying",
+        "fedoraproject.org/wiki/licensing/wtfpl"
       ],
       "longNames": [
+        "wtfpl",
         "do what f*ck you want to"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-nc-nd-4.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc-nd/4.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial no derivatives 4.0"
+        "cc by nc nd 4",
+        "creative commons attribution non commercial no derivatives 4"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by nc nd",
+        "creative commons attribution non commercial no derivatives"
+      ],
+      "couldbeUrl": []
     },
     "artistic-1.0": {
       "spdx": true,
       "osiApproved": true,
-      "urls": [],
-      "longNames": [
-        "artistic 1.0"
+      "fedoraApproved": {},
+      "urls": [
+        "opensource.org/licenses/artistic-1.0"
       ],
-      "specific": []
+      "longNames": [
+        "artistic 1"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "artistic"
+      ],
+      "couldbeUrl": []
     },
     "artistic-1.0-perl": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "dev.perl.org/licenses/artistic"
       ],
       "longNames": [
-        "artistic 1.0 (perl)"
+        "artistic 1 perl",
+        "artistic 1 (perl)"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "imlib2": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "trac.enlightenment.org/e/browser/trunk/imlib2/copying"
+        "trac.enlightenment.org/e/browser/trunk/imlib2/copying",
+        "fedoraproject.org/wiki/licensing/imlib2"
       ],
       "longNames": [
         "imlib2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-3.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by/3.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution 3.0"
+        "cc by 3",
+        "creative commons attribution 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by",
+        "creative commons attribution"
+      ],
+      "couldbeUrl": []
     },
     "lppl-1.2": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "latex-project.org/lppl/lppl-1-2"
       ],
       "longNames": [
+        "lppl 1.2",
         "latex project 1.2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "latex project",
+        "lppl"
+      ],
+      "couldbeUrl": []
     },
     "naumen": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "opensource.org/licenses/naumen"
       ],
       "longNames": [
         "naumen"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "lppl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "latex-project.org/lppl/lppl-1-0"
       ],
       "longNames": [
-        "latex project 1.0"
+        "lppl 1",
+        "latex project 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "latex project",
+        "lppl"
+      ],
+      "couldbeUrl": []
     },
     "lppl-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "latex-project.org/lppl/lppl-1-1"
       ],
       "longNames": [
+        "lppl 1.1",
         "latex project 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "latex project",
+        "lppl"
+      ],
+      "couldbeUrl": []
     },
     "efl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "eiffel-nice.org/license/forum",
         "opensource.org/licenses/efl-1.0"
       ],
       "longNames": [
-        "eiffel forum 1.0"
+        "efl 1",
+        "eiffel forum 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "eiffel forum",
+        "efl"
+      ],
+      "couldbeUrl": []
     },
     "mpl-1.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "mozilla.org/mpl/mpl-1.1",
         "opensource.org/licenses/mpl-1.1"
       ],
       "longNames": [
+        "mpl 1.1",
         "mozilla 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "mpl",
+        "mozilla"
+      ],
+      "couldbeUrl": []
     },
     "unicode-tou": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "unicode.org/copyright"
       ],
       "longNames": [
+        "unicode tou",
         "unicode terms of use"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cnri-python-gpl-compatible": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "python.org/download/releases/1.6.1/download_win/"
       ],
       "longNames": [
+        "cnri python gpl compatible",
         "cnri python source gpl compatible"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "gsoap-1.3b": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "cs.fsu.edu/~engelen/license"
       ],
       "longNames": [
+        "gsoap 1.3b",
         "gsoap v1.3b"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cddl-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [],
       "longNames": [
+        "cddl 1.1",
         "common development and distribution 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "common development and distribution",
+        "cddl"
+      ],
+      "couldbeUrl": []
     },
     "npl-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "mozilla.org/mpl/npl/1.1/"
       ],
       "longNames": [
+        "npl 1.1",
         "netscape 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "netscape",
+        "npl"
+      ],
+      "couldbeUrl": []
     },
     "fsful": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/fsf_unlimited_license"
       ],
       "longNames": [
+        "fsful",
         "fsf unlimited"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "npl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "mozilla.org/mpl/npl/1.0/"
       ],
       "longNames": [
-        "netscape 1.0"
+        "npl 1",
+        "netscape 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "netscape",
+        "npl"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nc-3.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc/3.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial 3.0"
+        "cc by nc 3",
+        "creative commons attribution non commercial 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "creative commons attribution non commercial",
+        "cc by nc"
+      ],
+      "couldbeUrl": []
+    },
+    "aop-pd": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "urls": [],
+      "longNames": [
+        "aop pd"
+      ],
+      "specific": [
+        {
+          "groupId": "aopalliance",
+          "artifactId": "aopalliance",
+          "version": "1.0"
+        }
+      ],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "eudatagrid": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "eu-datagrid.web.cern.ch/eu-datagrid/license",
         "opensource.org/licenses/eudatagrid"
       ],
       "longNames": [
+        "eudatagrid",
         "eu datagrid"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-sa-2.5": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-sa/2.5/legalcode"
       ],
       "longNames": [
+        "cc by sa 2.5",
         "creative commons attribution share alike 2.5"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by sa",
+        "creative commons attribution share alike"
+      ],
+      "couldbeUrl": []
     },
     "haskellreport": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/haskell_language_report_license"
       ],
       "longNames": [
+        "haskellreport",
         "haskell language report"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "aal": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "opensource.org/licenses/attribution"
       ],
       "longNames": [
+        "aal",
         "attribution assurance"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cecill-c": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "cecill.info/licences/licence_cecill-c_v1-fr"
+        "cecill.info/licences/licence_cecill-c_v1-fr",
+        "cecill.info/licences.en",
+        "cecill.info/licences.en"
       ],
       "longNames": [
         "cecill c"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "eurosym": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/eurosym"
       ],
       "longNames": [
         "eurosym"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "apache-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "apache.org/licenses/license-2.0",
         "opensource.org/licenses/apache-2.0"
       ],
       "longNames": [
-        "apache 2.0"
+        "apache 2",
+        "asl 2"
       ],
       "specific": [
         {
@@ -655,110 +1030,180 @@
           "artifactId": "httpclient",
           "version": "4.0.1"
         }
-      ]
+      ],
+      "couldbeName": [
+        "apache",
+        "asl"
+      ],
+      "couldbeUrl": []
     },
     "cecill-b": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "cecill.info/licences/licence_cecill-b_v1-fr"
+        "cecill.info/licences/licence_cecill-b_v1-fr",
+        "cecill.info/licences.en",
+        "cecill.info/licences.en"
       ],
       "longNames": [
         "cecill b"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cecill-b"
+      ],
+      "couldbeUrl": []
     },
     "gpl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "gnu.org/licenses/old-licenses/gpl-1.0-standalone"
+        "gnu.org/licenses/old-licenses/gpl-1.0-standalone",
+        "gnu.org/licenses/old-licenses/gpl-1.0"
       ],
       "longNames": [
-        "gnu general 1.0 only"
+        "gpl 1",
+        "gnu 1 only",
+        "gnu 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "gpl",
+        "gnu"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.2.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003d4bc786f34b50aa301be6f5600f58a980070f481e"
       ],
       "longNames": [
+        "oldap 2.2.1",
         "ldap 2.2.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.2.2": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003ddf2cc1e21eb7c160695f5b7cffd6296c151ba188"
       ],
       "longNames": [
+        "oldap 2.2.2",
         "ldap 2.2.2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "oml": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/open_market_license"
       ],
       "longNames": [
+        "oml",
         "market"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-nd-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nd/1.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution no derivatives 1.0"
+        "cc by nd 1",
+        "creative commons attribution no derivatives 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "creative commons attribution no derivatives",
+        "cc by nd"
+      ],
+      "couldbeUrl": []
     },
     "lgpllr": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "www-igm.univ-mlv.fr/~unitex/lgpllr"
       ],
       "longNames": [
-        "lesser general for linguistic resources"
+        "lgpllr",
+        "lesser for linguistic resources"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "vsl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/vsl-1.0"
       ],
       "longNames": [
-        "vovida 1.0"
+        "vsl 1",
+        "vovida 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "vovida",
+        "vsl"
+      ],
+      "couldbeUrl": []
     },
     "amdplpa": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/amd_plpa_map_license"
       ],
       "longNames": [
+        "amdplpa",
         "amd\u0027s plpa_map.c"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "mit": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/mit",
         "opensource.org/licenses/mit-license"
@@ -766,145 +1211,224 @@
       "longNames": [
         "mit"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "bsd-protection": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/bsd_protection_license"
       ],
       "longNames": [
         "bsd protection"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "oldap-1.4": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003dc9f95c2f3f2ffb5e0ae55fe7388af75547660941"
       ],
       "longNames": [
+        "oldap 1.4",
         "ldap 1.4"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "apsl-1.2": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "samurajdata.se/opensource/mirror/licenses/apsl"
       ],
       "longNames": [
+        "apsl 1.2",
         "apple source 1.2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "apsl",
+        "apple source"
+      ],
+      "couldbeUrl": []
     },
     "lppl-1.3a": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "latex-project.org/lppl/lppl-1-3a"
       ],
       "longNames": [
+        "lppl 1.3a",
         "latex project 1.3a"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "apl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/apl-1.0"
       ],
       "longNames": [
-        "adaptive 1.0"
+        "apl 1",
+        "adaptive 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "adaptive",
+        "apl"
+      ],
+      "couldbeUrl": []
     },
     "lppl-1.3c": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "latex-project.org/lppl/lppl-1-3c",
         "opensource.org/licenses/lppl-1.3c"
       ],
       "longNames": [
+        "lppl 1.3c",
         "latex project v1.3c"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cpol-1.02": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "codeproject.com/info/cpol10"
       ],
       "longNames": [
+        "cpol 1.02",
         "code project 1.02"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cpol",
+        "code project"
+      ],
+      "couldbeUrl": []
     },
     "unlicense": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "unlicense.org/"
+        "unlicense.org/",
+        "fedoraproject.org/wiki/licensing/unlicense"
       ],
       "longNames": [
         "unlicense"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "xfree86-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "xfree86.org/current/license4"
       ],
       "longNames": [
         "xfree86 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "xfree86"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-4.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by/4.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution 4.0"
+        "cc by 4",
+        "creative commons attribution 4"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by",
+        "creative commons attribution"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-sa-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-sa/1.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution share alike 1.0"
+        "cc by sa 1",
+        "creative commons attribution share alike 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by sa",
+        "creative commons attribution share alike"
+      ],
+      "couldbeUrl": []
     },
     "efl-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "eiffel-nice.org/license/eiffel-forum-license-2",
-        "opensource.org/licenses/efl-2.0"
+        "opensource.org/licenses/efl-2.0",
+        "fsf.org/licensing/licenses/eiffel-forum-license-2"
       ],
       "longNames": [
-        "eiffel forum 2.0"
+        "efl 2",
+        "eiffel forum 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "eiffel forum",
+        "efl"
+      ],
+      "couldbeUrl": []
     },
     "isc": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "isc.org/software/license",
         "opensource.org/licenses/isc"
@@ -912,29 +1436,42 @@
       "longNames": [
         "isc"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "xpp": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/xpp"
       ],
       "longNames": [
         "xpp"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "closed": {
-      "spdx": true,
+      "spdx": false,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [],
-      "longNames": [],
-      "specific": []
+      "longNames": [
+        "closed"
+      ],
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "bsd-3-clause": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/bsd-3-clause"
       ],
@@ -943,2097 +1480,3326 @@
         "new bsd",
         "revised bsd"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "glide": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "users.on.net/~triforce/glidexp/copying"
       ],
       "longNames": [
+        "glide",
         "3dfx glide"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "apsl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "fedoraproject.org/wiki/licensing/apple_public_source_license_1.0"
       ],
       "longNames": [
-        "apple source 1.0"
+        "apsl 1",
+        "apple source 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "apsl",
+        "apple source"
+      ],
+      "couldbeUrl": []
     },
     "apsl-1.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.apple.com/source/ioserialfamily/ioserialfamily-7/apple_license"
       ],
       "longNames": [
+        "apsl 1.1",
         "apple source 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "apsl",
+        "apple source"
+      ],
+      "couldbeUrl": []
     },
     "cc0-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "creativecommons.org/publicdomain/zero/1.0/legalcode"
+        "creativecommons.org/publicdomain/zero/1.0/legalcode",
+        "repository.jboss.org/licenses/cc0-1.0"
       ],
       "longNames": [
-        "creative commons zero 1.0 universal"
+        "cc0 1",
+        "creative commons zero 1 universal"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc0"
+      ],
+      "couldbeUrl": []
     },
     "snia": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/snia_public_license"
       ],
       "longNames": [
+        "snia",
         "snia 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "snia"
+      ],
+      "couldbeUrl": []
     },
     "spencer-86": {
       "spdx": true,
       "osiApproved": false,
-      "urls": [],
+      "fedoraApproved": {},
+      "urls": [
+        "fedoraproject.org/wiki/licensing/henry_spencer_reg-ex_library_license"
+      ],
       "longNames": [
         "spencer 86"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "spencer"
+      ],
+      "couldbeUrl": []
     },
     "swl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/swl"
       ],
       "longNames": [
+        "swl",
         "scheme widget library (swl)"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "miros": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "opensource.org/licenses/miros"
+        "opensource.org/licenses/miros",
+        "mirbsd.de/miros-licence"
       ],
       "longNames": [
+        "miros",
         "miros licence"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cua-opl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/cua-opl-1.0"
       ],
       "longNames": [
-        "cua office 1.0"
+        "cua opl 1",
+        "cua office 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cua office",
+        "cua opl"
+      ],
+      "couldbeUrl": []
     },
     "gpl-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "gnu.org/licenses/old-licenses/gpl-2.0-standalone",
-        "opensource.org/licenses/gpl-2.0"
+        "opensource.org/licenses/gpl-2.0",
+        "gnu.org/licenses/old-licenses/gpl-2.0"
       ],
       "longNames": [
-        "gnu general 2.0 only"
+        "gpl 2",
+        "gnu 2 only",
+        "gnu 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "gpl",
+        "gnu"
+      ],
+      "couldbeUrl": []
     },
     "nasa-1.3": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "ti.arc.nasa.gov/opensource/nosa/",
         "opensource.org/licenses/nasa-1.3"
       ],
       "longNames": [
+        "nasa 1.3",
         "nasa source 1.3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "nasa",
+        "nasa source"
+      ],
+      "couldbeUrl": []
     },
     "apache-1.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "apache.org/licenses/license-1.1",
-        "opensource.org/licenses/apache-1.1"
+        "opensource.org/licenses/apache-1.1",
+        "4suite.org/copyright"
       ],
       "longNames": [
-        "apache 1.1"
+        "apache 1.1",
+        "4suite",
+        "asl 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "apache",
+        "asl"
+      ],
+      "couldbeUrl": []
     },
     "gfdl-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "gnu.org/licenses/old-licenses/fdl-1.1"
       ],
       "longNames": [
+        "gfdl 1.1",
         "gnu documentation 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "gfdl",
+        "gnu documentation",
+        "gnu"
+      ],
+      "couldbeUrl": []
     },
     "hpnd": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/hpnd"
       ],
       "longNames": [
+        "hpnd",
         "historic permission notice and disclaimer"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "apache-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "apache.org/licenses/license-1.0"
       ],
       "longNames": [
-        "apache 1.0"
+        "apache 1",
+        "asl 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "apache",
+        "asl"
+      ],
+      "couldbeUrl": []
     },
     "gfdl-1.2": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "gnu.org/licenses/old-licenses/fdl-1.2"
       ],
       "longNames": [
+        "gfdl 1.2",
         "gnu documentation 1.2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "gfdl",
+        "gnu documentation",
+        "gnu"
+      ],
+      "couldbeUrl": []
     },
     "gfdl-1.3": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "gnu.org/licenses/fdl-1.3"
       ],
       "longNames": [
+        "gfdl 1.3",
         "gnu documentation 1.3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "gfdl",
+        "gnu documentation",
+        "gnu"
+      ],
+      "couldbeUrl": []
     },
     "barr": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/barr"
       ],
       "longNames": [
         "barr"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "python-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/python-2.0"
       ],
       "longNames": [
-        "python 2.0"
+        "python 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "python"
+      ],
+      "couldbeUrl": []
     },
     "sissl-1.2": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "gridscheduler.sourceforge.net/gridengine_sissl_license"
       ],
       "longNames": [
+        "sissl 1.2",
         "sun industry standards source 1.2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "sissl",
+        "sun industry standards source"
+      ],
+      "couldbeUrl": []
     },
     "spencer-94": {
       "spdx": true,
       "osiApproved": false,
-      "urls": [],
+      "fedoraApproved": {},
+      "urls": [
+        "fedoraproject.org/wiki/licensing/henry_spencer_reg-ex_library_license"
+      ],
       "longNames": [
         "spencer 94"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "spencer",
+        "spencer-94"
+      ],
+      "couldbeUrl": []
     },
     "zed": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/zed"
       ],
       "longNames": [
         "zed"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "x11": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "xfree86.org/3.3.6/copyright2.html#3"
       ],
       "longNames": [
         "x11"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "icu": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "source.icu-project.org/repos/icu/icu/trunk/license"
       ],
       "longNames": [
         "icu"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "leptonica": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/leptonica"
       ],
       "longNames": [
         "leptonica"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "imatix": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "legacy.imatix.com/html/sfl/sfl4.htm#license"
       ],
       "longNames": [
+        "imatix",
         "imatix standard function library"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "afl-1.2": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.linux-mirror.org/licenses/afl-1.2"
       ],
       "longNames": [
+        "afl 1.2",
         "academic 1.2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "afl",
+        "academic"
+      ],
+      "couldbeUrl": []
     },
     "afl-1.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.linux-mirror.org/licenses/afl-1.1"
       ],
       "longNames": [
+        "afl 1.1",
         "academic 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "afl",
+        "academic"
+      ],
+      "couldbeUrl": []
     },
     "vostrom": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/vostrom"
       ],
       "longNames": [
+        "vostrom",
         "vostrom for source"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-nc-sa-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc-sa/2.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial share alike 2.0"
+        "cc by nc sa 2",
+        "creative commons attribution non commercial share alike 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by nc sa",
+        "creative commons attribution non commercial share alike"
+      ],
+      "couldbeUrl": []
     },
     "bzip2-1.0.6": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "github.com/asimonov-im/bzip2/blob/master/license"
       ],
       "longNames": [
+        "bzip2 1.0.6",
         "bzip2 and libbzip2 1.0.6"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "bzip2",
+        "bzip2 and libbzip2"
+      ],
+      "couldbeUrl": []
     },
     "bzip2-1.0.5": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "bzip.org/1.0.5/bzip2-manual-1.0.5"
       ],
       "longNames": [
+        "bzip2 1.0.5",
         "bzip2 and libbzip2 1.0.5"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "bzip2",
+        "bzip2 and libbzip2"
+      ],
+      "couldbeUrl": []
     },
     "cpl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
-        "opensource.org/licenses/cpl-1.0"
+        "opensource.org/licenses/cpl-1.0",
+        "opensource.org/licenses/cpl1.0"
       ],
       "longNames": [
-        "common 1.0"
+        "cpl 1",
+        "common 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "common",
+        "cpl"
+      ],
+      "couldbeUrl": []
     },
     "catosl-1.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "opensource.org/licenses/catosl-1.1"
+        "opensource.org/licenses/catosl-1.1",
+        "opensource.org/licenses/ca-tosl1.1"
       ],
       "longNames": [
+        "catosl 1.1",
         "computer associates trusted source 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "computer associates trusted source",
+        "catosl"
+      ],
+      "couldbeUrl": []
     },
     "afmparse": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/afmparse"
       ],
       "longNames": [
         "afmparse"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-nc-sa-2.5": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc-sa/2.5/legalcode"
       ],
       "longNames": [
+        "cc by nc sa 2.5",
         "creative commons attribution non commercial share alike 2.5"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by nc sa",
+        "creative commons attribution non commercial share alike"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-sa-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-sa/2.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution share alike 2.0"
+        "cc by sa 2",
+        "creative commons attribution share alike 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by sa",
+        "creative commons attribution share alike"
+      ],
+      "couldbeUrl": []
     },
     "lpl-1.02": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "plan9.bell-labs.com/plan9/license",
         "opensource.org/licenses/lpl-1.02"
       ],
       "longNames": [
+        "lpl 1.02",
         "lucent 1.02"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "lpl",
+        "lucent"
+      ],
+      "couldbeUrl": []
     },
     "ofl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "scripts.sil.org/cms/scripts/page.php?item_id\u003dofl10_web"
       ],
       "longNames": [
-        "sil font 1.0"
+        "ofl 1",
+        "sil font 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ofl",
+        "sil font"
+      ],
+      "couldbeUrl": []
     },
     "gnuplot": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/gnuplot"
       ],
       "longNames": [
         "gnuplot"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
     },
     "mpl-2.0-no-copyleft-exception": {
       "spdx": true,
       "osiApproved": true,
-      "urls": [],
-      "longNames": [
-        "mozilla 2.0 (no copyleft exception)"
+      "fedoraApproved": {},
+      "urls": [
+        "mozilla.org/mpl/2.0/",
+        "opensource.org/licenses/mpl-2.0"
       ],
-      "specific": []
+      "longNames": [
+        "mpl 2 no copyleft exception",
+        "mozilla 2 (no copyleft exception)"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "mpl-2.0-no-copyleft-exception"
+      ],
+      "couldbeUrl": []
     },
     "ofl-1.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "scripts.sil.org/cms/scripts/page.php?item_id\u003dofl_web",
         "opensource.org/licenses/ofl-1.1"
       ],
       "longNames": [
+        "ofl 1.1",
         "sil font 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ofl",
+        "sil font"
+      ],
+      "couldbeUrl": []
     },
     "nunit": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/nunit"
       ],
       "longNames": [
         "nunit"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "zend-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "web.archive.org/web/20130517195954/http://www.zend.com/license/2_00"
+        "web.archive.org/web/20130517195954/http://www.zend.com/license/2_00",
+        "zend.com/license/2_00"
       ],
       "longNames": [
-        "zend 2.0"
+        "zend 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "zend"
+      ],
+      "couldbeUrl": []
     },
     "ogtsl": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opengroup.org/testing/downloads/the_open_group_tsl",
         "opensource.org/licenses/ogtsl"
       ],
       "longNames": [
+        "ogtsl",
         "group test suite"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "rpsl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "helixcommunity.org/content/rpsl",
-        "opensource.org/licenses/rpsl-1.0"
+        "opensource.org/licenses/rpsl-1.0",
+        "opensource.org/licenses/real"
       ],
       "longNames": [
-        "realnetworks source 1.0"
+        "rpsl 1",
+        "realnetworks source 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "rpsl",
+        "realnetworks source"
+      ],
+      "couldbeUrl": []
     },
     "multics": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/multics"
       ],
       "longNames": [
         "multics"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "jasper-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "ece.uvic.ca/~mdadams/jasper/license"
       ],
       "longNames": [
+        "jasper 2",
         "jasper"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "jasper"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nc-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc/1.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial 1.0"
+        "cc by nc 1",
+        "creative commons attribution non commercial 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "creative commons attribution non commercial",
+        "cc by nc"
+      ],
+      "couldbeUrl": []
     },
     "gpl-3.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "gnu.org/licenses/gpl-3.0-standalone",
-        "opensource.org/licenses/gpl-3.0"
+        "opensource.org/licenses/gpl-3.0",
+        "fsf.org/licensing/licenses/gpl"
       ],
       "longNames": [
-        "gnu general 3.0 only"
+        "gpl 3",
+        "gnu 3 only",
+        "gnu 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "gpl",
+        "gnu"
+      ],
+      "couldbeUrl": []
     },
     "saxpath": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/saxpath_license"
       ],
       "longNames": [
         "saxpath"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
+    },
+    "dom4j": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "urls": [],
+      "longNames": [
+        "dom4j"
+      ],
+      "specific": [
+        {
+          "groupId": "dom4j",
+          "artifactId": "dom4j",
+          "version": "1.6.1"
+        }
+      ],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-sa-4.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-sa/4.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution share alike 4.0"
+        "cc by sa 4",
+        "creative commons attribution share alike 4"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by sa",
+        "creative commons attribution share alike"
+      ],
+      "couldbeUrl": []
     },
     "qpl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "doc.qt.nokia.com/3.3/license",
         "opensource.org/licenses/qpl-1.0"
       ],
       "longNames": [
-        "q 1.0"
+        "qpl 1",
+        "q 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "q",
+        "qpl"
+      ],
+      "couldbeUrl": []
     },
     "crystalstacker": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "fedoraproject.org/wiki/licensing:crystalstacker?rd\u003dlicensing/crystalstacker"
       ],
       "longNames": [
         "crystalstacker"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "json": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "json.org/license"
       ],
       "longNames": [
         "json"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "scea": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "research.scea.com/scea_shared_source_license"
       ],
       "longNames": [
+        "scea",
         "scea shared source"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "fsfullr": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/fsf_unlimited_license#license_retention_variant"
       ],
       "longNames": [
+        "fsfullr",
         "fsf unlimited (with retention)"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "freeimage": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "freeimage.sourceforge.net/freeimage-license"
       ],
       "longNames": [
-        "freeimage 1.0"
+        "freeimage",
+        "freeimage 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "freeimage"
+      ],
+      "couldbeUrl": []
     },
     "afl-2.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.linux-mirror.org/licenses/afl-2.1"
       ],
       "longNames": [
+        "afl 2.1",
         "academic 2.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "afl",
+        "academic"
+      ],
+      "couldbeUrl": []
     },
     "afl-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.linux-mirror.org/licenses/afl-2.0"
       ],
       "longNames": [
-        "academic 2.0"
+        "afl 2",
+        "academic 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "afl",
+        "academic"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nc-sa-3.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc-sa/3.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial share alike 3.0"
+        "cc by nc sa 3",
+        "creative commons attribution non commercial share alike 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by nc sa",
+        "creative commons attribution non commercial share alike"
+      ],
+      "couldbeUrl": []
     },
     "condor-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "research.cs.wisc.edu/condor/license.html#condor"
       ],
       "longNames": [
         "condor 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "condor"
+      ],
+      "couldbeUrl": []
     },
     "bsd-2-clause-freebsd": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "freebsd.org/copyright/freebsd-license"
       ],
       "longNames": [
         "bsd 2 clause freebsd"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "artistic-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "perlfoundation.org/artistic_license_2_0  ",
-        "opensource.org/licenses/artistic-license-2.0"
+        "opensource.org/licenses/artistic-license-2.0",
+        "perlfoundation.org/artistic_license_2_0"
       ],
       "longNames": [
-        "artistic 2.0"
+        "artistic 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "artistic"
+      ],
+      "couldbeUrl": []
     },
     "osl-3.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "rosenlaw.com/osl3.0",
         "opensource.org/licenses/osl-3.0"
       ],
       "longNames": [
+        "osl 3",
         "Open Software License 3.0"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "Open Software License",
+        "osl"
+      ],
+      "couldbeUrl": []
     },
     "d-fsl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "dipp.nrw.de/d-fsl/lizenzen/",
         "dipp.nrw.de/d-fsl/index_html/lizenzen/de/d-fsl-1_0_de"
       ],
       "longNames": [
+        "d fsl 1",
         "deutsche freie lizenz"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "d fsl"
+      ],
+      "couldbeUrl": []
     },
     "apafml": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/adobepostscriptafm"
       ],
       "longNames": [
+        "apafml",
         "adobe postscript afm"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "nposl-3.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/nosl3.0"
       ],
       "longNames": [
-        "non profit 3.0"
+        "nposl 3",
+        "non profit 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "nposl",
+        "non profit"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-sa-3.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-sa/3.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution share alike 3.0"
+        "cc by sa 3",
+        "creative commons attribution share alike 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by sa",
+        "creative commons attribution share alike"
+      ],
+      "couldbeUrl": []
     },
     "ncsa": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "otm.illinois.edu/uiuc_opensource",
         "opensource.org/licenses/ncsa"
       ],
       "longNames": [
+        "ncsa",
         "university of illinois/ncsa source"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "rpl-1.5": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/rpl-1.5"
       ],
       "longNames": [
+        "rpl 1.5",
         "reciprocal 1.5"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "reciprocal",
+        "rpl"
+      ],
+      "couldbeUrl": []
     },
     "rpl-1.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/rpl-1.1"
       ],
       "longNames": [
+        "rpl 1.1",
         "reciprocal 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "reciprocal",
+        "rpl"
+      ],
+      "couldbeUrl": []
     },
     "bsd-4-clause-uc": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "freebsd.org/copyright/license"
       ],
       "longNames": [
+        "bsd 4 clause uc",
         "bsd 4 clause (university of california specific)"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "epl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "eclipse.org/legal/epl-v10",
         "opensource.org/licenses/epl-1.0"
       ],
       "longNames": [
-        "eclipse 1.0"
+        "epl 1",
+        "eclipse 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "epl",
+        "eclipse"
+      ],
+      "couldbeUrl": []
     },
     "pddl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "opendatacommons.org/licenses/pddl/1.0/"
       ],
       "longNames": [
-        "odc domain dedication \u0026 1.0"
+        "pddl 1",
+        "odc domain dedication \u0026 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "pddl",
+        "odc domain dedication \u0026"
+      ],
+      "couldbeUrl": []
     },
     "simpl-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/simpl-2.0"
       ],
       "longNames": [
-        "simple 2.0"
+        "simpl 2",
+        "simple 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "simpl",
+        "simple"
+      ],
+      "couldbeUrl": []
     },
     "giftware": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "alleg.sourceforge.net//license"
+        "alleg.sourceforge.net//license",
+        "talula.demon.co.uk/allegro/license"
       ],
       "longNames": [
         "giftware"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "bsd-3-clause-clear": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "labs.metacarta.com/license-explanation.html#license"
       ],
       "longNames": [
         "bsd 3 clause clear"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "xerox": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/xerox"
       ],
       "longNames": [
         "xerox"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "fair": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "opensource.org/licenses/fair"
       ],
       "longNames": [
         "fair"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "abstyles": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/abstyles"
       ],
       "longNames": [
         "abstyles"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "egenix": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "egenix.com/products/egenix.com-public-license-1.1.0",
         "fedoraproject.org/wiki/licensing/egenix.com_public_license_1.1.0"
       ],
       "longNames": [
-        "egenix.com 1.1.0"
+        "egenix",
+        "egenix.com 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "egenix.com"
+      ],
+      "couldbeUrl": []
     },
     "erlpl-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "erlang.org/eplicense"
+        "erlang.org/eplicense",
+        "fedoraproject.org/wiki/licensing/erlangpubliclicense"
       ],
       "longNames": [
-        "erlang 1.1"
+        "erlpl 1.1",
+        "erlang 1.1",
+        "erpl"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "erlang",
+        "erlpl"
+      ],
+      "couldbeUrl": []
     },
     "psutils": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/psutils"
       ],
       "longNames": [
         "psutils"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "php-3.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "opensource.org/licenses/php-3.0",
-        "php.net/license/3_0"
+        "php.net/license/3_0",
+        "php.net/license/3_01"
       ],
       "longNames": [
-        "php 3.0"
+        "php 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "php-3.0",
+        "php"
+      ],
+      "couldbeUrl": []
     },
     "zimbra-1.3": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [],
       "longNames": [
         "zimbra 1.3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "zimbra"
+      ],
+      "couldbeUrl": []
     },
     "dvipdfm": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/dvipdfm"
       ],
       "longNames": [
         "dvipdfm"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "zimbra-1.4": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "zimbra.com/legal/zimbra-public-license-1-4"
       ],
       "longNames": [
         "zimbra 1.4"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "zimbra"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nd-4.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nd/4.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution no derivatives 4.0"
+        "cc by nd 4",
+        "creative commons attribution no derivatives 4"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "creative commons attribution no derivatives",
+        "cc by nd"
+      ],
+      "couldbeUrl": []
     },
     "nbpl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003d37b4b3f6cc4bf34e1d3dec61e69914b9819d8894"
       ],
       "longNames": [
+        "nbpl 1",
         "net boolean 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "nbpl",
+        "net boolean"
+      ],
+      "couldbeUrl": []
     },
     "nokia": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "opensource.org/licenses/nokia"
       ],
       "longNames": [
+        "nokia",
         "nokia source"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "eupl-1.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "joinup.ec.europa.eu/software/page/eupl/licence-eupl",
         "joinup.ec.europa.eu/system/files/en/eupl%20v.1.1%20-%20licence",
-        "opensource.org/licenses/eupl-1.1"
+        "opensource.org/licenses/eupl-1.1",
+        "ec.europa.eu/idabc/en/document/7774"
       ],
       "longNames": [
+        "eupl 1.1",
         "european union 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "eupl",
+        "european union"
+      ],
+      "couldbeUrl": []
     },
     "eupl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "ec.europa.eu/idabc/en/document/7330",
         "ec.europa.eu/idabc/servlets/doc027f.pdf?id\u003d31096"
       ],
       "longNames": [
-        "european union 1.0"
+        "eupl 1",
+        "european union 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "eupl",
+        "european union"
+      ],
+      "couldbeUrl": []
     },
     "osl-2.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "opensource.org/licenses/osl-2.1",
-        "web.archive.org/web/20050212003940/http://www.rosenlaw.com/osl21"
+        "web.archive.org/web/20050212003940/http://www.rosenlaw.com/osl21",
+        "fedoraproject.org/wiki/licensing/osl2.1"
       ],
       "longNames": [
+        "osl 2.1",
         "Open Software License 2.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "Open Software License",
+        "osl"
+      ],
+      "couldbeUrl": []
     },
     "nrl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "web.mit.edu/network/isakmp/nrllicense"
       ],
       "longNames": [
-        "nrl"
+        "nrl",
+        "bsd with advertising"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "intel": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/intel"
       ],
       "longNames": [
+        "intel",
         "intel source"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "aladdin": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "pages.cs.wisc.edu/~ghost/doc/afpl/6.01/public"
       ],
       "longNames": [
         "aladdin"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "osl-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "web.archive.org/web/20041020171434/http://www.rosenlaw.com/osl2.0"
+        "web.archive.org/web/20041020171434/http://www.rosenlaw.com/osl2.0",
+        "nexb.com/license/license-osl-2.0"
       ],
       "longNames": [
+        "osl 2",
         "Open Software License 2.0"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "Open Software License",
+        "osl"
+      ],
+      "couldbeUrl": []
     },
     "openssl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "openssl.org/source/license"
+        "openssl.org/source/license",
+        "sdisw.com/openssl"
       ],
       "longNames": [
         "openssl"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "bsd-4-clause": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "directory.fsf.org/wiki/license:bsd_4clause"
       ],
       "longNames": [
-        "bsd 4 clause \"original\" or \"old\""
+        "bsd 4 clause",
+        "original bsd",
+        "bsd original",
+        "old bsd",
+        "bsd old"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "ecl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "opensource.org/licenses/ecl-1.0"
+        "opensource.org/licenses/ecl-1.0",
+        "opensource.org/licenses/ecl1"
       ],
       "longNames": [
-        "educational community 1.0"
+        "ecl 1",
+        "educational community 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ecl",
+        "educational community"
+      ],
+      "couldbeUrl": []
     },
     "mit-feh": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/mit#feh"
       ],
       "longNames": [
+        "mit feh",
         "feh"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "doc": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "cs.wustl.edu/~schmidt/ace-copying"
       ],
       "longNames": [
         "doc"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "bsd-2-clause": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/bsd-2-clause"
       ],
       "longNames": [
-        "bsd 2 clause \"simplified\""
+        "bsd 2 clause",
+        "simplified bsd",
+        "bsd simplified"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "bsl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "boost.org/license_1_0",
         "opensource.org/licenses/bsl-1.0"
       ],
       "longNames": [
-        "boost 1.0"
+        "bsl 1",
+        "boost 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "bsl",
+        "boost"
+      ],
+      "couldbeUrl": []
     },
     "ngpl": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "opensource.org/licenses/ngpl"
+        "opensource.org/licenses/ngpl",
+        "opensource.org/licenses/nethack"
       ],
       "longNames": [
-        "nethack general"
+        "ngpl",
+        "nethack"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "w3c": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "w3.org/consortium/legal/2002/copyright-software-20021231",
         "opensource.org/licenses/w3c"
       ],
       "longNames": [
+        "w3c",
         "w3c notice and (2002 12 31)"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "dotseqn": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/dotseqn"
       ],
       "longNames": [
         "dotseqn"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "upl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/upl"
       ],
       "longNames": [
-        "universal permissive 1.0"
+        "upl 1",
+        "universal permissive 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "upl",
+        "universal permissive"
+      ],
+      "couldbeUrl": []
     },
     "bahyph": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/bahyph"
       ],
       "longNames": [
         "bahyph"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "antlr-pd": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "antlr2.org/license"
       ],
       "longNames": [
+        "antlr pd",
         "antlr rights notice"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "w3c-19980720": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "w3.org/consortium/legal/copyright-software-19980720"
       ],
       "longNames": [
+        "w3c 19980720",
         "w3c notice and (1998 07 20)"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "beerware": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/beerware"
       ],
       "longNames": [
         "beerware"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "rsa-md": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "faqs.org/rfcs/rfc1321"
       ],
       "longNames": [
+        "rsa md",
         "rsa message digest"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "mtll": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/matrix_template_library_license"
       ],
       "longNames": [
+        "mtll",
         "matrix template library"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "torque-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/torquev1.1"
       ],
       "longNames": [
+        "torque 1.1",
         "torque v2.5+ 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "torque v2.5+",
+        "torque"
+      ],
+      "couldbeUrl": []
     },
     "qhull": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/qhull"
       ],
       "longNames": [
         "qhull"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "sgi-b-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "oss.sgi.com/projects/freeb/sgifreeswlicb.2.0"
       ],
       "longNames": [
-        "sgi b 2.0"
+        "sgi b 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "sgi b"
+      ],
+      "couldbeUrl": []
     },
     "sendmail": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "sendmail.com/pdfs/open_source/sendmail_license"
       ],
       "longNames": [
         "sendmail"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "sleepycat": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/sleepycat"
       ],
       "longNames": [
         "sleepycat"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "ftl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "freetype.fis.uniroma2.it/ftl"
       ],
       "longNames": [
+        "ftl",
         "freetype project"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-nc-nd-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nd-nc/1.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial no derivatives 1.0"
+        "cc by nc nd 1",
+        "creative commons attribution non commercial no derivatives 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by nc nd",
+        "creative commons attribution non commercial no derivatives"
+      ],
+      "couldbeUrl": []
     },
     "cnri-jython": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "jython.org/license"
       ],
       "longNames": [
         "cnri jython"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-nc-sa-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc-sa/1.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial share alike 1.0"
+        "cc by nc sa 1",
+        "creative commons attribution non commercial share alike 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by nc sa",
+        "creative commons attribution non commercial share alike"
+      ],
+      "couldbeUrl": []
     },
     "intel-acpi": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/intel_acpi_software_license_agreement"
       ],
       "longNames": [
         "intel acpi"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "spencer-99": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "opensource.apple.com/source/tcl/tcl-5/tcl/generic/regfronts"
       ],
       "longNames": [
         "spencer 99"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "spencer"
+      ],
+      "couldbeUrl": []
     },
     "ijg": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "dev.w3.org/cvsweb/amaya/libjpeg/attic/readme?rev\u003d1.2"
+        "dev.w3.org/cvsweb/amaya/libjpeg/attic/readme?rev\u003d1.2",
+        "fedoraproject.org/wiki/licensing/ijg"
       ],
       "longNames": [
+        "ijg",
         "independent jpeg group"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "opl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "old.koalateam.com/jackaroo/opl_1_0",
         "fedoraproject.org/wiki/licensing/open_public_license"
       ],
       "longNames": [
+        "opl 1",
         "Open Public License v1.0"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "opl"
+      ],
+      "couldbeUrl": []
     },
     "bsd-2-clause-netbsd": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "netbsd.org/about/redistribution.html#default"
       ],
       "longNames": [
         "bsd 2 clause netbsd"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "ntp": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/ntp"
       ],
       "longNames": [
         "ntp"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cnri-python": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/cnri-python"
       ],
       "longNames": [
         "cnri python"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "gl2ps": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "geuz.org/gl2ps/copying.gl2ps"
       ],
       "longNames": [
         "gl2ps"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "php-3.01": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "php.net/license/3_01"
       ],
       "longNames": [
         "php 3.01"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "php"
+      ],
+      "couldbeUrl": []
     },
     "sissl": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "openoffice.org/licenses/sissl_license",
         "opensource.org/licenses/sissl"
       ],
       "longNames": [
+        "sissl",
         "sun industry standards source 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "sun industry standards source"
+      ],
+      "couldbeUrl": []
     },
     "rdisc": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/rdisc_license"
       ],
       "longNames": [
         "rdisc"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "dsdp": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/dsdp"
       ],
       "longNames": [
         "dsdp"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "osl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "opensource.org/licenses/osl-1.0"
       ],
       "longNames": [
+        "osl 1",
         "Open Software License 1.0"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "Open Software License",
+        "osl"
+      ],
+      "couldbeUrl": []
     },
     "osl-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/osl1.1"
       ],
       "longNames": [
+        "osl 1.1",
         "Open Software License 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "Open Software License",
+        "osl"
+      ],
+      "couldbeUrl": []
     },
     "ecl-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "opensource.org/licenses/ecl-2.0"
+        "opensource.org/licenses/ecl-2.0",
+        "osedu.org/licenses/ecl-2.0/"
       ],
       "longNames": [
-        "educational community 2.0"
+        "ecl 2",
+        "educational community 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ecl",
+        "educational community"
+      ],
+      "couldbeUrl": []
     },
     "adobe-glyph": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/mit#adobeglyph"
       ],
       "longNames": [
+        "adobe glyph",
         "adobe glyph list"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "ampas": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/bsd#ampasbsd"
       ],
       "longNames": [
-        "academy of motion picture arts and sciences bsd"
+        "ampas",
+        "academy of motion picture arts and sciences bsd",
+        "ampas bsd"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "sax-pd": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "saxproject.org/copying"
       ],
       "longNames": [
+        "sax pd",
         "sax domain notice"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "zpl-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "old.zope.org/resources/license/zpl-1.1"
       ],
       "longNames": [
+        "zpl 1.1",
         "zope 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "zope",
+        "zpl"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nc-4.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc/4.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial 4.0"
+        "cc by nc 4",
+        "creative commons attribution non commercial 4"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "creative commons attribution non commercial",
+        "cc by nc"
+      ],
+      "couldbeUrl": []
     },
     "lpl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/lpl-1.0"
       ],
       "longNames": [
-        "lucent 1.0"
+        "lpl 1",
+        "lucent 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "lpl",
+        "lucent"
+      ],
+      "couldbeUrl": []
     },
     "oclc-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "oclc.org/research/activities/software/license/v2final",
         "opensource.org/licenses/oclc-2.0"
       ],
       "longNames": [
-        "oclc research 2.0"
+        "oclc 2",
+        "oclc research 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "oclc",
+        "oclc research"
+      ],
+      "couldbeUrl": []
     },
     "imagemagick": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "imagemagick.org/script/license"
       ],
       "longNames": [
         "imagemagick"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "adsl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/amazondigitalserviceslicense"
       ],
       "longNames": [
+        "adsl",
         "amazon digital services"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "caldera": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "lemis.com/grog/unix/ancient-source-all"
       ],
       "longNames": [
         "caldera"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "agpl-3.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "gnu.org/licenses/agpl",
-        "opensource.org/licenses/agpl-3.0"
+        "opensource.org/licenses/agpl-3.0",
+        "fsf.org/licensing/licenses/agpl-3.0"
       ],
       "longNames": [
-        "gnu affero general 3.0"
+        "agpl 3",
+        "gnu affero 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "affero",
+        "affero gnu",
+        "gnu affero",
+        "agpl"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nd-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nd/2.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution no derivatives 2.0"
+        "cc by nd 2",
+        "creative commons attribution no derivatives 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "creative commons attribution no derivatives",
+        "cc by nd"
+      ],
+      "couldbeUrl": []
     },
     "lgpl-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "gnu.org/licenses/old-licenses/lgpl-2.0-standalone"
       ],
       "longNames": [
-        "gnu library general 2 only"
+        "lgpl 2",
+        "gnu library 2 only",
+        "gnu library 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "lgpl",
+        "gnu library",
+        "gnu"
+      ],
+      "couldbeUrl": []
     },
     "sgi-b-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "oss.sgi.com/projects/freeb/"
       ],
       "longNames": [
         "sgi b 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "sgi b"
+      ],
+      "couldbeUrl": []
     },
     "lgpl-2.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "gnu.org/licenses/old-licenses/lgpl-2.1-standalone",
-        "opensource.org/licenses/lgpl-2.1"
+        "opensource.org/licenses/lgpl-2.1",
+        "gnu.org/licenses/lgpl-2.1"
       ],
       "longNames": [
-        "gnu lesser general 2.1 only"
+        "lgpl 2.1",
+        "gnu lesser 2.1 only",
+        "gnu lesser 2.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "lgpl",
+        "gnu lesser"
+      ],
+      "couldbeUrl": []
     },
     "sgi-b-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "oss.sgi.com/projects/freeb/sgifreeswlicb.1.0"
       ],
       "longNames": [
-        "sgi b 1.0"
+        "sgi b 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "sgi b"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nd-2.5": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nd/2.5/legalcode"
       ],
       "longNames": [
+        "cc by nd 2.5",
         "creative commons attribution no derivatives 2.5"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "creative commons attribution no derivatives",
+        "cc by nd"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.8": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/software/release/license"
       ],
       "longNames": [
+        "oldap 2.8",
         "ldap 2.8"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "mit-enna": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/mit#enna"
       ],
       "longNames": [
+        "mit enna",
         "enna"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "oldap-2.7": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003d47c2415c1df81556eeb39be6cad458ef87c534a2"
       ],
       "longNames": [
+        "oldap 2.7",
         "ldap 2.7"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.6": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003d1cae062821881f41b73012ba816434897abf4205"
       ],
       "longNames": [
+        "oldap 2.6",
         "ldap 2.6"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.5": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003d6852b9d90022e8593c98205413380536b1b5a7cf"
       ],
       "longNames": [
+        "oldap 2.5",
         "ldap 2.5"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.4": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003dcd1284c4a91a8a380d904eee68d1583f989ed386"
       ],
       "longNames": [
+        "oldap 2.4",
         "ldap 2.4"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "ipl-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/ipl-1.0"
       ],
       "longNames": [
-        "ibm 1.0"
+        "ipl 1",
+        "ibm 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ipl",
+        "ibm"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.3": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003dd32cf54a32d581ab475d23c810b0a7fbaf8d63c3"
       ],
       "longNames": [
+        "oldap 2.3",
         "ldap 2.3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "watcom-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/watcom-1.0"
       ],
       "longNames": [
-        "sybase watcom 1.0"
+        "watcom 1",
+        "sybase watcom 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "watcom",
+        "sybase watcom"
+      ],
+      "couldbeUrl": []
     },
     "makeindex": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/makeindex"
       ],
       "longNames": [
         "makeindex"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "oldap-1.3": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003de5f8117f0ce088d0bd7a8e18ddf37eaa40eb09b1"
       ],
       "longNames": [
+        "oldap 1.3",
         "ldap 1.3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "oldap-1.2": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003d42b0383c50c299977b5893ee695cf4e486fb0dc7"
       ],
       "longNames": [
+        "oldap 1.2",
         "ldap 1.2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "oldap-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003d806557a5ad59804ef3a44d5abfbe91d706b0791f"
       ],
       "longNames": [
+        "oldap 1.1",
         "ldap 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nc-nd-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc-nd/2.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial no derivatives 2.0"
+        "cc by nc nd 2",
+        "creative commons attribution non commercial no derivatives 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by nc nd",
+        "creative commons attribution non commercial no derivatives"
+      ],
+      "couldbeUrl": []
     },
     "rhecos-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "ecos.sourceware.org/old-license"
       ],
       "longNames": [
+        "rhecos 1.1",
         "red hat ecos 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "rhecos",
+        "red hat ecos"
+      ],
+      "couldbeUrl": []
     },
     "mitnfa": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/mitnfa"
       ],
       "longNames": [
+        "mitnfa",
         "mit +no false attribs"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "noweb": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/noweb"
       ],
       "longNames": [
         "noweb"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "artistic-1.0-cl8": {
       "spdx": true,
       "osiApproved": true,
-      "urls": [],
-      "longNames": [
-        "artistic 1.0 w/clause 8"
+      "fedoraApproved": {},
+      "urls": [
+        "opensource.org/licenses/artistic-1.0"
       ],
-      "specific": []
+      "longNames": [
+        "artistic 1 cl8",
+        "artistic 1 w/clause 8"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "artistic-1.0-cl8",
+        "artistic 1 w/clause"
+      ],
+      "couldbeUrl": []
     },
     "bsd-3-clause-attribution": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/bsd_with_attribution"
       ],
       "longNames": [
+        "bsd 3 clause attribution",
         "bsd with attribution"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by/1.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution 1.0"
+        "cc by 1",
+        "creative commons attribution 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by",
+        "creative commons attribution"
+      ],
+      "couldbeUrl": []
     },
     "ms-pl": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "opensource.org/licenses/ms-pl"
+        "microsoft.com/opensource/licenses",
+        "opensource.org/licenses/ms-pl",
+        "microsoft.com/opensource/licenses.mspx#ms-pl"
       ],
       "longNames": [
+        "ms pl",
         "microsoft"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-nc-nd-2.5": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc-nd/2.5/legalcode"
       ],
       "longNames": [
+        "cc by nc nd 2.5",
         "creative commons attribution non commercial no derivatives 2.5"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by nc nd",
+        "creative commons attribution non commercial no derivatives"
+      ],
+      "couldbeUrl": []
     },
     "latex2e": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/latex2e"
       ],
       "longNames": [
         "latex2e"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "apsl-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "opensource.apple.com/license/apsl/"
+        "opensource.apple.com/license/apsl/",
+        "opensource.apple.com/apsl/2.0"
       ],
       "longNames": [
-        "apple source 2.0"
+        "apsl 2",
+        "apple source 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "apsl",
+        "apple source"
+      ],
+      "couldbeUrl": []
     },
     "zpl-2.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "old.zope.org/resources/zpl/"
+        "old.zope.org/resources/zpl/",
+        "old.zope.org/resources/license/zpl-2.1"
       ],
       "longNames": [
+        "zpl 2.1",
         "zope 2.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "zope",
+        "zpl"
+      ],
+      "couldbeUrl": []
     },
     "aml": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/apple_mit_license"
       ],
       "longNames": [
+        "aml",
         "apple mit"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "glulxe": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/glulxe"
       ],
       "longNames": [
         "glulxe"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "rscpl": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "opensource.org/licenses/rscpl"
       ],
       "longNames": [
+        "rscpl",
         "ricoh source code"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "zpl-2.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "old.zope.org/resources/license/zpl-2.0",
         "opensource.org/licenses/zpl-2.0"
       ],
       "longNames": [
-        "zope 2.0"
+        "zpl 2",
+        "zope 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "zope",
+        "zpl"
+      ],
+      "couldbeUrl": []
     },
     "libpng": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "libpng.org/pub/png/src/libpng-license"
       ],
       "longNames": [
         "libpng"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "mup": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/mup"
       ],
       "longNames": [
         "mup"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "borceux": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/borceux"
       ],
       "longNames": [
         "borceux"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cecill-2.1": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "cecill.info/licences/licence_cecill_v2.1-fr",
         "opensource.org/licenses/cecill-2.1"
@@ -3041,237 +4807,379 @@
       "longNames": [
         "cecill 2.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cecill"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.0.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003db6d68acd14e51ca3aab4428bf26522aa74873f0e"
       ],
       "longNames": [
+        "oldap 2.0.1",
         "ldap 2.0.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "plexus": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/plexus_classworlds_license"
       ],
       "longNames": [
+        "plexus",
         "plexus classworlds"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "xskat": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/xskat_license"
       ],
       "longNames": [
         "xskat"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cecill-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "cecill.info/licences/licence_cecill_v2-fr"
+        "cecill.info/licences/licence_cecill_v2-fr",
+        "cecill.info/licences.en"
       ],
       "longNames": [
-        "cecill 2.0"
+        "cecill 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cecill"
+      ],
+      "couldbeUrl": []
     },
     "postgresql": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "postgresql.org/about/licence",
-        "opensource.org/licenses/postgresql"
+        "opensource.org/licenses/postgresql",
+        "fedoraproject.org/wiki/licensing/postgresql_license"
       ],
       "longNames": [
         "postgresql"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "bsd-3-clause-lbnl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/lbnlbsd"
       ],
       "longNames": [
-        "lawrence berkeley national labs bsd variant"
+        "bsd 3 clause lbnl",
+        "lawrence berkeley national labs bsd variant",
+        "lbnl bsd"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cc-by-nd-3.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nd/3.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution no derivatives 3.0"
+        "cc by nd 3",
+        "creative commons attribution no derivatives 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "creative commons attribution no derivatives",
+        "cc by nd"
+      ],
+      "couldbeUrl": []
     },
     "psfrag": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/psfrag"
       ],
       "longNames": [
         "psfrag"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "lgpl-3.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "gnu.org/licenses/lgpl-3.0-standalone",
-        "opensource.org/licenses/lgpl-3.0"
+        "opensource.org/licenses/lgpl-3.0",
+        "fsf.org/licensing/licenses/lgpl"
       ],
       "longNames": [
-        "gnu lesser general 3.0 only"
+        "lgpl 3",
+        "gnu lesser 3 only",
+        "gnu lesser 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "lgpl",
+        "gnu lesser"
+      ],
+      "couldbeUrl": []
     },
     "mpich2": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/mit"
       ],
       "longNames": [
         "mpich2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "tcl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/tcl"
       ],
       "longNames": [
+        "tcl",
         "tcl/tk"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "adobe-2006": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/adobelicense"
       ],
       "longNames": [
+        "adobe 2006",
         "adobe systems incorporated source code"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "adobe"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.2": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003d470b0c18ec67621c85881b2733057fecf4a1acc3"
       ],
       "longNames": [
+        "oldap 2.2",
         "ldap 2.2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003db0d176738e96a0d3b9f85cb51e140a86f21be715"
       ],
       "longNames": [
+        "oldap 2.1",
         "ldap 2.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ldap",
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "oldap-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "openldap.org/devel/gitweb.cgi?p\u003dopenldap.git;a\u003dblob;f\u003dlicense;hb\u003dcbf50f4e1185a21abd4c0a54d3f4341fe28f36ea"
       ],
       "longNames": [
-        "ldap 2.0 (or possibly 2.0a and 2.0b)"
+        "oldap 2",
+        "ldap 2 (or possibly 2.0a and 2.0b)"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "oldap"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-nc-nd-3.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by-nc-nd/3.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution non commercial no derivatives 3.0"
+        "cc by nc nd 3",
+        "creative commons attribution non commercial no derivatives 3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by nc nd",
+        "creative commons attribution non commercial no derivatives"
+      ],
+      "couldbeUrl": []
     },
     "cpal-1.0": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "opensource.org/licenses/cpal-1.0"
+        "opensource.org/licenses/cpal-1.0",
+        "socialtext.net/open/index.cgi?cpal_license_in_wikitext"
       ],
       "longNames": [
-        "common attribution 1.0"
+        "cpal 1",
+        "common attribution 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cpal",
+        "common attribution"
+      ],
+      "couldbeUrl": []
     },
     "nosl": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "bits.netizen.com.au/licenses/nosl/nosl"
       ],
       "longNames": [
+        "nosl",
         "netizen source"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "interbase-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "web.archive.org/web/20060319014854/http://info.borland.com/devsupport/interbase/opensource/ipl"
       ],
       "longNames": [
-        "interbase 1.0"
+        "interbase 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "interbase"
+      ],
+      "couldbeUrl": []
     },
     "ypl-1.1": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "zimbra.com/license/yahoo_public_license_1.1"
       ],
       "longNames": [
+        "ypl 1.1",
         "yahoo! 1.1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "yahoo!",
+        "ypl"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-2.5": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by/2.5/legalcode"
       ],
       "longNames": [
+        "cc by 2.5",
         "creative commons attribution 2.5"
       ],
       "specific": [
@@ -3280,53 +5188,81 @@
           "artifactId": "jcip-annotations",
           "version": "1.0"
         }
-      ]
+      ],
+      "couldbeName": [
+        "cc by",
+        "creative commons attribution"
+      ],
+      "couldbeUrl": []
     },
     "tmate": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "svnkit.com/license"
       ],
       "longNames": [
+        "tmate",
         "tmate source"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "ypl-1.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "zimbra.com/license/yahoo_public_license_1.0"
       ],
       "longNames": [
-        "yahoo! 1.0"
+        "ypl 1",
+        "yahoo! 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "yahoo!",
+        "ypl"
+      ],
+      "couldbeUrl": []
     },
     "ibm-pibs": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [],
       "longNames": [
+        "ibm pibs",
         "ibm powerpc initialization and boot"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "ruby": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "ruby-lang.org/en/license"
       ],
       "longNames": [
         "ruby"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "zlib": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {},
       "urls": [
         "zlib.net/zlib_license",
         "opensource.org/licenses/zlib"
@@ -3334,82 +5270,136 @@
       "longNames": [
         "zlib"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "ms-rl": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
-        "opensource.org/licenses/ms-rl"
+        "microsoft.com/opensource/licenses",
+        "opensource.org/licenses/ms-rl",
+        "microsoft.com/opensource/licenses.mspx#ms-rl"
       ],
       "longNames": [
+        "ms rl",
         "microsoft reciprocal"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "ms-rl"
+      ],
+      "couldbeUrl": []
     },
     "cc-by-2.0": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "creativecommons.org/licenses/by/2.0/legalcode"
       ],
       "longNames": [
-        "creative commons attribution 2.0"
+        "cc by 2",
+        "creative commons attribution 2"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "cc by",
+        "creative commons attribution"
+      ],
+      "couldbeUrl": []
     },
     "mit-cmu": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "fedoraproject.org/wiki/licensing:mit?rd\u003dlicensing/mit#cmu_style"
       ],
       "longNames": [
+        "mit cmu",
         "cmu"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "entessa": {
       "spdx": true,
       "osiApproved": true,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "opensource.org/licenses/entessa"
       ],
       "longNames": [
-        "entessa 1.0"
+        "entessa",
+        "entessa 1"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "entessa"
+      ],
+      "couldbeUrl": []
     },
     "sugarcrm-1.1.3": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [
         "sugarcrm.com/crm/spl"
       ],
       "longNames": [
         "sugarcrm 1.1.3"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [
+        "sugarcrm"
+      ],
+      "couldbeUrl": []
     },
     "mpl-2.0": {
       "spdx": true,
       "osiApproved": true,
-      "urls": [],
-      "longNames": [
-        "mozilla 2.0"
+      "fedoraApproved": {
+        "value": true
+      },
+      "urls": [
+        "mozilla.org/mpl/2.0/",
+        "opensource.org/licenses/mpl-2.0",
+        "fedoraproject.org/wiki/licensing/mplv2.0"
       ],
-      "specific": []
+      "longNames": [
+        "mpl 2",
+        "mozilla 2"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "mpl",
+        "mozilla"
+      ],
+      "couldbeUrl": []
     },
     "wsuipa": {
       "spdx": true,
       "osiApproved": false,
+      "fedoraApproved": {
+        "value": true
+      },
       "urls": [
         "fedoraproject.org/wiki/licensing/wsuipa"
       ],
       "longNames": [
         "wsuipa"
       ],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     }
   },
   "licenseExceptions": {
@@ -3443,23 +5433,60 @@
     "gpl-2.0 with classpath-exception-2.0": {
       "spdx": false,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [],
       "longNames": [],
-      "specific": []
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
+    },
+    "gpl-3.0+": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "urls": [],
+      "longNames": [],
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
+    },
+    "lgpl-2.0+": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "urls": [],
+      "longNames": [],
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "lgpl-3.0+": {
       "spdx": false,
       "osiApproved": false,
+      "fedoraApproved": {},
       "urls": [],
-      "longNames": [
-        "gnu lesser"
-      ],
-      "specific": []
+      "longNames": [],
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
+    },
+    "mpl-2.0 and epl-1.0": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "urls": [],
+      "longNames": [],
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "cddl-1.1 or gpl-2.0 with classpath-exception-2.0": {
       "spdx": false,
       "osiApproved": false,
-      "urls": [],
+      "fedoraApproved": {},
+      "urls": [
+        "glassfish.java.net/public/cddl+gpl_1_1"
+      ],
       "longNames": [],
       "specific": [
         {
@@ -3467,7 +5494,29 @@
           "artifactId": "javax.servlet-api",
           "version": "3.1.0"
         }
-      ]
+      ],
+      "couldbeName": [],
+      "couldbeUrl": []
+    },
+    "gpl-2.0+": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "urls": [],
+      "longNames": [],
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
+    },
+    "agpl-3.0+": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "urls": [],
+      "longNames": [],
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     }
   }
 }

@@ -4,7 +4,6 @@ import de.pfabulist.frex.Frex;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.Stack;
 import java.util.regex.Matcher;
@@ -13,12 +12,12 @@ import java.util.stream.Stream;
 
 import static de.pfabulist.frex.Frex.fullWord;
 import static de.pfabulist.frex.Frex.txt;
+import static de.pfabulist.loracle.license.FuzzyParser.TokTyp.andTok;
+import static de.pfabulist.loracle.license.FuzzyParser.TokTyp.closeBracket;
+import static de.pfabulist.loracle.license.FuzzyParser.TokTyp.openBracket;
+import static de.pfabulist.loracle.license.FuzzyParser.TokTyp.orTok;
+import static de.pfabulist.loracle.license.FuzzyParser.TokTyp.text;
 import static de.pfabulist.loracle.license.LicenseIDs.isOr;
-import static de.pfabulist.loracle.license.SPDXParser.TokTyp.andTok;
-import static de.pfabulist.loracle.license.SPDXParser.TokTyp.closeBracket;
-import static de.pfabulist.loracle.license.SPDXParser.TokTyp.openBracket;
-import static de.pfabulist.loracle.license.SPDXParser.TokTyp.orTok;
-import static de.pfabulist.loracle.license.SPDXParser.TokTyp.text;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 
 /**
@@ -26,11 +25,11 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-public class SPDXParser {
+public class FuzzyParser {
 
     private final LOracle lOracle;
 
-    public SPDXParser( LOracle lOracle ) {
+    public FuzzyParser( LOracle lOracle ) {
         this.lOracle = lOracle;
     }
 
@@ -82,16 +81,17 @@ public class SPDXParser {
         return liBuilder( tok(  LOracle.trim( in )) );
     }
 
+    private static Pattern first = Frex.any().zeroOrMore().lazy().var( "before" ).
+            then( Frex.or( txt( ')' ).var( "closed" ),
+                           txt( '(' ).var( "open" ),
+                           fullWord( "or" ).var( "or" ),
+                           fullWord( "and" ).var( "and" ) ) ).
+            then( Frex.any().zeroOrMore().var( "rest" ) ).
+            buildCaseInsensitivePattern();
+
     private Stream<Tok> tok( String in ) {
 
         List<Tok> ret = new ArrayList<>();
-        Pattern first = Frex.any().zeroOrMore().lazy().var( "before" ).
-                then( Frex.or( txt( ')' ).var( "closed" ),
-                               txt( '(' ).var( "open" ),
-                               fullWord( "or" ).var( "or" ),
-                               fullWord( "and" ).var( "and" ) ) ).
-                then( Frex.any().zeroOrMore().var( "rest" ) ).
-                buildCaseInsensitivePattern();
 
         String rest = in;
         while( true ) {
@@ -125,15 +125,14 @@ public class SPDXParser {
     }
 
     static Frex word = Frex.or( Frex.alphaNum(), txt( '-' ).or( txt( '.' ) ) ).oneOrMore();
-    static Pattern namePattern =
-            word.var( "name" ).
+    static Pattern namePattern = Frex.any().oneOrMore().lazy().var( "name" ).
 //                    then( Frex.whitespace().zeroOrMore()).
 //                    then( Frex.or( Frex.number(), txt('.')).zeroOrMore()).var( "name" ).
-                    then( Frex.whitespace().zeroOrMore()).
+//                    then( Frex.whitespace().zeroOrMore()).
                     then( txt( '+' ).var( "plus" ).zeroOrOnce() ).
-                    then( Frex.whitespace().
+                    then( Frex.whitespace().zeroOrMore().
                             then( txt( "WITH" ) ).
-                            then( Frex.whitespace() ).
+                            then( Frex.whitespace().zeroOrMore() ).
                             then( word.var( "exception" ) ).zeroOrOnce() ).
                     buildCaseInsensitivePattern();
 
@@ -146,13 +145,19 @@ public class SPDXParser {
         }
 
         String name = _nn( matcher.group( "name" ) );
-        SingleLicense license = lOracle.getSingle( name ).
+
+        LicenseID license = lOracle.getByName1( name).
                 orElseThrow( () -> new IllegalArgumentException( "no such license: " + name ) );
+
         boolean plus = matcher.group( "plus" ) != null;
         Optional<LicenseExclude> exception = Optional.ofNullable( matcher.group( "exception" ) ).
                 map( lOracle::getExceptionOrThrow );
 
-        return lOracle.getOrLater( license, plus, exception );
+        if ( license instanceof SingleLicense ) {
+            return lOracle.getOrLater( (SingleLicense) license, plus, exception );
+        }
+
+        throw new IllegalArgumentException( "combined license within combined" );
     }
 
     private void parseSingleSPDX( List<Tok> ret, String posSPDX ) {

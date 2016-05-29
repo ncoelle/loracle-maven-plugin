@@ -2,8 +2,10 @@ package de.pfabulist.loracle.mojo;
 
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.buildup.JSONStartup;
+import de.pfabulist.loracle.license.Decider;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
+import de.pfabulist.loracle.license.LicenseIDs;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
 import org.apache.maven.artifact.resolver.filter.ScopeArtifactFilter;
@@ -57,6 +59,10 @@ public class LOracleMojo extends AbstractMojo {
     @Nullable
     List<LicenseDeclaration> licenseDeclarations;
 
+    @Parameter( property = "license-check.stopOnError", defaultValue = "true")
+    boolean stopOnError;
+
+
     public DependencyGraphBuilder getDependencyGraphBuilder() {
         return _ni( dependencyGraphBuilder );
     }
@@ -73,9 +79,10 @@ public class LOracleMojo extends AbstractMojo {
         return licenseDeclarations == null ? Collections.emptyList() : licenseDeclarations;
     }
 
+    @SuppressWarnings( "PMD.AvoidPrintStackTrace" )
     public void execute() throws MojoExecutionException, MojoFailureException {
         getLog().info( "---------------------------------------" );
-        getLog().info( "      loracle license check                    " );
+        getLog().info( "      loracle license check            " );
         getLog().info( "---------------------------------------" );
 
         Path localRepo = Paths.get( _nn( getSession().getLocalRepository() ).getBasedir() );
@@ -104,6 +111,8 @@ public class LOracleMojo extends AbstractMojo {
                                 orElseThrow( () -> new MojoFailureException( "illegal license name in configuration of LicenseDeclarations in LOracle Plugin" ) );
 
                 lOracle.addLicenseForArtifact( coo, license );
+
+                getLog().info( "setting " + coo + " -> " + license  );
             }
 
             MavenLicenseOracle mlo = new MavenLicenseOracle( failures, localRepo );
@@ -137,13 +146,19 @@ public class LOracleMojo extends AbstractMojo {
                 licenseMapping( failures, lOracle, mlo, a );
             } );
 
-            failures.throwOnError();
+            if ( stopOnError ) {
+                failures.throwOnError();
+            }
 
         } catch( MojoFailureException e ) {
-            throw e;
+            if ( stopOnError ) {
+                throw e;
+            }
         } catch( Exception e ) {
             e.printStackTrace();
-            throw new MojoFailureException( e.getMessage() );
+            if ( stopOnError ) {
+                throw new MojoFailureException( e.getMessage() );
+            }
         }
 
     }
@@ -152,28 +167,25 @@ public class LOracleMojo extends AbstractMojo {
         Optional<License> mavenLicense = mlo.getMavenLicense( a );
         Coordinates coo = Coordinates.valueOf( a );
 
-//        getLog().info( "artifact:      " + coo );
         final Optional<LicenseID> byCoordinates = lOracle.getByCoordinates( Coordinates.valueOf( a ) );
-//        getLog().info( "    license:   " + byCoordinates.map( Object::toString ).orElse( "-" ) );
 
         Optional<String> name = mavenLicense.flatMap( l -> Optional.ofNullable( l.getName() ) );
-//        getLog().info( "  name:        " + name.orElse( "-" ) );
         Optional<LicenseID> byName = name.flatMap( lOracle::getByName );
-//        getLog().info( "    license:   " + byName.map( Object::toString ).orElse( "-" ) );
-
         Optional<String> url = mavenLicense.flatMap( l -> Optional.ofNullable( l.getUrl() ) );
-//        getLog().info( "  url:        " + url.orElse( "-" ) );
         Optional<LicenseID> byUrl = url.flatMap( lOracle::getByUrl );
-//        getLog().info( "    license:   " + byUrl.map( Object::toString ).orElse( "-" ) );
+
 
         try {
             LicenseID sum =
-                    byCoordinates.orElseGet(
-                            () -> byName.orElseGet(
-                                    () -> byUrl.orElseThrow(
-                                            () -> new IllegalArgumentException( "no license for:" + coo ) ) ) );
+                    new Decider( findings).decide( byCoordinates, byName, byUrl ).orElseThrow(
+//                    byCoordinates.orElseGet(
+//                            () -> byName.orElseGet(
+//                                    () -> byUrl.orElseThrow(
+                                            () -> new IllegalArgumentException( "no license for:" + coo ) );
             //          getLog().info( "  license:  " + sum );
             getLog().info( artiPlus( a ) + sum );
+
+
             return Optional.of( sum );
         } catch( IllegalArgumentException e ) {
             getLog().error( "artifact: " + coo + "   has no or not precise enough license" );
@@ -188,14 +200,16 @@ public class LOracleMojo extends AbstractMojo {
 
     String artiPlus( Artifact coo ) {
 
-        StringBuilder sb = new StringBuilder().append( coo.toString() );
-
-        for( int i = coo.toString().length(); i < 80; i++ ) {
-            sb.append( " " );
-        }
-
-        return sb.toString();
-
+        return String.format( "%-120s", coo );
+//
+//        StringBuilder sb = new StringBuilder().append( coo.toString() );
+//
+//        for( int i = coo.toString().length(); i < 120; i++ ) {
+//            sb.append( " " );
+//        }
+//
+//        return sb.toString();
+//
     }
 
     /**

@@ -12,6 +12,7 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
+@SuppressWarnings( "PMD.AvoidPrintStackTrace" )
 public class Coordinates {
 
     private final String groupId;
@@ -35,7 +36,21 @@ public class Coordinates {
             throw new IllegalArgumentException( "not legal coordinates group:arti:version, got: " + str );
         }
 
-        return new Coordinates( _nn( parts[ 0 ] ), _nn( parts[ 1 ] ), _nn( parts[ 2 ] ) );
+        if ( parts.length == 3 ) {
+            return new Coordinates( _nn( parts[ 0 ] ), _nn( parts[ 1 ] ), _nn( parts[ 2 ] ) );
+        }
+
+        if ( parts.length == 4 ) {
+            // with packaging or classifier
+            return new Coordinates( _nn( parts[ 0 ] ), _nn( parts[ 1 ] ), _nn( parts[ 3 ] ) );
+        }
+
+        if ( parts.length == 5 ) {
+            // with packaging and classifier
+            return new Coordinates( _nn( parts[ 0 ] ), _nn( parts[ 1 ] ), _nn( parts[ 4 ] ) );
+        }
+
+        throw new IllegalArgumentException( "not legal coordinates, too many ':' " + str );
     }
 
     public static Coordinates valueOf( Artifact arti ) {

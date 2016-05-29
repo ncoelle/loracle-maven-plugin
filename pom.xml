@@ -9,13 +9,13 @@
     <parent>
         <groupId>de.pfabulist</groupId>
         <artifactId>pfabulist-parent</artifactId>
-        <version>2.1.1</version>
+        <version>2.1.2</version>
         <relativePath>../pfabulist-parent-v2/pom.xml</relativePath>
     </parent>
 
 
     <artifactId>loracle-maven-plugin</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>maven-plugin</packaging>
 
     <name>loracle-maven-plugin</name>
@@ -120,7 +120,7 @@
         <dependency>
             <groupId>de.pfabulist</groupId>
             <artifactId>kleinod</artifactId>
-            <version>0.34.2</version>
+            <version>0.34.4</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
