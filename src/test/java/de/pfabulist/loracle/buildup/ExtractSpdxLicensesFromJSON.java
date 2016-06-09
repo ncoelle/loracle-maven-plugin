@@ -59,7 +59,9 @@ public class ExtractSpdxLicensesFromJSON {
             // longname
             if( license.getId().equals( "bsd-3-clause" ) ) {
                 lOracle.addLongName( license, "new bsd" );
+                lOracle.addLongName( license, "bsd new" );
                 lOracle.addLongName( license, "revised bsd" );
+                lOracle.addLongName( license, "bsd revised" );
 
             } else if( license.getId().equals( "bsd-4-clause" ) ) {
                 lOracle.addLongName( license, "original bsd" );

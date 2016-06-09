@@ -5,6 +5,7 @@ import de.pfabulist.frex.Frex;
 import de.pfabulist.kleinod.collection.P;
 
 import java.util.Locale;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,10 +21,20 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 
 public class AliasBuilder {
 
-    static private final String WHITESPACE = Frex.or( Frex.whitespace(), Frex.txt( ',' ), Frex.txt( '-' ) ).buildPattern().toString();
+    static private final String WHITESPACE = Frex.or( Frex.whitespace(),
+                                                      Frex.txt( ',' ),
+                                                      Frex.txt( '-' ),
+                                                      Frex.txt( '!' ),
+                                                      Frex.txt( '"' ),
+                                                      Frex.txt( '\'' ),
+                                                      Frex.txt( '/' ),
+                                                      Frex.txt( '(' ),
+                                                      Frex.txt( ')') ).
+            buildPattern().toString();
     static private final Pattern maybe = or( fullWord( "License" ),
                                              fullWord( "The" ),
                                              fullWord( "Version" ),
+                                             fullWord( "Vesion" ),
                                              fullWord( "Software" ),
                                              fullWord( "General" ),
                                              fullWord( "Agreement" ),
@@ -32,6 +43,7 @@ public class AliasBuilder {
                                              fullWord( "Public" ),
                                              fullWord( "General" ),
                                              fullWord( "Copyright" ),
+                                             fullWord( "Like" ), // todo hmm
                                              fullWord( "v" ) ).buildCaseInsensitivePattern();
     static private final Pattern spaces = Frex.whitespace().atLeast( 2 ).buildPattern();
     static private final Pattern vVersion = txt( "v" ).then( or( Frex.number(), txt( '.' ), txt( ',' ) ).oneOrMore() ).buildCaseInsensitivePattern();
@@ -41,6 +53,18 @@ public class AliasBuilder {
             then( Frex.txt( "v" ) ).
             then( or( Frex.number(), txt( '.' ) ).oneOrMore().var( "version" ) ).
             buildCaseInsensitivePattern();
+
+    static private final Pattern wordVersion = Frex.alpha().oneOrMore().var( "word" ).
+            then( or( Frex.number(), txt( '.' ) ).oneOrMore().var( "version" ) ).
+            buildCaseInsensitivePattern();
+
+
+    private static Pattern urlPattern = Frex.or( Frex.txt( "http://" ), Frex.txt( "https://" ) ).zeroOrOnce().
+            then( Frex.txt( "www." ).zeroOrOnce() ).
+            then( Frex.any().oneOrMore().lazy().var( "relevant" ) ).
+            then( Frex.txt( "." ).then( Frex.alpha().oneOrMore() ).zeroOrOnce() ).
+            //then( Frex.txt( '/' )).zeroOrOnce().
+                    buildCaseInsensitivePattern();
 
 
     private void addNumber( StringBuilder sb, String num ) {
@@ -69,7 +93,15 @@ public class AliasBuilder {
                     sb.append( " " );
                     addNumber( sb, _nn( matcher.group( "version" )));
                 } else {
-                    addNumber( sb, word );
+
+                    Matcher wv = wordVersion.matcher( word );
+                    if ( wv.matches() ) {
+                        sb.append( wv.group( "word" ) );
+                        sb.append( " " );
+                        addNumber( sb, _nn( wv.group( "version" )));
+                    }  else {
+                        addNumber( sb, word );
+                    }
                 }
             }
 
@@ -82,8 +114,17 @@ public class AliasBuilder {
             return spaces.matcher( ret ).replaceAll( " " );
         }
 
-        Log.warn( "license name composed of fill words only: " + in );
+        Log.debug( "license name composed of fill words only: " + in );
+        return spaces.matcher( in.toLowerCase( Locale.US )).replaceAll( " " );
+    }
 
-        return in;
+    public Optional<String> normalizeUrl( String url ) {
+        Matcher matcher = urlPattern.matcher( url );
+        if( !matcher.matches() ) {
+            return Optional.empty();
+        }
+
+        return Optional.of( _nn( matcher.group( "relevant" ) ).toLowerCase( Locale.US ));
+
     }
 }

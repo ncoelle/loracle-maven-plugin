@@ -1,9 +1,14 @@
 package de.pfabulist.loracle.license;
 
+import de.pfabulist.frex.Frex;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.maven.artifact.Artifact;
 
 import javax.annotation.Nullable;
+
+import java.util.Arrays;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 
@@ -12,20 +17,18 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-@SuppressWarnings( "PMD.AvoidPrintStackTrace" )
 public class Coordinates {
 
-    private final String groupId;
-    private final String artifactId;
-    private final String version;
+    private final String coo;
 
     public Coordinates( String groupId, String artifactId, String version ) {
-        this.groupId = groupId;
-        this.artifactId = artifactId;
-        this.version = version;
+        coo = groupId + ":" + artifactId + ":" + version;
 
         if( groupId.isEmpty() || artifactId.isEmpty() || version.isEmpty() ) {
             throw new IllegalArgumentException( "not a legal coordinates, one of group, artifact, version is empty" );
+        }
+        if( groupId.contains( ":" ) || artifactId.contains( ":" ) || version.contains( ":" ) ) {
+            throw new IllegalArgumentException( "not a legal coordinates, one of group, artifact, contains a ':' " );
         }
     }
 
@@ -36,16 +39,16 @@ public class Coordinates {
             throw new IllegalArgumentException( "not legal coordinates group:arti:version, got: " + str );
         }
 
-        if ( parts.length == 3 ) {
+        if( parts.length == 3 ) {
             return new Coordinates( _nn( parts[ 0 ] ), _nn( parts[ 1 ] ), _nn( parts[ 2 ] ) );
         }
 
-        if ( parts.length == 4 ) {
+        if( parts.length == 4 ) {
             // with packaging or classifier
             return new Coordinates( _nn( parts[ 0 ] ), _nn( parts[ 1 ] ), _nn( parts[ 3 ] ) );
         }
 
-        if ( parts.length == 5 ) {
+        if( parts.length == 5 ) {
             // with packaging and classifier
             return new Coordinates( _nn( parts[ 0 ] ), _nn( parts[ 1 ] ), _nn( parts[ 4 ] ) );
         }
@@ -58,53 +61,63 @@ public class Coordinates {
     }
 
     public String getGroupId() {
-        return groupId;
+        String[] parts = coo.split( ":" );
+        return _nn( parts[ 0 ] );
     }
 
     public String getArtifactId() {
-        return artifactId;
+        String[] parts = coo.split( ":" );
+        return _nn( parts[ 1 ] );
+
     }
 
     public String getVersion() {
-        return version;
+        String[] parts = coo.split( ":" );
+        return _nn( parts[ 2 ] );
     }
 
     @Override
     @SuppressFBWarnings( "NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION" )
     public boolean equals( @Nullable Object o ) {
-        if( this == o ) {
-            return true;
-        }
-        if( o == null ) {
-            return false;
-        }
-        if( !( o instanceof Coordinates ) ) {
-            return false;
-        }
+        if( this == o ) { return true; }
+        if( o == null || getClass() != o.getClass() ) { return false; }
 
         Coordinates that = (Coordinates) o;
 
-        if( !groupId.equals( that.groupId ) ) {
-            return false;
-        }
-        if( !artifactId.equals( that.artifactId ) ) {
-            return false;
-        }
-        return version.equals( that.version );
+        return coo.equals( that.coo );
 
     }
 
     @Override
     public int hashCode() {
-        int result = groupId.hashCode();
-        result = 31 * result + artifactId.hashCode();
-        result = 31 * result + version.hashCode();
-        return result;
+        return coo.hashCode();
     }
 
     @Override
     public String toString() {
-        return groupId + ':' + artifactId + ':' + version;
+        return coo;
+    }
+
+    public boolean matches( Coordinates other ) {
+        if( !coo.contains( "*" ) ) {
+            return equals( other );
+        }
+
+        // todo * at end
+
+        String[] txt = coo.split( "\\*" );
+
+        if( _nn( txt[ 0 ] ).isEmpty() ) {
+            throw new IllegalArgumentException( "group must not start with *" );
+        }
+
+        Pattern pat =
+                Arrays.asList( txt ).subList( 1, txt.length ).stream().
+                        map( Frex::txt ).
+                        collect( Collectors.reducing( Frex.txt( _nn(txt[0])), (f,g) -> f.then( Frex.anyBut( Frex.txt( ':' )).zeroOrMore()).then( g ))).
+                        buildCaseInsensitivePattern();
+
+        return pat.matcher( other.coo ).matches();
     }
 }
 

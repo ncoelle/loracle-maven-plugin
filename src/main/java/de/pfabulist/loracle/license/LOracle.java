@@ -2,8 +2,12 @@ package de.pfabulist.loracle.license;
 
 import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
+import de.pfabulist.kleinod.collection.P;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,6 +18,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -29,12 +34,6 @@ import static de.pfabulist.unchecked.NullCheck._orElseThrow;
 
 @SuppressFBWarnings( { "URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD", "UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" } )
 public class LOracle {
-
-    private static Pattern urlPattern = Frex.or( Frex.txt( "http://" ), Frex.txt( "https://" ) ).zeroOrOnce().
-            then( Frex.txt( "www." ).zeroOrOnce() ).
-            then( Frex.any().oneOrMore().lazy().var( "relevant" ) ).
-            then( Frex.txt( "." ).then( Frex.alpha().oneOrMore() ).zeroOrOnce() ).
-            buildCaseInsensitivePattern();
 
     @SuppressFBWarnings( "URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" )
     public static class More {
@@ -54,9 +53,12 @@ public class LOracle {
         }
     }
 
-    private Map<String, More> singles = new HashMap<>();
+    private Map<String, More> singles = new TreeMap<>( String::compareTo );
+    //new HashMap<>();
     private Map<String, Boolean> licenseExceptions = new HashMap<>();
     private Map<String, More> composites = new HashMap<>();
+
+    private Map<String, P<String, String>> urlsInTime = new TreeMap<>( String::compareTo );
 
     private final transient Map<String, Set<LicenseID>> couldbeNames = new HashMap<>();
     private final transient Map<String, Set<LicenseID>> couldbeUrls = new HashMap<>();
@@ -64,6 +66,7 @@ public class LOracle {
     private final transient SPDXParser parser;
     private final transient AliasBuilder aliasBuilder = new AliasBuilder();
     private transient Map<Coordinates, LicenseID> coordinatesMap = new HashMap<>();
+    // new TreeMap<>( (c,d) -> c.matches( d ) ? 0 : (c.hashCode() - d.hashCode()));
     private transient Map<String, LicenseID> longNameMapper = new HashMap<>();
     private transient Map<String, LicenseID> urls = new HashMap<>();
 
@@ -76,31 +79,37 @@ public class LOracle {
             throw new IllegalStateException( "can only be called after json construction" );
         }
 
-        singles.entrySet().stream().forEach(
-                e -> {
-                    String name = _nn( e.getKey() );
-                    More more = _nn( e.getValue() );
-                    LicenseID lid = new SingleLicense( name );
-                    more.urls.stream().forEach( u -> urls.put( u, lid ) );
-                    more.longNames.stream().forEach( l -> longNameMapper.putIfAbsent( l, lid ) );
-                    more.specific.stream().forEach( coo -> coordinatesMap.putIfAbsent( coo, lid ) );
-                    more.couldbeName.stream().forEach( n -> { couldbeNames.putIfAbsent( n, new HashSet<>() ); couldbeNames.get( n ).add( lid ); });
-                    more.couldbeUrl.stream().forEach( n -> { couldbeUrls.putIfAbsent( n, new HashSet<>() ); couldbeUrls.get( n ).add( lid ); });
-                }
+        singles.forEach( ( name, more ) -> {
+                             LicenseID lid = new SingleLicense( name );
+                             more.urls.forEach( u -> urls.put( u, lid ) );
+                             more.longNames.forEach( l -> longNameMapper.putIfAbsent( l, lid ) );
+                             more.specific.forEach( coo -> coordinatesMap.putIfAbsent( coo, lid ) );
+                             more.couldbeName.forEach( n -> {
+                                 couldbeNames.putIfAbsent( n, new HashSet<>() );
+                                 _nn( couldbeNames.get( n ) ).add( lid );
+                             } );
+                             more.couldbeUrl.forEach( n -> {
+                                 couldbeUrls.putIfAbsent( n, new HashSet<>() );
+                                 _nn( couldbeUrls.get( n ) ).add( lid );
+                             } );
+                         }
         );
 
-        composites.entrySet().stream().forEach(
-                e -> {
-                    String name = _nn( e.getKey() );
-                    More more = _nn( e.getValue() );
+        composites.forEach( ( name, more ) -> {
 
-                    LicenseID lid = getOrThrowByName( name );
-                    more.urls.stream().forEach( u -> urls.put( u, lid ) );
-                    more.longNames.stream().forEach( l -> longNameMapper.putIfAbsent( l, lid ) );
-                    more.specific.stream().forEach( coo -> coordinatesMap.putIfAbsent( coo, lid ) );
-                    more.couldbeName.stream().forEach( n -> { couldbeNames.putIfAbsent( n, new HashSet<>() ); couldbeNames.get( n ).add( lid ); });
-                    more.couldbeUrl.stream().forEach( n -> { couldbeUrls.putIfAbsent( n, new HashSet<>() ); couldbeUrls.get( n ).add( lid ); });
-                }
+                                LicenseID lid = getOrThrowByName( name );
+                                more.urls.forEach( u -> urls.put( u, lid ) );
+                                more.longNames.forEach( l -> longNameMapper.putIfAbsent( l, lid ) );
+                                more.specific.forEach( coo -> coordinatesMap.putIfAbsent( coo, lid ) );
+                                more.couldbeName.forEach( n -> {
+                                    couldbeNames.putIfAbsent( n, new HashSet<>() );
+                                    _nn( couldbeNames.get( n ) ).add( lid );
+                                } );
+                                more.couldbeUrl.forEach( n -> {
+                                    couldbeUrls.putIfAbsent( n, new HashSet<>() );
+                                    _nn( couldbeUrls.get( n ) ).add( lid );
+                                } );
+                            }
         );
 
         // todo couldbes
@@ -139,16 +148,13 @@ public class LOracle {
 
         String lower = trim( name );
 
-//        if( singles.containsKey( lower ) ) {
-//            throw new IllegalArgumentException( "not a new single license: " + name );
-//        }
-//
         if( getByName( lower ).isPresent() ) {
             throw new IllegalArgumentException( "not a new single license: " + name );
         }
 
         Set<LicenseID> guesses = guessByName( lower );
         if( !guesses.isEmpty() ) {
+//            throw new IllegalArgumentException( "not a new single license: " + name );
             removeNameGuess( lower );
         }
 
@@ -164,6 +170,9 @@ public class LOracle {
     }
 
     private void removeNameGuess( String name ) {
+        if( !name.equals( "w3c" ) ) {
+            throw new IllegalArgumentException( "not a new single license: " + name );
+        }
         Log.warn( "removing could be (so that it can be a new single id) " + name );
         Set<LicenseID> guesses = guessByName( name );
         couldbeNames.remove( name );
@@ -211,6 +220,8 @@ public class LOracle {
         } else if( reduced.contains( "affero" ) ) {
             addCouldbeName( license, "affero gnu" );
             addCouldbeName( license, "affero" );
+        } else if( reduced.contains( "bsd" ) ) {
+            addCouldbeName( license, "bsd" );
         }
     }
 
@@ -235,6 +246,8 @@ public class LOracle {
         return Optional.ofNullable( longNameMapper.get( aliasBuilder.reduce( name ) ) );
     }
 
+    private static final Pattern orLater = Frex.any().oneOrMore().var( "base" ).then( Frex.txt( " or later" ) ).buildCaseInsensitivePattern();
+
     public Optional<LicenseID> getByName( String name ) {
         try {
             return Optional.of( parser.parse( name ) );
@@ -242,9 +255,25 @@ public class LOracle {
             // not found
         }
 
-        Optional<LicenseID> ret = Optional.ofNullable( longNameMapper.get( aliasBuilder.reduce( name ) ) );
+        boolean plus = false;
+        String base = name;
+        Matcher matcher = orLater.matcher( name );
+        if( matcher.matches() ) {
+            base = _nn( matcher.group( "base" ) );
+            plus = true;
+        }
+
+        Optional<LicenseID> ret = Optional.ofNullable( longNameMapper.get( aliasBuilder.reduce( base ) ) );
 
         if( ret.isPresent() ) {
+            if( plus ) {
+                if( ret.get() instanceof SingleLicense ) {
+                    return Optional.of( getOrLater( (SingleLicense) _nn( ret.get() ), true, Optional.empty() ) );
+                } else {
+                    // or later with a composite license is strange
+                    return Optional.empty();
+                }
+            }
             return ret;
         }
 
@@ -265,7 +294,13 @@ public class LOracle {
     }
 
     public Optional<LicenseID> getByCoordinates( Coordinates coo ) {
-        return Optional.ofNullable( coordinatesMap.get( coo ) );
+
+        Optional<LicenseID> ret = Optional.ofNullable( coordinatesMap.get( coo ) );
+        if( ret.isPresent() ) {
+            return ret;
+        }
+
+        return coordinatesMap.keySet().stream().filter( c -> c.matches( coo ) ).findAny().map( c -> _nn( coordinatesMap.get( c ) ) );
     }
 
     public void addException( String name, boolean spdx ) {
@@ -278,16 +313,31 @@ public class LOracle {
         licenseExceptions.put( lower, spdx );
     }
 
+    private static final Pattern urlWithLongname =
+            Frex.any().oneOrMore().lazy().
+                    then( Frex.txt( '/' ) ).
+                    then( Frex.anyBut( Frex.txt( '/' ) ).oneOrMore().var( "fname" ) ).buildCaseInsensitivePattern();
+
     public Optional<LicenseID> getByUrl( String url ) {
-        Matcher matcher = urlPattern.matcher( url );
-        if( !matcher.matches() ) {
-            // log throw new IllegalArgumentException( "not a url: " + url );
+
+        Optional<String> rel = aliasBuilder.normalizeUrl( url );
+        if( !rel.isPresent() ) {
             return Optional.empty();
         }
 
-        String rel = _nn( matcher.group( "relevant" ) ).toLowerCase( Locale.US );
+        Optional<LicenseID> ret = Optional.ofNullable( urls.get( rel.get() ) );
+        if( ret.isPresent() ) {
+            return ret;
+        }
 
-        return Optional.ofNullable( urls.get( rel ) );
+        Matcher end = urlWithLongname.matcher( _nn( rel.get() ) );
+        if( !end.matches() ) {
+            Log.warn( "not a real url? " + url + " red: " + rel );
+            return Optional.empty();
+        }
+
+        return getByName( _nn( end.group( "fname" ) ) );
+
     }
 
     public void setOsiApproval( LicenseID licenseID, boolean osiApproved ) {
@@ -322,13 +372,18 @@ public class LOracle {
         return Optional.ofNullable( couldbeNames.get( aliasBuilder.reduce( name ) ) ).orElseGet( Collections::emptySet );
     }
 
-    public void addUrl( LicenseID license, String url ) {
-        Matcher matcher = urlPattern.matcher( url );
-        if( !matcher.matches() ) {
-            throw new IllegalArgumentException( "not a url: " + url );
-        }
+    public Set<LicenseID> guessByUrl( String url ) {
 
-        String rel = _nn( matcher.group( "relevant" ) ).toLowerCase( Locale.US );
+        return aliasBuilder.normalizeUrl( url ).map( u -> _orElseGet( couldbeUrls.get( u ), new HashSet<LicenseID>() ) ).orElseGet( HashSet::new );
+    }
+
+    public void addCouldBeUrl( LicenseID license, String url ) {
+
+    }
+
+    public void addUrl( LicenseID license, String url ) {
+
+        String rel = aliasBuilder.normalizeUrl( url ).orElseThrow( () -> new IllegalArgumentException( "not a url" ) );
 
         if( urls.containsKey( rel ) ) {
 
@@ -341,8 +396,12 @@ public class LOracle {
             Log.info( "known url: " + url + " as: " + old + "  moving it to couldbe, together with " + license );
 
             urls.remove( rel );
+            More oldMore = getMore( old );
+            oldMore.urls.remove( rel );
+            oldMore.couldbeUrl.add( rel );
 
-            getMore( license ).couldbeName.add( license.toString() );
+            More thisMore = getMore( license );
+            thisMore.couldbeUrl.add( rel );
 
             couldbeUrls.putIfAbsent( rel, new HashSet<>() );
             //noinspection ConstantConditions
@@ -350,20 +409,60 @@ public class LOracle {
             //noinspection ConstantConditions
             couldbeUrls.get( rel ).add( old );
 
-            getMore( license ).urls.add( rel );
-
             return;
         }
 
         if( couldbeUrls.containsKey( rel ) ) {
-            couldbeUrls.get( rel ).add( license );
-            getMore( license ).urls.add( rel );
-            Log.info( "known couldbe url: " + url + " for " + license );
-            return;
+
+            Set<LicenseID> could = _nn( couldbeUrls.get( rel ) );
+
+            if( could.size() > 1 ) {
+                if( could.contains( license ) ) {
+                    // known
+                    return;
+                }
+
+                could.add( license );
+                getMore( license ).couldbeUrl.add( rel );
+                return;
+            }
+
+            throw new IllegalArgumentException( "unique could be ?: " + rel + " " + license );
+//
+//
+//            couldbeUrls.get( rel ).add( license );
+//            getMore( license ).urls.add( rel );
+//            Log.info( "known couldbe url: " + url + " for " + license );
+//            return;
         }
 
         getMore( license ).urls.add( rel );
         urls.put( rel, license );
+    }
+
+    public void addUrlCheckedAt( LicenseID license, String url, String date ) {
+        Log.info( "added url checkedat " + url + " " + license + " " + date );
+        urlsInTime.put( url, P.of( date, license.toString() ) );
+    }
+
+    public void allowUrlsCheckedDaysBefore( int days ) {
+        LocalDate now = LocalDate.now();
+
+        urlsInTime.forEach( ( u, p ) -> {
+            try {
+                LocalDate checked = _nn( LocalDate.parse( p.i0 ) );
+
+                if( ChronoUnit.DAYS.between( checked, now ) < days ) {
+                    addUrl( getOrThrowByName( p.i1 ), u );
+                    Log.info( "url " + u + " was checked to be " + p.i1 );
+                } else {
+                    Log.warn( "url " + u + " was checked too long ago: days " + checked );
+                }
+
+            } catch( DateTimeParseException e ) {
+                Log.warn( "not a date " + p.i0 );
+            }
+        } );
     }
 
 }

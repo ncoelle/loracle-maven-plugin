@@ -30,6 +30,11 @@ public class Decider {
         }
 
         byUrl.ifPresent( this::warnOnAnd );
+        if ( byUrl.isPresent()) {
+            log.debug( "      license by url " );
+        } else {
+            log.debug( "      no license " );
+        }
 
         return byUrl;
     }
@@ -42,6 +47,8 @@ public class Decider {
         } );
 
         warnOnAnd( licenseID );
+
+        log.debug( "      license by name " );
 
         return Optional.of( licenseID );
     }
@@ -59,6 +66,8 @@ public class Decider {
                 log.warn( "   license by url differs " + name );
             }
         } );
+
+        log.debug( "      license on coordinates " );
 
         return licenseID;
     }

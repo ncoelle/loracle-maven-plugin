@@ -155,8 +155,10 @@ public class ExtractGoodFedoraLicensesFromHTML {
 //                    }
 
                     if ( shrt.isPresent() && lng.isPresent() && shrt.get().equals( lng.get() )) {
-                        sb.append( "   adding : " + f.url + "\n");
-                        lOracle.addUrl( shrt.get(), f.url );
+                        if ( f.url != null && !f.url.isEmpty()) {
+                            sb.append( "   adding : " + f.url + "\n" );
+                            lOracle.addUrl( shrt.get(), f.url );
+                        }
 
                         addFedoraInfo( lOracle, lng.get(), f );
 

@@ -5,7 +5,7 @@ LOracle maven plugin is the the License Oracle.
 
 I Am Not A Lawyer But I'll fail your build if something license related looks fishy.
  
-It chekcs checks that 
+It checks checks that
   
 1. every dependency has a declared license and that this license is known 
 
@@ -39,9 +39,9 @@ or not breaking implies you're save in court.
 
 LOracle looks at the license block of each pom.
 Using the name and the url it tries to map it to a standard SPDX open software license.
-If that fails it looks in a list o known artifacts.
+If that fails it looks in a list of known artifacts.
  
-As there a generally accepted standards the content of these tags varies wildly.
+As there a no generally accepted standards the content of these tags varies wildly.
 IANAL uses some regex to interpret them.
 
 ## License Standards
@@ -123,7 +123,7 @@ Until recently there were a lot of lists which all had a couple of common proper
  * they can change at any time
  * they are fuzzy about multi licenses issues
 
-e.g. opensource.org/licenses, gnu, fedora, dejacode, tldr/licenses, wikipedia
+e.g. opensource.org/licenses, gnu, fedora, dejacode, tldr/licenses, wikipedia, versioneye
 
 Then came SPDX/licenses. A versioned list of (many) licenses which defined ids and text.
 Version 2 even decides how to precisely describe license variants like "or later" or exceptions.
@@ -154,7 +154,7 @@ To give you a taste of the problem here is a report from an other tool:
     * Apache
     
 So how many different licenses are these ?
-Trick question. One real License: Apache-2.0 (SPDX) and a vague reference. The last is could mean several licenses.
+Trick question. One real License: Apache-2.0 (SPDX) and a vague reference. The last could mean several licenses.
 
 For everyone saying so what apache is apache have look at the discussions about GPL2.0 versus GPL3.0 on the linux
 kernel list, e.g. version matter.
@@ -177,6 +177,7 @@ Most license names include a relevant part (e.g. GNU Lesser 3.0) and some extra 
  * Open
  * Public
  * v
+ ...
  
 Map vNumber to Number, convert to lowercase, remove ',', '-' and the Apache list becomes
   
@@ -223,7 +224,7 @@ Answer (SPDX):
   * - (is ',' 'and' or 'or')
   * - (which classpath exception)
   
-As it turns out, License modification varies so much that appart from 'or later' the actually used names can not identify the
+As it turns out, License modification varies so much that apart from 'or later' the actually used names can not identify the
 license.
 
 #### Mapping by Name (Multiple Maven Licenses)
@@ -259,6 +260,13 @@ So if you rip out "https://", "http://", "www.", any endings (e.g. html, txt ..)
 opensource.org also "-license" before the ending and you get a normal form that matches something.
  Be careful though. Some licenses share the url (e.g. with or without exception) and thus can not be used 
  for license identification.
+
+### Mapping By Url (time based)
+
+So you found a license at http://i.am.a.license/i/promise.really and looking at its content shout "ah bsd-2-clause".
+ Can you then safely map this url as bsd-2-clause?
+  Well no. The content may change at any time. But how about risking it for a while ? You just checked it.
+   It probably is good for a while. So lets do that. Store the mapping with date and only allow it for the next x days.
  
 ### Mapping by License Text
  
@@ -285,7 +293,9 @@ Now with many different ways to identify a license it just might be possible tha
 ### Summery
      
 As long a the world does not move en mass to SPDX license identifiers license identification stays a game.
-     Good for me. Because this is a side project and fiddling with heuristics is fun. 
+     Good for me. Because this is a side project and fiddling with heuristics is fun.
+      If you want an easy check that does most of the simple work: use the plugin and look at the warning once in a while.
+      If it stops the build. Check the artifact.
      If you need law advice please consult a lawyer in your relevant country. 
       
       

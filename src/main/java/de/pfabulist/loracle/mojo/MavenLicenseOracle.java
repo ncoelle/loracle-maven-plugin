@@ -3,15 +3,26 @@ package de.pfabulist.loracle.mojo;
 import de.pfabulist.loracle.license.Coordinates;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.License;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.Parent;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.plugin.logging.Log;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static de.pfabulist.frex.Frex.txt;
 import static de.pfabulist.kleinod.text.Strings.newString;
+import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.unchecked.NullCheck._orElseGet;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -28,49 +39,43 @@ public class MavenLicenseOracle {
         this.localRepo = localRepo;
     }
 
-    public Optional<License> getMavenLicense( Artifact arti ) {
-        Coordinates coo = Coordinates.valueOf( arti );
+    public List<License> getMavenLicense( Artifact arti ) {
+        return getMavenLicense( Coordinates.valueOf( arti ));
+    }
+
+    public List<License> getMavenLicense( Coordinates coo ) {
 
         while( true ) {
-            try {
-                Path pom = getPom( coo );
-                String content = newString( Files.readAllBytes( pom ) );
-                Optional<String> ret = extractLicenseName( content );
-                if( ret.isPresent() ) {
-                    License license = new License();
-                    license.setName( ret.get() );
-                    extractUrl( content ).ifPresent( license::setUrl );
-                    return Optional.of( license );
-                } else {
-                    log.debug( "       " + coo + " has no license declaration checking parent " );
-                }
+            Path pom = getPom( coo );
+            List<License> licenses = extractLicense( pom );
 
-                Optional<Coordinates> parentCoo = extractParentCoords( content );
-
-                if( parentCoo.isPresent() ) {
-                    coo = parentCoo.get();
-                    log.debug( "          parent is" + coo );
-                } else {
-                    log.debug( "          no parent" );
-                    return Optional.empty();
-                }
-
-            } catch( IOException e ) {
-                log.warn( "no pom ?" );
-                return Optional.empty();
+            if( !licenses.isEmpty() ) {
+                log.debug( "      licenses found " );
+                licenses.forEach( l -> log.debug( "         " + _orElseGet( l.getName(), "-" ) + " : " + _orElseGet( l.getUrl(), "-" ) ) );
+                return licenses;
             }
+
+            log.debug( "    no licenses found in " + coo  );
+
+            Optional<Coordinates> parentCoo = extractParent( pom );
+
+            if( parentCoo.isPresent() ) {
+                coo = _nn( parentCoo.get() );
+                log.debug( "          going to parent: " + coo );
+            } else {
+                log.debug( "          no parent, i,e. no license found" );
+                return Collections.emptyList();
+            }
+
         }
     }
 
     private Path getPom( Coordinates coords ) {
         Path ret = localRepo;
-        ret = ret.resolve( coords.getGroupId().replace( '.', '/' ) );
-        ret = ret.resolve( coords.getArtifactId() );
-        ret = ret.resolve( coords.getVersion() );
-        ret = ret.resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".pom" );
-
-//        log.info( "pom exists: " + ret + " " + Files.exists( ret ) );
-//
+        ret = _nn( ret.resolve( coords.getGroupId().replace( '.', '/' ) ) );
+        ret = _nn( ret.resolve( coords.getArtifactId() ) );
+        ret = _nn( ret.resolve( coords.getVersion() ) );
+        ret = _nn( ret.resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".pom" ) );
         return ret;
     }
 
@@ -86,51 +91,105 @@ public class MavenLicenseOracle {
 //        return ret;
 //    }
 
-    Optional<String> extractLicenseName( final String raw ) {
-        final String licenseTagStart = "<license>", licenseTagStop = "</license>";
-        final String nameTagStart = "<name>", nameTagStop = "</name>";
-        if( raw.contains( licenseTagStart ) ) {
-            final String licenseContents = raw.substring( raw.indexOf( licenseTagStart ) + licenseTagStart.length(), raw.indexOf( licenseTagStop ) );
-            final String name = licenseContents.substring( licenseContents.indexOf( nameTagStart ) + nameTagStart.length(), licenseContents.indexOf( nameTagStop ) );
-            return Optional.of( name );
+    List<License> extractLicense( final Path pom ) {
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        try( Reader pathReader = Files.newBufferedReader( pom ) ) {
+            Model pomModel = _nn( reader.read( pathReader ) );
+
+            return _nn( pomModel.getLicenses() );
+
+//            if( licenses.isEmpty() ) {
+//                return Optional.empty();
+//            }
+//
+//            if( licenses.size() == 1 ) {
+//                return Optional.of( _nn( licenses.get( 0 ) ) );
+//            }
+//
+//            return Optional.of( getAndLicense( licenses ));
+
+        } catch( IOException | XmlPullParserException e ) {
+            log.warn( "error extracting license from pom " + e );
         }
-        return Optional.empty();
+
+//        return Optional.empty();
+        return Collections.emptyList();
+
     }
 
-    private Optional<String> extractUrl( String raw ) {
-        final String licenseTagStart = "<license>", licenseTagStop = "</license>";
-        final String nameTagStart = "<url>", nameTagStop = "</url>";
-        if( raw.contains( licenseTagStart ) ) {
-            final String licenseContents = raw.substring( raw.indexOf( licenseTagStart ) + licenseTagStart.length(), raw.indexOf( licenseTagStop ) );
-            if ( !licenseContents.contains( nameTagStart )) {
+    public static License getAndLicense( List<License> licenses ) {
+        License and = new License();
+        and.setName( licenses.stream().map( License::getName ).collect( Collectors.joining( " and " ) ) );
+        return and;
+    }
+
+//    Optional<String> extractLicenseName( final String raw ) {
+//
+//        final String licenseTagStart = "<license>", licenseTagStop = "</license>";
+//        final String nameTagStart = "<name>", nameTagStop = "</name>";
+//        if( raw.contains( licenseTagStart ) ) {
+//            final String licenseContents = raw.substring( raw.indexOf( licenseTagStart ) + licenseTagStart.length(), raw.indexOf( licenseTagStop ) );
+//            final String name = licenseContents.substring( licenseContents.indexOf( nameTagStart ) + nameTagStart.length(), licenseContents.indexOf( nameTagStop ) );
+//            return Optional.of( name );
+//        }
+//        return Optional.empty();
+//    }
+//
+//    private Optional<String> extractUrl( String raw ) {
+//        final String licenseTagStart = "<license>", licenseTagStop = "</license>";
+//        final String nameTagStart = "<url>", nameTagStop = "</url>";
+//        if( raw.contains( licenseTagStart ) ) {
+//            final String licenseContents = raw.substring( raw.indexOf( licenseTagStart ) + licenseTagStart.length(), raw.indexOf( licenseTagStop ) );
+//            if( !licenseContents.contains( nameTagStart ) ) {
+//                return Optional.empty();
+//            }
+//            final String name = licenseContents.substring( licenseContents.indexOf( nameTagStart ) + nameTagStart.length(), licenseContents.indexOf( nameTagStop ) );
+//            return Optional.of( name );
+//        }
+//        return Optional.empty();
+//
+//    }
+
+    Optional<Coordinates> extractParent( Path pom ) {
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        try( Reader pathReader = Files.newBufferedReader( pom ) ) {
+            Model pomModel = _nn( reader.read( pathReader ) );
+
+            @Nullable Parent parent = pomModel.getParent();
+            if( parent == null ) {
                 return Optional.empty();
             }
-            final String name = licenseContents.substring( licenseContents.indexOf( nameTagStart ) + nameTagStart.length(), licenseContents.indexOf( nameTagStop ) );
-            return Optional.of( name );
+
+            return Optional.of( new Coordinates( _nn( parent.getGroupId() ), _nn( parent.getArtifactId() ), _nn( parent.getVersion() ) ) );
+
+        } catch( IOException | XmlPullParserException e ) {
+            log.warn( "error extracting parent from pom " + e );
         }
+
         return Optional.empty();
+
     }
 
-    /**
-     * @param raw
-     * @return
-     */
-    // TODO obviously this code needs a lot of error protection and handling
-    Optional<Coordinates> extractParentCoords( final String raw ) {
-        final String parentTagStart = "<parent>", parentTagStop = "</parent>";
-        final String groupTagStart = "<groupId>", groupTagStop = "</groupId>";
-        final String artifactTagStart = "<artifactId>", artifactTagStop = "</artifactId>";
-        final String versionTagStart = "<version>", versionTagStop = "</version>";
-
-        if( !raw.contains( parentTagStart ) ) {
-            return Optional.empty();
-        }
-        final String contents = raw.substring( raw.indexOf( parentTagStart ) + parentTagStart.length(), raw.indexOf( parentTagStop ) );
-        final String group = contents.substring( contents.indexOf( groupTagStart ) + groupTagStart.length(), contents.indexOf( groupTagStop ) );
-        final String artifact = contents.substring( contents.indexOf( artifactTagStart ) + artifactTagStart.length(), contents.indexOf( artifactTagStop ) );
-        final String version = contents.substring( contents.indexOf( versionTagStart ) + versionTagStart.length(), contents.indexOf( versionTagStop ) );
-        return Optional.of( new Coordinates( group, artifact, version ) );
-    }
+//    /**
+//     * @param raw
+//     * @return
+//     */
+//    // TODO obviously this code needs a lot of error protection and handling
+//    Optional<Coordinates> extractParentCoords( final String raw ) {
+//        final String parentTagStart = "<parent>", parentTagStop = "</parent>";
+//        final String groupTagStart = "<groupId>", groupTagStop = "</groupId>";
+//        final String artifactTagStart = "<artifactId>", artifactTagStop = "</artifactId>";
+//        final String versionTagStart = "<version>", versionTagStop = "</version>";
+//
+//        if( !raw.contains( parentTagStart ) ) {
+//            return Optional.empty();
+//        }
+//        final String contents = raw.substring( raw.indexOf( parentTagStart ) + parentTagStart.length(), raw.indexOf( parentTagStop ) );
+//        final String group = contents.substring( contents.indexOf( groupTagStart ) + groupTagStart.length(), contents.indexOf( groupTagStop ) );
+//        final String artifact = contents.substring( contents.indexOf( artifactTagStart ) + artifactTagStart.length(), contents.indexOf( artifactTagStop ) );
+//        final String version = contents.substring( contents.indexOf( versionTagStart ) + versionTagStart.length(), contents.indexOf( versionTagStop ) );
+//        return Optional.of( new Coordinates( group, artifact, version ) );
+//    }
 
 //    private Optional<String> extract( String raw, String outer, String tag ) {
 //        Pattern pat = any().zeroOrMore().
