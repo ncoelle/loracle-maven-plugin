@@ -3,6 +3,7 @@ package de.pfabulist.loracle.license;
 import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.kleinod.collection.P;
+import de.pfabulist.kleinod.encode.Base16;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.time.LocalDate;
@@ -42,6 +43,7 @@ public class LOracle {
         public Optional<Boolean> fedoraApproved = Optional.empty();
         public Optional<Boolean> gpl2Compatible = Optional.empty();
         public Optional<Boolean> gpl3Compatible = Optional.empty();
+        public boolean copyLeft = false;
         public List<String> urls = new ArrayList<>();
         public List<String> longNames = new ArrayList<>();
         public List<Coordinates> specific = new ArrayList<>();

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de" dir="ltr">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Die Seite wurde nicht gefunden. | ifrOSS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="/sites/default/files/fourseasons_favicon.ico" type="image/x-icon" />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/default/files/css/css_0d49b61fcacd12d93ef586e869e45b79.css" />
+      <!--[if lt IE 7]>
+  <style type="text/css" media="all">@import "/sites/all/themes/fourseasons/fix-ie.css";</style>
+  <![endif]-->
+  <style>
+    #header-image { background-color: #990000; background-image:none; }
+    h1, h2, h3, h4, h5, #headline a { color: #990000; }
+  </style>
+</head>
+
+<body >
+
+<div id="pagewrapper">
+
+  
+    <script type="text/javascript" src="/misc/jquery.js"></script>
+    <script type="text/javascript">
+    function toggle_style(color) {
+      $("#header-image").css("background-color", color);
+      $("#header-image").css("background-image", "none");
+      $("h1").css("color", color);
+      $("h2").css("color", color);
+      $("h3").css("color", color);
+      $("#headline a").css("color", color);
+    }
+    </script>
+  
+    <div id="farben">
+      <span>try another color: </span>
+      <a href="#" style="background-color:#FF9900;" onclick="toggle_style('#FF9900');"></a>
+      <a href="#" style="background-color:#003366;" onclick="toggle_style('#003366');"></a>
+      <a href="#" style="background-color:#990000;" onclick="toggle_style('#990000');"></a>
+      <a href="#" style="background-color:#CCCCCC;" onclick="toggle_style('#CCCCCC');"></a>
+      <a href="#" style="background-color:#006699;" onclick="toggle_style('#006699');"></a>
+      <a href="#" style="background-color:#000000;" onclick="toggle_style('#000000');"></a>
+    </div>
+
+    <div id="font">
+      <span style="margin-left:20px;">try another fontsize: </span>
+      <a href="#" onclick="$('body').css('font-size','60%');">60%</a>
+      <a href="#" onclick="$('body').css('font-size','70%');">70%</a>
+      <a href="#" onclick="$('body').css('font-size','80%');">80%</a>
+      <a href="#" onclick="$('body').css('font-size','90%');">90%</a>
+    </div>
+  
+
+  <div id="headline">
+    <a href="/" title=""><img src="/sites/default/files/fourseasons_logo.png" alt="" id="logo" /></a><div id="site-slogan">Institut für Rechtsfragen der Freien und Open Source Software</div>  </div>
+  
+  
+  <div id="navigation-primary">
+                              <div style="clear:both;"></div>
+  </div>
+
+  <div id="navigation-secondary">
+        <ul class="links secondary-links"><li style="border:none;">&nbsp;</li></ul>    <div style="clear:both;"></div>
+  </div>
+
+  <div id="header-image">
+      </div>
+
+
+  <div id="navigation-breadcrumb">
+  <div class="breadcrumb"><a href="#">&nbsp;</a></div>  </div>
+
+  <div style="clear:both;"></div>
+  <div id="contentwrapper">
+
+    
+    <div id="middle-content">
+      <div class="content-padding">
+                    <h2>Die Seite wurde nicht gefunden.</h2>                                        
+          Die angeforderte Seite konnte nicht gefunden werden.<div id="block-print-0" class="clear-block block block-print">
+
+
+  <div class="content"><span class="print_html"><a href="http://www.ifross.org/print/ifross_html/lizenzcenter-en-Dateien/ping_bg.png" title="Druckoptimierte Version dieser Seite anzeigen." class="print-page" rel="nofollow">Druckversion</a></span></div>
+</div>
+          <span class="clear"></span>
+                    <div style="clear:both;"></div>
+      </div>
+    </div>
+
+      </div>
+
+  <div style="clear:both;"></div>
+
+  <div id="footer"></div> 
+
+  <div id="footer-message"></div> 
+
+</div>
+
+
+</body>
+</html>

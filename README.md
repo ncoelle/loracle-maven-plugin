@@ -7,9 +7,13 @@ I Am Not A Lawyer But I'll fail your build if something license related looks fi
  
 It checks checks that
   
-1. every dependency has a declared license and that this license is known 
+ * every dependency has a declared known license
+ * license compatibility is valid (some)
 
-(2. all licenses are compatible) later
+Note
+
+ * does not generate notes listing all dependend licenses
+ * does not set licence headers in source
 
 ## Use
     
@@ -28,6 +32,59 @@ It checks checks that
                 </executions>
             </plugin>
         </plugins>
+
+### Configuration options
+
+ * Declare Licenses directly
+
+        <licenseDeclarations>
+            <licenseDeclaration>
+                <coordinates>a.b:foo:1.0</coordinates>
+                <license>apache-2</license>
+            </licenseDeclaration>
+        </licenseDeclarations>
+
+   The coordinates allow '*' to declare patterns. The '*' only works within groupid and artifactid
+
+ * Url Declarations
+
+        <urlDeclarations>
+            <urlDeclaration>
+                <url>a.b:foo:1.0</url>
+                <license>apache-2</license>
+                <checkedAt>2016-02-03</checkedAt>
+            </urlDeclaration>
+        </urlDeclarations>
+
+    Urls may declare a license but these tend to be volatile over time. So its only good for a while
+
+ * allowUrlsCheckedDaysBefore
+
+        <allowUrlsCheckedDaysBefore>100</allowUrlsCheckedDaysBefore>
+
+ To allow urls that are only good for a time.
+ Note: The declaration is by absolute time and this flag relative, i.e. you builds will fail eventually and force you to recheck the urls.
+
+ * stopOnError
+
+        <stopOnError>false</stopOnError>
+
+  To prevent build breakage set this flag. It meant for multi module builds, to see all results in one run.
+
+ * andIsOr
+
+        <andIsOr>true</andIsOr>
+
+ There is no maven defined meaning of 2 or more license declarations in a pom. The defensive approach is to
+        assume 'and' combination. But checking the artifact it is often meant as 'or'.
+        This flag switches the behaviour to 'or'.
+
+
+
+
+
+
+## older notes
 
 
 ## Obvious note

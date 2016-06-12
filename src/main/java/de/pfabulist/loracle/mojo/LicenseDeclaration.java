@@ -1,7 +1,13 @@
 package de.pfabulist.loracle.mojo;
 
+import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.license.LicenseID;
+import org.apache.maven.plugin.MojoFailureException;
+
 import javax.annotation.Nullable;
 import java.util.Optional;
+
+import static de.pfabulist.unchecked.NullCheck._orElseThrow;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -13,16 +19,17 @@ public class LicenseDeclaration {
     private @Nullable String coordinates;
     private @Nullable String license;
 
-    public Optional<String> getCoordinates() {
-        return Optional.ofNullable( coordinates );
+    public Coordinates getCoordinates() {
+        return Coordinates.valueOf( _orElseThrow( coordinates,
+                () -> new MojoFailureException( "no coordinates set in configuration of LicenseDeclarations in LOracle Plugin" ) ) );
     }
 
     public void setCoordinates( String coordinates ) {
         this.coordinates = coordinates;
     }
 
-    public Optional<String> getLicense() {
-        return Optional.ofNullable( license );
+    public String getLicense() {
+        return _orElseThrow( license, () -> new IllegalArgumentException( "no license set in LicenseDeclaration") );
     }
 
     public void setLicense( String license ) {
