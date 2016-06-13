@@ -15,13 +15,12 @@
 
 
     <artifactId>loracle-maven-plugin</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
     <packaging>maven-plugin</packaging>
 
     <name>loracle-maven-plugin</name>
     <description>maven plugin to check the licenses of all dependencies and possible incompatibilities</description>
     <url>http://www.github.com/openCage/loracle-maven-plugin</url>
-
 
 
     <dependencyManagement>

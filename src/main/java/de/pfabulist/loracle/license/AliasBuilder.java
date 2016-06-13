@@ -32,6 +32,8 @@ public class AliasBuilder {
                                                       Frex.txt( ')') ).
             buildPattern().toString();
     static private final Pattern maybe = or( fullWord( "License" ),
+                                             fullWord( "Source" ),
+                                             fullWord( "Code" ),
                                              fullWord( "The" ),
                                              fullWord( "Version" ),
                                              fullWord( "Vesion" ),
@@ -85,7 +87,11 @@ public class AliasBuilder {
             } else if( maybe.matcher( word ).matches() ) {
                 // ignore ret = ret.then( txt( word).zeroOrOnce() );
             } else if( vVersion.matcher( word ).matches() ) {
-                addNumber( sb, word.substring( 1 ) );
+                if ( !word.equals( "v." )) {
+                    addNumber( sb, word.substring( 1 ) );
+                }
+                //else { skip }
+
             } else {
                 Matcher matcher = wordVversion.matcher( word );
                 if( matcher.matches() ) {
@@ -99,7 +105,7 @@ public class AliasBuilder {
                         sb.append( wv.group( "word" ) );
                         sb.append( " " );
                         addNumber( sb, _nn( wv.group( "version" )));
-                    }  else {
+                    } else {
                         addNumber( sb, word );
                     }
                 }

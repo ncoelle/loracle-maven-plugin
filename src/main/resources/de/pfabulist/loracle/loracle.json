@@ -190,14 +190,12 @@
       ],
       "longNames": [
         "adobe 2006",
-        "adobe systems incorporated source code",
-        "adobe scl",
-        "adobe source code 2006"
+        "adobe systems incorporated",
+        "adobe scl"
       ],
       "specific": [],
       "couldbeName": [
-        "adobe",
-        "adobe source code"
+        "adobe"
       ],
       "couldbeUrl": []
     },
@@ -723,6 +721,27 @@
       ],
       "couldbeUrl": []
     },
+    "alternate-1.1": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "gpl2Compatible": {},
+      "gpl3Compatible": {},
+      "copyLeft": true,
+      "urls": [
+        "wsdot.wa.gov/eesc/bridge/alternateroute/arosl"
+      ],
+      "longNames": [
+        "alternate 1.1",
+        "alternate route 1.1"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "alternate route",
+        "alternate"
+      ],
+      "couldbeUrl": []
+    },
     "altova-eula": {
       "spdx": false,
       "osiApproved": false,
@@ -1160,7 +1179,7 @@
       "urls": [],
       "longNames": [
         "apple excl",
-        "apple example code"
+        "apple example"
       ],
       "specific": [],
       "couldbeName": [],
@@ -1193,7 +1212,7 @@
       "urls": [],
       "longNames": [
         "apple sscl",
-        "apple sample source code"
+        "apple sample"
       ],
       "specific": [],
       "couldbeName": [],
@@ -1214,12 +1233,12 @@
       ],
       "longNames": [
         "apsl 1",
-        "apple source 1"
+        "apple 1"
       ],
       "specific": [],
       "couldbeName": [
-        "apsl",
-        "apple source"
+        "apple",
+        "apsl"
       ],
       "couldbeUrl": []
     },
@@ -1236,12 +1255,12 @@
       ],
       "longNames": [
         "apsl 1.1",
-        "apple source 1.1"
+        "apple 1.1"
       ],
       "specific": [],
       "couldbeName": [
-        "apsl",
-        "apple source"
+        "apple",
+        "apsl"
       ],
       "couldbeUrl": []
     },
@@ -1259,12 +1278,12 @@
       ],
       "longNames": [
         "apsl 1.2",
-        "apple source 1.2"
+        "apple 1.2"
       ],
       "specific": [],
       "couldbeName": [
-        "apsl",
-        "apple source"
+        "apple",
+        "apsl"
       ],
       "couldbeUrl": []
     },
@@ -1280,7 +1299,7 @@
       "gpl3Compatible": {
         "value": false
       },
-      "copyLeft": false,
+      "copyLeft": true,
       "urls": [
         "opensource.apple.com/license/apsl/",
         "opensource.org/licenses/apsl-2.0",
@@ -1288,12 +1307,12 @@
       ],
       "longNames": [
         "apsl 2",
-        "apple source 2"
+        "apple 2"
       ],
       "specific": [],
       "couldbeName": [
-        "apsl",
-        "apple source"
+        "apple",
+        "apsl"
       ],
       "couldbeUrl": []
     },
@@ -1559,7 +1578,7 @@
       "urls": [],
       "longNames": [
         "asn 1",
-        "asn .1 object dumping code"
+        "asn .1 object dumping"
       ],
       "specific": [],
       "couldbeName": [
@@ -1755,11 +1774,11 @@
       ],
       "longNames": [
         "beopen",
-        "beopen source 1"
+        "beopen 1"
       ],
       "specific": [],
       "couldbeName": [
-        "beopen source"
+        "beopen"
       ],
       "couldbeUrl": []
     },
@@ -1868,12 +1887,10 @@
         "spdx.org/licenses/bittorrent-1.0"
       ],
       "longNames": [
-        "bittorrent 1",
-        "bittorrent source 1"
+        "bittorrent 1"
       ],
       "specific": [],
       "couldbeName": [
-        "bittorrent source",
         "bittorrent"
       ],
       "couldbeUrl": []
@@ -1892,12 +1909,10 @@
         "spdx.org/licenses/bittorrent-1.1"
       ],
       "longNames": [
-        "bittorrent 1.1",
-        "bittorrent source 1.1"
+        "bittorrent 1.1"
       ],
       "specific": [],
       "couldbeName": [
-        "bittorrent source",
         "bittorrent"
       ],
       "couldbeUrl": []
@@ -2896,14 +2911,14 @@
       ],
       "longNames": [
         "catosl 1.1",
-        "computer associates trusted source 1.1",
+        "computer associates trusted 1.1",
         "ca tosl 1.1",
-        "ca trusted source 1.1"
+        "ca trusted 1.1"
       ],
       "specific": [],
       "couldbeName": [
-        "ca trusted source",
-        "computer associates trusted source",
+        "ca trusted",
+        "computer associates trusted",
         "ca tosl",
         "catosl"
       ],
@@ -4103,12 +4118,12 @@
       ],
       "longNames": [
         "cnri python 1.6",
-        "cnri source for python 1.6"
+        "cnri for python 1.6"
       ],
       "specific": [],
       "couldbeName": [
         "cnri python",
-        "cnri source for python"
+        "cnri for python"
       ],
       "couldbeUrl": []
     },
@@ -4122,12 +4137,12 @@
       "urls": [],
       "longNames": [
         "cnri python 1.6.1",
-        "cnri source for python 1.6.1"
+        "cnri for python 1.6.1"
       ],
       "specific": [],
       "couldbeName": [
         "cnri python",
-        "cnri source for python"
+        "cnri for python"
       ],
       "couldbeUrl": []
     },
@@ -4142,8 +4157,7 @@
         "python.org/download/releases/1.6.1/download_win/"
       ],
       "longNames": [
-        "cnri python gpl compatible",
-        "cnri python source gpl compatible"
+        "cnri python gpl compatible"
       ],
       "specific": [],
       "couldbeName": [],
@@ -4194,11 +4208,11 @@
       ],
       "longNames": [
         "cognitive web osl 1.1",
-        "cognitiveweb source 1.1"
+        "cognitiveweb 1.1"
       ],
       "specific": [],
       "couldbeName": [
-        "cognitiveweb source",
+        "cognitiveweb",
         "cognitive web osl"
       ],
       "couldbeUrl": []
@@ -4450,7 +4464,7 @@
       "fedoraApproved": {},
       "gpl2Compatible": {},
       "gpl3Compatible": {},
-      "copyLeft": false,
+      "copyLeft": true,
       "urls": [
         "opensource.org/licenses/cpl-1.0",
         "eclipse.org/legal/cpl-v10",
@@ -4480,14 +4494,14 @@
       ],
       "longNames": [
         "cpol 1.02",
-        "code project 1.02",
-        "code project cpol 1.02"
+        "project 1.02",
+        "project cpol 1.02"
       ],
       "specific": [],
       "couldbeName": [
+        "project cpol",
         "cpol",
-        "code project",
-        "code project cpol"
+        "project"
       ],
       "couldbeUrl": []
     },
@@ -4513,6 +4527,27 @@
       "specific": [],
       "couldbeName": [
         "crc"
+      ],
+      "couldbeUrl": []
+    },
+    "crosspoint-1.1": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "gpl2Compatible": {},
+      "gpl3Compatible": {},
+      "copyLeft": true,
+      "urls": [
+        "crosspoint.de/srclicense"
+      ],
+      "longNames": [
+        "crosspoint 1.1",
+        "crosspoint only in german",
+        "crosspoint"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "crosspoint"
       ],
       "couldbeUrl": []
     },
@@ -4736,13 +4771,15 @@
       "fedoraApproved": {},
       "gpl2Compatible": {},
       "gpl3Compatible": {},
-      "copyLeft": false,
+      "copyLeft": true,
       "urls": [
         "dipp.nrw.de/d-fsl/index_html/lizenzen/en/d-fsl-1_0_en"
       ],
       "longNames": [
         "d fsl 1 en",
-        "german"
+        "german",
+        "deutsche freie softwarelizenz d fsl german",
+        "deutsche freie softwarelizenz"
       ],
       "specific": [],
       "couldbeName": [],
@@ -5729,7 +5766,7 @@
       "gpl3Compatible": {
         "value": false
       },
-      "copyLeft": false,
+      "copyLeft": true,
       "urls": [
         "eclipse.org/legal/epl-v10",
         "opensource.org/licenses/epl-1.0",
@@ -5758,12 +5795,12 @@
       ],
       "longNames": [
         "epo osl 2005.1",
-        "epo source licence no . 2005 1",
+        "epo licence no . 2005 1",
         "epo osl"
       ],
       "specific": [],
       "couldbeName": [
-        "epo source licence no . 2005",
+        "epo licence no . 2005",
         "epo osl"
       ],
       "couldbeUrl": []
@@ -6667,8 +6704,7 @@
       ],
       "longNames": [
         "glide",
-        "3dfx glide",
-        "3dfx glide source code"
+        "3dfx glide"
       ],
       "specific": [],
       "couldbeName": [],
@@ -6814,11 +6850,13 @@
       "longNames": [
         "gpl 1",
         "gnu 1 only",
-        "gnu 1"
+        "gnu 1",
+        "gnu gpl 1"
       ],
       "specific": [],
       "couldbeName": [
         "gpl",
+        "gnu gpl",
         "gnu"
       ],
       "couldbeUrl": [
@@ -6846,11 +6884,13 @@
       "longNames": [
         "gpl 2",
         "gnu 2 only",
-        "gnu 2"
+        "gnu 2",
+        "gnu gpl 2"
       ],
       "specific": [],
       "couldbeName": [
         "gpl",
+        "gnu gpl",
         "gnu"
       ],
       "couldbeUrl": [
@@ -7515,11 +7555,13 @@
       "longNames": [
         "gpl 3",
         "gnu 3 only",
-        "gnu 3"
+        "gnu 3",
+        "gnu gpl 3"
       ],
       "specific": [],
       "couldbeName": [
         "gpl",
+        "gnu gpl",
         "gnu"
       ],
       "couldbeUrl": [
@@ -7772,7 +7814,7 @@
         "hacktivismo.com/about/hessla"
       ],
       "longNames": [
-        "hacktivismo enhanced source"
+        "hacktivismo enhanced"
       ],
       "specific": [],
       "couldbeName": [],
@@ -7790,12 +7832,12 @@
       ],
       "longNames": [
         "hacos 1.2",
-        "health administration corporation source 1.2"
+        "health administration corporation 1.2"
       ],
       "specific": [],
       "couldbeName": [
         "hacos",
-        "health administration corporation source"
+        "health administration corporation"
       ],
       "couldbeUrl": []
     },
@@ -8034,6 +8076,52 @@
       "couldbeName": [],
       "couldbeUrl": []
     },
+    "hpl-1.0": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "gpl2Compatible": {},
+      "gpl3Compatible": {},
+      "copyLeft": true,
+      "urls": [
+        "projectpier.org/manual/tour/licence"
+      ],
+      "longNames": [
+        "hpl 1",
+        "honest hpl 1",
+        "honest 1"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "hpl",
+        "honest",
+        "honest hpl"
+      ],
+      "couldbeUrl": []
+    },
+    "hpl-1.1": {
+      "spdx": false,
+      "osiApproved": false,
+      "fedoraApproved": {},
+      "gpl2Compatible": {},
+      "gpl3Compatible": {},
+      "copyLeft": true,
+      "urls": [
+        "opensourcestrategies.com/hplv1.1"
+      ],
+      "longNames": [
+        "hpl 1.1",
+        "honest hpl 1.1",
+        "honest 1.1"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "hpl",
+        "honest",
+        "honest hpl"
+      ],
+      "couldbeUrl": []
+    },
     "hpnd": {
       "spdx": true,
       "osiApproved": true,
@@ -8139,25 +8227,6 @@
       "couldbeName": [],
       "couldbeUrl": []
     },
-    "ibm sample code license": {
-      "spdx": false,
-      "osiApproved": false,
-      "fedoraApproved": {
-        "value": false
-      },
-      "gpl2Compatible": {},
-      "gpl3Compatible": {},
-      "copyLeft": false,
-      "urls": [
-        "fedoraproject.org/wiki/licensing/ibm_sample_code_license"
-      ],
-      "longNames": [
-        "ibm sample code"
-      ],
-      "specific": [],
-      "couldbeName": [],
-      "couldbeUrl": []
-    },
     "ibm-as-is": {
       "spdx": false,
       "osiApproved": false,
@@ -8250,8 +8319,8 @@
       "urls": [],
       "longNames": [
         "ibm nwsc",
-        "ibm international for non warranted sample code",
-        "ibm non warranted sample code"
+        "ibm international for non warranted sample",
+        "ibm non warranted sample"
       ],
       "specific": [],
       "couldbeName": [],
@@ -8757,7 +8826,7 @@
       ],
       "longNames": [
         "intel",
-        "intel source",
+        "intel scl",
         "intel limited patent"
       ],
       "specific": [],
@@ -8855,7 +8924,7 @@
         "web.archive.org/web/20061110164256/http://www.intel.com/cd/ids/developer/asmo-na/eng/19287.htm?desturl\u003d276611"
       ],
       "longNames": [
-        "intel code samples"
+        "intel samples"
       ],
       "specific": [],
       "couldbeName": [],
@@ -8871,11 +8940,11 @@
       "urls": [],
       "longNames": [
         "intel osl 1989",
-        "intel source 1989"
+        "intel 1989"
       ],
       "specific": [],
       "couldbeName": [
-        "intel source",
+        "intel",
         "intel osl"
       ],
       "couldbeUrl": []
@@ -8890,22 +8959,6 @@
       "urls": [],
       "longNames": [
         "intel royalty"
-      ],
-      "specific": [],
-      "couldbeName": [],
-      "couldbeUrl": []
-    },
-    "intel-scl": {
-      "spdx": false,
-      "osiApproved": false,
-      "fedoraApproved": {},
-      "gpl2Compatible": {},
-      "gpl3Compatible": {},
-      "copyLeft": false,
-      "urls": [],
-      "longNames": [
-        "intel scl",
-        "intel source code"
       ],
       "specific": [],
       "couldbeName": [],
@@ -9136,7 +9189,7 @@
         "jahia.org/jahia/jahia/pid/145"
       ],
       "longNames": [
-        "jahia community source"
+        "jahia community"
       ],
       "specific": [],
       "couldbeName": [],
@@ -9154,13 +9207,13 @@
       ],
       "longNames": [
         "jahia 1.3.1",
-        "jahia collaborative source 1.3.1",
+        "jahia collaborative 1.3.1",
         "jcsl 1.3.1"
       ],
       "specific": [],
       "couldbeName": [
         "jcsl",
-        "jahia collaborative source",
+        "jahia collaborative",
         "jahia"
       ],
       "couldbeUrl": []
@@ -9385,12 +9438,10 @@
       ],
       "longNames": [
         "josl 1",
-        "jabber source 1",
         "jabber 1"
       ],
       "specific": [],
       "couldbeName": [
-        "jabber source",
         "jabber",
         "josl"
       ],
@@ -10277,13 +10328,11 @@
       ],
       "longNames": [
         "logica 1",
-        "logica source 1",
         "logica osl 1"
       ],
       "specific": [],
       "couldbeName": [
         "logica",
-        "logica source",
         "logica osl"
       ],
       "couldbeUrl": []
@@ -10306,7 +10355,7 @@
       ],
       "longNames": [
         "losla",
-        "lego source"
+        "lego"
       ],
       "specific": [],
       "couldbeName": [],
@@ -10342,7 +10391,7 @@
       "fedoraApproved": {},
       "gpl2Compatible": {},
       "gpl3Compatible": {},
-      "copyLeft": false,
+      "copyLeft": true,
       "urls": [
         "plan9.bell-labs.com/plan9/license",
         "opensource.org/licenses/lpl-1.02"
@@ -10787,8 +10836,7 @@
         "mentalis.org/site/license"
       ],
       "longNames": [
-        "mentalis",
-        "mentalis source code"
+        "mentalis"
       ],
       "specific": [],
       "couldbeName": [],
@@ -10878,7 +10926,7 @@
       "urls": [],
       "longNames": [
         "michigan disclaimer",
-        "university of michigan source",
+        "university of michigan",
         "university of michigan osl"
       ],
       "specific": [],
@@ -10898,7 +10946,7 @@
         "fedoraproject.org/wiki/licensing/microsoft_shared_source_license"
       ],
       "longNames": [
-        "microsoft s shared source cli c# jscript"
+        "microsoft s shared cli c# jscript"
       ],
       "specific": [],
       "couldbeName": [],
@@ -11484,12 +11532,10 @@
       "copyLeft": false,
       "urls": [],
       "longNames": [
-        "motosoto 0.9.1",
-        "motosoto source 0.9.1"
+        "motosoto 0.9.1"
       ],
       "specific": [],
       "couldbeName": [
-        "motosoto source",
         "motosoto"
       ],
       "couldbeUrl": [
@@ -12180,8 +12226,8 @@
       "copyLeft": false,
       "urls": [],
       "longNames": [
-        "ms research shared source",
-        "microsoft research shared source"
+        "ms research shared",
+        "microsoft research shared"
       ],
       "specific": [],
       "couldbeName": [],
@@ -12226,8 +12272,8 @@
       ],
       "longNames": [
         "ms rsl",
-        "microsoft reference source",
-        "ms reference source"
+        "microsoft reference",
+        "ms reference"
       ],
       "specific": [],
       "couldbeName": [],
@@ -12457,9 +12503,9 @@
       "copyLeft": false,
       "urls": [],
       "longNames": [
-        "msj sample code",
-        "microsoft systems journal sample code",
-        "ms systems journal sample code"
+        "msj sample",
+        "microsoft systems journal sample",
+        "ms systems journal sample"
       ],
       "specific": [],
       "couldbeName": [],
@@ -12637,13 +12683,11 @@
         "opensource.arc.nasa.gov/static/html/nasa_open_source_agreement_1.3"
       ],
       "longNames": [
-        "nasa 1.3",
-        "nasa source 1.3"
+        "nasa 1.3"
       ],
       "specific": [],
       "couldbeName": [
-        "nasa",
-        "nasa source"
+        "nasa"
       ],
       "couldbeUrl": []
     },
@@ -12721,9 +12765,8 @@
       ],
       "longNames": [
         "ncsa",
-        "university of illinois ncsa source",
-        "uoi ncsa",
-        "ncsa source"
+        "university of illinois ncsa",
+        "uoi ncsa"
       ],
       "specific": [],
       "couldbeName": [],
@@ -12937,7 +12980,7 @@
       "gpl3Compatible": {
         "value": false
       },
-      "copyLeft": false,
+      "copyLeft": true,
       "urls": [
         "opensource.org/licenses/ngpl",
         "nethack.org/common/license",
@@ -13065,8 +13108,7 @@
       "copyLeft": false,
       "urls": [],
       "longNames": [
-        "nokia",
-        "nokia source"
+        "nokia"
       ],
       "specific": [],
       "couldbeName": [],
@@ -13084,7 +13126,7 @@
       "urls": [],
       "longNames": [
         "nokos 1.0a",
-        "nokia source 1.0a"
+        "nokia 1.0a"
       ],
       "specific": [],
       "couldbeName": [],
@@ -13138,7 +13180,7 @@
       "urls": [],
       "longNames": [
         "nosl",
-        "netizen source"
+        "netizen"
       ],
       "specific": [],
       "couldbeName": [],
@@ -13156,12 +13198,12 @@
       "urls": [],
       "longNames": [
         "nosl 1",
-        "netizen source 1"
+        "netizen 1"
       ],
       "specific": [],
       "couldbeName": [
-        "netizen source",
-        "nosl"
+        "nosl",
+        "netizen"
       ],
       "couldbeUrl": [
         "bits.netizen.com.au/licenses/nosl/nosl"
@@ -14053,9 +14095,10 @@
       "fedoraApproved": {},
       "gpl2Compatible": {},
       "gpl3Compatible": {},
-      "copyLeft": false,
+      "copyLeft": true,
       "urls": [
-        "opengroup.org/openmotif/license/"
+        "opengroup.org/openmotif/license/",
+        "opengroup.org/openmotif/license"
       ],
       "longNames": [
         "group"
@@ -14395,7 +14438,7 @@
       "copyLeft": false,
       "urls": [],
       "longNames": [
-        "opennetcf shared source"
+        "opennetcf shared"
       ],
       "specific": [],
       "couldbeName": [],
@@ -14686,8 +14729,8 @@
       "copyLeft": false,
       "urls": [],
       "longNames": [
-        "oracle code samples bsd",
-        "oracle code samples bsd style"
+        "oracle samples bsd",
+        "oracle samples bsd style"
       ],
       "specific": [],
       "couldbeName": [
@@ -14799,7 +14842,7 @@
       "urls": [],
       "longNames": [
         "oreilly notice",
-        "o reilly code sample notice"
+        "o reilly sample notice"
       ],
       "specific": [],
       "couldbeName": [],
@@ -14940,7 +14983,7 @@
       "gpl3Compatible": {
         "value": false
       },
-      "copyLeft": false,
+      "copyLeft": true,
       "urls": [
         "opensource.org/licenses/osl-2.1",
         "web.archive.org/web/20050212003940/http://www.rosenlaw.com/osl21",
@@ -15478,7 +15521,7 @@
       "copyLeft": false,
       "urls": [],
       "longNames": [
-        "planet source code"
+        "planet"
       ],
       "specific": [],
       "couldbeName": [],
@@ -15997,13 +16040,13 @@
       ],
       "longNames": [
         "rcsl 2",
-        "realnetworks community source 2",
+        "realnetworks community 2",
         "rcsl r\u0026d 2"
       ],
       "specific": [],
       "couldbeName": [
         "rcsl r\u0026d",
-        "realnetworks community source",
+        "realnetworks community",
         "rcsl"
       ],
       "couldbeUrl": []
@@ -16018,13 +16061,13 @@
       "urls": [],
       "longNames": [
         "rcsl 3",
-        "realnetworks community source 3",
+        "realnetworks community 3",
         "rcsl r\u0026d 3"
       ],
       "specific": [],
       "couldbeName": [
         "rcsl r\u0026d",
-        "realnetworks community source",
+        "realnetworks community",
         "rcsl"
       ],
       "couldbeUrl": []
@@ -16173,13 +16216,11 @@
         "opensource.org/licenses/ricohpl"
       ],
       "longNames": [
-        "ricoh 1",
-        "ricoh source code 1"
+        "ricoh 1"
       ],
       "specific": [],
       "couldbeName": [
-        "ricoh",
-        "ricoh source code"
+        "ricoh"
       ],
       "couldbeUrl": []
     },
@@ -16284,12 +16325,12 @@
       ],
       "longNames": [
         "rpsl 1",
-        "realnetworks source 1"
+        "realnetworks 1"
       ],
       "specific": [],
       "couldbeName": [
-        "rpsl",
-        "realnetworks source"
+        "realnetworks",
+        "rpsl"
       ],
       "couldbeUrl": []
     },
@@ -16436,7 +16477,7 @@
       ],
       "longNames": [
         "rscpl",
-        "ricoh source code"
+        "ricoh"
       ],
       "specific": [],
       "couldbeName": [],
@@ -16725,7 +16766,7 @@
       ],
       "longNames": [
         "scea",
-        "scea shared source"
+        "scea shared"
       ],
       "specific": [],
       "couldbeName": [],
@@ -16741,12 +16782,12 @@
       "urls": [],
       "longNames": [
         "scea 1",
-        "scea shared source 1"
+        "scea shared 1"
       ],
       "specific": [],
       "couldbeName": [
-        "scea shared source",
-        "scea"
+        "scea",
+        "scea shared"
       ],
       "couldbeUrl": []
     },
@@ -16883,11 +16924,11 @@
       "urls": [],
       "longNames": [
         "scsl 3",
-        "sun community source 3"
+        "sun community 3"
       ],
       "specific": [],
       "couldbeName": [
-        "sun community source",
+        "sun community",
         "scsl"
       ],
       "couldbeUrl": []
@@ -17056,12 +17097,12 @@
       ],
       "longNames": [
         "sgi cid 1",
-        "sgi cid font code 1"
+        "sgi cid font 1"
       ],
       "specific": [],
       "couldbeName": [
         "sgi cid",
-        "sgi cid font code"
+        "sgi cid font"
       ],
       "couldbeUrl": []
     },
@@ -17207,13 +17248,13 @@
       ],
       "longNames": [
         "sissl",
-        "sun industry standards source 1.1",
+        "sun industry standards 1.1",
         "sun sissl 1.1"
       ],
       "specific": [],
       "couldbeName": [
-        "sun industry standards source",
-        "sun sissl"
+        "sun sissl",
+        "sun industry standards"
       ],
       "couldbeUrl": []
     },
@@ -17229,14 +17270,14 @@
       ],
       "longNames": [
         "sissl 1.2",
-        "sun industry standards source 1.2",
+        "sun industry standards 1.2",
         "sun sissl 1.2"
       ],
       "specific": [],
       "couldbeName": [
         "sissl",
-        "sun industry standards source",
-        "sun sissl"
+        "sun sissl",
+        "sun industry standards"
       ],
       "couldbeUrl": []
     },
@@ -17812,7 +17853,7 @@
         "fedoraproject.org/wiki/licensing/sun_binary_code_license_agreement"
       ],
       "longNames": [
-        "sun binary code"
+        "sun binary"
       ],
       "specific": [],
       "couldbeName": [],
@@ -18399,14 +18440,14 @@
       "urls": [],
       "longNames": [
         "sun ssscfr 1.1",
-        "sun solaris source code foundation release 1.1",
-        "sun solaris source code 1.1"
+        "sun solaris foundation release 1.1",
+        "sun solaris 1.1"
       ],
       "specific": [],
       "couldbeName": [
-        "sun solaris source code foundation release",
         "sun ssscfr",
-        "sun solaris source code"
+        "sun solaris",
+        "sun solaris foundation release"
       ],
       "couldbeUrl": []
     },
@@ -18528,7 +18569,7 @@
         "systemc.org/about/org_docs/license/"
       ],
       "longNames": [
-        "systemc source"
+        "systemc"
       ],
       "specific": [],
       "couldbeName": [],
@@ -18849,8 +18890,7 @@
         "svnkit.com/license"
       ],
       "longNames": [
-        "tmate",
-        "tmate source"
+        "tmate"
       ],
       "specific": [],
       "couldbeName": [],
@@ -18943,8 +18983,8 @@
       ],
       "longNames": [
         "tosl",
-        "trusster source",
-        "trusster source 1.0a",
+        "trusster",
+        "trusster 1.0a",
         "tosl 1.0a"
       ],
       "specific": [],
@@ -19452,9 +19492,10 @@
       "gpl3Compatible": {
         "value": false
       },
-      "copyLeft": false,
+      "copyLeft": true,
       "urls": [
-        "vimdoc.sourceforge.net/htmldoc/uganda"
+        "vimdoc.sourceforge.net/htmldoc/uganda",
+        "vim.org/htmldoc/uganda"
       ],
       "longNames": [
         "vim"
@@ -19529,7 +19570,7 @@
       ],
       "longNames": [
         "vnlsl",
-        "vita nuova liberal source"
+        "vita nuova liberal"
       ],
       "specific": [],
       "couldbeName": [],
@@ -19553,7 +19594,7 @@
       ],
       "longNames": [
         "vostrom",
-        "vostrom for source"
+        "vostrom for"
       ],
       "specific": [],
       "couldbeName": [],
@@ -19568,7 +19609,7 @@
       "copyLeft": false,
       "urls": [],
       "longNames": [
-        "vs10x code map"
+        "vs10x map"
       ],
       "specific": [],
       "couldbeName": [],
@@ -19594,13 +19635,11 @@
       ],
       "longNames": [
         "vsl 1",
-        "vovida 1",
-        "vovida . 1"
+        "vovida 1"
       ],
       "specific": [],
       "couldbeName": [
         "vovida",
-        "vovida .",
         "vsl"
       ],
       "couldbeUrl": []
@@ -19884,9 +19923,9 @@
         "msdn.microsoft.com/en-us/windowsembedded/aa714524"
       ],
       "longNames": [
-        "wince 50 shared source",
-        "microsoft windows ce 5 shared source",
-        "ms windows ce 5 shared source"
+        "wince 50 shared",
+        "microsoft windows ce 5 shared",
+        "ms windows ce 5 shared"
       ],
       "specific": [],
       "couldbeName": [],
@@ -21072,7 +21111,7 @@
   },
   "composites": {
     "gpl-2.0 with classpath-exception-2.0": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {},
       "gpl2Compatible": {},
@@ -21087,7 +21126,7 @@
       "couldbeUrl": []
     },
     "gpl-3.0+": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {
         "value": true
@@ -21115,7 +21154,7 @@
       ]
     },
     "lgpl-2.1+": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {},
       "gpl2Compatible": {},
@@ -21136,7 +21175,7 @@
       ]
     },
     "lgpl-2.0+": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {},
       "gpl2Compatible": {},
@@ -21157,7 +21196,7 @@
       ]
     },
     "lgpl-3.0+": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {
         "value": true
@@ -21187,7 +21226,7 @@
       ]
     },
     "cddl-1.1 or gpl-2.0 with classpath-exception-2.0": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {},
       "gpl2Compatible": {},
@@ -21207,7 +21246,7 @@
       "couldbeUrl": []
     },
     "cddl-1.0 or gpl-2.0 with classpath-exception-2.0": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {},
       "gpl2Compatible": {},
@@ -21224,7 +21263,7 @@
       "couldbeUrl": []
     },
     "gpl-1.0+": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {
         "value": true
@@ -21252,7 +21291,7 @@
       ]
     },
     "gpl-2.0+": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {
         "value": true
@@ -21280,7 +21319,7 @@
       ]
     },
     "agpl-1.0+": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {},
       "gpl2Compatible": {},
@@ -21293,7 +21332,7 @@
       "couldbeUrl": []
     },
     "agpl-3.0+": {
-      "spdx": false,
+      "spdx": true,
       "osiApproved": false,
       "fedoraApproved": {
         "value": true
@@ -21325,11 +21364,11 @@
     },
     "http://asm.objectweb.org/license.html": {
       "i0": "2016-06-08",
-      "i1": "bsd-2-clause"
+      "i1": "bsd-3-clause"
     },
     "http://asm.ow2.org/license.html": {
       "i0": "2016-06-08",
-      "i1": "bsd-2-clause"
+      "i1": "bsd-3-clause"
     },
     "http://hsqldb.org/web/hsqlLicense.html": {
       "i0": "2016-06-08",

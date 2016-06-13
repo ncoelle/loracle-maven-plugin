@@ -1,4 +1,4 @@
-loracle-maven-plugin [![Build Status](https://travis-ci.org/openCage/ianal-but-maven-plugin.svg?branch=master)](https://travis-ci.org/openCage/ianal-but-maven-plugin) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.pfabulist/ianal-but-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.pfabulist/ianal-but-maven-plugin) 
+loracle-maven-plugin [![Build Status](https://travis-ci.org/openCage/loracle-but-maven-plugin.svg?branch=master)](https://travis-ci.org/openCage/loracle-but-maven-plugin) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.pfabulist/loracle-but-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.pfabulist/loracle-but-maven-plugin)
 ======= 
 
 LOracle maven plugin is the the License Oracle.

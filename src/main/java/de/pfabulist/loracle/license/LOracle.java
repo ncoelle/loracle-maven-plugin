@@ -123,9 +123,11 @@ public class LOracle {
         if( !orLater && !exception.isPresent() ) {
             return license;
         }
+
         LicenseID ret = new ModifiedSingleLicense( license, orLater, exception );
 
-        composites.putIfAbsent( ret.getId(), new More( false ) );
+        composites.putIfAbsent( ret.getId(), new More( getMore( license ).spdx ) );
+        getMore( ret ).copyLeft = getMore( license ).copyLeft;
 
         return ret;
     }
@@ -348,13 +350,23 @@ public class LOracle {
 
     public CompositeLicense getAnd( LicenseID left, LicenseID right ) {
         CompositeLicense ret = new CompositeLicense( false, left, right );
-        composites.putIfAbsent( ret.getId(), new More( false ) ); // todo
+
+        More mLeft = getMore( left );
+        More mRight = getMore( right );
+
+        composites.putIfAbsent( ret.getId(), new More( mLeft.spdx && mRight.spdx ) );
+        getMore( ret ).copyLeft = mLeft.copyLeft || mRight.copyLeft;
         return ret;
     }
 
     public CompositeLicense getOr( LicenseID left, LicenseID right ) {
         CompositeLicense ret = new CompositeLicense( true, left, right );
-        composites.putIfAbsent( ret.getId(), new More( false ) ); // todo
+        More mLeft = getMore( left );
+        More mRight = getMore( right );
+
+        composites.putIfAbsent( ret.getId(), new More( mLeft.spdx && mRight.spdx ) );
+        getMore( ret ).copyLeft = mLeft.copyLeft && mRight.copyLeft;
+
         return ret;
     }
 
@@ -465,6 +477,10 @@ public class LOracle {
                 Log.warn( "not a date " + p.i0 );
             }
         } );
+    }
+
+    public int getSingleLicenseCount() {
+        return singles.size();
     }
 
 }

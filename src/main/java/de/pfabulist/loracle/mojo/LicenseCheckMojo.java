@@ -282,25 +282,25 @@ public class LicenseCheckMojo {
 
         LicenseID mine = _nn( licenses.get( self.get() ) );
 
-        if( mine.equals( lOracle.getOrThrowByName( "gpl-2.0" ) ) || mine.equals( lOracle.getOrThrowByName( "gpl-2.0+" ) ) ) {
-            licenses.forEach( ( c, l ) -> {
-                lOracle.getMore( l ).gpl2Compatible.ifPresent( ga -> {
-                    if( !ga ) {
-                        log.error( "not gpl2 compatible: " + l + " used by " + c );
-                    }
-                } );
-            } );
-        }
-
-        if( mine.equals( lOracle.getOrThrowByName( "gpl-3.0" ) ) || mine.equals( lOracle.getOrThrowByName( "gpl-3.0+" ) ) ) {
-            licenses.forEach( ( c, l ) -> {
-                lOracle.getMore( l ).gpl3Compatible.ifPresent( ga -> {
-                    if( !ga ) {
-                        log.error( "not gpl3 compatible: " + l + " used by " + c );
-                    }
-                } );
-            } );
-        }
+//        if( mine.equals( lOracle.getOrThrowByName( "gpl-2.0" ) ) || mine.equals( lOracle.getOrThrowByName( "gpl-2.0+" ) ) ) {
+//            licenses.forEach( ( c, l ) -> {
+//                lOracle.getMore( l ).gpl2Compatible.ifPresent( ga -> {
+//                    if( !ga ) {
+//                        log.error( "not gpl2 compatible: " + l + " used by " + c );
+//                    }
+//                } );
+//            } );
+//        }
+//
+//        if( mine.equals( lOracle.getOrThrowByName( "gpl-3.0" ) ) || mine.equals( lOracle.getOrThrowByName( "gpl-3.0+" ) ) ) {
+//            licenses.forEach( ( c, l ) -> {
+//                lOracle.getMore( l ).gpl3Compatible.ifPresent( ga -> {
+//                    if( !ga ) {
+//                        log.error( "not gpl3 compatible: " + l + " used by " + c );
+//                    }
+//                } );
+//            } );
+//        }
 
         if( lOracle.getMore( mine ).copyLeft ) {
             licenses.forEach( ( c, l ) -> {
@@ -310,14 +310,14 @@ public class LicenseCheckMojo {
 
                 lOracle.getMore( l ).gpl2Compatible.ifPresent( gc -> {
                                                                    if( !gc ) {
-                                                                       log.error( "not gpl2 compatible: " + l + " used by " + c );
+                                                                       scopeDependingLog( c, "not gpl2 compatible: " + l + " used by " + c );
                                                                    }
                                                                }
                 );
 
                 lOracle.getMore( l ).gpl3Compatible.ifPresent( gc -> {
                                                                    if( !gc ) {
-                                                                       log.error( "not gpl2 compatible: " + l + " used by " + c );
+                                                                       scopeDependingLog( c, "not gpl2 compatible: " + l + " used by " + c );
                                                                    }
                                                                }
                 );
@@ -327,9 +327,19 @@ public class LicenseCheckMojo {
         if( !lOracle.getMore( mine ).copyLeft ) {
             licenses.forEach( ( c, l ) -> {
                 if( lOracle.getMore( l ).copyLeft ) {
-                    log.error( "can't depend on a copy left license: " + l + " used by " + c );
+                    scopeDependingLog( c, "can't depend on a copy left license: " + l + " used by " + c );
                 }
             } );
+        }
+    }
+
+    private void scopeDependingLog( Coordinates coo, String message ) {
+        String scope = _orElseGet( scopes.get( coo ), "compile" );
+
+        if ( !scope.equals( "plugin" ) && !scope.equals( "test" )) {
+            log.error( message );
+        } else {
+            log.warn( message );
         }
     }
 
