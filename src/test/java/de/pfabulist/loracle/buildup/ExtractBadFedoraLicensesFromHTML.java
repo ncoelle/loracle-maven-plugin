@@ -121,7 +121,7 @@ public class ExtractBadFedoraLicensesFromHTML {
                     System.out.println( sb.toString() + "\n" );
 
                     if( lng.isPresent() && url.isPresent() && lng.get().equals( url.get() ) ) {
-                        lOracle.getMore( lng.get() ).fedoraApproved = Optional.of( false );
+                        lOracle.getAttributes( lng.get() ).setFedoraApproved( false );
                         return;
                     }
 
@@ -137,7 +137,7 @@ public class ExtractBadFedoraLicensesFromHTML {
                             if ( !f.url.isEmpty() ) {
                                 lOracle.addUrl( nn, f.url );
                             }
-                            lOracle.getMore( nn  ).fedoraApproved = Optional.of( false );
+                            lOracle.getAttributes( nn  ).setFedoraApproved( false );
                         }
                     }
 

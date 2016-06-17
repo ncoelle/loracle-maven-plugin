@@ -347,15 +347,15 @@ public class ExtractGoodFedoraLicensesFromHTML {
     }
 
     private void addFedoraInfo( LOracle lOracle, LicenseID licenseID, FedoraInfo fedoraInfo ) {
-        lOracle.getMore( licenseID ).fedoraApproved = Optional.of( Boolean.TRUE );
+        lOracle.getAttributes( licenseID ).setFedoraApproved( true );
         try {
             lOracle.addUrl( licenseID, fedoraInfo.url );
         } catch( Exception e ) {
             System.out.println( fedoraInfo.url + " not an url");
         }
 
-        lOracle.getMore( licenseID ).gpl2Compatible = Optional.of( fedoraInfo.gpl2Compatible );
-        lOracle.getMore( licenseID ).gpl3Compatible = Optional.of( fedoraInfo.gpl3Compatible );
+        lOracle.getAttributes( licenseID ).setGpl2Compatible( fedoraInfo.gpl2Compatible );
+        lOracle.getAttributes( licenseID ).setGpl3Compatible( fedoraInfo.gpl3Compatible );
 
 //        System.out.println("done\n");
 

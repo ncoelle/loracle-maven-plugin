@@ -39,10 +39,6 @@ public class MavenLicenseOracle {
         this.localRepo = localRepo;
     }
 
-    public List<License> getMavenLicense( Artifact arti ) {
-        return getMavenLicense( Coordinates.valueOf( arti ));
-    }
-
     public List<License> getMavenLicense( Coordinates coo ) {
 
         while( true ) {
@@ -66,7 +62,6 @@ public class MavenLicenseOracle {
                 log.debug( "          no parent, i,e. no license found" );
                 return Collections.emptyList();
             }
-
         }
     }
 
@@ -79,17 +74,24 @@ public class MavenLicenseOracle {
         return ret;
     }
 
-//    private Path getPom( Artifact arti ) {
-//        Path ret = localRepo;
-//        ret = ret.resolve( arti.getGroupId().replace( '.', '/' ) );
-//        ret = ret.resolve( arti.getArtifactId() );
-//        ret = ret.resolve( arti.getVersion() );
-//        ret = ret.resolve( arti.getArtifactId() + "-" + arti.getVersion() + ".pom" );
-//
-//        log.info( "pom exists: " + ret + " " + Files.exists( ret ) );
-//
-//        return ret;
-//    }
+    public Path getArtifact( Coordinates coords ) {
+        Path ret = localRepo;
+        ret = _nn( ret.resolve( coords.getGroupId().replace( '.', '/' ) ) );
+        ret = _nn( ret.resolve( coords.getArtifactId() ) );
+        ret = _nn( ret.resolve( coords.getVersion() ) );
+        ret = _nn( ret.resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".jar" ) );  // todo war ...
+        return ret;
+    }
+
+    public Path getSrc( Coordinates coords ) {
+        Path ret = localRepo;
+        ret = _nn( ret.resolve( coords.getGroupId().replace( '.', '/' ) ) );
+        ret = _nn( ret.resolve( coords.getArtifactId() ) );
+        ret = _nn( ret.resolve( coords.getVersion() ) );
+        ret = _nn( ret.resolve( coords.getArtifactId() + "-" + coords.getVersion() + "-sources.jar" ) );  // todo war ...
+        return ret;
+    }
+
 
     List<License> extractLicense( final Path pom ) {
         MavenXpp3Reader reader = new MavenXpp3Reader();
@@ -98,57 +100,13 @@ public class MavenLicenseOracle {
 
             return _nn( pomModel.getLicenses() );
 
-//            if( licenses.isEmpty() ) {
-//                return Optional.empty();
-//            }
-//
-//            if( licenses.size() == 1 ) {
-//                return Optional.of( _nn( licenses.get( 0 ) ) );
-//            }
-//
-//            return Optional.of( getAndLicense( licenses ));
-
         } catch( IOException | XmlPullParserException e ) {
             log.warn( "error extracting license from pom " + e );
         }
 
-//        return Optional.empty();
         return Collections.emptyList();
-
     }
 
-    public static License getAndLicense( List<License> licenses ) {
-        License and = new License();
-        and.setName( licenses.stream().map( License::getName ).collect( Collectors.joining( " and " ) ) );
-        return and;
-    }
-
-//    Optional<String> extractLicenseName( final String raw ) {
-//
-//        final String licenseTagStart = "<license>", licenseTagStop = "</license>";
-//        final String nameTagStart = "<name>", nameTagStop = "</name>";
-//        if( raw.contains( licenseTagStart ) ) {
-//            final String licenseContents = raw.substring( raw.indexOf( licenseTagStart ) + licenseTagStart.length(), raw.indexOf( licenseTagStop ) );
-//            final String name = licenseContents.substring( licenseContents.indexOf( nameTagStart ) + nameTagStart.length(), licenseContents.indexOf( nameTagStop ) );
-//            return Optional.of( name );
-//        }
-//        return Optional.empty();
-//    }
-//
-//    private Optional<String> extractUrl( String raw ) {
-//        final String licenseTagStart = "<license>", licenseTagStop = "</license>";
-//        final String nameTagStart = "<url>", nameTagStop = "</url>";
-//        if( raw.contains( licenseTagStart ) ) {
-//            final String licenseContents = raw.substring( raw.indexOf( licenseTagStart ) + licenseTagStart.length(), raw.indexOf( licenseTagStop ) );
-//            if( !licenseContents.contains( nameTagStart ) ) {
-//                return Optional.empty();
-//            }
-//            final String name = licenseContents.substring( licenseContents.indexOf( nameTagStart ) + nameTagStart.length(), licenseContents.indexOf( nameTagStop ) );
-//            return Optional.of( name );
-//        }
-//        return Optional.empty();
-//
-//    }
 
     Optional<Coordinates> extractParent( Path pom ) {
         MavenXpp3Reader reader = new MavenXpp3Reader();
@@ -169,63 +127,5 @@ public class MavenLicenseOracle {
         return Optional.empty();
 
     }
-
-//    /**
-//     * @param raw
-//     * @return
-//     */
-//    // TODO obviously this code needs a lot of error protection and handling
-//    Optional<Coordinates> extractParentCoords( final String raw ) {
-//        final String parentTagStart = "<parent>", parentTagStop = "</parent>";
-//        final String groupTagStart = "<groupId>", groupTagStop = "</groupId>";
-//        final String artifactTagStart = "<artifactId>", artifactTagStop = "</artifactId>";
-//        final String versionTagStart = "<version>", versionTagStop = "</version>";
-//
-//        if( !raw.contains( parentTagStart ) ) {
-//            return Optional.empty();
-//        }
-//        final String contents = raw.substring( raw.indexOf( parentTagStart ) + parentTagStart.length(), raw.indexOf( parentTagStop ) );
-//        final String group = contents.substring( contents.indexOf( groupTagStart ) + groupTagStart.length(), contents.indexOf( groupTagStop ) );
-//        final String artifact = contents.substring( contents.indexOf( artifactTagStart ) + artifactTagStart.length(), contents.indexOf( artifactTagStop ) );
-//        final String version = contents.substring( contents.indexOf( versionTagStart ) + versionTagStart.length(), contents.indexOf( versionTagStop ) );
-//        return Optional.of( new Coordinates( group, artifact, version ) );
-//    }
-
-//    private Optional<String> extract( String raw, String outer, String tag ) {
-//        Pattern pat = any().zeroOrMore().
-//                        then( txt("<" + outer + ">")).
-//                        then( any().zeroOrMore() ).
-//                        then( txt("<" + tag + ">")).
-//                        then( Frex.anyBut( txt('<') ).var( "content" )).
-//                        then( txt("</" + tag + ">")).
-//                        then( any().zeroOrMore() ).
-//                        then( txt("</" + outer + ">")).
-//                        then( any().zeroOrMore() ).
-//                buildCaseInsensitivePattern();
-//
-//        Matcher matcher = pat.matcher( raw );
-//
-//        if ( !matcher.matches()) {
-//            return Optional.empty();
-//        }
-//
-//        return Optional.of( matcher.group( "content" ) );
-//
-////        final String outerStart = "<" + outer + ">";
-////        //final String outerStop = "</" + outer + ">";
-////        final String tagStart = "<" + tag + ">";
-////        final String tagStop = "</" + tag + ">";
-////
-////        if( raw.contains( outerStart ) ) {
-////            final String outerBlock = raw.substring( raw.indexOf( outerStart ) + outerStart.length() ); //, raw.indexOf( outerStop ) );
-////            if ( !outerBlock.contains( tagStart  )) {
-////                return Optional.empty();
-////            }
-////
-////            final String tagContent = outerBlock.substring( outerBlock.indexOf( tagStart ) + tagStart.length(), outerBlock.indexOf( tagStop ) );
-////            return Optional.of( tagContent );
-////        }
-////        return Optional.empty();
-//    }
 
 }

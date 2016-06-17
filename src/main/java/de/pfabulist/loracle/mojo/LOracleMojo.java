@@ -93,6 +93,7 @@ public class LOracleMojo extends AbstractMojo {
     @SuppressWarnings( "PMD.AvoidPrintStackTrace" )
     public void execute() throws MojoExecutionException, MojoFailureException {
 
+
         try {
 
             LicenseCheckMojo mojo =
@@ -105,7 +106,13 @@ public class LOracleMojo extends AbstractMojo {
             mojo.config( getLicenseDeclarations(), getUrlDeclarations(), allowUrlsCheckedDaysBefore );
             mojo.getDependencies();
             mojo.determineLicenses();
+            mojo.getHolder();
+            mojo.src();
             mojo.checkCompatibility();
+
+            mojo.summery();
+            mojo.store();
+
 
         } catch( Exception e ) {
             e.printStackTrace();

@@ -3,7 +3,6 @@ package de.pfabulist.loracle.license;
 import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.kleinod.collection.P;
-import de.pfabulist.kleinod.encode.Base16;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.time.LocalDate;
@@ -38,12 +37,7 @@ public class LOracle {
 
     @SuppressFBWarnings( "URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" )
     public static class More {
-        public boolean spdx;
-        public boolean osiApproved;
-        public Optional<Boolean> fedoraApproved = Optional.empty();
-        public Optional<Boolean> gpl2Compatible = Optional.empty();
-        public Optional<Boolean> gpl3Compatible = Optional.empty();
-        public boolean copyLeft = false;
+        public LicenseAttributes attributes;
         public List<String> urls = new ArrayList<>();
         public List<String> longNames = new ArrayList<>();
         public List<Coordinates> specific = new ArrayList<>();
@@ -51,7 +45,8 @@ public class LOracle {
         public Set<String> couldbeUrl = new HashSet<>();
 
         public More( boolean spdx ) {
-            this.spdx = spdx;
+            attributes = new LicenseAttributes();
+            attributes.setSPDX( spdx );
         }
     }
 
@@ -126,8 +121,8 @@ public class LOracle {
 
         LicenseID ret = new ModifiedSingleLicense( license, orLater, exception );
 
-        composites.putIfAbsent( ret.getId(), new More( getMore( license ).spdx ) );
-        getMore( ret ).copyLeft = getMore( license ).copyLeft;
+        composites.putIfAbsent( ret.getId(), new More( getMore( license ).attributes.isSPDX() ) );
+        getMore( ret ).attributes.setCopyLeft( getMore( license ).attributes.isCopyLeftDef() );
 
         return ret;
     }
@@ -189,6 +184,12 @@ public class LOracle {
                            () -> _orElseThrow( composites.get( licenseID.getId() ),
                                                () -> new IllegalArgumentException( "no such license: " + licenseID ) ) );
     }
+
+    public LicenseAttributes getAttributes( LicenseID l ) {
+        return getMore( l ).attributes;
+    }
+
+
 
     private static Pattern withVersion = Frex.any().oneOrMore().lazy().var( "base" ).
             then( Frex.txt( ' ' ) ).then( Frex.or( Frex.number(), Frex.txt( '.' ) ).oneOrMore() ).buildCaseInsensitivePattern();
@@ -345,7 +346,7 @@ public class LOracle {
     }
 
     public void setOsiApproval( LicenseID licenseID, boolean osiApproved ) {
-        getMore( licenseID ).osiApproved = osiApproved;
+        getMore( licenseID ).attributes.setOsiApproved( osiApproved );
     }
 
     public CompositeLicense getAnd( LicenseID left, LicenseID right ) {
@@ -354,8 +355,8 @@ public class LOracle {
         More mLeft = getMore( left );
         More mRight = getMore( right );
 
-        composites.putIfAbsent( ret.getId(), new More( mLeft.spdx && mRight.spdx ) );
-        getMore( ret ).copyLeft = mLeft.copyLeft || mRight.copyLeft;
+        composites.putIfAbsent( ret.getId(), new More( mLeft.attributes.isSPDX() && mRight.attributes.isSPDX() ) );
+        getMore( ret ).attributes.setCopyLeft( mLeft.attributes.isCopyLeftDef() || mRight.attributes.isCopyLeftDef() );
         return ret;
     }
 
@@ -364,8 +365,8 @@ public class LOracle {
         More mLeft = getMore( left );
         More mRight = getMore( right );
 
-        composites.putIfAbsent( ret.getId(), new More( mLeft.spdx && mRight.spdx ) );
-        getMore( ret ).copyLeft = mLeft.copyLeft && mRight.copyLeft;
+        composites.putIfAbsent( ret.getId(), new More( mLeft.attributes.isSPDX() && mRight.attributes.isSPDX() ) );
+        getMore( ret ).attributes.setCopyLeft( mLeft.attributes.isCopyLeftDef() && mRight.attributes.isCopyLeftDef() );
 
         return ret;
     }
