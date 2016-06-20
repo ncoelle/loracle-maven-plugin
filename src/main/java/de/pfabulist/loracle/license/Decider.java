@@ -18,42 +18,42 @@ public class Decider {
         this.log = log;
     }
 
-    public Optional<LicenseID> decide( Optional<LicenseID> byCoordinates, Optional<LicenseID> byName, Optional<LicenseID> byUrl ) {
+    public MappedLicense decide( MappedLicense byCoordinates, MappedLicense byName, MappedLicense byUrl ) {
         if ( byCoordinates.isPresent()) {
-            //noinspection ConstantConditions
-            return Optional.of( decideWithCoordinates( byCoordinates.get(), byName, byUrl ));
+            return decideWithCoordinates( byCoordinates, byName, byUrl );
         }
 
         if ( byName.isPresent()) {
             //noinspection ConstantConditions
-            return decideWithName( byName.get(), byUrl );
+            return decideWithName( byName, byUrl );
         }
 
         byUrl.ifPresent( this::warnOnAnd );
         if ( byUrl.isPresent()) {
             log.debug( "      license by url " );
+            return byUrl.addReason( "no name or coordinates" );
         } else {
             log.debug( "      no license " );
+            return MappedLicense.empty();
         }
 
-        return byUrl;
     }
 
-    private Optional<LicenseID> decideWithName( LicenseID licenseID, Optional<LicenseID> byUrl ) {
+    private MappedLicense decideWithName( MappedLicense licenseID, MappedLicense byUrl ) {
         byUrl.ifPresent( name -> {
             if ( !name.equals( licenseID )) {
                 log.warn( "   license by url differs " + name );
             }
         } );
 
-        warnOnAnd( licenseID );
+        licenseID.ifPresent( this::warnOnAnd );
 
         log.debug( "      license by name " );
 
-        return Optional.of( licenseID );
+        return licenseID.addReason( "priority name" );
     }
 
-    private LicenseID decideWithCoordinates( LicenseID licenseID, Optional<LicenseID> byName, Optional<LicenseID> byUrl ) {
+    private MappedLicense decideWithCoordinates( MappedLicense licenseID, MappedLicense byName, MappedLicense byUrl ) {
 
         byName.ifPresent( name -> {
             if ( !name.equals( licenseID )) {
@@ -69,7 +69,7 @@ public class Decider {
 
         log.debug( "      license on coordinates " );
 
-        return licenseID;
+        return licenseID.addReason( "coordinates priority" );  // name and url ?
     }
 
     private void warnOnAnd( LicenseID licenseID ) {

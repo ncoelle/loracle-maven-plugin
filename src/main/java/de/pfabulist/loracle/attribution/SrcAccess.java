@@ -71,7 +71,7 @@ public class SrcAccess {
             }
 
 //            lico.setLicenseTxt( file );
-            lico.setHeaderTxt( file );
+            lico.setHeaderTxt( Header.getHeader( file ));
 
             Matcher matcher = copyRightPattern.matcher( file );
 

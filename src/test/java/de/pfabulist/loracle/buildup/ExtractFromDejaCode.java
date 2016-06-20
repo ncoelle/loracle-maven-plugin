@@ -6,21 +6,17 @@ import com.esotericsoftware.yamlbeans.YamlReader;
 import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.kleinod.nio.Pathss;
 import de.pfabulist.kleinod.nio.UnzipToPath;
-import de.pfabulist.loracle.license.AliasBuilder;
+import de.pfabulist.loracle.license.Normalizer;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
-import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static de.pfabulist.kleinod.text.Strings.newString;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 
 /**
@@ -30,7 +26,7 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 
 public class ExtractFromDejaCode {
 
-    AliasBuilder aliasBuilder = new AliasBuilder();
+    Normalizer normalizer = new Normalizer();
 
     public void go( LOracle lOracle ) {
 
@@ -50,9 +46,9 @@ public class ExtractFromDejaCode {
         //System.out.println( object );
         Map map = (Map) object;
 
-        Optional<LicenseID> key = lOracle.getByName( (String) map.get( "key" ) );
-        Optional<LicenseID> name = lOracle.getByName( (String) map.get( "name" ) );
-        Optional<LicenseID> shrt = lOracle.getByName( (String) map.get( "short_name" ) );
+        Optional<LicenseID> key = lOracle.getByName( (String) map.get( "key" ) ).noReason();
+        Optional<LicenseID> name = lOracle.getByName( (String) map.get( "name" ) ).noReason();
+        Optional<LicenseID> shrt = lOracle.getByName( (String) map.get( "short_name" ) ).noReason();
 
         Optional<LicenseID> res = propLicense( lOracle, _nn( (String) map.get( "key" ) ), key, name, shrt );
 
@@ -158,7 +154,7 @@ public class ExtractFromDejaCode {
             Optional.ofNullable( (List<String>) map.get( "text_urls" ) ).ifPresent( l -> l.forEach( u -> lOracle.addUrl( licenseID, u ) ) );
         }
         Optional.ofNullable( (String) map.get( "osi_url" ) ).ifPresent( u -> {
-            Optional<String> uu = aliasBuilder.normalizeUrl( u );
+            Optional<String> uu = normalizer.normalizeUrl( u );
             if ( uu.isPresent()) {
                 if( !uu.get().equals( "opensource.org/licenses/bsd-license" ) ) {
                     // bsd is time based

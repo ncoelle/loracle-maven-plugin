@@ -5,7 +5,6 @@ import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.kleinod.nio.IO;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.license.LicenseID;
 import de.pfabulist.loracle.mojo.Findings;
 import de.pfabulist.loracle.mojo.MavenLicenseOracle;
 import org.apache.maven.model.License;
@@ -38,13 +37,13 @@ public class GetHolder {
             Frex.txt( "META-INF/NOTICE" ).then( Frex.any().zeroOrMore() ).
                     buildCaseInsensitivePattern();
 
-    static Pattern noticeCopyRightPattern =
-            Frex.or( Frex.any(), Frex.txt( '\n' ) ).zeroOrMore().
-                    then( Frex.txt( "Copyright " ) ).
-                    then( Frex.or( Frex.number(), Frex.txt( '-' ), Frex.txt( ',' ), Frex.whitespace() ).oneOrMore().var( "year" ) ).
-                    then( Frex.txt( ' ' ) ).
-                    then( Frex.anyBut( Frex.txt( '\n' ) ).oneOrMore().var( "holder" ) ).
-                    then( Frex.or( Frex.any(), Frex.txt( '\n' ) ).zeroOrMore() ).buildCaseInsensitivePattern();
+//    static Pattern noticeCopyRightPattern =
+//            Frex.or( Frex.any(), Frex.txt( '\n' ) ).zeroOrMore().
+//                    then( Frex.txt( "Copyright " ) ).
+//                    then( Frex.or( Frex.number(), Frex.txt( '-' ), Frex.txt( ',' ), Frex.whitespace() ).oneOrMore().var( "year" ) ).
+//                    then( Frex.txt( ' ' ) ).
+//                    then( Frex.anyBut( Frex.txt( '\n' ) ).oneOrMore().var( "holder" ) ).
+//                    then( Frex.or( Frex.any(), Frex.txt( '\n' ) ).zeroOrMore() ).buildCaseInsensitivePattern();
 
     static Pattern commentsCopyRightPattern =
             Frex.or( Frex.txt( "Copyright " ) ).
@@ -95,9 +94,9 @@ public class GetHolder {
                 return Optional.empty();
             }
 
-            Matcher ch = noticeCopyRightPattern.matcher( notice );
-            if( !ch.matches() ) {
-                log.warn( "notice file has unexpected pattern" );
+            Matcher ch = SrcAccess.copyRightPattern.matcher( notice );
+            if( !ch.find() ) {
+                log.warn( "notice file has no recognizable holder" );
                 return Optional.empty();
             }
 

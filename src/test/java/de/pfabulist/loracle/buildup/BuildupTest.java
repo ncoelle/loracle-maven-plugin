@@ -28,7 +28,7 @@ public class BuildupTest {
         LOracle lOracle = new LOracle();
         new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
 
-        assertThat( lOracle.getSingle( "ZPl-1.1" ) ).isPresent();
+        assertThat( lOracle.getSingle( "ZPl-1.1" ).isPresent() ).isTrue();
     }
 
     @Test
@@ -61,7 +61,7 @@ public class BuildupTest {
         new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
         new ExtractSPDXExceptionsFromHTML( lOracle );
 
-        assertThat( lOracle.getByName( "apache-2.0 with Classpath-exception-2.0" ) ).isPresent();
+        assertThat( lOracle.getByName( "apache-2.0 with Classpath-exception-2.0" ).isPresent() ).isTrue();
 
     }
 
@@ -74,7 +74,7 @@ public class BuildupTest {
         lOracle.addLicenseForArtifact( new Coordinates( "javax.servlet", "javax.servlet-api", "3.1.0" ),
                                        lOracle.getOrThrowByName( "cddl-1.1 with Classpath-exception-2.0" ) );
 
-        assertThat( lOracle.getByCoordinates( new Coordinates( "javax.servlet", "javax.servlet-api", "3.1.0" ) ) ).isPresent();
+        assertThat( lOracle.getByCoordinates( new Coordinates( "javax.servlet", "javax.servlet-api", "3.1.0" )).isPresent() ).isTrue();
     }
 
     @Test
@@ -82,7 +82,7 @@ public class BuildupTest {
         LOracle lOracle = new LOracle();
         new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
 
-        assertThat( lOracle.getByName( "GPL-2.0+" ) ).isPresent();
+        assertThat( lOracle.getByName( "GPL-2.0+" ).isPresent() ).isTrue();
 
         System.out.println( lOracle.getByName( "GPL-2.0+" ) );
     }
@@ -145,8 +145,14 @@ public class BuildupTest {
         lOracle.newSingle( "closed", false );
         lOracle.addLicenseForArtifact( Coordinates.valueOf( "aopalliance:aopalliance:1.0" ), lOracle.newSingle( "aop-pd", false ) );
 
+        LicenseID gs = lOracle.newSingle( "gsbase-1.0", false );
+        lOracle.addUrl( gs, "gsbase.sourceforge.net/license.html" );
+
         // by artifact
         lOracle.addLicenseForArtifact( Coordinates.valueOf( "dom4j:dom4j:1.6.1" ), lOracle.getOrThrowByName( "dom4j" ) );
+        lOracle.addLicenseForArtifact( Coordinates.valueOf( "dom4j:dom4j:1.6.1.redhat-6" ), lOracle.getOrThrowByName( "dom4j" ) ); // todo pattern ?
+        // Copyright 2001-2005 (C) MetaStuff, Ltd. All Rights Reserved.
+        // http://dom4j.sourceforge.net/dom4j-1.6.1/license.html
 
         lOracle.addLicenseForArtifact( new Coordinates( "net.jcip", "jcip-annotations", "1.0" ), lOracle.getOrThrowByName( "CC-BY-2.5" ) );
 
@@ -176,6 +182,50 @@ public class BuildupTest {
         lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.json4s:json4s-*:3.2.10" ),
                                        lOracle.getOrThrowByName( "apache-2" ) );
 
+        lOracle.addLicenseForArtifact( Coordinates.valueOf( "riffle:riffle:jar:0.1-dev" ),
+                                       lOracle.getOrThrowByName( "apache-2" ));  // todo: holder: Concurrent, Inc. (http://www.concurrentinc.com/)
+
+        lOracle.addLicenseForArtifact( Coordinates.valueOf( "junitperf:junitperf:1.8" ),
+                                       lOracle.getOrThrowByName( "bsd-3-clause" ));
+        // todo: Copyright (C) 2001 Clarkware Consulting, Inc.
+        // https://github.com/clarkware/junitperf
+
+        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.jvnet.jaxb2.maven2:maven-jaxb2-plugin:0.12.3" ), // 0.13.2
+                                       lOracle.getOrThrowByName( "bsd-2-clause" ));
+        // https://github.com/highsource/maven-jaxb2-plugin,
+        // https://github.com/highsource/maven-jaxb2-plugin/blob/master/LICENSE
+        // Copyright (c) 2006-2014, Alexey Valikov.
+
+
+        //
+        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" ),
+                                       lOracle.getOrThrowByName( "Eclipse Distribution License - v 1.0" )); // or epl1-0
+        // Copyright (c) 2007, Eclipse Foundation, Inc. and its licensors.
+        // Copyright (c) 2008, 2009 Sun Microsystems, Oracle Corporation. All rights reserved.
+        // http://grepcode.com/file/repo1.maven.org/maven2/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/readme.txt?av=f
+
+        //Copyright (c) 2008, 2009 Sun Microsystems, Oracle Corporation. All rights reserved.
+//
+//        This program and the accompanying materials are made available under the
+//        terms of the Eclipse Public License v1.0 and Eclipse Distribution License v. 1.0
+//        which accompanies this distribution.
+//                The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+//        and the Eclipse Distribution License is available at
+//        http://www.eclipse.org/org/documents/edl-v10.php.
+//
+//        Contributors:
+//        Linda DeMichiel -Java Persistence 2.0 - Proposed Final Draft, Version 2.0 (August 31, 2009)
+//        Specification available from http://jcp.org/en/jsr/detail?id=317
+//        Oracle Committers - EclipseLink specific implementations and OSGi support
+
+
+
+        // postgres
+        // Copyright (c) 1997-2011, PostgreSQL Global Development Group
+
+
+
+
         // bsd-2-clause hmm
         //http://www.opensource.org/licenses/bsd-license.php
         //http://asm.objectweb.org/license.html
@@ -186,6 +236,7 @@ public class BuildupTest {
         // com.jcabi:jcabi-manifests:1.1
 
         // scala 2.10.5
+
 
         System.out.println( "----------------------- " );
         System.out.println( "------ fedora --------- " );
@@ -205,7 +256,9 @@ public class BuildupTest {
         lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-4-clause" ), "http://hsqldb.org/web/hsqlLicense.html", "2016-06-08" );
         lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://repo.aduna-software.org/legal/aduna-bsd.txt", "2016-06-08" );
         lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-4-clause" ), "http://www.jcabi.com/LICENSE.txt", "2016-06-09" );  // todo
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), " http://antlr.org/license.html", "2016-06-09" );  // todo
+        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://antlr.org/license.html", "2016-06-09" );  // todo
+        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/about/license.html", "2016-06-20" );
+        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/license.html", "2016-06-20" );
 
         System.out.println( "----------------------- " );
         System.out.println( "------ ifross.org ----- " );
@@ -224,17 +277,17 @@ public class BuildupTest {
     }
 
     public void testAll( LOracle lOracle ) {
-        assertThat( lOracle.getByUrl( "http://www.apache.org/licenses/LICENSE-2.0" ) ).isPresent();
-        assertThat( lOracle.getByUrl( "http://www.apache.org/licenses/LICENSE-2.0.TXT" ) ).isPresent();
-        assertThat( lOracle.getByUrl( "http://www.opensource.org/licenses/mit-license.php" ) ).isPresent();
-        assertThat( lOracle.getByUrl( "glassfish.java.net/public/cddl+gpl_1_1" ) ).isPresent();
-        assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "aopalliance:aopalliance:1.0" ) ) ).isPresent();
+        assertThat( lOracle.getByUrl( "http://www.apache.org/licenses/LICENSE-2.0" ).isPresent() ).isTrue();
+        assertThat( lOracle.getByUrl( "http://www.apache.org/licenses/LICENSE-2.0.TXT" ).isPresent() ).isTrue();
+        assertThat( lOracle.getByUrl( "http://www.opensource.org/licenses/mit-license.php" ).isPresent() ).isTrue();
+        assertThat( lOracle.getByUrl( "glassfish.java.net/public/cddl+gpl_1_1" ).isPresent() ).isTrue();
+        assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "aopalliance:aopalliance:1.0" ) ).isPresent() ).isTrue();
 
         assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "javax.servlet:javax.servlet-api:3.1.0" ) ) ).isEqualTo(
                 lOracle.getByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ) );
 
         assertThat( lOracle.getOrThrowByName( "MPL 2.0" ) ).isEqualTo( lOracle.getOrThrowByName( "mpl-2.0" ) );
-        assertThat( lOracle.getByName( "MPL 2.0, and EPL 1.0" ) ).isPresent();
+        assertThat( lOracle.getByName( "MPL 2.0, and EPL 1.0" ).isPresent() ).isTrue();
 
         assertThat( lOracle.getOrThrowByName( "ASL-1.1" ) ).isEqualTo( lOracle.getOrThrowByName( "apache-1.1" ) );
 
@@ -248,13 +301,13 @@ public class BuildupTest {
         assertThat( lOracle.getByName( "Indiana University Extreme! Lab Software License, vesion 1.1.1" ) ).
                 isEqualTo( lOracle.getByName( "indiana-extreme-1.1.1" ) );
 
-        assertThat( lOracle.getByUrl( "http://freemarker.org/LICENSE.txt" ) ).isPresent();
+        assertThat( lOracle.getByUrl( "http://freemarker.org/LICENSE.txt" ).isPresent() ).isTrue();
 
-        assertThat( lOracle.getByUrl( "http://htmlparser.sourceforge.net/cpl1.0.txt" ) ).isPresent();
-        assertThat( lOracle.getByUrl( "http://foo.bar/baz/lgpl-2.1.html" ) ).isPresent();
-        assertThat( lOracle.getByUrl( "gnu.org/licenses/lgpl-2.1" ) ).isPresent();
-        assertThat( lOracle.getByUrl( "repository.jboss.org/licenses/cc0-1.0" ) ).isPresent();
-        assertThat( lOracle.getByUrl( "www.fsf.org/licensing/licenses/agpl-3.0.html" ) ).isPresent();
+        assertThat( lOracle.getByUrl( "http://htmlparser.sourceforge.net/cpl1.0.txt" ).isPresent() ).isTrue();
+        assertThat( lOracle.getByUrl( "http://foo.bar/baz/lgpl-2.1.html" ).isPresent() ).isTrue();
+        assertThat( lOracle.getByUrl( "gnu.org/licenses/lgpl-2.1" ).isPresent() ).isTrue();
+        assertThat( lOracle.getByUrl( "repository.jboss.org/licenses/cc0-1.0" ).isPresent() ).isTrue();
+        assertThat( lOracle.getByUrl( "www.fsf.org/licensing/licenses/agpl-3.0.html" ).isPresent() ).isTrue();
 
         assertThat( lOracle.getByUrl( "http://creativecommons.org/publicdomain/zero/1.0/" ) ).
                 isEqualTo( lOracle.getByName( "cc0-1.0" ) );
@@ -262,13 +315,13 @@ public class BuildupTest {
         assertThat( lOracle.getByUrl( "http://www.opensource.org/licenses/cpl1.0" ) ).
                 isEqualTo( lOracle.getByName( "cpl-1.0" ) );
 
-        assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "org.scala-lang:scalap:2.10.0" ) ) ).isPresent();
+        assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "org.scala-lang:scalap:2.10.0" ) ).isPresent() ).isTrue();
 
         lOracle.allowUrlsCheckedDaysBefore( 100 );
 //        System.out.println( lOracle.guessByUrl( "http://www.opensource.org/licenses/bsd-license.php" ) );
-        assertThat( lOracle.getByUrl( "http://www.opensource.org/licenses/bsd-license.php" ) ).isPresent();
+        assertThat( lOracle.getByUrl( "http://www.opensource.org/licenses/bsd-license.php" ).isPresent() ).isTrue();
 
-        assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "net.jcip:jcip-annotations:1.0" ))).isPresent();
+        assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "net.jcip:jcip-annotations:1.0" )).isPresent()).isTrue();
 
     }
 

@@ -45,12 +45,14 @@ public class JSONStartup {
         return new Gson().fromJson( jsonstr, LOracle.class );
     }
 
-    public static Coordinates2License previous() {
+    public static Coordinates2License previous( boolean andIsOr ) {
 
-        Path previuos = _nn( Paths.get( "loracle.json").toAbsolutePath() );
+        Path previuos = getLoracleJson();
 
         if ( !Files.exists( previuos )) {
-            return new Coordinates2License();
+            Coordinates2License ret = new Coordinates2License();
+            ret.setAndIsOr( andIsOr );
+            return ret;
         }
 
         byte[] buf = new byte[ 3000000 ];
@@ -70,14 +72,23 @@ public class JSONStartup {
 
         String jsonstr = new String( buf, 0, got, StandardCharsets.UTF_8 );
 
-        return new Gson().fromJson( jsonstr, Coordinates2License.class );
+        Coordinates2License ret = new Gson().fromJson( jsonstr, Coordinates2License.class );
+        ret.setAndIsOr( andIsOr );
+        return ret;
 
     }
 
     public static void previousOut( Coordinates2License c2l ) {
-        Path previuos = _nn( Paths.get( "loracle.json").toAbsolutePath() );
+        Path previous = getLoracleJson();
         Gson gson = new GsonBuilder().setPrettyPrinting().enableComplexMapKeySerialization().create();
-        Filess.write( previuos, getBytes( gson.toJson( c2l ) ));
+        Filess.write( previous, getBytes( gson.toJson( c2l ) ));
     }
+
+    private static Path getLoracleJson() {
+        Path previous = _nn( Paths.get( "target/loracle/loracle.json").toAbsolutePath() );
+        Filess.createDirectories( _nn(previous.getParent() ));
+        return previous;
+    }
+
 
 }

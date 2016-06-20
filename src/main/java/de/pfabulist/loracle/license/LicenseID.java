@@ -8,4 +8,5 @@ package de.pfabulist.loracle.license;
 public interface LicenseID {
 
     String getId();
+
 }

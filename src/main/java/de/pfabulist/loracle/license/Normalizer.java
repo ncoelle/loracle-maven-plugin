@@ -19,7 +19,7 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-public class AliasBuilder {
+public class Normalizer {
 
     static private final String WHITESPACE = Frex.or( Frex.whitespace(),
                                                       Frex.txt( ',' ),

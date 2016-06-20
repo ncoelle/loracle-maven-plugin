@@ -23,11 +23,14 @@ import static de.pfabulist.unchecked.NullCheck._orElseThrow;
 @SuppressWarnings( { "PMD.UnusedPrivateField" } )
 public class Coordinates2License {
 
+
     @SuppressFBWarnings( { "URF_UNREAD_FIELD" } ) // txt only in tojson
 
     public static class LiCo {
         private Optional<String> license = Optional.empty();
+        private String licenseReason = "";
         private Optional<CopyrightHolder> copyrightHolder = Optional.empty();
+        private String holderReason = "";
         private String scope = "plugin";
         private String message = "";
         private String licenseTxt = "";
@@ -42,8 +45,16 @@ public class Coordinates2License {
             return copyrightHolder;
         }
 
-        public void setLicense( Optional<LicenseID> license ) {
-            this.license = license.map( Object::toString );
+        public void setLicense( MappedLicense mlicense ) {
+            mlicense.ifPresent( l-> {
+                license = Optional.of(l.toString());
+                this.licenseReason = mlicense.getReason();
+            });
+
+            if ( !mlicense.isPresent()) {
+                licenseReason = "";
+                license = Optional.empty();
+            }
         }
 
         public String getScope() {
@@ -76,6 +87,10 @@ public class Coordinates2License {
 
         public void setHeaderTxt( String headerTxt ) {
             this.headerTxt = headerTxt;
+        }
+
+        public String getLicenseReason() {
+            return licenseReason;
         }
     }
 
@@ -131,14 +146,16 @@ public class Coordinates2License {
         return _orElseThrow( log, () -> new IllegalStateException( "no logger" ) );
     }
 
-    public void determineLicenses( FunctionE<Coordinates, Optional<LicenseID>, Exception> f ) {
+    public void determineLicenses( FunctionE<Coordinates, MappedLicense, Exception> f ) {
         list.forEach( ( c, coli ) -> {
-            getLog().debug( "license for " + c + " is ...");
-            if( !coli.getLicense().isPresent() ) {
-                coli.setLicense( _nn( f.apply( c ) ) );
-                getLog().debug( "license for " + c + " is (found) to be " + coli.getLicense());
-            } else {
-                getLog().debug( "license for " + c + " is known to be " + coli.getLicense().get());
+            if( coli.isUsed() ) {
+                getLog().debug( "license for " + c + " is ..." );
+                if( !coli.getLicense().isPresent() ) {
+                    coli.setLicense( _nn( f.apply( c ) ) );
+                    getLog().debug( "license for " + c + " is (found) to be " + coli.getLicense() );
+                } else {
+                    getLog().debug( "license for " + c + " is known to be " + coli.getLicense().get() );
+                }
             }
         } );
     }
@@ -148,16 +165,19 @@ public class Coordinates2License {
     }
 
     public void checkCompatibility( BiFunction<Coordinates, String, String> f ) {
-        list.forEach( ( c, coli ) ->
-                              coli.getLicense().ifPresent( l -> {
-                                  String message = _nn( f.apply( c, l ) );
-                                  if( !message.isEmpty() ) {
-                                      scopeDependingLog( c, message );
-                                  }
+        list.forEach( ( c, coli ) -> {
+            if( coli.isUsed() ) {
+                coli.getLicense().ifPresent( l -> {
+                    String message = _nn( f.apply( c, l ) );
+                    if( !message.isEmpty() ) {
+                        scopeDependingLog( c, message );
+                    }
 
-                                  coli.setMessage( message );
+                    coli.setMessage( message );
 
-                              } ) );
+                } );
+            }
+        } );
 
     }
 
@@ -185,22 +205,51 @@ public class Coordinates2License {
                                                   lico.getScope(),
                                                   lico.getLicense().map( Object::toString ).orElse( "-" ) ) +
                                            lico.getHolder().map( Object::toString ).orElse( "-" ) );
+                    if ( !lico.getLicense().isPresent()) {
+                        getLog().error( "   no license found" );
+                    }
                     if( !lico.getMessage().isEmpty() ) {
                         getLog().error( "   " + lico.getMessage() );
                     }
+                    getLog().debug( "    " + lico.getLicenseReason() );
                 } );
     }
 
     public void getHolders( BiFunction<Coordinates, String, Optional<CopyrightHolder>> f ) {
-        list.forEach( ( c, lico ) -> lico.getLicense().ifPresent( l -> lico.setHolder( _nn( f.apply( c, l ) ) ) ) );
+        list.forEach( ( c, lico ) -> {
+            if ( lico.isUsed() ) {
+                lico.getLicense().ifPresent( l -> lico.setHolder( _nn( f.apply( c, l ) ) ) );
+            }});
     }
 
     public void fromSrc( BiConsumer<Coordinates, LiCo> f ) {
-        list.forEach( f );
+        list.forEach( ( c, lico ) -> {
+            if ( lico.isUsed() ) {
+                f.accept( c,lico );
+            }});
+    }
+
+    public void fromJar( BiConsumer<Coordinates, LiCo> f  ) {
+        list.forEach( ( c, lico ) -> {
+            if ( lico.isUsed() && !lico.getLicense().isPresent()) {
+                f.accept( c,lico );
+            }});
     }
 
     public void setLog( Findings log ) {
         this.log = log;
     }
+
+    public boolean andIsOr() {
+        return andIsOr;
+    }
+
+    public void setAndIsOr( boolean andIsOr ) {
+        if ( this.andIsOr != andIsOr ) {
+            list.forEach( (c,coli) -> coli.setLicense( MappedLicense.empty() ) ); // todo just and, or ?
+        }
+        this.andIsOr = andIsOr;
+    }
+
 
 }

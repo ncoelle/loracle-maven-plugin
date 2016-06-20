@@ -2,6 +2,7 @@ package de.pfabulist.loracle.mojo;
 
 import com.google.gson.Gson;
 import de.pfabulist.loracle.attribution.GetHolder;
+import de.pfabulist.loracle.attribution.JarAccess;
 import de.pfabulist.loracle.attribution.SrcAccess;
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.Coordinates;
@@ -9,6 +10,7 @@ import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.Decider;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
+import de.pfabulist.loracle.license.MappedLicense;
 import de.pfabulist.unchecked.Unchecked;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
@@ -46,12 +48,6 @@ public class LicenseCheckMojo {
     private final boolean andIsOr;
     private Optional<Coordinates> self = Optional.empty();
 
-//    private Set<Coordinates> necessaries = new HashSet<>();
-//    private Map<Coordinates, LicenseID> licenses = new HashMap<>();
-//    private Map<Coordinates, String> scopes = new HashMap<>();
-//    private Map<Coordinates, CopyrightHolder> holder = new HashMap<>();
-//    private Map<Coordinates, String> compatiblityIssues = new HashMap<>();
-
     private final Coordinates2License coordinates2License;
 
     public LicenseCheckMojo( Findings log, Path localRepo, MavenProject project, DependencyGraphBuilder dependencyGraphBuilder, boolean andIsOr ) {
@@ -66,7 +62,7 @@ public class LicenseCheckMojo {
         log.info( "      loracle license check            " );
         log.info( "---------------------------------------" );
 
-        coordinates2License = JSONStartup.previous();
+        coordinates2License = JSONStartup.previous( andIsOr );
         coordinates2License.setLog( log );
     }
 
@@ -153,70 +149,58 @@ public class LicenseCheckMojo {
     public void determineLicenses() {
         log.debug( "-- determine licenses --" );
         coordinates2License.determineLicenses( this::licenseMapping );
-//        necessaries.stream().
-////                sorted( ( a, b ) -> getScopeLevel( _nn( scopes.get( a ) ) ) - getScopeLevel( _nn( scopes.get( b ) ) ) ).
-//                forEach( c -> licenseMapping( c, _nn( scopes.get( c ) ) ) );
     }
 
-    private Optional<LicenseID> licenseMapping( Coordinates coo ) {
+    @SuppressWarnings( "PMD.AvoidPrintStackTrace" )
+    private MappedLicense licenseMapping( Coordinates coo ) {
         log.debug( coo.toString() + "    license is ..." );
         List<License> mavenLicenses = mlo.getMavenLicense( coo );
 
-        if ( mavenLicenses.isEmpty() ) {
+        if( mavenLicenses.isEmpty() ) {
             mavenLicenses = Collections.singletonList( new License() );
         }
 
-        final Optional<LicenseID> byCoordinates = lOracle.getByCoordinates( coo );
+        final MappedLicense byCoordinates = lOracle.getByCoordinates( coo );
 
-        AtomicReference<Boolean> error = new AtomicReference<>( false );
-
-        //        if( ret.isPresent() && !_nn( error.get() ) ) {
-//            log.info( String.format( "%-100s %-20s", coo, scope ) + ret.get() );
-//        }
-
-//
-//        ret.ifPresent( l -> licenses.put( coo, l ) );
-//
         try {
             return mavenLicenses.stream().
-                    map( ml -> mavenLicenseToLicense( coo, byCoordinates, error, ml ) ).
-                    collect( Collectors.reducing( Optional.empty(), this::and ) );
-        } catch ( Exception ex ) {
+                    map( ml -> mavenLicenseToLicense( coo, byCoordinates, ml ) ).
+                    collect( Collectors.reducing( MappedLicense.empty(), this::and ) );
+        } catch( Exception ex ) {
             ex.printStackTrace();
-            return Optional.empty();
+            return MappedLicense.empty();
         }
 
     }
 
-    private Optional<LicenseID> mavenLicenseToLicense( Coordinates coo,
-                                                       Optional<LicenseID> byCoordinates,
-                                                       AtomicReference<Boolean> error,
-                                                       License mavenLicense ) {
+    private MappedLicense mavenLicenseToLicense( Coordinates coo,
+                                                 MappedLicense byCoordinates,
+                                                 License mavenLicense ) {
 
         Optional<String> name = Optional.ofNullable( mavenLicense.getName() );
-        Optional<LicenseID> byName = name.flatMap( lOracle::getByName );
+        MappedLicense byName = name.map( lOracle::getByName ).orElse( MappedLicense.empty() );
         Optional<String> url = Optional.ofNullable( mavenLicense.getUrl() );
-        Optional<LicenseID> byUrl = url.flatMap( lOracle::getByUrl );
+        MappedLicense byUrl = url.map( lOracle::getByUrl ).orElse( MappedLicense.empty() );
 
-        Optional<LicenseID> licenseID = new Decider( log ).decide( byCoordinates, byName, byUrl );
+        MappedLicense licenseID = new Decider( log ).decide( byCoordinates, byName, byUrl );
 
         if( !licenseID.isPresent() ) {
-            log.error( "artifact: " + coo + "   has one unprecise license" );
-            log.error( "    by coordinates : " + byCoordinates.map( Object::toString ).orElse( "-" ) );
-            log.error( "    by license name: " + name.orElse( "-" ) + " -> " + byName.map( Object::toString ).orElse( "-" ) );
-            log.error( "    by license url : " + url.orElse( "-" ) + " ->" + byUrl.map( Object::toString ).orElse( "-" ) );
+            log.warn( "[pom] artifact: " + coo + "   has one unprecise license" );
+            log.warn( "[pom]    by coordinates : " + byCoordinates );
+            log.warn( "[pom]    by license name: " + name.orElse( "-" ) + " -> " + byName );
+            log.warn( "[pom]    by license url : " + url.orElse( "-" ) + " ->" + byUrl );
 
-            log.error( "artifact: " + coo + "   has no or not precise enough license" );
-            error.set( true );
+            log.warn( "[pom] artifact: " + coo + "   has no or not precise enough license" );
 
-            name.ifPresent( n -> log.error( "   it could be (by name) " + lOracle.guessByName( n ) ) );
-            url.ifPresent( u -> log.error( "   it could be (by url) " + lOracle.guessByUrl( u ) ) );
+            name.ifPresent( n -> log.warn( "[pom]   it could be (by name) " + lOracle.guessByName( n ) ) );
+            url.ifPresent( u -> log.warn( "[pom]   it could be (by url) " + lOracle.guessByUrl( u ) ) );
         }
 
         return licenseID;
     }
 
-    private Optional<LicenseID> and( Optional<LicenseID> l, Optional<LicenseID> r ) {
+    private MappedLicense and( MappedLicense l, MappedLicense r ) {
+
         if( !l.isPresent() ) {
             return r;
         }
@@ -225,20 +209,16 @@ public class LicenseCheckMojo {
             return l;
         }
 
-        LicenseID left = _nn( l.get() );
-        LicenseID right = _nn( r.get() );
-
-        if( left.equals( right ) ) {
-            return l;
-        }
-
-        if( andIsOr ) {
-            return Optional.of( lOracle.getOr( left, right ) );
-        }
-
-        LicenseID ret = lOracle.getAnd( left, right );
-        log.warn( "is that really <" + ret + "> or should that be <" + lOracle.getOr( left, right ) + ">" );
-        return Optional.of( ret );
+        AtomicReference<MappedLicense> ret = new AtomicReference<>( MappedLicense.empty() );
+        l.ifPresent( left -> r.ifPresent( right -> {
+            if( andIsOr ) {
+                ret.set( MappedLicense.of( lOracle.getOr( left, right ), "dual license or'ed (" + l.getReason() + "), (" + r.getReason() + ")" ) );
+            } else {
+                log.warn( "is that really <" + ret + "> or should that be <" + lOracle.getOr( left, right ) + ">" );
+                ret.set( MappedLicense.of( lOracle.getAnd( left, right ), "dual license and'ed (" + l.getReason() + "), (" + r.getReason() + ")" ) );
+            }
+        } ) );
+        return _nn( ret.get() );
 
     }
 
@@ -264,7 +244,7 @@ public class LicenseCheckMojo {
             return "no license on current artifact";
         }
 
-        LicenseID mine = lOracle.getOrThrowByName( _nn( _nn( info.get() ).getLicense().get() ));
+        LicenseID mine = lOracle.getOrThrowByName( _nn( _nn( info.get() ).getLicense().get() ) );
 
         if( mine.equals( license ) ) {
             return "";
@@ -365,4 +345,10 @@ public class LicenseCheckMojo {
     public void store() {
         JSONStartup.previousOut( coordinates2License );
     }
+
+    public void jars() {
+        JarAccess src = new JarAccess( lOracle, mlo, log );
+        coordinates2License.fromJar( src::check );
+    }
+
 }

@@ -27,11 +27,11 @@ public class HolderTest {
                 "This product includes software developed at\n" +
                 "The Apache Software Foundation (http://www.apache.org/).\n";
 
-        System.out.println( GetHolder.noticeCopyRightPattern );
+        System.out.println( SrcAccess.copyRightPattern );
 
-        Matcher matcher = GetHolder.noticeCopyRightPattern.matcher( in );
+        Matcher matcher = SrcAccess.copyRightPattern.matcher( in );
 
-        assertThat( matcher.matches() ).isTrue();
+        assertThat( matcher.find() ).isTrue();
 
         System.out.println(matcher.group( "year" ));
         System.out.println(matcher.group( "holder" ));

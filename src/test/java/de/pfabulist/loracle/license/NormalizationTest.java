@@ -14,7 +14,7 @@ public class NormalizationTest {
 
     @Test
     public void noSpace() {
-        assertThat( new AliasBuilder().reduce( "ab1.0" )).isEqualTo( "ab 1" );
+        assertThat( new Normalizer().reduce( "ab1.0" )).isEqualTo( "ab 1" );
     }
 
 }

@@ -804,6 +804,9 @@
         },
         {
           "coo": "org.json4s:json4s-*:3.2.10"
+        },
+        {
+          "coo": "riffle:riffle:0.1-dev"
         }
       ],
       "couldbeName": [
@@ -1729,6 +1732,9 @@
         },
         {
           "coo": "com.thoughtworks.paranamer:paranamer:2.3"
+        },
+        {
+          "coo": "org.jvnet.jaxb2.maven2:maven-jaxb2-plugin:0.12.3"
         }
       ],
       "couldbeName": [
@@ -1783,7 +1789,11 @@
         "bsd revised",
         "bsd modified"
       ],
-      "specific": [],
+      "specific": [
+        {
+          "coo": "junitperf:junitperf:1.8"
+        }
+      ],
       "couldbeName": [
         "bsd"
       ],
@@ -4068,6 +4078,9 @@
       "specific": [
         {
           "coo": "dom4j:dom4j:1.6.1"
+        },
+        {
+          "coo": "dom4j:dom4j:1.6.1.redhat-6"
         }
       ],
       "couldbeName": [],
@@ -4298,7 +4311,11 @@
         "edl 1",
         "eclipse distribution 1"
       ],
-      "specific": [],
+      "specific": [
+        {
+          "coo": "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final"
+        }
+      ],
       "couldbeName": [
         "edl",
         "eclipse distribution"
@@ -6106,6 +6123,22 @@
       ],
       "specific": [],
       "couldbeName": [],
+      "couldbeUrl": []
+    },
+    "gsbase-1.0": {
+      "attributes": {
+        "attis": "S-O 2 3 F L W  "
+      },
+      "urls": [
+        "gsbase.sourceforge.net/license"
+      ],
+      "longNames": [
+        "gsbase 1"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gsbase"
+      ],
       "couldbeUrl": []
     },
     "gsoap-1.3a": {
@@ -16802,37 +16835,41 @@
     }
   },
   "urlsInTime": {
-    " http://antlr.org/license.html": {
+    "antlr.org/license": {
       "i0": "2016-06-09",
       "i1": "bsd-2-clause"
     },
-    "http://antlr.org/license.html": {
-      "i0": "2016-06-08",
-      "i1": "bsd-2-clause"
-    },
-    "http://asm.objectweb.org/license.html": {
+    "asm.objectweb.org/license": {
       "i0": "2016-06-08",
       "i1": "bsd-3-clause"
     },
-    "http://asm.ow2.org/license.html": {
+    "asm.ow2.org/license": {
       "i0": "2016-06-08",
       "i1": "bsd-3-clause"
     },
-    "http://hsqldb.org/web/hsqlLicense.html": {
+    "hsqldb.org/web/hsqllicense": {
       "i0": "2016-06-08",
       "i1": "bsd-4-clause"
     },
-    "http://repo.aduna-software.org/legal/aduna-bsd.txt": {
-      "i0": "2016-06-08",
-      "i1": "bsd-3-clause"
-    },
-    "http://www.jcabi.com/LICENSE.txt": {
+    "jcabi.com/license": {
       "i0": "2016-06-09",
       "i1": "bsd-4-clause"
     },
-    "http://www.opensource.org/licenses/bsd-license.php": {
+    "jdbc.postgresql.org/about/license": {
+      "i0": "2016-06-20",
+      "i1": "bsd-3-clause"
+    },
+    "jdbc.postgresql.org/license": {
+      "i0": "2016-06-20",
+      "i1": "bsd-3-clause"
+    },
+    "opensource.org/licenses/bsd-license": {
       "i0": "2016-06-08",
       "i1": "bsd-2-clause"
+    },
+    "repo.aduna-software.org/legal/aduna-bsd": {
+      "i0": "2016-06-08",
+      "i1": "bsd-3-clause"
     }
   }
 }

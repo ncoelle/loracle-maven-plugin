@@ -61,7 +61,7 @@ public class LOracle {
     private final transient Map<String, Set<LicenseID>> couldbeUrls = new HashMap<>();
 
     private final transient SPDXParser parser;
-    private final transient AliasBuilder aliasBuilder = new AliasBuilder();
+    private final transient Normalizer normalizer = new Normalizer();
     private transient Map<Coordinates, LicenseID> coordinatesMap = new HashMap<>();
     // new TreeMap<>( (c,d) -> c.matches( d ) ? 0 : (c.hashCode() - d.hashCode()));
     private transient Map<String, LicenseID> longNameMapper = new HashMap<>();
@@ -114,6 +114,7 @@ public class LOracle {
         return this;
     }
 
+    // todo copy left ?
     public LicenseID getOrLater( SingleLicense license, boolean orLater, Optional<LicenseExclude> exception ) {
         if( !orLater && !exception.isPresent() ) {
             return license;
@@ -136,8 +137,7 @@ public class LOracle {
         throw new IllegalArgumentException( "no such exception: " + ex );
     }
 
-    //private static Pattern WS = Frex.txt( ',' ).or( Frex.txt( '-' )).buildPattern();
-
+    // todo to normalizer
     public static String trim( String in ) {
         return _nn( in.toLowerCase( Locale.US ) ).replaceAll( ",", " " ).trim();
     }
@@ -189,13 +189,11 @@ public class LOracle {
         return getMore( l ).attributes;
     }
 
-
-
     private static Pattern withVersion = Frex.any().oneOrMore().lazy().var( "base" ).
             then( Frex.txt( ' ' ) ).then( Frex.or( Frex.number(), Frex.txt( '.' ) ).oneOrMore() ).buildCaseInsensitivePattern();
 
     public void addLongName( LicenseID license, String longName ) {
-        String reduced = aliasBuilder.reduce( longName );
+        String reduced = normalizer.reduce( longName );
         if( longNameMapper.containsKey( reduced ) ) {
             if( license.equals( longNameMapper.get( reduced ) ) ) {
                 return;
@@ -211,6 +209,7 @@ public class LOracle {
             addCouldbeName( license, _nn( versioned.group( "base" ) ) );
         }
 
+        // todo refactor
         if( reduced.contains( "gnu" ) ) {
             if( reduced.contains( "lesser" ) ) {
                 addCouldbeName( license, "gnu lesser" );
@@ -248,14 +247,14 @@ public class LOracle {
             // not found
         }
 
-        return Optional.ofNullable( longNameMapper.get( aliasBuilder.reduce( name ) ) );
+        return Optional.ofNullable( longNameMapper.get( normalizer.reduce( name ) ) );
     }
 
     private static final Pattern orLater = Frex.any().oneOrMore().var( "base" ).then( Frex.txt( " or later" ) ).buildCaseInsensitivePattern();
 
-    public Optional<LicenseID> getByName( String name ) {
+    public MappedLicense getByName( String name ) {
         try {
-            return Optional.of( parser.parse( name ) );
+            return MappedLicense.of( parser.parse( name ), "by parsed name: " + name );
         } catch( Exception e ) {
             // not found
         }
@@ -268,24 +267,24 @@ public class LOracle {
             plus = true;
         }
 
-        Optional<LicenseID> ret = Optional.ofNullable( longNameMapper.get( aliasBuilder.reduce( base ) ) );
+        Optional<LicenseID> ret = Optional.ofNullable( longNameMapper.get( normalizer.reduce( base ) ) );
 
         if( ret.isPresent() ) {
             if( plus ) {
                 if( ret.get() instanceof SingleLicense ) {
-                    return Optional.of( getOrLater( (SingleLicense) _nn( ret.get() ), true, Optional.empty() ) );
+                    return MappedLicense.of( getOrLater( (SingleLicense) _nn( ret.get() ), true, Optional.empty() ), "by normalized name and 'or later': " + name );
                 } else {
                     // or later with a composite license is strange
-                    return Optional.empty();
+                    return MappedLicense.empty();
                 }
             }
-            return ret;
+            return MappedLicense.of( ret, "by normalized name: " + name );
         }
 
         try {
-            return Optional.of( new FuzzyParser( this ).parse( name ) );
+            return MappedLicense.of( new FuzzyParser( this ).parse( name ), "by fuzzy parsing name: " + name );
         } catch( Exception e ) {
-            return Optional.empty();
+            return MappedLicense.empty();
         }
     }
 
@@ -298,14 +297,18 @@ public class LOracle {
         coordinatesMap.put( coo, licenseID );
     }
 
-    public Optional<LicenseID> getByCoordinates( Coordinates coo ) {
+    public MappedLicense getByCoordinates( Coordinates coo ) {
 
         Optional<LicenseID> ret = Optional.ofNullable( coordinatesMap.get( coo ) );
         if( ret.isPresent() ) {
-            return ret;
+            return MappedLicense.of( ret, "by direct coordinates" );
         }
 
-        return coordinatesMap.keySet().stream().filter( c -> c.matches( coo ) ).findAny().map( c -> _nn( coordinatesMap.get( c ) ) );
+        return coordinatesMap.keySet().stream().
+                filter( c -> c.matches( coo ) ).
+                findAny().
+                map( c -> MappedLicense.of( _nn( coordinatesMap.get( c ) ), "by patterned coordinates " + c ) ).
+                orElse( MappedLicense.empty() );
     }
 
     public void addException( String name, boolean spdx ) {
@@ -323,25 +326,33 @@ public class LOracle {
                     then( Frex.txt( '/' ) ).
                     then( Frex.anyBut( Frex.txt( '/' ) ).oneOrMore().var( "fname" ) ).buildCaseInsensitivePattern();
 
-    public Optional<LicenseID> getByUrl( String url ) {
+    public MappedLicense getByUrl( String url ) {
 
-        Optional<String> rel = aliasBuilder.normalizeUrl( url );
+        Optional<String> rel = normalizer.normalizeUrl( url );
         if( !rel.isPresent() ) {
-            return Optional.empty();
+            return MappedLicense.empty();
         }
 
         Optional<LicenseID> ret = Optional.ofNullable( urls.get( rel.get() ) );
         if( ret.isPresent() ) {
-            return ret;
+            if( urlsInTime.containsKey( rel.get() ) ) {
+                return MappedLicense.of( ret, "by url " + url + " checked at: " + _nn( urlsInTime.get( rel.get() ) ).i0 );
+            }
+            return MappedLicense.of( ret, "by url " + url );
         }
 
         Matcher end = urlWithLongname.matcher( _nn( rel.get() ) );
         if( !end.matches() ) {
             Log.warn( "not a real url? " + url + " red: " + rel );
-            return Optional.empty();
+            return MappedLicense.empty();
         }
 
-        return getByName( _nn( end.group( "fname" ) ) );
+        MappedLicense ml = getByName( _nn( end.group( "fname" ) ) );
+        if( ml.isPresent() ) {
+            return ml.addReason( "by name match of url: " + url );
+        }
+
+        return MappedLicense.empty();
 
     }
 
@@ -384,12 +395,12 @@ public class LOracle {
     }
 
     public Set<LicenseID> guessByName( String name ) {
-        return Optional.ofNullable( couldbeNames.get( aliasBuilder.reduce( name ) ) ).orElseGet( Collections::emptySet );
+        return Optional.ofNullable( couldbeNames.get( normalizer.reduce( name ) ) ).orElseGet( Collections::emptySet );
     }
 
     public Set<LicenseID> guessByUrl( String url ) {
 
-        return aliasBuilder.normalizeUrl( url ).map( u -> _orElseGet( couldbeUrls.get( u ), new HashSet<LicenseID>() ) ).orElseGet( HashSet::new );
+        return normalizer.normalizeUrl( url ).map( u -> _orElseGet( couldbeUrls.get( u ), new HashSet<LicenseID>() ) ).orElseGet( HashSet::new );
     }
 
     public void addCouldBeUrl( LicenseID license, String url ) {
@@ -398,7 +409,7 @@ public class LOracle {
 
     public void addUrl( LicenseID license, String url ) {
 
-        String rel = aliasBuilder.normalizeUrl( url ).orElseThrow( () -> new IllegalArgumentException( "not a url" ) );
+        String rel = normalizer.normalizeUrl( url ).orElseThrow( () -> new IllegalArgumentException( "not a url" ) );
 
         if( urls.containsKey( rel ) ) {
 
@@ -457,7 +468,8 @@ public class LOracle {
 
     public void addUrlCheckedAt( LicenseID license, String url, String date ) {
         Log.info( "added url checkedat " + url + " " + license + " " + date );
-        urlsInTime.put( url, P.of( date, license.toString() ) );
+        String norm = normalizer.normalizeUrl( url ).orElseThrow( () -> new IllegalArgumentException( "can't normalize this url: " + url ) );
+        urlsInTime.put( norm, P.of( date, license.toString() ) );
     }
 
     public void allowUrlsCheckedDaysBefore( int days ) {

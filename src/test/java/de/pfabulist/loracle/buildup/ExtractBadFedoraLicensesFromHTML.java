@@ -108,8 +108,8 @@ public class ExtractBadFedoraLicensesFromHTML {
                     StringBuilder sb = new StringBuilder();
 
 //                    Optional<LicenseID> shrt = lOracle.getByName( f.shortName );
-                    Optional<LicenseID> lng = lOracle.getByName( f.name );
-                    Optional<LicenseID> url = lOracle.getByUrl( f.url );
+                    Optional<LicenseID> lng = lOracle.getByName( f.name ).noReason();
+                    Optional<LicenseID> url = lOracle.getByUrl( f.url ).noReason();
 
                     String str =
                             lng.map( Object::toString ).orElse( "<" + f.name + ">" ) + " : " +

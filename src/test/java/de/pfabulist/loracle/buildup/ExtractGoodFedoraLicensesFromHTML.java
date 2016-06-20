@@ -123,9 +123,9 @@ public class ExtractGoodFedoraLicensesFromHTML {
 
                     StringBuilder sb = new StringBuilder();
 
-                    Optional<LicenseID> shrt = lOracle.getByName( f.shortName );
-                    Optional<LicenseID> lng = lOracle.getByName( f.name );
-                    Optional<LicenseID> url = lOracle.getByUrl( f.url );
+                    Optional<LicenseID> shrt = lOracle.getByName( f.shortName ).noReason();
+                    Optional<LicenseID> lng = lOracle.getByName( f.name ).noReason();
+                    Optional<LicenseID> url = lOracle.getByUrl( f.url ).noReason();
 
                     String str = shrt.map( Object::toString ).orElse( "<" + f.shortName + ">" ) + " : " +
                             lng.map( Object::toString ).orElse( "<" + f.name + ">" ) + " : " +
