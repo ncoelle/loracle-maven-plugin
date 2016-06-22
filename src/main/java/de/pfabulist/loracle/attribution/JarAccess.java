@@ -2,10 +2,12 @@ package de.pfabulist.loracle.attribution;
 
 import de.pfabulist.frex.Frex;
 import de.pfabulist.kleinod.nio.Filess;
+import de.pfabulist.loracle.license.ContentToLicense;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.MappedLicense;
+import de.pfabulist.loracle.license.Normalizer;
 import de.pfabulist.loracle.mojo.Findings;
 import de.pfabulist.loracle.mojo.MavenLicenseOracle;
 
@@ -29,6 +31,7 @@ public class JarAccess {
     private final LOracle lOracle;
     private final MavenLicenseOracle mlo;
     private final Findings log;
+    private final boolean andIsOr;
 
     private static Pattern licensePattern =
             Frex.or( Frex.txt( "LICENSE" ), Frex.txt( "META-INF/LICENSE" )).then( Frex.any().zeroOrMore() ).
@@ -43,10 +46,11 @@ public class JarAccess {
                     buildCaseInsensitivePattern();
 
 
-    public JarAccess( LOracle lOracle, MavenLicenseOracle mlo, Findings log ) {
+    public JarAccess( LOracle lOracle, MavenLicenseOracle mlo, Findings log, boolean andIsOr ) {
         this.lOracle = lOracle;
         this.mlo = mlo;
         this.log = log;
+        this.andIsOr = andIsOr;
     }
 
 
@@ -70,14 +74,28 @@ public class JarAccess {
 
             log.debug( "found license file in jar" );
 
-            if ( file.equals( apache2 )) {
-                lico.setLicense( MappedLicense.of( lOracle.getOrThrowByName( "apache-2" ), "by license.txt in jar" ) );
+            if ( lico.getLicense().isPresent()) {
                 return;
             }
 
-            log.info( "found license but could not identify it" );
-            log.info( file );
-            log.info( "\n\n" );
+            MappedLicense ml = new ContentToLicense( lOracle, "by license file", log, andIsOr ).toLicense( file );
+            lico.setLicense( ml );
+
+            if ( !ml.isPresent()) {
+                log.info( "found license but could not identify it" );
+                log.info( file );
+                log.info( "\n\n" );
+            }
+
+
+//            if ( file.replaceAll( Normalizer.spaces.toString(), " " ).equals( apache2 )) {
+//                lico.setLicense( MappedLicense.of( lOracle.getOrThrowByName( "apache-2" ), "by license.txt in jar" ) );
+//                return;
+//            }
+//
+//            log.info( "found license but could not identify it" );
+//            log.info( file );
+//            log.info( "\n\n" );
 
 //            Matcher ch = noticeCopyRightPattern.matcher( file );
 //            if( !ch.matches() ) {
@@ -267,5 +285,5 @@ public class JarAccess {
             "      incurred by, or claims asserted against, such Contributor by reason\n" +
             "      of your accepting any such warranty or additional liability.\n" +
             "\n" +
-            "   END OF TERMS AND CONDITIONS\n";
+            "   END OF TERMS AND CONDITIONS\n".replaceAll( Normalizer.spaces.toString(), " " );
 }

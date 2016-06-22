@@ -1,10 +1,10 @@
 package de.pfabulist.loracle.mojo;
 
-import com.google.gson.Gson;
 import de.pfabulist.loracle.attribution.GetHolder;
 import de.pfabulist.loracle.attribution.JarAccess;
 import de.pfabulist.loracle.attribution.SrcAccess;
 import de.pfabulist.loracle.buildup.JSONStartup;
+import de.pfabulist.loracle.license.And;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.Decider;
@@ -22,7 +22,6 @@ import org.apache.maven.shared.dependency.graph.DependencyGraphBuilder;
 import org.apache.maven.shared.dependency.graph.DependencyNode;
 import org.apache.maven.shared.dependency.graph.traversal.DependencyNodeVisitor;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
@@ -162,10 +161,13 @@ public class LicenseCheckMojo {
 
         final MappedLicense byCoordinates = lOracle.getByCoordinates( coo );
 
+
+        And and = new And( lOracle, log, andIsOr );
+
         try {
             return mavenLicenses.stream().
                     map( ml -> mavenLicenseToLicense( coo, byCoordinates, ml ) ).
-                    collect( Collectors.reducing( MappedLicense.empty(), this::and ) );
+                    collect( Collectors.reducing( MappedLicense.empty(), and::and ) );
         } catch( Exception ex ) {
             ex.printStackTrace();
             return MappedLicense.empty();
@@ -197,29 +199,6 @@ public class LicenseCheckMojo {
         }
 
         return licenseID;
-    }
-
-    private MappedLicense and( MappedLicense l, MappedLicense r ) {
-
-        if( !l.isPresent() ) {
-            return r;
-        }
-
-        if( !r.isPresent() ) {
-            return l;
-        }
-
-        AtomicReference<MappedLicense> ret = new AtomicReference<>( MappedLicense.empty() );
-        l.ifPresent( left -> r.ifPresent( right -> {
-            if( andIsOr ) {
-                ret.set( MappedLicense.of( lOracle.getOr( left, right ), "dual license or'ed (" + l.getReason() + "), (" + r.getReason() + ")" ) );
-            } else {
-                log.warn( "is that really <" + ret + "> or should that be <" + lOracle.getOr( left, right ) + ">" );
-                ret.set( MappedLicense.of( lOracle.getAnd( left, right ), "dual license and'ed (" + l.getReason() + "), (" + r.getReason() + ")" ) );
-            }
-        } ) );
-        return _nn( ret.get() );
-
     }
 
     public String checkCompatibility( Coordinates coo, String licenseStr ) {
@@ -337,7 +316,7 @@ public class LicenseCheckMojo {
     }
 
     public void src() {
-        SrcAccess src = new SrcAccess( lOracle, mlo, log );
+        SrcAccess src = new SrcAccess( lOracle, mlo, log, andIsOr );
         coordinates2License.fromSrc( src::check );
 
     }
@@ -347,7 +326,7 @@ public class LicenseCheckMojo {
     }
 
     public void jars() {
-        JarAccess src = new JarAccess( lOracle, mlo, log );
+        JarAccess src = new JarAccess( lOracle, mlo, log, andIsOr );
         coordinates2License.fromJar( src::check );
     }
 

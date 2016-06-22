@@ -1,6 +1,7 @@
 package de.pfabulist.loracle.attribution;
 
 import de.pfabulist.frex.Frex;
+import de.pfabulist.loracle.license.ContentToLicense;
 import org.junit.Test;
 
 import java.util.regex.Matcher;
@@ -27,9 +28,9 @@ public class HolderTest {
                 "This product includes software developed at\n" +
                 "The Apache Software Foundation (http://www.apache.org/).\n";
 
-        System.out.println( SrcAccess.copyRightPattern );
+        System.out.println( ContentToLicense.copyRightPattern );
 
-        Matcher matcher = SrcAccess.copyRightPattern.matcher( in );
+        Matcher matcher = ContentToLicense.copyRightPattern.matcher( in );
 
         assertThat( matcher.find() ).isTrue();
 

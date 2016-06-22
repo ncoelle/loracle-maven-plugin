@@ -3,6 +3,7 @@ package de.pfabulist.loracle.attribution;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.kleinod.nio.IO;
+import de.pfabulist.loracle.license.ContentToLicense;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.mojo.Findings;
@@ -94,7 +95,7 @@ public class GetHolder {
                 return Optional.empty();
             }
 
-            Matcher ch = SrcAccess.copyRightPattern.matcher( notice );
+            Matcher ch = ContentToLicense.copyRightPattern.matcher( notice );
             if( !ch.find() ) {
                 log.warn( "notice file has no recognizable holder" );
                 return Optional.empty();

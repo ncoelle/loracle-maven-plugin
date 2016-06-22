@@ -15,5 +15,6 @@ public class CoordinatesTest {
     public void matches() {
         assertThat( Coordinates.valueOf( "a:b*c:1.0" ).matches( Coordinates.valueOf( "a:bc:1.0" ) )).isTrue();
         assertThat( Coordinates.valueOf( "a:b-*:1.0" ).matches( Coordinates.valueOf( "a:b-foo:1.0" ) )).isTrue();
+        assertThat( Coordinates.valueOf( "a:b:*" ).matches( Coordinates.valueOf( "a:b:1.0" ) )).isTrue();
     }
 }

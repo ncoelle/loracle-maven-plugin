@@ -101,7 +101,9 @@ public class MavenLicenseOracle {
             return _nn( pomModel.getLicenses() );
 
         } catch( IOException | XmlPullParserException e ) {
+            log.warn( "\n++++++++++++++++++++++++++++++++++++++ " );
             log.warn( "error extracting license from pom " + e );
+            log.warn( "++++++++++++++++++++++++++++++++++++++ \n" );
         }
 
         return Collections.emptyList();

@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class Decider {
 
-
     private final Log log;
 
     public Decider( Log log ) {
@@ -19,17 +18,17 @@ public class Decider {
     }
 
     public MappedLicense decide( MappedLicense byCoordinates, MappedLicense byName, MappedLicense byUrl ) {
-        if ( byCoordinates.isPresent()) {
+        if( byCoordinates.isPresent() ) {
             return decideWithCoordinates( byCoordinates, byName, byUrl );
         }
 
-        if ( byName.isPresent()) {
+        if( byName.isPresent() ) {
             //noinspection ConstantConditions
             return decideWithName( byName, byUrl );
         }
 
         byUrl.ifPresent( this::warnOnAnd );
-        if ( byUrl.isPresent()) {
+        if( byUrl.isPresent() ) {
             log.debug( "      license by url " );
             return byUrl.addReason( "no name or coordinates" );
         } else {
@@ -40,44 +39,51 @@ public class Decider {
     }
 
     private MappedLicense decideWithName( MappedLicense licenseID, MappedLicense byUrl ) {
-        byUrl.ifPresent( name -> {
-            if ( !name.equals( licenseID )) {
-                log.warn( "   license by url differs " + name );
-            }
-        } );
+        LicenseID nameLi = licenseID.orElseThrow( () -> new IllegalStateException( "huh" ) );
 
-        licenseID.ifPresent( this::warnOnAnd );
+        MappedLicense ret = licenseID.addReason( "priority name" );
 
-        log.debug( "      license by name " );
-
-        return licenseID.addReason( "priority name" );
+        return byUrl.orElse( l -> {
+                                 if( !l.equals( nameLi ) ) {
+                                     return ret.addReason( " (over " + byUrl + ")" );
+                                 } else {
+                                     return ret;
+                                 }
+                             },
+                             ret );
     }
 
     private MappedLicense decideWithCoordinates( MappedLicense licenseID, MappedLicense byName, MappedLicense byUrl ) {
 
-        byName.ifPresent( name -> {
-            if ( !name.equals( licenseID )) {
-                log.warn( "   license by name differs " + name );
-            }
-        } );
+        LicenseID cooLi = licenseID.orElseThrow( () -> new IllegalStateException( "huh" ) );
 
-        byUrl.ifPresent( name -> {
-            if ( !name.equals( licenseID )) {
-                log.warn( "   license by url differs " + name );
-            }
-        } );
+        MappedLicense ret = licenseID.addReason( "coordinates priority" );
 
-        log.debug( "      license on coordinates " );
+        MappedLicense ret1 = byName.orElse( l -> {
+                                                if( !l.equals( cooLi ) ) {
+                                                    return ret.addReason( " (over " + byName + ")" );
+                                                } else {
+                                                    return ret;
+                                                }
+                                            },
+                                            ret );
 
-        return licenseID.addReason( "coordinates priority" );  // name and url ?
+        return byUrl.orElse( l -> {
+                                 if( !l.equals( cooLi ) ) {
+                                     return ret1.addReason( " (over " + byUrl + ")" );
+                                 } else {
+                                     return ret1;
+                                 }
+                             },
+                             ret1 );
+
     }
 
     private void warnOnAnd( LicenseID licenseID ) {
-        if ( LicenseIDs.isAnd( licenseID )) {
-            log.error( "   fulfilling the constraints of 2 license is unlikely, was 'or' meant? or really "  + licenseID );
+        if( LicenseIDs.isAnd( licenseID ) ) {
+            log.error( "   fulfilling the constraints of 2 license is unlikely, was 'or' meant? or really " + licenseID );
             log.error( "   set it directly in plugin configuration" );
         }
     }
-
 
 }

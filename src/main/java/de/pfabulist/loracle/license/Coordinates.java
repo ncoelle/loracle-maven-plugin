@@ -6,7 +6,9 @@ import org.apache.maven.artifact.Artifact;
 
 import javax.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -79,8 +81,12 @@ public class Coordinates {
     @Override
     @SuppressFBWarnings( "NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION" )
     public boolean equals( @Nullable Object o ) {
-        if( this == o ) { return true; }
-        if( o == null || getClass() != o.getClass() ) { return false; }
+        if( this == o ) {
+            return true;
+        }
+        if( o == null || getClass() != o.getClass() ) {
+            return false;
+        }
 
         Coordinates that = (Coordinates) o;
 
@@ -105,16 +111,20 @@ public class Coordinates {
 
         // todo * at end
 
-        String[] txt = coo.split( "\\*" );
+        List<String> txt = new ArrayList<>( Arrays.asList( coo.split( "\\*" )));
 
-        if( _nn( txt[ 0 ] ).isEmpty() ) {
+        if ( coo.endsWith( "*" )) {
+            txt.add( "" );
+        }
+
+        if( _nn( txt.get( 0 ) ).isEmpty() ) {
             throw new IllegalArgumentException( "group must not start with *" );
         }
 
         Pattern pat =
-                Arrays.asList( txt ).subList( 1, txt.length ).stream().
+                txt.subList( 1, txt.size() ).stream().
                         map( Frex::txt ).
-                        collect( Collectors.reducing( Frex.txt( _nn(txt[0])), (f,g) -> f.then( Frex.anyBut( Frex.txt( ':' )).zeroOrMore()).then( g ))).
+                        collect( Collectors.reducing( Frex.txt( _nn( txt.get( 0 ) ) ), ( f, g ) -> f.then( Frex.anyBut( Frex.txt( ':' ) ).zeroOrMore() ).then( g ) ) ).
                         buildCaseInsensitivePattern();
 
         return pat.matcher( other.coo ).matches();

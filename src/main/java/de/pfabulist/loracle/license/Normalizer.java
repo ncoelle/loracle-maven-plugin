@@ -47,7 +47,7 @@ public class Normalizer {
                                              fullWord( "Copyright" ),
                                              fullWord( "Like" ), // todo hmm
                                              fullWord( "v" ) ).buildCaseInsensitivePattern();
-    static private final Pattern spaces = Frex.whitespace().atLeast( 2 ).buildPattern();
+    static public final Pattern spaces = Frex.whitespace().atLeast( 2 ).buildPattern();
     static private final Pattern vVersion = txt( "v" ).then( or( Frex.number(), txt( '.' ), txt( ',' ) ).oneOrMore() ).buildCaseInsensitivePattern();
     static private final Pattern version = or( Frex.number(), txt( '.' ) ).oneOrMore().buildCaseInsensitivePattern();
 

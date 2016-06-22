@@ -29,6 +29,8 @@ public class Coordinates2License {
     public static class LiCo {
         private Optional<String> license = Optional.empty();
         private String licenseReason = "";
+        private String licenseName = "";
+        private String licenseUrl = "";
         private Optional<CopyrightHolder> copyrightHolder = Optional.empty();
         private String holderReason = "";
         private String scope = "plugin";
@@ -212,6 +214,7 @@ public class Coordinates2License {
                         getLog().error( "   " + lico.getMessage() );
                     }
                     getLog().debug( "    " + lico.getLicenseReason() );
+                    getLog().debug( "\n" );
                 } );
     }
 

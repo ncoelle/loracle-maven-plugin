@@ -6,6 +6,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
@@ -48,7 +49,7 @@ public class MappedLicense {
     }
 
     public boolean isPresent() {
-        return !reason.isEmpty();
+        return license != null;
     }
 
     public LicenseID orElseThrow( Supplier<Exception> ex ) {
@@ -67,7 +68,7 @@ public class MappedLicense {
 
     public MappedLicense addReason( String more ) {
         if ( !isPresent() ) {
-            throw new IllegalArgumentException( "cant add to empty (MappedLicense)" );
+            return MappedLicense.empty();
         }
         return new MappedLicense( _nn(license), reason + " && " + more );
     }
@@ -104,5 +105,13 @@ public class MappedLicense {
     @Override
     public int hashCode() {
         return license != null ? license.hashCode() : 0;
+    }
+
+    public <U> U orElse( Function<LicenseID, U> f, U els ) {
+        if ( isPresent()) {
+            return _nn(f.apply( _nn(license )));
+        }
+
+        return els;
     }
 }

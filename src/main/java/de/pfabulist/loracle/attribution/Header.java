@@ -20,9 +20,9 @@ public class Header {
             Frex.whitespace().zeroOrMore().
                     then( Frex.or( Frex.txt( "public" ), Frex.txt( "private" ), Frex.txt( "protected" ) ).zeroOrOnce() ).
                     then( Frex.whitespace().oneOrMore() ).
-                    then( Frex.txt( "final " ).zeroOrMore() ).
+                    then( Frex.txt( "final " ).zeroOrOnce() ).
                     then( Frex.whitespace().zeroOrMore() ).
-                    then( Frex.or( Frex.txt( "class" ), Frex.txt( "enum" ), Frex.txt( "interfact" ), Frex.txt( "abstract class" ) ) ).
+                    then( Frex.or( Frex.txt( "class" ), Frex.txt( "enum" ), Frex.txt( "interface" ), Frex.txt( "abstract class" ) ) ).
                     then( Frex.any().zeroOrMore() ).buildCaseInsensitivePattern();
 
     public static String getHeader( String in ) {

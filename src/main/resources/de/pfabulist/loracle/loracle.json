@@ -3549,7 +3549,7 @@
     },
     "cpl-1.0": {
       "attributes": {
-        "attis": "S+O+2 3 F L+W  "
+        "attis": "S+O+2 3 F L W+ "
       },
       "urls": [
         "opensource.org/licenses/cpl-1.0",
