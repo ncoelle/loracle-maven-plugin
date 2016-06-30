@@ -1,7 +1,8 @@
 package de.pfabulist.loracle.mojo;
 
+import de.pfabulist.frex.Frex;
+import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.license.Coordinates;
-import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.License;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
@@ -17,6 +18,8 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static de.pfabulist.frex.Frex.txt;
@@ -51,7 +54,7 @@ public class MavenLicenseOracle {
                 return licenses;
             }
 
-            log.debug( "    no licenses found in " + coo  );
+            log.debug( "    no licenses found in " + coo );
 
             Optional<Coordinates> parentCoo = extractParent( pom );
 
@@ -65,7 +68,7 @@ public class MavenLicenseOracle {
         }
     }
 
-    private Path getPom( Coordinates coords ) {
+    public Path getPom( Coordinates coords ) {
         Path ret = localRepo;
         ret = _nn( ret.resolve( coords.getGroupId().replace( '.', '/' ) ) );
         ret = _nn( ret.resolve( coords.getArtifactId() ) );
@@ -74,13 +77,50 @@ public class MavenLicenseOracle {
         return ret;
     }
 
-    public Path getArtifact( Coordinates coords ) {
+    public Path getArtifactOld( Coordinates coords ) {
         Path ret = localRepo;
         ret = _nn( ret.resolve( coords.getGroupId().replace( '.', '/' ) ) );
         ret = _nn( ret.resolve( coords.getArtifactId() ) );
         ret = _nn( ret.resolve( coords.getVersion() ) );
         ret = _nn( ret.resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".jar" ) );  // todo war ...
         return ret;
+    }
+
+    public Path getArtifact( Coordinates coords ) {
+        Path path = localRepo;
+        path = _nn( path.resolve( coords.getGroupId().replace( '.', '/' ) ) );
+        path = _nn( path.resolve( coords.getArtifactId() ) );
+        path = _nn( path.resolve( coords.getVersion() ) );
+        Path dir = path;
+
+
+        Pattern pattern =
+                Frex.txt( _nn( dir.resolve( coords.getArtifactId() + "-" + coords.getVersion() ) ).toString() ).
+                        then( Frex.or( Frex.alphaNum(), Frex.txt( '-' ) ).zeroOrMore().group( "suffix" ) ).
+                        then( Frex.txt( ".jar" ) ).buildCaseInsensitivePattern();
+
+        Path classic = _nn( dir.resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".jar" ) );
+        if ( !Files.exists( dir )) {
+            return classic;
+        }
+
+        return Filess.list( dir ).
+                filter( p -> {
+                    Matcher matcher = pattern.matcher( p.toString() );
+                    if ( !matcher.find()   ) {
+                        return false;
+                    }
+
+                    switch( _nn(matcher.group("suffix")) ) {
+                        case "-sources":
+                        case "-javadoc":
+                            return false;
+                        default:
+                            return true;
+                    }
+                }).
+                findFirst().
+                orElse( classic );
     }
 
     public Path getSrc( Coordinates coords ) {
@@ -91,7 +131,6 @@ public class MavenLicenseOracle {
         ret = _nn( ret.resolve( coords.getArtifactId() + "-" + coords.getVersion() + "-sources.jar" ) );  // todo war ...
         return ret;
     }
-
 
     List<License> extractLicense( final Path pom ) {
         MavenXpp3Reader reader = new MavenXpp3Reader();
@@ -108,7 +147,6 @@ public class MavenLicenseOracle {
 
         return Collections.emptyList();
     }
-
 
     Optional<Coordinates> extractParent( Path pom ) {
         MavenXpp3Reader reader = new MavenXpp3Reader();

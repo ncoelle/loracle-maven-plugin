@@ -74,18 +74,21 @@ public class JarAccess {
 
             log.debug( "found license file in jar" );
 
-            if ( lico.getLicense().isPresent()) {
-                return;
-            }
+            lico.setLicenseTxt( file );
 
-            MappedLicense ml = new ContentToLicense( lOracle, "by license file", log, andIsOr ).toLicense( file );
-            lico.setLicense( ml );
-
-            if ( !ml.isPresent()) {
-                log.info( "found license but could not identify it" );
-                log.info( file );
-                log.info( "\n\n" );
-            }
+//
+//            if ( lico.getLicense().isPresent()) {
+//                return;
+//            }
+//
+//            MappedLicense ml = new ContentToLicense( lOracle, "by license file", log, andIsOr ).toLicense( file );
+//            lico.setLicense( ml );
+//
+//            if ( !ml.isPresent()) {
+//                log.info( "found license but could not identify it" );
+//                log.info( file );
+//                log.info( "\n\n" );
+//            }
 
 
 //            if ( file.replaceAll( Normalizer.spaces.toString(), " " ).equals( apache2 )) {

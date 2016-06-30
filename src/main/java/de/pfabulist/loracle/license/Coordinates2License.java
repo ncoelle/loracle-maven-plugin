@@ -2,11 +2,12 @@ package de.pfabulist.loracle.license;
 
 import de.pfabulist.loracle.attribution.CopyrightHolder;
 import de.pfabulist.loracle.mojo.Findings;
-import de.pfabulist.unchecked.functiontypes.FunctionE;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -24,13 +25,51 @@ import static de.pfabulist.unchecked.NullCheck._orElseThrow;
 public class Coordinates2License {
 
 
-    @SuppressFBWarnings( { "URF_UNREAD_FIELD" } ) // txt only in tojson
+    @SuppressFBWarnings( { "URF_UNREAD_FIELD", "URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" } )
+    public static class MLicense {
+        public String mavenLicenseName = "";
+        public String byName = "-";
+        public String mavenLicenseUrl = "";
+        public String byUrl = "-";
+        public String mavenLicenseComment = "";
+        public String byComment = "-";
 
+        public MLicense( String mavenLicenseName, String mavenLicenseUrl, String mavenLicenseComment ) {
+            this.mavenLicenseName = mavenLicenseName;
+            this.mavenLicenseUrl = mavenLicenseUrl;
+            this.mavenLicenseComment = mavenLicenseComment;
+        }
+
+        public String getName() {
+            return mavenLicenseName;
+        }
+
+        public String getUrl() {
+            return mavenLicenseUrl;
+        }
+
+        public String getComment() {
+            return mavenLicenseComment;
+        }
+
+        public void setByName( MappedLicense byName ) {
+            this.byName = byName.toString();
+        }
+
+        public void setByUrl( MappedLicense byUrl ) {
+            this.byUrl = byUrl.toString();
+        }
+
+        public void setByComment( MappedLicense byComment ) {
+            this.byComment = byComment.toString();
+        }
+    }
+
+    @SuppressFBWarnings( { "URF_UNREAD_FIELD" } ) // txt only in tojson
     public static class LiCo {
         private Optional<String> license = Optional.empty();
         private String licenseReason = "";
-        private String licenseName = "";
-        private String licenseUrl = "";
+        private List<MLicense> mavenLicenses = Collections.emptyList();
         private Optional<CopyrightHolder> copyrightHolder = Optional.empty();
         private String holderReason = "";
         private String scope = "plugin";
@@ -38,9 +77,39 @@ public class Coordinates2License {
         private String licenseTxt = "";
         private String headerTxt = "";
         transient private boolean used = false;
+        private String licenseTxtLicense = "";
+        private String headerLicense = "";
+        private String pomLicense = "";
+        private String byCoordinates = "";
+        private String notice = "";
+        private String pomHeaderLicense = "";
+
+        public String getPomHeader() {
+            return pomHeader;
+        }
+
+        public void setPomHeader( String pomHeader ) {
+            this.pomHeader = pomHeader;
+        }
+
+        private String pomHeader = "";
+
+        public void setNoticeLicense( MappedLicense noticeLicense ) {
+            this.noticeLicense = noticeLicense.toString();
+        }
+
+        private String noticeLicense = "";
 
         public Optional<String> getLicense() {
             return license;
+        }
+
+        public String getNotice() {
+            return notice;
+        }
+
+        public void setNotice( String notice ) {
+            this.notice = notice;
         }
 
         public Optional<CopyrightHolder> getCopyrightHolder() {
@@ -50,7 +119,7 @@ public class Coordinates2License {
         public void setLicense( MappedLicense mlicense ) {
             mlicense.ifPresent( l-> {
                 license = Optional.of(l.toString());
-                this.licenseReason = mlicense.getReason();
+                this.licenseReason = mlicense.toString();
             });
 
             if ( !mlicense.isPresent()) {
@@ -93,6 +162,82 @@ public class Coordinates2License {
 
         public String getLicenseReason() {
             return licenseReason;
+        }
+
+        public void setMLicenses( List<MLicense> mLicenses ) {
+            this.mavenLicenses = mLicenses;
+        }
+
+        public List<MLicense> getMavenLicenses() {
+            return mavenLicenses;
+        }
+
+        public String getLicenseTxt() {
+            return licenseTxt;
+        }
+
+        public void setLicenseTxtLicense( MappedLicense licenseTxtLicense ) {
+            if ( licenseTxtLicense.isPresent() ) {
+                this.licenseTxtLicense = licenseTxtLicense.toString();
+            } else {
+                this.licenseTxtLicense = licenseTxtLicense.getReason();
+            }
+        }
+
+        public void setHeaderLicense( MappedLicense headerLicense ) {
+            if ( headerLicense.isPresent() ) {
+                this.headerLicense = headerLicense.toString();
+            } else {
+                this.headerLicense = headerLicense.getReason();
+            }
+        }
+
+        public String getLicenseTextLicense() {
+            return licenseTxtLicense;
+        }
+
+        public String getHeaderLicense() {
+            return headerLicense;
+        }
+
+        public void setPomLicense( MappedLicense pomLicense ) {
+            if ( pomLicense.isPresent() ) {
+                this.pomLicense = pomLicense.toString();
+            } else {
+                this.pomLicense = pomLicense.getReason();
+            }
+        }
+
+        public String getPomLicense() {
+            return pomLicense;
+        }
+
+        public String getHeaderTxt() {
+            return headerTxt;
+        }
+
+        public void setByCoordinates( MappedLicense byCoordinates ) {
+            if ( byCoordinates.isPresent() ) {
+                this.byCoordinates = byCoordinates.toString();
+            } else {
+                this.byCoordinates = byCoordinates.getReason();
+            }
+        }
+
+        public String getByCoordinates() {
+            return byCoordinates;
+        }
+
+        public String getNoticeLicense() {
+            return noticeLicense;
+        }
+
+        public String getPomHeaderLicense() {
+            return pomHeaderLicense;
+        }
+
+        public void setPomHeaderLicense( MappedLicense license ) {
+            this.pomHeaderLicense = license.toString();
         }
     }
 
@@ -148,16 +293,17 @@ public class Coordinates2License {
         return _orElseThrow( log, () -> new IllegalStateException( "no logger" ) );
     }
 
-    public void determineLicenses( FunctionE<Coordinates, MappedLicense, Exception> f ) {
+    public void update( BiConsumer<Coordinates, LiCo> f ) {
         list.forEach( ( c, coli ) -> {
             if( coli.isUsed() ) {
-                getLog().debug( "license for " + c + " is ..." );
-                if( !coli.getLicense().isPresent() ) {
-                    coli.setLicense( _nn( f.apply( c ) ) );
-                    getLog().debug( "license for " + c + " is (found) to be " + coli.getLicense() );
-                } else {
-                    getLog().debug( "license for " + c + " is known to be " + coli.getLicense().get() );
-                }
+                f.accept( c, coli );
+//                getLog().debug( "license for " + c + " is ..." );
+//                if( !coli.getLicense().isPresent() ) {
+//                    coli.setLicense( _nn( f.apply( c ) ) );
+//                    getLog().debug( "license for " + c + " is (found) to be " + coli.getLicense() );
+//                } else {
+//                    getLog().debug( "license for " + c + " is known to be " + coli.getLicense().get() );
+//                }
             }
         } );
     }
@@ -207,13 +353,41 @@ public class Coordinates2License {
                                                   lico.getScope(),
                                                   lico.getLicense().map( Object::toString ).orElse( "-" ) ) +
                                            lico.getHolder().map( Object::toString ).orElse( "-" ) );
-                    if ( !lico.getLicense().isPresent()) {
+                    if( !lico.getLicense().isPresent() ) {
                         getLog().error( "   no license found" );
                     }
                     if( !lico.getMessage().isEmpty() ) {
                         getLog().error( "   " + lico.getMessage() );
                     }
-                    getLog().debug( "    " + lico.getLicenseReason() );
+                    getLog().debug( "    [sum]              " + lico.getLicenseReason() );
+                    getLog().debug( "    by Coordinates     " + lico.getByCoordinates() );
+                    getLog().debug( "    by Pom             " + lico.getPomLicense() );
+                    lico.getMavenLicenses().forEach( ml -> {
+                        getLog().debug( "    by Pom Licenses" );
+                        getLog().debug( "       <" );
+                        if( ml.byName.length() > 2 ) {
+                            getLog().debug( "                       " + ml.byName );
+                        } else {
+                            getLog().debug( "                       [-] " + ml.getName() );
+                        }
+
+                        if( ml.byUrl.length() > 2 ) {
+                            getLog().debug( "                       " + ml.byUrl );
+                        } else {
+                            getLog().debug( "                       [-] " + ml.getUrl() );
+                        }
+
+                        if( ml.byComment.length() > 2 ) {
+                            getLog().debug( "                       " + ml.byComment );
+                        } else {
+                            getLog().debug( "                       [-] " + ml.getComment() );
+                        }
+                        getLog().debug( "       >" );
+                    } );
+                    getLog().debug( "    by Pom Header      " + (lico.getPomHeader().isEmpty() ? "" : "[+] ") + lico.getPomHeaderLicense() );
+                    getLog().debug( "    by License Text    " + (lico.getLicenseTxt().isEmpty() ? "" : "[+] ") + lico.getLicenseTextLicense() );
+                    getLog().debug( "    by Header          " + (lico.getHeaderTxt().isEmpty() ? "" : "[+] ") + lico.getHeaderLicense() );
+                    getLog().debug( "    by Notice          " + (lico.getNotice().isEmpty() ? "" : "[+] ") + lico.getNoticeLicense() );
                     getLog().debug( "\n" );
                 } );
     }

@@ -30,7 +30,6 @@ public class ExtractFromDejaCode {
 
     public void go( LOracle lOracle ) {
 
-
         Path tmp = Pathss.getTmpDir( "foo" );
         Filess.createDirectories( tmp );
 
@@ -38,32 +37,31 @@ public class ExtractFromDejaCode {
 
         Filess.list( _nn( tmp.resolve( "licenses" ) ) ).
                 filter( f -> f.toString().endsWith( ".yml" ) ).
-//                peek( System.out::println ).
-        forEach( f -> {
-    try {
-        YamlReader reader = new YamlReader( new FileReader( f.toString() ) );
-        Object object = reader.read();
-        //System.out.println( object );
-        Map map = (Map) object;
+                forEach( f -> {
+                    try {
+                        YamlReader reader = new YamlReader( new FileReader( f.toString() ) );
+                        Object object = _nn( reader.read() );
+                        //System.out.println( object );
+                        Map map = (Map) object;
 
-        Optional<LicenseID> key = lOracle.getByName( (String) map.get( "key" ) ).noReason();
-        Optional<LicenseID> name = lOracle.getByName( (String) map.get( "name" ) ).noReason();
-        Optional<LicenseID> shrt = lOracle.getByName( (String) map.get( "short_name" ) ).noReason();
+                        Optional<LicenseID> key = lOracle.getByName( _nn( (String) map.get( "key" ) ) ).noReason();
+                        Optional<LicenseID> name = lOracle.getByName( _nn( (String) map.get( "name" ) ) ).noReason();
+                        Optional<LicenseID> shrt = lOracle.getByName( _nn( (String) map.get( "short_name" ) ) ).noReason();
 
-        Optional<LicenseID> res = propLicense( lOracle, _nn( (String) map.get( "key" ) ), key, name, shrt );
+                        Optional<LicenseID> res = propLicense( lOracle, _nn( (String) map.get( "key" ) ), key, name, shrt );
 
-        if( res.isPresent() ) {
-            addStuff( lOracle, res.get(), map );
+                        if( res.isPresent() ) {
+                            addStuff( lOracle, _nn( res.get() ), map );
 //                            System.out.println( "\n" );
-        } else {
-            System.out.println( "hmmmm\n" );
+                        } else {
+                            System.out.println( "hmmmm\n" );
 //                            throw new IllegalArgumentException( "oops" );
-        }
+                        }
 
-    } catch( FileNotFoundException | YamlException e ) {
-        Log.warn( e.getMessage() );
-    }
-} );
+                    } catch( FileNotFoundException | YamlException e ) {
+                        Log.warn( e.getMessage() );
+                    }
+                } );
 
         Pathss.deleteRecursive( tmp );
     }
@@ -137,8 +135,17 @@ public class ExtractFromDejaCode {
             key = "indiana-extreme-1.1.1";
         }
 
+        if( key.equals( "commercial-option" )
+                || key.equals( "proprietary" )
+                || key.equals( "commercial" ) ) {
+            // what is this ?
+            return Optional.empty();
+        }
+
         try {
-            return Optional.of( lOracle.newSingle( key, false ) );
+            LicenseID ret = lOracle.newSingle( key, false );
+            lOracle.getMore( ret ).attributes.setFromDeja();
+            return Optional.of( ret );
         } catch( Exception e ) {
             System.out.println( "known (probably guess) " + key );
             return Optional.empty();
@@ -155,7 +162,7 @@ public class ExtractFromDejaCode {
         }
         Optional.ofNullable( (String) map.get( "osi_url" ) ).ifPresent( u -> {
             Optional<String> uu = normalizer.normalizeUrl( u );
-            if ( uu.isPresent()) {
+            if( uu.isPresent() ) {
                 if( !uu.get().equals( "opensource.org/licenses/bsd-license" ) ) {
                     // bsd is time based
                     lOracle.addUrl( licenseID, uu.get() );

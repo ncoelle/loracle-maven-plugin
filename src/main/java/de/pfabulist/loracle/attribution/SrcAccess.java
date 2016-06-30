@@ -15,10 +15,9 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.kleinod.text.Strings.newString;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._orElseGet;
 
 /**
@@ -35,8 +34,9 @@ public class SrcAccess {
     private final Findings log;
     private final boolean andIsOr;
 
-    private static Pattern javaPattern = //Frex.any().then( Frex.txt( "license") ).then( Frex.txt( '.' ).then( Frex.any().zeroOrMore()).zeroOrOnce()).buildCaseInsensitivePattern();
-            Frex.any().zeroOrMore().then( Frex.txt( ".java" )).buildCaseInsensitivePattern();
+    private static Pattern javaPattern =
+            Frex.any().zeroOrMore().
+                    then( Frex.or( Frex.txt( ".scala" ), Frex.txt( ".java" ))).buildCaseInsensitivePattern();
 
     public SrcAccess( LOracle lOracle, MavenLicenseOracle mlo, Findings log, boolean andIsOr ) {
         this.lOracle = lOracle;
@@ -69,18 +69,18 @@ public class SrcAccess {
             lico.setHeaderTxt( file );
 
 
-            getHolder( lOracle, log, andIsOr, file ).ifPresent( h ->lico.setHolder( Optional.of( h )));
-
-            extractLicense( lOracle, lico, file, log, andIsOr );
+//            getHolder( lOracle, log, andIsOr, file ).ifPresent( h ->lico.setHolder( Optional.of( h )));
+//
+//            extractLicense( lOracle, lico, file, log, andIsOr );
 
         } catch( IOException e ) {
             log.warn( _orElseGet( e.getMessage(), "pattern problem" ) );
         }
     }
 
-    static Optional<CopyrightHolder> getHolder( LOracle lOracle, Findings log, boolean andIsOr, String str  ) {
-        return new ContentToLicense( lOracle, "by file header", log, andIsOr ).getHolder( str );
-    }
+//    static Optional<CopyrightHolder> getHolder( LOracle lOracle, Findings log, boolean andIsOr, String str  ) {
+//        return new ContentToLicense( lOracle, "by file header", log, andIsOr ).getHolder( str );
+//    }
 
     static void extractLicense( LOracle lOracle, Coordinates2License.LiCo lico, String file, Findings log, boolean andIsOr ) {
 
@@ -110,5 +110,17 @@ public class SrcAccess {
 //                lico.setLicense( MappedLicense.of( lOracle.getOrThrowByName( "apache-2" ), "by header file" ) );
 //            }
 //        }
+    }
+
+    public void getPomHeader( Coordinates coordinates, Coordinates2License.LiCo liCo ) {
+        Path src = mlo.getPom( coordinates );
+
+        if ( !Files.exists(src)) {
+            log.warn( "no pom available for " + coordinates );
+            return;
+        }
+
+        liCo.setPomHeader( Header.getPomHeader( newString( Filess.readAllBytes( src ))));
+
     }
 }

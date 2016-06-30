@@ -44,7 +44,7 @@ Note
             </licenseDeclaration>
         </licenseDeclarations>
 
-   The coordinates allow '*' to declare patterns. The '*' only works within groupid and artifactid
+   The coordinates allow '\*' to declare patterns. The '\*' only works within groupid and artifactid
 
  * Url Declarations
 
@@ -81,7 +81,18 @@ Note
 
 
 
+### Non-open Source needs
 
+If you develop an non open project you still need to assign a license to your project, otherwise loracle will complain.
+i.e. declare your project closed:
+
+    <licenses>
+        <license>
+           <name>closed</name>
+        </license>
+    </licenses>
+
+This also means that any copy left licenses with a stronger than 'compile' scope will break your build
 
 
 ## older notes

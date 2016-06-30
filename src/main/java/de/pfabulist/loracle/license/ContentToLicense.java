@@ -4,6 +4,9 @@ import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.attribution.CopyrightHolder;
 import de.pfabulist.loracle.mojo.Findings;
 
+import java.nio.MappedByteBuffer;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,22 +32,29 @@ public class ContentToLicense {
     private final LOracle lOracle;
     private final String dscr;
     private final And and;
+    private final Findings log;
 
     public ContentToLicense( LOracle lOracle, String dscr, Findings log, boolean andIsOr ) {
         this.lOracle = lOracle;
         this.dscr = dscr;
         this.and = new And( lOracle, log, andIsOr );
+        this.log = log;
     }
 
     public MappedLicense toLicense( String str ) {
 
+        if( str.isEmpty() ) {
+            return MappedLicense.empty( "<no file found>" );
+        }
+
         return and.and( byUrl( str ), byNamePattern( str ) );
     }
 
-    private final static Pattern page =
+    public final static Pattern page =
             Frex.or( Frex.txt( "http://" ), Frex.txt( "https://" ) ).
-                    then( Frex.any().oneOrMore() ).group( "addr" ).
-                    then( Frex.or( Frex.txt( ' ' ), Frex.txt( ".\n" ) ) ).
+                    then( Frex.any().oneOrMore().lazy() ).group( "addr" ).
+                    then( Frex.txt( '.' ).zeroOrOnce()).
+                    then( Frex.or( Frex.txt( ' ' ), Frex.txt( '\n' ), Frex.txt( '\r' ) ) ).
                     //But( Frex.txt( ' ' ) ).oneOrMore().group( "addr" ) ).
                             buildCaseInsensitivePattern();
 
@@ -76,12 +86,52 @@ public class ContentToLicense {
             return MappedLicense.of( lOracle.getOrThrowByName( "cddl-1.0" ), dscr );
         }
 
-        if ( str.contains( "The Apache Software License, Version 1.1" )) {
+        if( str.contains( "The Apache Software License, Version 1.1" ) ) {
             return MappedLicense.of( lOracle.getOrThrowByName( "apache-1.1" ), dscr );
         }
 
         return MappedLicense.empty();
     }
+
+
+    public MappedLicense findLicenses( String str ) {
+
+        MappedLicense name = lOracle.findLongNames( and, str );
+        MappedLicense url = byUrl( str );
+
+        // todo merge
+
+        return and.and( name, url );
+    }
+
+//
+//        return
+//                Arrays.stream( str.split( "\n" ) ).
+//                        map( this::byLongNameSearchInLine ).
+//                        filter( MappedLicense::isPresent ).
+//                        findFirst().
+//                        orElse( MappedLicense.empty() );
+//
+//    }
+
+//    private MappedLicense byLongNameSearchInLine( String s ) {
+//        String line = new Normalizer().reduce( s );
+//        while( true ) {
+//            MappedLicense ret = lOracle.geByLongNameStart( line );
+//
+//            if( ret.isPresent() ) {
+//                return ret;
+//            }
+//
+//            int pos = line.indexOf( ' ' );
+//            if( pos <= 0 ) {
+//                return MappedLicense.empty();
+//            }
+//
+//            line = line.substring( pos + 1 );
+//
+//        }
+//    }
 
     public Optional<CopyrightHolder> getHolder( String str ) {
         Matcher matcher = copyRightPattern.matcher( str );

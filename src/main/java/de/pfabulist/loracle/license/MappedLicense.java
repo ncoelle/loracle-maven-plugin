@@ -5,9 +5,12 @@ import de.pfabulist.unchecked.functiontypes.ConsumerE;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 
@@ -17,8 +20,11 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
  */
 
 public class MappedLicense {
-    private final @Nullable LicenseID license;
+    private final
+    @Nullable
+    LicenseID license;
     private final String reason;
+    private final List<MappedLicense> diffOver = new ArrayList<>();
 
     private final static MappedLicense empty = new MappedLicense();
 
@@ -31,7 +37,15 @@ public class MappedLicense {
         this.license = licenseID;
         this.reason = reason;
 
-        if (reason.isEmpty() ) {
+        if( reason.isEmpty() ) {
+            throw new IllegalArgumentException( "can't have a MappedLicense without reason" );
+        }
+    }
+
+    public MappedLicense( String reason ) {
+        this.license = null;
+        this.reason = reason;
+        if( reason.isEmpty() ) {
             throw new IllegalArgumentException( "can't have a MappedLicense without reason" );
         }
     }
@@ -45,7 +59,7 @@ public class MappedLicense {
     }
 
     public static MappedLicense of( Optional<LicenseID> licenseID, String reason ) {
-        return licenseID.map( l -> of( l, reason) ).orElse( empty() );
+        return licenseID.map( l -> of( l, reason ) ).orElse( empty() );
     }
 
     public boolean isPresent() {
@@ -53,30 +67,37 @@ public class MappedLicense {
     }
 
     public LicenseID orElseThrow( Supplier<Exception> ex ) {
-        if ( !isPresent()) {
-            throw Unchecked.u( _nn(ex.get()));
+        if( !isPresent() ) {
+            throw Unchecked.u( _nn( ex.get() ) );
         }
 
         return _nn( license );
     }
 
     public void ifPresent( ConsumerE<LicenseID, Exception> con ) {
-        if ( isPresent() ) {
+        if( isPresent() ) {
             con.accept( license );
         }
     }
 
     public MappedLicense addReason( String more ) {
-        if ( !isPresent() ) {
+        if( !isPresent() ) {
             return MappedLicense.empty();
         }
-        return new MappedLicense( _nn(license), reason + " && " + more );
+        if( more.isEmpty() ) {
+            return this;
+        }
+        return new MappedLicense( _nn( license ), reason + " && " + more );
     }
 
     @Override
     public String toString() {
-        if ( isPresent() ) {
-            return _nn(license) + " [" + reason + "]";
+        if( isPresent() ) {
+            String diff = "";
+            if ( !diffOver.isEmpty()) {
+                diff = "!override! " + " [" + diffOver.stream().map( Object::toString ).collect( Collectors.joining() ) + "]";
+            }
+            return _nn( license ) + " [" + reason + "]" + diff;
         }
 
         return "-";
@@ -91,10 +112,14 @@ public class MappedLicense {
     }
 
     @Override
-    @SuppressFBWarnings( "NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION")
+    @SuppressFBWarnings( "NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION" )
     public boolean equals( @Nullable Object o ) {
-        if( this == o ) { return true; }
-        if( o == null || getClass() != o.getClass() ) { return false; }
+        if( this == o ) {
+            return true;
+        }
+        if( o == null || getClass() != o.getClass() ) {
+            return false;
+        }
 
         MappedLicense that = (MappedLicense) o;
 
@@ -108,10 +133,40 @@ public class MappedLicense {
     }
 
     public <U> U orElse( Function<LicenseID, U> f, U els ) {
-        if ( isPresent()) {
-            return _nn(f.apply( _nn(license )));
+        if( isPresent() ) {
+            return _nn( f.apply( _nn( license ) ) );
         }
 
         return els;
     }
+
+    public static MappedLicense empty( String s ) {
+        return new MappedLicense( s );
+    }
+
+    public void addOver( MappedLicense other ) {
+
+        if ( this == other ) {
+            return;
+        }
+
+        if( other.isPresent() && !equals( other ) ) {
+            diffOver.add( other );
+        }
+
+        other.diffOver.forEach( over -> {
+            if ( !equals( over )) {
+                diffOver.add( over );
+            }
+        } );
+    }
+
+    public void addOverFrom( MappedLicense other ) {
+        other.diffOver.forEach( over -> {
+            if ( equals( over )) {
+                diffOver.add( over );
+            }
+        } );
+    }
+
 }

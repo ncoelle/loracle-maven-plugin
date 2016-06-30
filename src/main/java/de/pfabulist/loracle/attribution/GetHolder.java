@@ -5,9 +5,12 @@ import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.kleinod.nio.IO;
 import de.pfabulist.loracle.license.ContentToLicense;
 import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.mojo.Findings;
 import de.pfabulist.loracle.mojo.MavenLicenseOracle;
+import de.pfabulist.unchecked.functiontypes.ConsumerE;
+import de.pfabulist.unchecked.functiontypes.PredicateE;
 import org.apache.maven.model.License;
 
 import javax.annotation.Nullable;
@@ -17,6 +20,8 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -84,6 +89,19 @@ public class GetHolder {
         return getApacheCopyrightHolder( coo );
     }
 
+    public void getNotice( Coordinates coo, Coordinates2License.LiCo lico ) {
+        Path jar = mlo.getArtifact( coo );
+
+        try( InputStream in = Filess.newInputStream( jar ) ) {
+            String notice = unzipToString( in, noticePattern );
+
+            lico.setNotice( notice );
+        } catch( IOException e ) {
+            log.warn( _orElseGet( e.getMessage(), "pattern problem" ) );
+        }
+    }
+
+
     private Optional<CopyrightHolder> getApacheCopyrightHolder( Coordinates coo ) {
         Path jar = mlo.getArtifact( coo );
 
@@ -133,4 +151,26 @@ public class GetHolder {
 
     }
 
+
+//    public static void onUnzip( InputStream is, Predicate<String> filter, BiConsumer<String, InputStream> action ) {
+//        try( ZipInputStream zin = new ZipInputStream( is ) ) {
+//
+//            @Nullable ZipEntry ze;
+//            while( ( ze = zin.getNextEntry() ) != null ) {
+//
+////                if( pat.matcher( ze.getName() ).matches() ) {
+////
+////                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+////                    IO.copy( zin, out );
+////
+////                    return newString( out.toByteArray() );
+////                }
+//                zin.closeEntry();
+//            }
+//        } catch( IOException e ) {
+//            throw u( e );
+//        }
+//
+//    }
+//
 }

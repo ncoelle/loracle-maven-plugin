@@ -249,7 +249,9 @@ public class ExtractGoodFedoraLicensesFromHTML {
 
                                 if ( f.name.equals( "Affero General Public License 3.0 with Zarafa trademark exceptions" )) {
                           //          System.out.println( "   found new license: " );
+                                    // todo new exception ?
                                     LicenseID newL = lOracle.newSingle( "AGPL-3.0 with Zarafa-trademark-exception", false );
+                                    lOracle.getMore( newL ).attributes.setFromFedora();
                                     lOracle.addLongName( newL, "Affero General Public License 3.0 with Zarafa trademark exceptions" );
                                     addFedoraInfo( lOracle, newL, f );
                                     return;
@@ -260,6 +262,7 @@ public class ExtractGoodFedoraLicensesFromHTML {
                                         !f.shortName.equals( "Public Domain" ) )
                                 {
                                     LicenseID newL = lOracle.newSingle( f.shortName, false );
+                                    lOracle.getMore( newL ).attributes.setFromFedora();
                                     lOracle.addLongName( newL, f.name );
                                     addFedoraInfo( lOracle, newL, f );
                                     return;

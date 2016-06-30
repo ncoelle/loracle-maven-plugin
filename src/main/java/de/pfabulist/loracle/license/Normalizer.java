@@ -24,11 +24,13 @@ public class Normalizer {
     static private final String WHITESPACE = Frex.or( Frex.whitespace(),
                                                       Frex.txt( ',' ),
                                                       Frex.txt( '-' ),
+                                                      Frex.txt( '_' ),
                                                       Frex.txt( '!' ),
                                                       Frex.txt( '"' ),
                                                       Frex.txt( '\'' ),
                                                       Frex.txt( '/' ),
                                                       Frex.txt( '(' ),
+                                                      Frex.txt( '*' ),
                                                       Frex.txt( ')') ).
             buildPattern().toString();
     static private final Pattern maybe = or( fullWord( "License" ),

@@ -67,6 +67,8 @@ public class LOracle {
     private transient Map<String, LicenseID> longNameMapper = new HashMap<>();
     private transient Map<String, LicenseID> urls = new HashMap<>();
 
+    private List<String> tooSimpleLongNames = new ArrayList<>();
+
     public LOracle() {
         parser = new SPDXParser( this );
     }
@@ -253,6 +255,11 @@ public class LOracle {
     private static final Pattern orLater = Frex.any().oneOrMore().var( "base" ).then( Frex.txt( " or later" ) ).buildCaseInsensitivePattern();
 
     public MappedLicense getByName( String name ) {
+
+        if( name.isEmpty() ) {
+            return MappedLicense.empty( "no name" );
+        }
+
         try {
             return MappedLicense.of( parser.parse( name ), "by parsed name: " + name );
         } catch( Exception e ) {
@@ -275,7 +282,7 @@ public class LOracle {
                     return MappedLicense.of( getOrLater( (SingleLicense) _nn( ret.get() ), true, Optional.empty() ), "by normalized name and 'or later': " + name );
                 } else {
                     // or later with a composite license is strange
-                    return MappedLicense.empty();
+                    return MappedLicense.empty( " or later with composite (?)" );
                 }
             }
             return MappedLicense.of( ret, "by normalized name: " + name );
@@ -284,7 +291,7 @@ public class LOracle {
         try {
             return MappedLicense.of( new FuzzyParser( this ).parse( name ), "by fuzzy parsing name: " + name );
         } catch( Exception e ) {
-            return MappedLicense.empty();
+            return MappedLicense.empty( "unknown name" );
         }
     }
 
@@ -343,7 +350,7 @@ public class LOracle {
 
         Matcher end = urlWithLongname.matcher( _nn( rel.get() ) );
         if( !end.matches() ) {
-            Log.warn( "not a real url? " + url + " red: " + rel );
+            Log.debug( "not a url with path ? " + url + " reduced: " + rel );
             return MappedLicense.empty();
         }
 
@@ -494,6 +501,56 @@ public class LOracle {
 
     public int getSingleLicenseCount() {
         return singles.size();
+    }
+
+    public MappedLicense geByLongNameStart( String line ) {
+        return longNameMapper.entrySet().stream().
+                map( e -> line.startsWith( _nn( e.getKey() ) ) ? MappedLicense.of( _nn( e.getValue() ), "starts with" ) : MappedLicense.empty() ).
+                filter( MappedLicense::isPresent ).
+                findFirst().
+                orElse( MappedLicense.empty() );
+    }
+
+    public Pattern fullNames( String lng ) {
+        return Arrays.stream( lng.split( " " ) ).
+                map( Frex::fullWord ).
+                reduce( Frex.txt( "" ), ( a, b ) -> a.then( Frex.whitespace().oneOrMore() ).then( b ) ).
+                buildCaseInsensitivePattern();
+    }
+
+    public MappedLicense byUrlSearch( And and, String str ) {
+        return urls.entrySet().stream().
+                map( e -> str.contains( _nn( e.getKey() ) ) ? MappedLicense.of( _nn( e.getValue() ), "found url" ) : MappedLicense.empty() ).
+                reduce( MappedLicense.empty(), and::and );
+    }
+
+    public MappedLicense findLongNames( And and, String str ) {
+        String norm = normalizer.reduce( str );
+
+        return longNameMapper.entrySet().stream().
+                map( e -> {
+                    String name = _nn( e.getKey() );
+                    LicenseID li = _nn( e.getValue());
+                    if ( !tooSimpleLongNames.contains( name ) &&
+                        fullNames( name ).matcher( norm ).find()) {
+                        return MappedLicense.of( li, "found name" );
+                    } else {
+                        return MappedLicense.empty();
+                    }
+                } ).
+                reduce( MappedLicense.empty(), and::and );
+//
+//
+//        return longNameMapper.entrySet().stream().
+//                map( e ->
+//                             line.startsWith( _nn( e.getKey() ) ) ? MappedLicense.of( _nn( e.getValue() ), "starts with" ) : MappedLicense.empty() ).
+//                filter( MappedLicense::isPresent ).
+//                findFirst().
+//                orElse( MappedLicense.empty() );
+    }
+
+    public void addTooSimple( String... strs ) {
+        tooSimpleLongNames.addAll( Arrays.asList( strs ) );
     }
 
 }

@@ -134,6 +134,7 @@ public class ExtractBadFedoraLicensesFromHTML {
                         if ( gn.isEmpty() && gu.isEmpty() ) {
                             System.out.println("new bad");
                             LicenseID nn = lOracle.newSingle( f.name, false );
+                            lOracle.getMore( nn ).attributes.setFromFedora();
                             if ( !f.url.isEmpty() ) {
                                 lOracle.addUrl( nn, f.url );
                             }

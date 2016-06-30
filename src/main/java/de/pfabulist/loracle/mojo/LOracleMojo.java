@@ -105,11 +105,15 @@ public class LOracleMojo extends AbstractMojo {
 
             mojo.config( getLicenseDeclarations(), getUrlDeclarations(), allowUrlsCheckedDaysBefore );
             mojo.getDependencies();
-            mojo.determineLicenses();
+            mojo.determineMavenLicenses();
             mojo.jars();
-            mojo.getHolder();
             mojo.src();
+            mojo.getNotice();
+            mojo.getPomHeader();
+            mojo.computeLicense();
+            mojo.computeHolder();
             mojo.checkCompatibility();
+
 
             mojo.summery();
             mojo.store();
