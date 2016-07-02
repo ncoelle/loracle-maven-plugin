@@ -6,9 +6,12 @@ import org.apache.maven.artifact.Artifact;
 
 import javax.annotation.Nullable;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,15 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
  */
 
 public class Coordinates {
+
+    public static final Pattern snapshot =
+            Frex.any().oneOrMore().lazy().var( "base" ).
+                    then( Frex.number().times( 8 ) ).
+                    then( Frex.txt( '.' ) ).
+                    then( Frex.number().times( 6 ) ).
+                    then( Frex.txt( '-' ) ).
+                    then( Frex.number().oneOrMore() ).
+                    buildCaseInsensitivePattern();
 
     private final String coo;
 
@@ -111,9 +123,9 @@ public class Coordinates {
 
         // todo * at end
 
-        List<String> txt = new ArrayList<>( Arrays.asList( coo.split( "\\*" )));
+        List<String> txt = new ArrayList<>( Arrays.asList( coo.split( "\\*" ) ) );
 
-        if ( coo.endsWith( "*" )) {
+        if( coo.endsWith( "*" ) ) {
             txt.add( "" );
         }
 
@@ -129,6 +141,20 @@ public class Coordinates {
 
         return pat.matcher( other.coo ).matches();
     }
+
+    public boolean isSnapshot() {
+        return snapshot.matcher( getVersion() ).matches();
+    }
+
+    public Path getSnapshotTolerantDir( Path base ) {
+        Matcher matcher = snapshot.matcher( getVersion() );
+        if( matcher.matches() ) {
+            return _nn( _nn( _nn( base.resolve( getGroupId().replace( '.', '/' ) ) ).resolve( getArtifactId() ) ).resolve( matcher.group( "base" ) + "-SNAPSHOT" ) );
+        }
+
+        return _nn( _nn( _nn( base.resolve( getGroupId().replace( '.', '/' ) ) ).resolve( getArtifactId() ) ).resolve( getVersion() ) );
+    }
+
 }
 
 

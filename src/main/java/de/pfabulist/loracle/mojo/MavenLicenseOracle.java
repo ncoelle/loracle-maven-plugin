@@ -68,13 +68,9 @@ public class MavenLicenseOracle {
         }
     }
 
+
     public Path getPom( Coordinates coords ) {
-        Path ret = localRepo;
-        ret = _nn( ret.resolve( coords.getGroupId().replace( '.', '/' ) ) );
-        ret = _nn( ret.resolve( coords.getArtifactId() ) );
-        ret = _nn( ret.resolve( coords.getVersion() ) );
-        ret = _nn( ret.resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".pom" ) );
-        return ret;
+        return _nn( coords.getSnapshotTolerantDir( localRepo ).resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".pom" ));
     }
 
     public Path getArtifactOld( Coordinates coords ) {
@@ -87,11 +83,11 @@ public class MavenLicenseOracle {
     }
 
     public Path getArtifact( Coordinates coords ) {
-        Path path = localRepo;
-        path = _nn( path.resolve( coords.getGroupId().replace( '.', '/' ) ) );
-        path = _nn( path.resolve( coords.getArtifactId() ) );
-        path = _nn( path.resolve( coords.getVersion() ) );
-        Path dir = path;
+//        Path path = localRepo;
+//        path = _nn( path.resolve( coords.getGroupId().replace( '.', '/' ) ) );
+//        path = _nn( path.resolve( coords.getArtifactId() ) );
+//        path = _nn( path.resolve( coords.getVersion() ) );
+        Path dir = coords.getSnapshotTolerantDir( localRepo );
 
 
         Pattern pattern =
@@ -124,12 +120,7 @@ public class MavenLicenseOracle {
     }
 
     public Path getSrc( Coordinates coords ) {
-        Path ret = localRepo;
-        ret = _nn( ret.resolve( coords.getGroupId().replace( '.', '/' ) ) );
-        ret = _nn( ret.resolve( coords.getArtifactId() ) );
-        ret = _nn( ret.resolve( coords.getVersion() ) );
-        ret = _nn( ret.resolve( coords.getArtifactId() + "-" + coords.getVersion() + "-sources.jar" ) );  // todo war ...
-        return ret;
+        return _nn( coords.getSnapshotTolerantDir( localRepo ).resolve( coords.getArtifactId() + "-" + coords.getVersion() + "-sources.jar" ));
     }
 
     List<License> extractLicense( final Path pom ) {

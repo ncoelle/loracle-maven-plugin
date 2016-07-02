@@ -212,8 +212,9 @@ public class BuildupTest {
         lOracle.addLicenseForArtifact( Coordinates.valueOf( "junitperf:junitperf:1.8" ),
                                        lOracle.getOrThrowByName( "bsd-3-clause" ) );
 
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "asm:asm*:3.1" ),
-                                       lOracle.getOrThrowByName( "bsd-3-clause" ) );
+//        lOracle.addLicenseForArtifact( Coordinates.valueOf( "asm:asm*:3.1" ),
+//                                       lOracle.getOrThrowByName( "bsd-3-clause" ) ); // now license full text
+
         // todo: Copyright (C) 2001 Clarkware Consulting, Inc.
         // https://github.com/clarkware/junitperf
 

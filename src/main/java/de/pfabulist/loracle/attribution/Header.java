@@ -18,16 +18,20 @@ public class Header {
 
     private static Pattern start =
             Frex.txt( "//" ).zeroOrOnce().
-                    then( Frex.whitespace().zeroOrMore() ).
-                    then( Frex.or( Frex.txt( "public" ), Frex.txt( "private" ), Frex.txt( "protected" ) ).zeroOrOnce() ).
-                    then( Frex.whitespace().oneOrMore() ).
-                    then( Frex.txt( "final " ).zeroOrOnce() ).
-                    then( Frex.whitespace().zeroOrMore() ).
-                    then( Frex.or( Frex.txt( "class" ), Frex.txt( "enum" ), Frex.txt( "interface" ), Frex.txt( "abstract class" ) ) ).
-                    then( Frex.any().zeroOrMore() ).buildCaseInsensitivePattern();
+                    then( Frex.or( Frex.fullWord( "public" ),
+                                   Frex.fullWord( "private" ),
+                                   Frex.fullWord( "protected" ),
+                                   Frex.fullWord( "abstract" ),
+                                   Frex.fullWord( "final" ),
+                                   Frex.fullWord( "static" ),
+                                   Frex.whitespace() ).zeroOrMore() ).
+                    then( Frex.or( Frex.fullWord( "class" ),
+                                   Frex.fullWord( "interface" ),
+                                   Frex.fullWord( "@interface" ),
+                                   Frex.fullWord( "enum" ) ) ).
+                    then( Frex.any().oneOrMore() ).
+                    buildCaseInsensitivePattern();
 
-//    private static Pattern pomproject =
-//            Frex.txt( "<project" ).buildCaseInsensitivePattern();
 
     public static String getHeader( String in ) {
         String[] lines = in.split( "\n" );
@@ -36,14 +40,14 @@ public class Header {
         AtomicReference<Integer> count = new AtomicReference<>( 0 );
 
         return Arrays.stream( lines ).
-                filter( l -> !l.startsWith( "import" ) ).
-                peek( l -> count.set( _nn(count.get()) + l.length()) ).
+                filter( l -> !l.startsWith( "import" ) && !l.startsWith( "package" ) ).
+                peek( l -> count.set( _nn( count.get() ) + l.length() ) ).
                 map( l -> {
                     if( _nn( afterClass.get() ) ) {
                         return "";
                     }
 
-                    if( start.matcher( l ).matches() || _nn(count.get()) > 3000 ) {
+                    if( start.matcher( l ).matches() || _nn( count.get() ) > 3000 ) {
                         afterClass.set( true );
                         return "";
                     }
@@ -57,13 +61,13 @@ public class Header {
 
     public static String getPomHeader( String in ) {
         int start = in.indexOf( "<project" );
-        if ( start <= 0 ) {
+        if( start <= 0 ) {
             return "";
         }
 
         String ret = in.substring( 0, start );
 
-        if ( ret.startsWith( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>")) {
+        if( ret.startsWith( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" ) ) {
             ret = ret.substring( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>".length() ).trim();
         }
 

@@ -11,6 +11,7 @@ import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.Decider;
 import de.pfabulist.loracle.license.LOracle;
+import de.pfabulist.loracle.license.LicenseFromText;
 import de.pfabulist.loracle.license.LicenseID;
 import de.pfabulist.loracle.license.MappedLicense;
 import de.pfabulist.nonnullbydefault.NonnullCheck;
@@ -364,10 +365,34 @@ public class LicenseCheckMojo {
 
         liCo.setPomLicense( byPom );
 
-        if ( byPom.isPresent() ) {
-            MappedLicense sum = new Decider().decide( byCoo, byPom );
+        LicenseFromText lft = new LicenseFromText( lOracle );
+        MappedLicense t1 = lft.getLicense( liCo.getLicenseTxt() );
+        if ( t1.isPresent() ) {
+            log.debug( "[woo] " + coordinates + " -> " + t1 );
+            liCo.setLicenseTxtLicense( t1 );
+        }
+        MappedLicense t2 = lft.getLicense( liCo.getPomHeader() );
+        if ( t2.isPresent() ) {
+            log.debug( "[woo] " + coordinates + " -> " + t2 );
+            liCo.setPomHeaderLicense( t2 );
+        }
+        MappedLicense t3 = lft.getLicense( liCo.getHeaderTxt() );
+        if ( t3.isPresent() ) {
+            log.debug( "[woo] " + coordinates + " -> " + t3 );
+            liCo.setHeaderLicense( t3 );
+        }
+        MappedLicense t4 = lft.getLicense( liCo.getNotice() );
+        if ( t4.isPresent() ) {
+            log.debug( "[woo] " + coordinates + " -> " + t4 );
+            liCo.setNoticeLicense( t4 );
+        }
+
+        MappedLicense sum = new Decider().decide( byCoo, byPom, t1, t2, t3, t4 );
+
+
+        if ( sum.isPresent() ) {
             liCo.setLicense( sum );
-            log.debug( "coordinates + pom: " + coordinates + " -> " +sum.toString()  );
+            //log.debug( "coordinates + pom: " + coordinates + " -> " +sum.toString()  );
             // todo overridable by flag
             return;
         }
@@ -388,7 +413,7 @@ public class LicenseCheckMojo {
         liCo.setNoticeLicense( byNotice );
 
 
-        MappedLicense sum = new Decider().decide( byCoo, byPom, byPomHeader, byLicenseTxt, byHeader, byNotice );
+        sum = new Decider().decide( byCoo, byPom, byPomHeader, byLicenseTxt, byHeader, byNotice );
         liCo.setLicense( sum );
 
         log.debug( "done found?: " + sum.toString()  );

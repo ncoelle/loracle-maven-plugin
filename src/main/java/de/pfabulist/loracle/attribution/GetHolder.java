@@ -96,6 +96,8 @@ public class GetHolder {
             String notice = unzipToString( in, noticePattern );
 
             lico.setNotice( notice );
+            new LicenseWriter().write( coo, "notice", notice );
+
         } catch( IOException e ) {
             log.warn( _orElseGet( e.getMessage(), "pattern problem" ) );
         }

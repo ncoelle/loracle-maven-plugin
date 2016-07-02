@@ -67,6 +67,8 @@ public class SrcAccess {
 
             file = Header.getHeader( file );
             lico.setHeaderTxt( file );
+            new LicenseWriter().write( coo, "src-header", file );
+
 
 
 //            getHolder( lOracle, log, andIsOr, file ).ifPresent( h ->lico.setHolder( Optional.of( h )));
@@ -116,11 +118,14 @@ public class SrcAccess {
         Path src = mlo.getPom( coordinates );
 
         if ( !Files.exists(src)) {
-            log.warn( "no pom available for " + coordinates );
+            log.warn( "no pom available for " + coordinates + " at " + src );
             return;
         }
 
-        liCo.setPomHeader( Header.getPomHeader( newString( Filess.readAllBytes( src ))));
+        String header = Header.getPomHeader( newString( Filess.readAllBytes( src )));
+        liCo.setPomHeader( header );
+        new LicenseWriter().write( coordinates, "pom-header", header );
+
 
     }
 }
