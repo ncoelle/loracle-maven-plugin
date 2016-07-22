@@ -1,0 +1,28 @@
+{
+  "license": {},
+  "licenseReason": "",
+  "mavenLicenses": [
+    {
+      "mavenLicenseName": "MIT",
+      "byName": "",
+      "mavenLicenseUrl": "https://github.com/scribejava/scribejava/blob/master/LICENSE.txt",
+      "byUrl": "",
+      "mavenLicenseComment": "",
+      "byComment": ""
+    }
+  ],
+  "copyrightHolder": {},
+  "holderReason": "",
+  "scope": "compile",
+  "message": "",
+  "licenseTxt": "",
+  "headerTxt": "/**\n * Signs a base string, returning the OAuth signature\n */",
+  "licenseTxtLicense": "",
+  "headerLicense": "",
+  "pomLicense": "mit [by parsed name: MIT]",
+  "byCoordinates": "",
+  "notice": "",
+  "pomHeaderLicense": "",
+  "pomHeader": "",
+  "noticeLicense": ""
+}

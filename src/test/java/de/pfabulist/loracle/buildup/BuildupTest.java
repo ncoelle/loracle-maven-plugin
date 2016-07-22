@@ -127,6 +127,11 @@ public class BuildupTest {
         lOracle.addLongName( lOracle.getOrThrowByName( "gpl-1.0" ), "gnu (gpl) 1.0" );
         lOracle.addLongName( lOracle.getOrThrowByName( "cddl-1.0" ), "Common Development and Distribution License (CDDL) v1.0" );
 
+        lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL_1_1" );
+        lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.0 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL" );
+
+
+
         System.out.println( "----------------------- " );
         System.out.println( "------ dejacode ------- " );
         System.out.println( "----------------------- " );
@@ -135,25 +140,10 @@ public class BuildupTest {
 
         System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
 
-        lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL_1_1" );
-        lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.0 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL" );
-
-//        lOracle.addUrl( lOracle.getOrThrowByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ), "https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html" );
-//        lOracle.addUrl( lOracle.getOrThrowByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ), "glassfish.java.net/public/cddl+gpl_1_1" );
-//        lOracle.addUrl( lOracle.getOrThrowByName( "CDDl-1.0 or GPL-2.0 with Classpath-exception-2.0" ), "https://glassfish.dev.java.net/public/CDDL+GPL.html" );
-//        lOracle.addUrl( lOracle.getOrThrowByName( "CDDl-1.0 or GPL-2.0 with Classpath-exception-2.0" ), "http://glassfish.java.net/public/CDDL+GPL.html" );
-//        lOracle.addUrl( lOracle.getOrThrowByName( "CDDl-1.0 or GPL-2.0 with Classpath-exception-2.0" ), "https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html" );
-
-//        lOracle.addUrl( lOracle.getOrThrowByName( "cc0-1.0" ), "repository.jboss.org/licenses/cc0-1.0" );
-
-        // osi license urls
-        //lOracle.addUrl( lOracle.getOrThrowByName( "mit" ), "http://www.opensource.org/licenses/mit-license.php" );
 
         // gnu license urls
         lOracle.addUrl( lOracle.getOrThrowByName( "LGPL-3.0+" ), "gnu.org/licenses/lgpl" );
 
-        // fsf license urls
-//        lOracle.addUrl( lOracle.getOrThrowByName( "agpl-3.0" ), "www.fsf.org/licensing/licenses/agpl-3.0.html"  );
 
         // creative commons urls
         lOracle.addUrl( lOracle.getOrThrowByName( "cc0-1.0" ), "http://creativecommons.org/publicdomain/zero/1.0/" );
@@ -169,6 +159,11 @@ public class BuildupTest {
 
         LicenseID gs = lOracle.newSingle( "gsbase-1.0", false );
         lOracle.addUrl( gs, "gsbase.sourceforge.net/license.html" );
+
+//        LicenseID bouncy = lOracle.newSingle( "bouncycastle", false ); // is really mit
+//        lOracle.addUrl( bouncy, "bouncyastle.org/license.html" ); // todo
+
+
 
         // by artifact
         // lOracle.addLicenseForArtifact( Coordinates.valueOf( "dom4j:dom4j:1.6.1" ), lOracle.getOrThrowByName( "dom4j" ) ); found in license
@@ -211,6 +206,9 @@ public class BuildupTest {
 
         lOracle.addLicenseForArtifact( Coordinates.valueOf( "junitperf:junitperf:1.8" ),
                                        lOracle.getOrThrowByName( "bsd-3-clause" ) );
+
+        lOracle.addLicenseForArtifact( Coordinates.valueOf( "com.sun:tools:*" ),
+                                       lOracle.getOrThrowByName( "cddl-1.1" ) ); // todo check
 
 //        lOracle.addLicenseForArtifact( Coordinates.valueOf( "asm:asm*:3.1" ),
 //                                       lOracle.getOrThrowByName( "bsd-3-clause" ) ); // now license full text
@@ -271,18 +269,18 @@ public class BuildupTest {
 
         // checkat
 
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://asm.objectweb.org/license.html", "2016-06-08" );
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://asm.ow2.org/license.html", "2016-06-08" ); // todo
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://antlr.org/license.html", "2016-06-08" ); // todo
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://www.opensource.org/licenses/bsd-license.php", "2016-06-08" );
-//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-4-clause" ), "http://hsqldb.org/web/hsqlLicense.html", "2016-06-08" ); // now new license
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://repo.aduna-software.org/legal/aduna-bsd.txt", "2016-06-08" );
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-4-clause" ), "http://www.jcabi.com/LICENSE.txt", "2016-06-09" );  // todo
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://antlr.org/license.html", "2016-06-09" );  // todo
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/about/license.html", "2016-06-20" );
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/license.html", "2016-06-20" );
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://msv.java.net/License.txt", "2016-06-24" );
-        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "mit" ), "http://www.bouncycastle.org/license.html", "2016-06-28" );
+//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://asm.objectweb.org/license.html", "2016-06-08" );
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://asm.ow2.org/license.html", "2016-06-08" ); // todo
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://antlr.org/license.html", "2016-06-08" ); // todo
+//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://www.opensource.org/licenses/bsd-license.php", "2016-06-08" );
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-4-clause" ), "http://hsqldb.org/web/hsqlLicense.html", "2016-06-08" ); // now new license
+//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://repo.aduna-software.org/legal/aduna-bsd.txt", "2016-06-08" );
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-4-clause" ), "http://www.jcabi.com/LICENSE.txt", "2016-06-09" );  // todo
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://antlr.org/license.html", "2016-06-09" );  // todo
+//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/about/license.html", "2016-06-20" );
+//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/license.html", "2016-06-20" );
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://msv.java.net/License.txt", "2016-06-24" );
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "mit" ), "http://www.bouncycastle.org/license.html", "2016-06-28" );
 
         lOracle.addUrl( lOracle.getOrThrowByName( "wtfpl" ), "http://www.wtfpl.net/" );
 

@@ -53,7 +53,7 @@ public class LOracleMojo extends AbstractMojo {
     @Parameter( property = "license-check.stopOnError", defaultValue = "true" )
     boolean stopOnError;
 
-    @Parameter( property = "license-check.andIsOr", defaultValue = "false" )
+    @Parameter( property = "license-check.andIsOr", defaultValue = "true" )
     boolean andIsOr;
 
     @Parameter( property = "license-check.allowUrlsCheckedDaysBefore", defaultValue = "-1000" )
@@ -110,13 +110,16 @@ public class LOracleMojo extends AbstractMojo {
             mojo.src();
             mojo.getNotice();
             mojo.getPomHeader();
+            mojo.downloadPages();
+
             mojo.computeLicense();
             mojo.computeHolder();
             mojo.checkCompatibility();
 
-
             mojo.summery();
+            mojo.generateNotice();
             mojo.store();
+
 
 
         } catch( Exception e ) {

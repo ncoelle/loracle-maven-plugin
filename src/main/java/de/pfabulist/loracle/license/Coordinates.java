@@ -26,11 +26,11 @@ public class Coordinates {
 
     public static final Pattern snapshot =
             Frex.any().oneOrMore().lazy().var( "base" ).
-                    then( Frex.number().times( 8 ) ).
+                    then( Frex.digit().times( 8 ) ).
                     then( Frex.txt( '.' ) ).
-                    then( Frex.number().times( 6 ) ).
+                    then( Frex.digit().times( 6 ) ).
                     then( Frex.txt( '-' ) ).
-                    then( Frex.number().oneOrMore() ).
+                    then( Frex.digit().oneOrMore() ).
                     buildCaseInsensitivePattern();
 
     private final String coo;
@@ -153,6 +153,10 @@ public class Coordinates {
         }
 
         return _nn( _nn( _nn( base.resolve( getGroupId().replace( '.', '/' ) ) ).resolve( getArtifactId() ) ).resolve( getVersion() ) );
+    }
+
+    public String toFilename() {
+        return coo.replace( ":", "_");
     }
 
 }

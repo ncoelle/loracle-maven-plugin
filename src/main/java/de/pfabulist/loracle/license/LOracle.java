@@ -125,7 +125,11 @@ public class LOracle {
         LicenseID ret = new ModifiedSingleLicense( license, orLater, exception );
 
         composites.putIfAbsent( ret.getId(), new More( getMore( license ).attributes.isSPDX() ) );
-        getMore( ret ).attributes.setCopyLeft( getMore( license ).attributes.isCopyLeftDef() );
+
+        // todo not all exceptions prevent copyleft
+        if( !exception.isPresent() ) {
+            getMore( ret ).attributes.setCopyLeft( getMore( license ).attributes.isCopyLeftDef() );
+        }
 
         return ret;
     }
@@ -142,6 +146,15 @@ public class LOracle {
     // todo to normalizer
     public static String trim( String in ) {
         return _nn( in.toLowerCase( Locale.US ) ).replaceAll( ",", " " ).trim();
+    }
+
+    public SingleLicense newSingle( String name, More more ) {
+        if ( getByName( name ).isPresent() ) {
+            throw new IllegalArgumentException( "not a new license" );
+        }
+
+        singles.put( name, more );
+        return new SingleLicense( name );
     }
 
     public SingleLicense newSingle( String name, boolean spdx ) {
@@ -503,26 +516,29 @@ public class LOracle {
         return singles.size();
     }
 
-    public MappedLicense geByLongNameStart( String line ) {
-        return longNameMapper.entrySet().stream().
-                map( e -> line.startsWith( _nn( e.getKey() ) ) ? MappedLicense.of( _nn( e.getValue() ), "starts with" ) : MappedLicense.empty() ).
-                filter( MappedLicense::isPresent ).
-                findFirst().
-                orElse( MappedLicense.empty() );
-    }
+//    public MappedLicense geByLongNameStart( String line ) {
+//        return longNameMapper.entrySet().stream().
+//                map( e -> line.startsWith( _nn( e.getKey() ) ) ? MappedLicense.of( _nn( e.getValue() ), "starts with" ) : MappedLicense.empty() ).
+//                filter( MappedLicense::isPresent ).
+//                findFirst().
+//                orElse( MappedLicense.empty() );
+//    }
+
+    public static final Frex ws = Frex.or( Frex.whitespace(), Frex.txt( '\r' ), Frex.txt( '\n' ) );
 
     public Pattern fullNames( String lng ) {
         return Arrays.stream( lng.split( " " ) ).
-                map( Frex::fullWord ).
-                reduce( Frex.txt( "" ), ( a, b ) -> a.then( Frex.whitespace().oneOrMore() ).then( b ) ).
-                buildCaseInsensitivePattern();
+                map( w -> Frex.fullWord( w ).then( ws ) ).
+                //peek( w -> System.out.println( w.buildCaseInsensitivePattern()) ).
+                        reduce( Frex.txt( "" ), Frex::then ).
+                        buildCaseInsensitivePattern();
     }
 
-    public MappedLicense byUrlSearch( And and, String str ) {
-        return urls.entrySet().stream().
-                map( e -> str.contains( _nn( e.getKey() ) ) ? MappedLicense.of( _nn( e.getValue() ), "found url" ) : MappedLicense.empty() ).
-                reduce( MappedLicense.empty(), and::and );
-    }
+//    public MappedLicense byUrlSearch( And and, String str ) {
+//        return urls.entrySet().stream().
+//                map( e -> str.contains( _nn( e.getKey() ) ) ? MappedLicense.of( _nn( e.getValue() ), "found url" ) : MappedLicense.empty() ).
+//                reduce( MappedLicense.empty(), and::and );
+//    }
 
     public MappedLicense findLongNames( And and, String str ) {
         String norm = normalizer.reduce( str );
@@ -530,9 +546,9 @@ public class LOracle {
         return longNameMapper.entrySet().stream().
                 map( e -> {
                     String name = _nn( e.getKey() );
-                    LicenseID li = _nn( e.getValue());
-                    if ( !tooSimpleLongNames.contains( name ) &&
-                        fullNames( name ).matcher( norm ).find()) {
+                    LicenseID li = _nn( e.getValue() );
+                    if( !tooSimpleLongNames.contains( name ) &&
+                            fullNames( name ).matcher( norm ).find() ) {
                         return MappedLicense.of( li, "found name" );
                     } else {
                         return MappedLicense.empty();

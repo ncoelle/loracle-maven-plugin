@@ -1,10 +1,13 @@
 package de.pfabulist.loracle.license;
 
+import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.attribution.CopyrightHolder;
 import de.pfabulist.loracle.mojo.Findings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +15,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 
+import static de.pfabulist.kleinod.text.Strings.getBytes;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 import static de.pfabulist.unchecked.NullCheck._orElseThrow;
 
@@ -23,7 +28,6 @@ import static de.pfabulist.unchecked.NullCheck._orElseThrow;
 
 @SuppressWarnings( { "PMD.UnusedPrivateField" } )
 public class Coordinates2License {
-
 
     @SuppressFBWarnings( { "URF_UNREAD_FIELD", "URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD" } )
     public static class MLicense {
@@ -117,12 +121,12 @@ public class Coordinates2License {
         }
 
         public void setLicense( MappedLicense mlicense ) {
-            mlicense.ifPresent( l-> {
-                license = Optional.of(l.toString());
+            mlicense.ifPresent( l -> {
+                license = Optional.of( l.toString() );
                 this.licenseReason = mlicense.toString();
-            });
+            } );
 
-            if ( !mlicense.isPresent()) {
+            if( !mlicense.isPresent() ) {
                 licenseReason = "";
                 license = Optional.empty();
             }
@@ -177,7 +181,7 @@ public class Coordinates2License {
         }
 
         public void setLicenseTxtLicense( MappedLicense licenseTxtLicense ) {
-            if ( licenseTxtLicense.isPresent() ) {
+            if( licenseTxtLicense.isPresent() ) {
                 this.licenseTxtLicense = licenseTxtLicense.toString();
             } else {
                 this.licenseTxtLicense = licenseTxtLicense.getReason();
@@ -185,7 +189,7 @@ public class Coordinates2License {
         }
 
         public void setHeaderLicense( MappedLicense headerLicense ) {
-            if ( headerLicense.isPresent() ) {
+            if( headerLicense.isPresent() ) {
                 this.headerLicense = headerLicense.toString();
             } else {
                 this.headerLicense = headerLicense.getReason();
@@ -201,7 +205,7 @@ public class Coordinates2License {
         }
 
         public void setPomLicense( MappedLicense pomLicense ) {
-            if ( pomLicense.isPresent() ) {
+            if( pomLicense.isPresent() ) {
                 this.pomLicense = pomLicense.toString();
             } else {
                 this.pomLicense = pomLicense.getReason();
@@ -217,7 +221,7 @@ public class Coordinates2License {
         }
 
         public void setByCoordinates( MappedLicense byCoordinates ) {
-            if ( byCoordinates.isPresent() ) {
+            if( byCoordinates.isPresent() ) {
                 this.byCoordinates = byCoordinates.toString();
             } else {
                 this.byCoordinates = byCoordinates.getReason();
@@ -238,6 +242,10 @@ public class Coordinates2License {
 
         public void setPomHeaderLicense( MappedLicense license ) {
             this.pomHeaderLicense = license.toString();
+        }
+
+        public void setMavenLicenses( List<MLicense> mavenLicenses ) {
+            this.mavenLicenses = mavenLicenses;
         }
     }
 
@@ -342,8 +350,15 @@ public class Coordinates2License {
 
     public void summery() {
         list.entrySet().stream().
-                filter( e -> _nn( e.getValue() ).isUsed() ).
-                sorted( ( a, b ) -> getScopeLevel( _nn( a.getValue() ).getScope() ) - getScopeLevel( _nn( b.getValue() ).getScope() ) ).
+                filter( e -> entryPred( e, ( coo, lico ) -> lico.isUsed() ) ).
+                sorted( ( a, b ) -> {
+                    int scope = getScopeLevel( _nn( a.getValue() ).getScope() ) - getScopeLevel( _nn( b.getValue() ).getScope() );
+                    if( scope != 0 ) {
+                        return scope;
+                    }
+
+                    return a.toString().compareTo( b.toString() );
+                } ).
                 forEach( e -> {
                     Coordinates c = _nn( e.getKey() );
                     LiCo lico = _nn( e.getValue() );
@@ -384,33 +399,63 @@ public class Coordinates2License {
                         }
                         getLog().debug( "       >" );
                     } );
-                    getLog().debug( "    by Pom Header      " + (lico.getPomHeader().isEmpty() ? "" : "[+] ") + lico.getPomHeaderLicense() );
-                    getLog().debug( "    by License Text    " + (lico.getLicenseTxt().isEmpty() ? "" : "[+] ") + lico.getLicenseTextLicense() );
-                    getLog().debug( "    by Header          " + (lico.getHeaderTxt().isEmpty() ? "" : "[+] ") + lico.getHeaderLicense() );
-                    getLog().debug( "    by Notice          " + (lico.getNotice().isEmpty() ? "" : "[+] ") + lico.getNoticeLicense() );
+                    getLog().debug( "    by Pom Header      " + ( lico.getPomHeader().isEmpty() ? "" : "[+] " ) + lico.getPomHeaderLicense() );
+                    getLog().debug( "    by License Text    " + ( lico.getLicenseTxt().isEmpty() ? "" : "[+] " ) + lico.getLicenseTextLicense() );
+                    getLog().debug( "    by Header          " + ( lico.getHeaderTxt().isEmpty() ? "" : "[+] " ) + lico.getHeaderLicense() );
+                    getLog().debug( "    by Notice          " + ( lico.getNotice().isEmpty() ? "" : "[+] " ) + lico.getNoticeLicense() );
                     getLog().debug( "\n" );
                 } );
     }
 
+    public void generateNotice() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(
+                "   =========================================================================\n" +
+                        "   ==  NOTICE file corresponding Notice file standard as described in                     ==\n" +
+                        "   ==  the loracle-maven-plugin ,                                   ==\n" +
+                        "   ==                       ==\n" +
+                        "   =========================================================================\n" +
+                        "\n" +
+                        "   This is <loracle-maven-plugin-version foo>\n" +
+                        "   copyright pfabulist.de licensed under BSD-2-clause\n" +
+                        "\n" +
+                        "   It includes the following software\n" +
+                        "   Please read the different LICENSE files present in the de.pfabulist.loracle directory of\n" +
+                        "   this distribution.\n\n\n" );
+
+        list.entrySet().stream().
+                filter( e -> entryPred( e, ( coo, lico ) -> lico.isUsed() && getScopeLevel( lico.getScope() ) < getScopeLevel( "test" ) ) ).
+                sorted( ( a, b ) -> entryComp( a, b, ( cooA, x, cooB, y ) -> cooA.toString().compareTo( cooB.toString() ) ) );
+//                forEach( sb.append( li ) );
+
+        Path ff = Paths.get( "target/generated-sources/loracle/NOTICE.txt" );
+        Filess.write( ff, getBytes( sb.toString() ) );
+
+    }
+
     public void getHolders( BiFunction<Coordinates, String, Optional<CopyrightHolder>> f ) {
         list.forEach( ( c, lico ) -> {
-            if ( lico.isUsed() ) {
+            if( lico.isUsed() ) {
                 lico.getLicense().ifPresent( l -> lico.setHolder( _nn( f.apply( c, l ) ) ) );
-            }});
+            }
+        } );
     }
 
     public void fromSrc( BiConsumer<Coordinates, LiCo> f ) {
         list.forEach( ( c, lico ) -> {
-            if ( lico.isUsed() ) {
-                f.accept( c,lico );
-            }});
+            if( lico.isUsed() ) {
+                f.accept( c, lico );
+            }
+        } );
     }
 
-    public void fromJar( BiConsumer<Coordinates, LiCo> f  ) {
+    public void fromJar( BiConsumer<Coordinates, LiCo> f ) {
         list.forEach( ( c, lico ) -> {
-            if ( lico.isUsed() && !lico.getLicense().isPresent()) {
-                f.accept( c,lico );
-            }});
+            if( lico.isUsed() && !lico.getLicense().isPresent() ) {
+                f.accept( c, lico );
+            }
+        } );
     }
 
     public void setLog( Findings log ) {
@@ -422,11 +467,22 @@ public class Coordinates2License {
     }
 
     public void setAndIsOr( boolean andIsOr ) {
-        if ( this.andIsOr != andIsOr ) {
-            list.forEach( (c,coli) -> coli.setLicense( MappedLicense.empty() ) ); // todo just and, or ?
+        if( this.andIsOr != andIsOr ) {
+            list.forEach( ( c, coli ) -> coli.setLicense( MappedLicense.empty() ) ); // todo just and, or ?
         }
         this.andIsOr = andIsOr;
     }
 
+    public static <K, V> boolean entryPred( Map.Entry<K, V> entry, BiPredicate<K, V> bipred ) {
+        return bipred.test( entry.getKey(), entry.getValue() );
+    }
+
+    public interface Function4<A, B, C, D, R> {
+        R apply( A a, B b, C c, D d );
+    }
+
+    public static <K, V> int entryComp( Map.Entry<K, V> a, Map.Entry<K, V> b, Function4<K, V, K, V, Integer> f4 ) {
+        return f4.apply( _nn( a.getKey() ), _nn( a.getValue() ), _nn( b.getKey() ), _nn( b.getValue() ) );
+    }
 
 }

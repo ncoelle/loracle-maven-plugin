@@ -1784,9 +1784,6 @@
       "specific": [
         {
           "coo": "junitperf:junitperf:1.8"
-        },
-        {
-          "coo": "asm:asm*:3.1"
         }
       ],
       "couldbeName": [
@@ -2944,7 +2941,11 @@
         "cddl 1.1",
         "common development and distribution 1.1"
       ],
-      "specific": [],
+      "specific": [
+        {
+          "coo": "com.sun:tools:*"
+        }
+      ],
       "couldbeName": [
         "common development and distribution",
         "cddl"
@@ -5402,24 +5403,6 @@
         "gnu.org/licenses/old-licenses/gpl-2.0-standalone"
       ]
     },
-    "gpl-2.0-autoconf": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [
-        "ac-archive.sourceforge.net/doc/copyright"
-      ],
-      "longNames": [
-        "gpl 2 autoconf",
-        "gnu 2 with autoconf exception",
-        "gpl 2 with autoconf exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
     "gpl-2.0-autoopts": {
       "attributes": {
         "attis": "SdO 2 3 F L W  "
@@ -5436,22 +5419,6 @@
       ],
       "couldbeUrl": []
     },
-    "gpl-2.0-bison": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [],
-      "longNames": [
-        "gpl 2 bison",
-        "gnu 2 with bison exception",
-        "gpl 2 with bison exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
     "gpl-2.0-broadcom-linking": {
       "attributes": {
         "attis": "SdO 2 3 F L W  "
@@ -5461,42 +5428,6 @@
         "gpl 2 broadcom linking",
         "gnu 2 with broadcom linking exception",
         "gpl 2 with broadcom linking exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
-    "gpl-2.0-classpath": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [
-        "gnu.org/software/classpath/license"
-      ],
-      "longNames": [
-        "gpl 2 classpath",
-        "gnu 2 with classpath exception",
-        "gpl 2 with classpath exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
-    "gpl-2.0-clisp": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [
-        "clisp.hg.sourceforge.net/hgweb/clisp/clisp/raw-file/tip/copyright"
-      ],
-      "longNames": [
-        "gpl 2 clisp",
-        "gnu 2 with clisp exception",
-        "gpl 2 with clisp exception"
       ],
       "specific": [],
       "couldbeName": [
@@ -5521,58 +5452,6 @@
       "couldbeUrl": [
         "cygwin.com/cgi-bin/cvsweb.cgi/src/winsup/cygwin_license?cvsroot\u003dsrc"
       ]
-    },
-    "gpl-2.0-font": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [
-        "gnu.org/licenses/gpl-faq.html#fontexception"
-      ],
-      "longNames": [
-        "gpl 2 font",
-        "gnu 2 with font exception",
-        "gpl 2 with font exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
-    "gpl-2.0-freertos": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [
-        "freertos.org/"
-      ],
-      "longNames": [
-        "gpl 2 freertos",
-        "gnu 2 with freertos exception",
-        "gpl 2 with freertos exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
-    "gpl-2.0-gcc": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [],
-      "longNames": [
-        "gpl 2 gcc",
-        "gnu 2 with gcc runtime library exception",
-        "gpl 2 with gcc exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
     },
     "gpl-2.0-gcc-compiler-exception": {
       "attributes": {
@@ -5731,22 +5610,6 @@
       ],
       "couldbeUrl": []
     },
-    "gpl-2.0-libtool": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [],
-      "longNames": [
-        "gpl 2 libtool",
-        "gnu 2 with gnu libtool exception",
-        "gpl 2 with gnu libtool exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
     "gpl-2.0-mysql-connector-odbc": {
       "attributes": {
         "attis": "SdO 2 3 F L W  "
@@ -5799,24 +5662,6 @@
       ],
       "couldbeUrl": []
     },
-    "gpl-2.0-openssl": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [],
-      "longNames": [
-        "gpl 2 openssl",
-        "gnu 2 with openssl exception",
-        "gpl 2 with openssl exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": [
-        "openssl.org/source/license"
-      ]
-    },
     "gpl-2.0-plus-ada": {
       "attributes": {
         "attis": "SdO 2 3 F L W  "
@@ -5826,22 +5671,6 @@
         "gpl 2 plus ada",
         "gnu 2 or later with ada exception",
         "gpl 2 or later with ada exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
-    "gpl-2.0-plus-gcc": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [],
-      "longNames": [
-        "gpl 2 plus gcc",
-        "gnu 2 or later with gcc runtime library exception",
-        "gpl 2 or later with gcc exception"
       ],
       "specific": [],
       "couldbeName": [
@@ -5922,24 +5751,6 @@
       "couldbeName": [],
       "couldbeUrl": []
     },
-    "gpl-2.0-uboot": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [],
-      "longNames": [
-        "gpl 2 uboot",
-        "gnu 2 with u boot exception",
-        "gpl 2 with u boot exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": [
-        "gnu.org/licenses/old-licenses/gpl-2.0"
-      ]
-    },
     "gpl-3.0": {
       "attributes": {
         "attis": "SsO+2-3-F+L+W  "
@@ -5965,40 +5776,6 @@
         "fsf.org/licensing/licenses/gpl"
       ]
     },
-    "gpl-3.0-autoconf": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [
-        "gnu.org/licenses/autoconf-exception-3.0"
-      ],
-      "longNames": [
-        "gpl 3 autoconf",
-        "gnu 3 with autoconf exception",
-        "gpl 3 with autoconf exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
-    "gpl-3.0-bison": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [],
-      "longNames": [
-        "gpl 3 bison",
-        "gnu 3 or later with bison exception",
-        "gpl 3 or later with bison exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
     "gpl-3.0-cygwin": {
       "attributes": {
         "attis": "SdO 2 3 F L W  "
@@ -6016,39 +5793,6 @@
       "couldbeUrl": [
         "cygwin.com/cgi-bin/cvsweb.cgi/src/winsup/cygwin_license?cvsroot\u003dsrc"
       ]
-    },
-    "gpl-3.0-font": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [],
-      "longNames": [
-        "gpl 3 font",
-        "gnu 3 or later with font exception",
-        "gpl 3 or later with font exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
-    "gpl-3.0-gcc": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [
-        "gnu.org/licenses/gcc-exception-3.1"
-      ],
-      "longNames": [
-        "gpl 3 gcc",
-        "gcc runtime library exception 3.1"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gcc runtime library exception"
-      ],
-      "couldbeUrl": []
     },
     "gpl-3.0-plus-openssl": {
       "attributes": {
@@ -7802,24 +7546,6 @@
         "gnu.org/licenses/old-licenses/lgpl-2.0-standalone"
       ]
     },
-    "lgpl-2.0-plus-gcc": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [
-        "opensource.apple.com/source/libcppabi/libcppabi-26/include/demangle"
-      ],
-      "longNames": [
-        "lgpl 2 plus gcc",
-        "gnu library 2 or later with gcc runtime library exception",
-        "lgpl 2 or later with gcc exception"
-      ],
-      "specific": [],
-      "couldbeName": [
-        "gnu"
-      ],
-      "couldbeUrl": []
-    },
     "lgpl-2.1": {
       "attributes": {
         "attis": "SsO+2 3 F L W  "
@@ -7859,19 +7585,6 @@
         "digia qt lgpl exception",
         "digia digia qt lgpl exception"
       ],
-      "couldbeUrl": []
-    },
-    "lgpl-2.1-fltk": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [],
-      "longNames": [
-        "lgpl 2.1 fltk",
-        "fltk lgpl exception"
-      ],
-      "specific": [],
-      "couldbeName": [],
       "couldbeUrl": []
     },
     "lgpl-2.1-nokia-qt-1.0": {
@@ -7977,19 +7690,6 @@
         "fsf.org/licensing/licenses/lgpl",
         "gnu.org/licenses/lgpl-3.0-standalone"
       ]
-    },
-    "lgpl-3.0-plus-openssl": {
-      "attributes": {
-        "attis": "SdO 2 3 F L W  "
-      },
-      "urls": [],
-      "longNames": [
-        "lgpl 3 plus openssl",
-        "lgpl 3 or later with openssl exception"
-      ],
-      "specific": [],
-      "couldbeName": [],
-      "couldbeUrl": []
     },
     "lgpllr": {
       "attributes": {
@@ -16632,54 +16332,52 @@
     "fawkes-runtime-exception": true
   },
   "composites": {
-    "gpl-2.0 with classpath-exception-2.0": {
+    "gpl-2.0 with bison-exception-2.2": {
       "attributes": {
-        "attis": "SsO 2 3 F L-W  "
+        "attis": "SsO 2 3 F L W  "
       },
       "urls": [],
       "longNames": [
-        "gpl 2 w cpe"
-      ],
-      "specific": [],
-      "couldbeName": [],
-      "couldbeUrl": []
-    },
-    "gpl-3.0+": {
-      "attributes": {
-        "attis": "SsO 2-3-F+L+W  "
-      },
-      "urls": [],
-      "longNames": [
-        "gpl 3 plus",
-        "gnu 3 or later",
-        "gpl 3 or later"
+        "gpl 2 bison",
+        "gnu 2 with bison exception",
+        "gpl 2 with bison exception"
       ],
       "specific": [],
       "couldbeName": [
         "gnu"
       ],
-      "couldbeUrl": [
-        "gnu.org/licenses/gpl-3.0-standalone",
-        "fsf.org/licensing/licenses/gpl"
-      ]
+      "couldbeUrl": []
     },
-    "lgpl-2.1+": {
+    "lgpl-3.0+ with openvpn-openssl-exception": {
       "attributes": {
-        "attis": "SsO 2 3 F L-W  "
+        "attis": "SsO 2 3 F L W  "
       },
       "urls": [],
       "longNames": [
-        "lgpl 2.1 plus",
-        "gnu lesser 2.1 or later",
-        "lgpl 2.1 or later"
+        "lgpl 3 plus openssl",
+        "lgpl 3 or later with openssl exception"
+      ],
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
+    },
+    "gpl-2.0 with font-exception-2.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [
+        "gnu.org/licenses/gpl-faq.html#fontexception"
+      ],
+      "longNames": [
+        "gpl 2 font",
+        "gnu 2 with font exception",
+        "gpl 2 with font exception"
       ],
       "specific": [],
       "couldbeName": [
-        "gnu lesser"
+        "gnu"
       ],
-      "couldbeUrl": [
-        "gnu.org/licenses/old-licenses/lgpl-2.1-standalone"
-      ]
+      "couldbeUrl": []
     },
     "lgpl-2.0+": {
       "attributes": {
@@ -16697,6 +16395,141 @@
       ],
       "couldbeUrl": [
         "gnu.org/licenses/old-licenses/lgpl-2.0-standalone"
+      ]
+    },
+    "gpl-2.0 with autoconf-exception-2.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [
+        "ac-archive.sourceforge.net/doc/copyright"
+      ],
+      "longNames": [
+        "gpl 2 autoconf",
+        "gnu 2 with autoconf exception",
+        "gpl 2 with autoconf exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
+    },
+    "cddl-1.0 or gpl-2.0 with classpath-exception-2.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L-W  "
+      },
+      "urls": [],
+      "longNames": [
+        "cddl+gpl"
+      ],
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
+    },
+    "gpl-2.0+": {
+      "attributes": {
+        "attis": "SsO 2-3-F+L+W  "
+      },
+      "urls": [],
+      "longNames": [
+        "gpl 2 plus",
+        "gnu 2 or later",
+        "gpl 2 or later"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": [
+        "gnu.org/licenses/old-licenses/gpl-2.0",
+        "gnu.org/licenses/old-licenses/gpl-2.0-standalone"
+      ]
+    },
+    "gpl-3.0 with bison-exception-2.2": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [],
+      "longNames": [
+        "gpl 3 bison",
+        "gnu 3 or later with bison exception",
+        "gpl 3 or later with bison exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
+    },
+    "lgpl-2.0 with gcc-exception-2.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [
+        "opensource.apple.com/source/libcppabi/libcppabi-26/include/demangle"
+      ],
+      "longNames": [
+        "lgpl 2 plus gcc",
+        "gnu library 2 or later with gcc runtime library exception",
+        "lgpl 2 or later with gcc exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
+    },
+    "gpl-2.0 with u-boot-exception-2.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [],
+      "longNames": [
+        "gpl 2 uboot",
+        "gnu 2 with u boot exception",
+        "gpl 2 with u boot exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": [
+        "gnu.org/licenses/old-licenses/gpl-2.0"
+      ]
+    },
+    "gpl-2.0+ with gcc-exception-2.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [],
+      "longNames": [
+        "gpl 2 plus gcc",
+        "gnu 2 or later with gcc runtime library exception",
+        "gpl 2 or later with gcc exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
+    },
+    "lgpl-2.1+": {
+      "attributes": {
+        "attis": "SsO 2 3 F L-W  "
+      },
+      "urls": [],
+      "longNames": [
+        "lgpl 2.1 plus",
+        "gnu lesser 2.1 or later",
+        "lgpl 2.1 or later"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu lesser"
+      ],
+      "couldbeUrl": [
+        "gnu.org/licenses/old-licenses/lgpl-2.1-standalone"
       ]
     },
     "lgpl-3.0+": {
@@ -16734,16 +16567,22 @@
       ],
       "couldbeUrl": []
     },
-    "cddl-1.0 or gpl-2.0 with classpath-exception-2.0": {
+    "gpl-2.0 with clisp-exception-2.0": {
       "attributes": {
-        "attis": "SsO 2 3 F L-W  "
+        "attis": "SsO 2 3 F L W  "
       },
-      "urls": [],
+      "urls": [
+        "clisp.hg.sourceforge.net/hgweb/clisp/clisp/raw-file/tip/copyright"
+      ],
       "longNames": [
-        "cddl+gpl"
+        "gpl 2 clisp",
+        "gnu 2 with clisp exception",
+        "gpl 2 with clisp exception"
       ],
       "specific": [],
-      "couldbeName": [],
+      "couldbeName": [
+        "gnu"
+      ],
       "couldbeUrl": []
     },
     "gpl-1.0+": {
@@ -16765,24 +16604,175 @@
         "gnu.org/licenses/old-licenses/gpl-1.0-standalone"
       ]
     },
-    "gpl-2.0+": {
+    "gpl-3.0 with autoconf-exception-3.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [
+        "gnu.org/licenses/autoconf-exception-3.0"
+      ],
+      "longNames": [
+        "gpl 3 autoconf",
+        "gnu 3 with autoconf exception",
+        "gpl 3 with autoconf exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
+    },
+    "gpl-2.0 with classpath-exception-2.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [
+        "gnu.org/software/classpath/license"
+      ],
+      "longNames": [
+        "gpl 2 w cpe",
+        "gpl 2 classpath",
+        "gnu 2 with classpath exception",
+        "gpl 2 with classpath exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
+    },
+    "gpl-3.0+": {
       "attributes": {
         "attis": "SsO 2-3-F+L+W  "
       },
       "urls": [],
       "longNames": [
-        "gpl 2 plus",
-        "gnu 2 or later",
-        "gpl 2 or later"
+        "gpl 3 plus",
+        "gnu 3 or later",
+        "gpl 3 or later"
       ],
       "specific": [],
       "couldbeName": [
         "gnu"
       ],
       "couldbeUrl": [
-        "gnu.org/licenses/old-licenses/gpl-2.0",
-        "gnu.org/licenses/old-licenses/gpl-2.0-standalone"
+        "gnu.org/licenses/gpl-3.0-standalone",
+        "fsf.org/licensing/licenses/gpl"
       ]
+    },
+    "gpl-3.0 with font-exception-2.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [],
+      "longNames": [
+        "gpl 3 font",
+        "gnu 3 or later with font exception",
+        "gpl 3 or later with font exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
+    },
+    "gpl-2.0 with libtool-exception": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [],
+      "longNames": [
+        "gpl 2 libtool",
+        "gnu 2 with gnu libtool exception",
+        "gpl 2 with gnu libtool exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
+    },
+    "gpl-2.0 with openvpn-openssl-exception": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [],
+      "longNames": [
+        "gpl 2 openssl",
+        "gnu 2 with openssl exception",
+        "gpl 2 with openssl exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": [
+        "openssl.org/source/license"
+      ]
+    },
+    "gpl-2.0 with freertos-exception-2.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [
+        "freertos.org/"
+      ],
+      "longNames": [
+        "gpl 2 freertos",
+        "gnu 2 with freertos exception",
+        "gpl 2 with freertos exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
+    },
+    "gpl-2.0 with gcc-exception-2.0": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [],
+      "longNames": [
+        "gpl 2 gcc",
+        "gnu 2 with gcc runtime library exception",
+        "gpl 2 with gcc exception"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gnu"
+      ],
+      "couldbeUrl": []
+    },
+    "gpl-3.0 with gcc-exception-3.1": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [
+        "gnu.org/licenses/gcc-exception-3.1"
+      ],
+      "longNames": [
+        "gpl 3 gcc",
+        "gcc runtime library exception 3.1"
+      ],
+      "specific": [],
+      "couldbeName": [
+        "gcc runtime library exception"
+      ],
+      "couldbeUrl": []
+    },
+    "lgpl-2.1 with fltk-exception": {
+      "attributes": {
+        "attis": "SsO 2 3 F L W  "
+      },
+      "urls": [],
+      "longNames": [
+        "lgpl 2.1 fltk",
+        "fltk lgpl exception"
+      ],
+      "specific": [],
+      "couldbeName": [],
+      "couldbeUrl": []
     },
     "agpl-1.0+": {
       "attributes": {
@@ -16807,48 +16797,7 @@
       ]
     }
   },
-  "urlsInTime": {
-    "antlr.org/license": {
-      "i0": "2016-06-09",
-      "i1": "bsd-2-clause"
-    },
-    "asm.objectweb.org/license": {
-      "i0": "2016-06-08",
-      "i1": "bsd-3-clause"
-    },
-    "asm.ow2.org/license": {
-      "i0": "2016-06-08",
-      "i1": "bsd-3-clause"
-    },
-    "bouncycastle.org/license": {
-      "i0": "2016-06-28",
-      "i1": "mit"
-    },
-    "jcabi.com/license": {
-      "i0": "2016-06-09",
-      "i1": "bsd-4-clause"
-    },
-    "jdbc.postgresql.org/about/license": {
-      "i0": "2016-06-20",
-      "i1": "bsd-3-clause"
-    },
-    "jdbc.postgresql.org/license": {
-      "i0": "2016-06-20",
-      "i1": "bsd-3-clause"
-    },
-    "msv.java.net/license": {
-      "i0": "2016-06-24",
-      "i1": "bsd-3-clause"
-    },
-    "opensource.org/licenses/bsd-license": {
-      "i0": "2016-06-08",
-      "i1": "bsd-2-clause"
-    },
-    "repo.aduna-software.org/legal/aduna-bsd": {
-      "i0": "2016-06-08",
-      "i1": "bsd-3-clause"
-    }
-  },
+  "urlsInTime": {},
   "tooSimpleLongNames": [
     "map",
     "par",

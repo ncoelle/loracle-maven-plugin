@@ -1,0 +1,28 @@
+{
+  "license": {},
+  "licenseReason": "",
+  "mavenLicenses": [
+    {
+      "mavenLicenseName": "BSD",
+      "byName": "-",
+      "mavenLicenseUrl": "http://asm.objectweb.org/license.html",
+      "byUrl": "-",
+      "mavenLicenseComment": "",
+      "byComment": "-"
+    }
+  ],
+  "copyrightHolder": {},
+  "holderReason": "",
+  "scope": "compile",
+  "message": "",
+  "licenseTxt": "",
+  "headerTxt": "",
+  "licenseTxtLicense": "",
+  "headerLicense": "",
+  "pomLicense": "",
+  "byCoordinates": "",
+  "notice": "",
+  "pomHeaderLicense": "",
+  "pomHeader": "",
+  "noticeLicense": ""
+}

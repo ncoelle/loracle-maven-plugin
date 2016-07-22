@@ -9,6 +9,7 @@ import de.pfabulist.kleinod.nio.UnzipToPath;
 import de.pfabulist.loracle.license.Normalizer;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
+import de.pfabulist.loracle.license.SingleLicense;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -54,8 +55,25 @@ public class ExtractFromDejaCode {
                             addStuff( lOracle, _nn( res.get() ), map );
 //                            System.out.println( "\n" );
                         } else {
-                            System.out.println( "hmmmm\n" );
-//                            throw new IllegalArgumentException( "oops" );
+                            switch( (String) _nn( map.get( "name" ) ) ) {
+                                case "Apache-licensed software (unknown license version)":
+                                case "Apple Attribution License":
+                                case "BSD-Original-UC": // actually spdx: bsd-4-clause-uc but not much extra info
+                                case "Commercial Option": // a closed version ?
+                                case "Commercial Contract": // a closed version ?
+                                case "GNU Free Documentation License, any version":
+                                case "GPL, no version":
+                                case "LGPL, no version":
+                                case "MPICH License":
+                                case "Mozilla Public License":
+                                case "Proprietary": // a closed version ?
+                                case "Proprietary license": // a closed version ?
+                                    // not precise: couldbe
+                                    return;
+                                default:
+                                    System.out.println( "hmmmm\n" );
+                                    propLicense( lOracle, _nn( (String) map.get( "key" ) ), key, name, shrt );
+                            }
                         }
 
                     } catch( FileNotFoundException | YamlException e ) {
@@ -142,6 +160,65 @@ public class ExtractFromDejaCode {
             return Optional.empty();
         }
 
+        // change spdx 1.0 ids to 2.0
+        switch( key ) {
+            case "gpl-2.0-classpath":
+                return lOracle.getByName( "gpl-2.0 with classpath-exception-2.0" ).noReason();
+            case "gpl-2.0-autoconf":
+                return lOracle.getByName( "gpl-2.0 with Autoconf-exception-2.0" ).noReason();
+            case "gpl-2.0-bison":
+                return lOracle.getByName( "gpl-2.0 with Bison-exception-2.2" ).noReason();
+            case "gpl-2.0-clisp":
+                return lOracle.getByName( "gpl-2.0 with CLISP-exception-2.0" ).noReason();
+            case "gpl-2.0-font":
+                return lOracle.getByName( "gpl-2.0 with Font-exception-2.0" ).noReason();
+            case "gpl-2.0-freertos":
+                return lOracle.getByName( "gpl-2.0 with freertos-exception-2.0" ).noReason();
+            case "gpl-2.0-gcc":
+                return lOracle.getByName( "gpl-2.0 with GCC-exception-2.0" ).noReason();
+            case "gpl-2.0-libtool":
+                return lOracle.getByName( "gpl-2.0 with Libtool-exception" ).noReason();
+            case "gpl-2.0-openssl":
+                return lOracle.getByName( "gpl-2.0 with openvpn-openssl-exception" ).noReason(); // todo check
+            case "gpl-2.0-uboot":
+                return lOracle.getByName( "gpl-2.0 with u-boot-exception-2.0" ).noReason();
+
+            case "gpl-2.0-plus":
+                return lOracle.getByName( "gpl-2.0+" ).noReason();
+            case "gpl-2.0-plus-gcc":
+                return lOracle.getByName( "gpl-2.0+ with GCC-exception-2.0" ).noReason();
+
+            case "gpl-3.0-autoconf":
+                return lOracle.getByName( "gpl-3.0 with Autoconf-exception-3.0" ).noReason();
+            case "gpl-3.0-bison":
+                return lOracle.getByName( "gpl-3.0 with Bison-exception-2.2" ).noReason();
+            case "gpl-3.0-font":
+                return lOracle.getByName( "gpl-3.0 with Font-exception-2.0" ).noReason();
+            case "gpl-3.0-gcc":
+                return lOracle.getByName( "gpl-3.0 with GCC-exception-3.1" ).noReason();
+
+            case "gpl-3.0-plus":
+                return lOracle.getByName( "gpl-3.0+" ).noReason();
+
+            case "lgpl-2.0-plus":
+                return lOracle.getByName( "lgpl-2.0+" ).noReason();
+            case "lgpl-2.0-plus-gcc":
+                return lOracle.getByName( "lgpl2.0 with GCC-exception-2.0" ).noReason();
+
+            case "lgpl-2.1-fltk":
+                return lOracle.getByName( "lgpl-2.1 with FLTK-exception" ).noReason();
+
+            case "lgpl-2.1-plus":
+                return lOracle.getByName( "lgpl-2.1+" ).noReason();
+
+            case "lgpl-3.0-plus":
+                return lOracle.getByName( "lgpl-3.0" ).noReason();
+            case "lgpl-3.0-plus-openssl":
+                return lOracle.getByName( "lgpl-3.0+ with openvpn-openssl-exception" ).noReason(); // todo check
+
+            default:
+        }
+
         try {
             LicenseID ret = lOracle.newSingle( key, false );
             lOracle.getMore( ret ).attributes.setFromDeja();
@@ -163,7 +240,7 @@ public class ExtractFromDejaCode {
         Optional.ofNullable( (String) map.get( "osi_url" ) ).ifPresent( u -> {
             Optional<String> uu = normalizer.normalizeUrl( u );
             if( uu.isPresent() ) {
-                if( !uu.get().equals( "opensource.org/licenses/bsd-license" ) ) {
+                if( !_nn( uu.get() ).equals( "opensource.org/licenses/bsd-license" ) ) {
                     // bsd is time based
                     lOracle.addUrl( licenseID, uu.get() );
                 } else {
@@ -173,6 +250,13 @@ public class ExtractFromDejaCode {
             }
         } );
         //System.out.println( "done" );
+
+        if ( lOracle.getMore( licenseID ).urls.isEmpty() ) {
+            if ( licenseID instanceof SingleLicense ) {
+                int i = 0;
+            }
+        }
+
     }
 
 }

@@ -4,6 +4,6 @@
  */
 
 @NonnullByDefault
-package de.pfabulist.ianalb.mojo;
+package de.pfabulist.loracle;
 
 import de.pfabulist.nonnullbydefault.NonnullByDefault;

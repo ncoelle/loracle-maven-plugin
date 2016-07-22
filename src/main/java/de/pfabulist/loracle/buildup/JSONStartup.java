@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
+import de.pfabulist.loracle.mojo.Url2License;
 import de.pfabulist.unchecked.Unchecked;
 
 import java.io.IOException;
@@ -85,10 +86,15 @@ public class JSONStartup {
     }
 
     private static Path getLoracleJson() {
-        Path previous = _nn( Paths.get( "target/loracle/loracle.json").toAbsolutePath() );
+        Path previous = _nn( Paths.get( "target/generated-sources/loracle/loracle.json").toAbsolutePath() );
         Filess.createDirectories( _nn(previous.getParent() ));
         return previous;
     }
 
+    public static Url2License urls() {
+        Path previous = _nn( Paths.get( ".loracle/urls.json").toAbsolutePath() );
+        Filess.createDirectories( _nn(previous.getParent() ));
 
+        return new Url2License();
+    }
 }

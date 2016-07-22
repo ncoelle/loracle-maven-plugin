@@ -3,6 +3,7 @@ package de.pfabulist.loracle.license;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.attribution.CopyrightHolder;
 import de.pfabulist.loracle.mojo.Findings;
+import de.pfabulist.loracle.mojo.UrlToLicense;
 
 import java.nio.MappedByteBuffer;
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
+@SuppressWarnings( "PMD.UnusedPrivateField" )
 public class ContentToLicense {
 
     static public final Pattern copyRightPattern =
@@ -33,21 +35,14 @@ public class ContentToLicense {
     private final String dscr;
     private final And and;
     private final Findings log;
+    private final UrlToLicense urlToLicense;
 
     public ContentToLicense( LOracle lOracle, String dscr, Findings log, boolean andIsOr ) {
         this.lOracle = lOracle;
         this.dscr = dscr;
         this.and = new And( lOracle, log, andIsOr );
         this.log = log;
-    }
-
-    public MappedLicense toLicense( String str ) {
-
-        if( str.isEmpty() ) {
-            return MappedLicense.empty( "<no file found>" );
-        }
-
-        return and.and( byUrl( str ), byNamePattern( str ) );
+        this.urlToLicense = new UrlToLicense( lOracle, log );
     }
 
     public final static Pattern page =
@@ -64,7 +59,7 @@ public class ContentToLicense {
         MappedLicense ret = MappedLicense.empty();
 
         while( matcher.find() ) {
-            ret = and.and( ret, lOracle.getByUrl( _nn( matcher.group( "addr" ) ) ).addReason( dscr ) );
+            ret = and.and( ret, urlToLicense.getLicense( _nn( matcher.group( "addr" ) ) ).addReason( dscr ) );
         }
 
         return ret;
@@ -77,22 +72,22 @@ public class ContentToLicense {
                     then( Frex.txt( "Version" ) ).then( ws ).
                     then( Frex.txt( "2.0" ) ).buildCaseInsensitivePattern();
 
-    public MappedLicense byNamePattern( String str ) {
-        if( apache2.matcher( str ).find() ) {
-            return MappedLicense.of( lOracle.getOrThrowByName( "apache-2" ), dscr );
-        }
-
-        if( str.contains( "COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0" ) ) {
-            return MappedLicense.of( lOracle.getOrThrowByName( "cddl-1.0" ), dscr );
-        }
-
-        if( str.contains( "The Apache Software License, Version 1.1" ) ) {
-            return MappedLicense.of( lOracle.getOrThrowByName( "apache-1.1" ), dscr );
-        }
-
-        return MappedLicense.empty();
-    }
-
+//    public MappedLicense byNamePattern( String str ) {
+//        if( apache2.matcher( str ).find() ) {
+//            return MappedLicense.of( lOracle.getOrThrowByName( "apache-2" ), dscr );
+//        }
+//
+//        if( str.contains( "COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0" ) ) {
+//            return MappedLicense.of( lOracle.getOrThrowByName( "cddl-1.0" ), dscr );
+//        }
+//
+//        if( str.contains( "The Apache Software License, Version 1.1" ) ) {
+//            return MappedLicense.of( lOracle.getOrThrowByName( "apache-1.1" ), dscr );
+//        }
+//
+//        return MappedLicense.empty();
+//    }
+//
 
     public MappedLicense findLicenses( String str ) {
 

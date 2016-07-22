@@ -98,7 +98,7 @@ public class ExtractSpdxLicensesFromJSON {
 //                                !u.equals( "https://fedoraproject.org/wiki/Licensing/Henry_Spencer_Reg-Ex_Library_License" )
 //
 //                        ).
-                        forEach( u -> lOracle.addUrl( license, u ) );
+        forEach( u -> lOracle.addUrl( license, u ) );
             }
 
             // osi approved

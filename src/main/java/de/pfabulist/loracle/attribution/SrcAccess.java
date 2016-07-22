@@ -67,7 +67,9 @@ public class SrcAccess {
 
             file = Header.getHeader( file );
             lico.setHeaderTxt( file );
-            new LicenseWriter().write( coo, "src-header", file );
+            if ( !file.isEmpty()) {
+                new LicenseWriter().write( coo, "src-header", file );
+            }
 
 
 
@@ -84,16 +86,16 @@ public class SrcAccess {
 //        return new ContentToLicense( lOracle, "by file header", log, andIsOr ).getHolder( str );
 //    }
 
-    static void extractLicense( LOracle lOracle, Coordinates2License.LiCo lico, String file, Findings log, boolean andIsOr ) {
-
-        if ( lico.getLicense().isPresent()) {
-            return;
-        }
-
-        MappedLicense ml = new ContentToLicense( lOracle, "by file header", log, andIsOr ).toLicense( file );
-
-        lico.setLicense( ml );
-
+//    static void extractLicense( LOracle lOracle, Coordinates2License.LiCo lico, String file, Findings log, boolean andIsOr ) {
+//
+//        if ( lico.getLicense().isPresent()) {
+//            return;
+//        }
+//
+//        MappedLicense ml = new ContentToLicense( lOracle, "by file header", log, andIsOr ).toLicense( file );
+//
+//        lico.setLicense( ml );
+//
 //
 //        if ( file.contains( "https://glassfish.dev.java.net/public/CDDLv1.0.html" )) {
 //            if ( !lico.getLicense().isPresent() ) {
@@ -112,7 +114,7 @@ public class SrcAccess {
 //                lico.setLicense( MappedLicense.of( lOracle.getOrThrowByName( "apache-2" ), "by header file" ) );
 //            }
 //        }
-    }
+//    }
 
     public void getPomHeader( Coordinates coordinates, Coordinates2License.LiCo liCo ) {
         Path src = mlo.getPom( coordinates );
@@ -124,8 +126,9 @@ public class SrcAccess {
 
         String header = Header.getPomHeader( newString( Filess.readAllBytes( src )));
         liCo.setPomHeader( header );
-        new LicenseWriter().write( coordinates, "pom-header", header );
-
+        if ( !header.isEmpty()) {
+            new LicenseWriter().write( coordinates, "pom-header", header );
+        }
 
     }
 }

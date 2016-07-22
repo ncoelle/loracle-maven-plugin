@@ -2,12 +2,13 @@ package de.pfabulist.loracle.license;
 
 import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
-import de.pfabulist.kleinod.collection.P;
 
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static de.pfabulist.frex.Frex.fullWord;
 import static de.pfabulist.frex.Frex.or;
@@ -80,7 +81,6 @@ public class Normalizer {
     }
 
     public String reduce( String in ) {
-        // todo handle , getAnd extra -
         StringBuilder sb = new StringBuilder();
 
         for( String word : in.toLowerCase( Locale.US ).split( WHITESPACE ) ) {
@@ -135,4 +135,25 @@ public class Normalizer {
         return Optional.of( _nn( matcher.group( "relevant" ) ).toLowerCase( Locale.US ));
 
     }
+
+    private final static Pattern htmlws = Frex.or( Frex.whitespace(), Frex.txt( '\r' ), Frex.txt( '\n' ) ).oneOrMore().buildPattern();
+
+    public String norm( String txt ) {
+        return Arrays.stream( txt.split( "\n" ) ).
+                map( l -> {
+                    l = l.trim();
+                    if( l.startsWith( "*" ) ) {
+                        return l.substring( 1 ).trim();
+                    } else if( l.startsWith( "//" ) ) {
+                        return l.substring( 2 ).trim();
+                    } else if( l.startsWith( "!" ) ) {
+                        return l.substring( 1 ).trim();
+                    } else {
+                        return l;
+                    }
+                } ).
+                collect( Collectors.joining( " ") ).
+                replaceAll( htmlws.toString(), " " );
+    }
+
 }

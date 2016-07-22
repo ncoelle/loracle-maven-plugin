@@ -16,7 +16,7 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 
 public class Header {
 
-    private static Pattern start =
+    static Pattern start =
             Frex.txt( "//" ).zeroOrOnce().
                     then( Frex.or( Frex.fullWord( "public" ),
                                    Frex.fullWord( "private" ),
@@ -30,6 +30,7 @@ public class Header {
                                    Frex.fullWord( "@interface" ),
                                    Frex.fullWord( "enum" ) ) ).
                     then( Frex.any().oneOrMore() ).
+                    then( Frex.or( Frex.txt( '\r' ), Frex.txt( '\n' ) ).zeroOrMore()).
                     buildCaseInsensitivePattern();
 
 

@@ -5,15 +5,11 @@ import de.pfabulist.loracle.attribution.GetHolder;
 import de.pfabulist.loracle.attribution.JarAccess;
 import de.pfabulist.loracle.attribution.SrcAccess;
 import de.pfabulist.loracle.buildup.JSONStartup;
-import de.pfabulist.loracle.license.And;
 import de.pfabulist.loracle.license.ContentToLicense;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
-import de.pfabulist.loracle.license.Decider;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.license.LicenseFromText;
 import de.pfabulist.loracle.license.LicenseID;
-import de.pfabulist.loracle.license.MappedLicense;
 import de.pfabulist.nonnullbydefault.NonnullCheck;
 import de.pfabulist.unchecked.Unchecked;
 import org.apache.maven.artifact.Artifact;
@@ -49,6 +45,7 @@ public class LicenseCheckMojo {
     private final MavenProject mavenProject;
     private final DependencyGraphBuilder dependencyGraphBuilder;
     private final boolean andIsOr;
+    private final Url2License urlToLicense;
     private Optional<Coordinates> self = Optional.empty();
 
     private final Coordinates2License coordinates2License;
@@ -67,6 +64,8 @@ public class LicenseCheckMojo {
 
         coordinates2License = JSONStartup.previous( andIsOr );
         coordinates2License.setLog( log );
+
+        urlToLicense = JSONStartup.urls();
     }
 
     public void config( List<LicenseDeclaration> licenseDeclarations, List<UrlDeclaration> urlDeclarations, int allowUrlsCheckedDaysBefore ) {
@@ -191,36 +190,6 @@ public class LicenseCheckMojo {
 //
 //    }
 
-    private MappedLicense mavenLicenseToLicense( //Coordinates coo,
-                                                 // MappedLicense byCoordinates,
-                                                 Coordinates2License.MLicense mavenLicense ) {
-
-        Optional<String> name = Optional.of( mavenLicense.getName() );
-        MappedLicense byName = name.map( lOracle::getByName ).orElse( MappedLicense.empty() );
-        Optional<String> url = Optional.of( mavenLicense.getUrl() );
-        MappedLicense byUrl = url.map( lOracle::getByUrl ).orElse( MappedLicense.empty() );
-
-        MappedLicense byComments = new ContentToLicense( lOracle, "comments", log, andIsOr ).findLicenses( mavenLicense.getComment() );
-
-        mavenLicense.setByName( byName );
-        mavenLicense.setByUrl( byUrl );
-        mavenLicense.setByComment( byComments );
-
-        //        if( !licenseID.isPresent() ) {
-//            log.warn( "[pom] artifact: " + coo + "   has one unprecise license" );
-//            log.warn( "[pom]    by coordinates : " + byCoordinates );
-//            log.warn( "[pom]    by license name: " + name.orElse( "-" ) + " -> " + byName );
-//            log.warn( "[pom]    by license url : " + url.orElse( "-" ) + " ->" + byUrl );
-//
-//            log.warn( "[pom] artifact: " + coo + "   has no or not precise enough license" );
-//
-//            name.ifPresent( n -> log.warn( "[pom]   it could be (by name) " + lOracle.guessByName( n ) ) );
-//            url.ifPresent( u -> log.warn( "[pom]   it could be (by url) " + lOracle.guessByUrl( u ) ) );
-//        }
-
-        return new Decider().decide( byName, byUrl, byComments );
-    }
-
     public String checkCompatibility( Coordinates coo, String licenseStr ) {
 
         LicenseID license = lOracle.getOrThrowByName( licenseStr );
@@ -277,53 +246,6 @@ public class LicenseCheckMojo {
 
     public void checkCompatibility() {
         coordinates2License.checkCompatibility( this::checkCompatibility );
-
-//        licenses.forEach( ( c, l ) ->
-//                                  lOracle.getAttributes( l ).isFedoraApproved().ifPresent( fed -> {
-//                                      if( !fed ) {
-//                                          log.error( "bad license " + l + " used by " + c + "  (not approved by fedora)" );
-//                                      }
-//                                  } ) );
-//
-//        if( !self.isPresent() ) {
-//            return;
-//        }
-//
-//        if( !licenses.containsKey( self.get() ) ) {
-//            return;
-//        }
-//
-//        LicenseID mine = _nn( licenses.get( self.get() ) );
-//
-//        if( lOracle.getAttributes( mine ).isCopyLeftDef() ) {
-//            licenses.forEach( ( c, l ) -> {
-//                if( l.equals( mine ) ) {
-//                    return;
-//                }
-//
-//                lOracle.getAttributes( l ).isGpl2Compatible().ifPresent( gc -> {
-//                                                                             if( !gc ) {
-//                                                                                 scopeDependingLog( c, "not gpl2 compatible: " + l + " used by " + c );
-//                                                                             }
-//                                                                         }
-//                );
-//
-//                lOracle.getAttributes( l ).isGpl3Compatible().ifPresent( gc -> {
-//                                                                             if( !gc ) {
-//                                                                                 scopeDependingLog( c, "not gpl2 compatible: " + l + " used by " + c );
-//                                                                             }
-//                                                                         }
-//                );
-//            } );
-//        }
-//
-//        if( !lOracle.getAttributes( mine ).isCopyLeftDef() ) {
-//            licenses.forEach( ( c, l ) -> {
-//                if( lOracle.getAttributes( l ).isCopyLeftDef() ) {
-//                    scopeDependingLog( c, "can't depend on a copy left license: " + l + " used by " + c );
-//                }
-//            } );
-//        }
     }
 
     public void getHolder() {
@@ -350,75 +272,6 @@ public class LicenseCheckMojo {
         coordinates2License.fromJar( src::check );
     }
 
-    public void computeLicense() {
-        coordinates2License.update( this::compute );
-    }
-
-    private void compute( Coordinates coordinates, Coordinates2License.LiCo liCo ) {
-        MappedLicense byCoo = lOracle.getByCoordinates( coordinates );
-
-        liCo.setByCoordinates( byCoo );
-
-        MappedLicense byPom = liCo.getMavenLicenses().stream().
-                map( this::mavenLicenseToLicense ).
-                reduce( MappedLicense.empty(), (a,b) -> new And( lOracle, log, andIsOr ).and( a,b ));
-
-        liCo.setPomLicense( byPom );
-
-        LicenseFromText lft = new LicenseFromText( lOracle );
-        MappedLicense t1 = lft.getLicense( liCo.getLicenseTxt() );
-        if ( t1.isPresent() ) {
-            log.debug( "[woo] " + coordinates + " -> " + t1 );
-            liCo.setLicenseTxtLicense( t1 );
-        }
-        MappedLicense t2 = lft.getLicense( liCo.getPomHeader() );
-        if ( t2.isPresent() ) {
-            log.debug( "[woo] " + coordinates + " -> " + t2 );
-            liCo.setPomHeaderLicense( t2 );
-        }
-        MappedLicense t3 = lft.getLicense( liCo.getHeaderTxt() );
-        if ( t3.isPresent() ) {
-            log.debug( "[woo] " + coordinates + " -> " + t3 );
-            liCo.setHeaderLicense( t3 );
-        }
-        MappedLicense t4 = lft.getLicense( liCo.getNotice() );
-        if ( t4.isPresent() ) {
-            log.debug( "[woo] " + coordinates + " -> " + t4 );
-            liCo.setNoticeLicense( t4 );
-        }
-
-        MappedLicense sum = new Decider().decide( byCoo, byPom, t1, t2, t3, t4 );
-
-
-        if ( sum.isPresent() ) {
-            liCo.setLicense( sum );
-            //log.debug( "coordinates + pom: " + coordinates + " -> " +sum.toString()  );
-            // todo overridable by flag
-            return;
-        }
-
-        log.debug( "searching in in content for " + coordinates );
-
-        MappedLicense byPomHeader = new ContentToLicense( lOracle, "by pom header", log, andIsOr ).findLicenses( liCo.getPomHeader() );
-        liCo.setPomHeaderLicense( byPomHeader );
-
-
-        MappedLicense byLicenseTxt = new ContentToLicense( lOracle, "by license file", log, andIsOr ).findLicenses( liCo.getLicenseTxt() );
-        liCo.setLicenseTxtLicense( byLicenseTxt );
-
-        MappedLicense byHeader = new ContentToLicense( lOracle, "by file header", log, andIsOr ).findLicenses( liCo.getHeaderTxt() );
-        liCo.setHeaderLicense( byHeader );
-
-        MappedLicense byNotice = new ContentToLicense( lOracle, "by notice", log, andIsOr ).findLicenses( liCo.getNotice() );
-        liCo.setNoticeLicense( byNotice );
-
-
-        sum = new Decider().decide( byCoo, byPom, byPomHeader, byLicenseTxt, byHeader, byNotice );
-        liCo.setLicense( sum );
-
-        log.debug( "done found?: " + sum.toString()  );
-
-    }
 
     public void computeHolder() {
         coordinates2License.update( this::computeHolder );
@@ -467,5 +320,18 @@ public class LicenseCheckMojo {
         SrcAccess src = new SrcAccess( lOracle, mlo, log, andIsOr );
         coordinates2License.fromSrc( src::getPomHeader );
 
+    }
+
+    public void generateNotice() {
+        coordinates2License.generateNotice();
+
+    }
+
+    public void computeLicense() {
+            coordinates2License.update( new LicenseIntelligence( lOracle, log )::compute );
+    }
+
+    public void downloadPages() {
+        coordinates2License.update( new Downloader( log, urlToLicense )::getExtension );
     }
 }

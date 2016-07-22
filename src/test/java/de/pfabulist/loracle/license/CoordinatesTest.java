@@ -22,5 +22,8 @@ public class CoordinatesTest {
     public void snapshot() {
         Coordinates coo = Coordinates.valueOf( "commons-io:commons-io:2.6-20160630.123456-42" );
         assertThat( coo.isSnapshot() ).isTrue();
+
+        coo = Coordinates.valueOf( "foo:foo:1.0-2" );
+        assertThat( coo.isSnapshot() ).isFalse();
     }
 }
