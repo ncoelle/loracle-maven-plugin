@@ -20,7 +20,7 @@ public class UrlToLicense {
     public UrlToLicense( LOracle lOracle, Findings log ) {
         this.lOracle = lOracle;
         this.log = log;
-        this.downloader = new Downloader( log, new Url2License() );
+        this.downloader = new Downloader( log, new Url2License(), lOracle );
         this.lft = new LicenseFromText( lOracle );
     }
 

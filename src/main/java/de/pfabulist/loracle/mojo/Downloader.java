@@ -6,12 +6,12 @@ import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
+import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.Normalizer;
 import de.pfabulist.unchecked.Unchecked;
 import org.jsoup.Jsoup;
 
 import javax.annotation.Nullable;
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -36,10 +36,12 @@ public class Downloader {
     private final Url2License url2License;
     Normalizer normalizer = new Normalizer();
     private boolean noInternet = true;
+    private final LOracle lOracle;
 
-    public Downloader( Findings log, Url2License url2License ) {
+    public Downloader( Findings log, Url2License url2License, LOracle lOracle ) {
         this.log = log;
         this.url2License = url2License;
+        this.lOracle = lOracle;
     }
 
     public void get( Coordinates coordinates, Coordinates2License.LiCo liCo ) {
@@ -98,7 +100,13 @@ public class Downloader {
         }
         Filess.createDirectories( _nn( path.getParent() ) );
 
-        try( @Nullable InputStream is = getClass().getResourceAsStream( "/de/pfabulist/loracle/urls/" + getUrlPath( url ) ) ) {
+        Optional<String> res = lOracle.getUrlContent( url );
+        if ( !res.isPresent()) {
+            log.debug( "    url not known: " + url );
+            return;
+        }
+
+        try( @Nullable InputStream is = getClass().getResourceAsStream( res.get() )) {
             if( is == null ) {
                 log.debug( "    not found: " + getUrlPath( url ) );
                 return;

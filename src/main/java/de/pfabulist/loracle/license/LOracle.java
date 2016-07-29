@@ -3,6 +3,7 @@ package de.pfabulist.loracle.license;
 import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.kleinod.collection.P;
+import de.pfabulist.loracle.spi.CustomService;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.time.LocalDate;
@@ -66,6 +67,7 @@ public class LOracle {
     // new TreeMap<>( (c,d) -> c.matches( d ) ? 0 : (c.hashCode() - d.hashCode()));
     private transient Map<String, LicenseID> longNameMapper = new HashMap<>();
     private transient Map<String, LicenseID> urls = new HashMap<>();
+    private Map<String,String> urlToContent = new HashMap<>();
 
     private List<String> tooSimpleLongNames = new ArrayList<>();
 
@@ -112,6 +114,34 @@ public class LOracle {
         );
 
         // todo couldbes
+        CustomService.getInstance().getAll().forEach( c -> {
+            c.getCustomLicenses().forEach( l -> {
+                try {
+                    LicenseID lid = newSingle( l.getId(), false );
+                    addUrl( lid, l.getUrl() );
+                } catch( Exception e ) {
+                    Log.warn( "custom license is known (ignored) " + l.getId() );
+                }
+            } );
+            c.getCoordinates().forEach( co ->{
+                try {
+                    Coordinates coo = Coordinates.valueOf( co.getCoordinates() );
+                    if ( !co.getLicense().isEmpty()) {
+                        LicenseID li = getOrThrowByName( co.getLicense() );
+                        addLicenseForArtifact( coo, li );
+                    }
+
+//                    if ( !co.getUrl().isEmpty() ) {
+//
+//                    }
+                } catch( Exception e ) {
+                    Log.warn( "custom coordinates to license setting flawed " + co.getCoordinates() );
+                }
+            });
+            c.getUrls().forEach( u -> addUrlContent( u.getUrl(), u.getResource() ) );
+        } );
+
+
 
         return this;
     }
@@ -568,5 +598,20 @@ public class LOracle {
     public void addTooSimple( String... strs ) {
         tooSimpleLongNames.addAll( Arrays.asList( strs ) );
     }
+
+    public Optional<String> getUrlContent( String url ) {
+        return normalizer.normalizeUrl( url ).flatMap( u -> Optional.ofNullable( urlToContent.get( u )));
+    }
+
+    public void addUrlContent( String url, String res ) {
+        Optional<String> u = normalizer.normalizeUrl( url );
+        if ( !u.isPresent()) {
+            throw new IllegalArgumentException( "huhh" );
+        }
+
+        urlToContent.put( u.get(), res );
+    }
+
+
 
 }

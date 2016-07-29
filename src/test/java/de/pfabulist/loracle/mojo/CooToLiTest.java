@@ -6,8 +6,6 @@ import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.license.LicenseID;
-import de.pfabulist.loracle.license.MappedLicense;
 import de.pfabulist.unchecked.Unchecked;
 import org.junit.Test;
 
@@ -28,7 +26,7 @@ public class CooToLiTest {
 
     private final LOracle lOracle = JSONStartup.start().spread();
     private final LicenseIntelligence lIntelligence = new LicenseIntelligence( lOracle, new Findings( SrcTest.dummy ));
-    private final Downloader downloader = new Downloader( new Findings( SrcTest.dummy ), new Url2License() );
+    private final Downloader downloader = new Downloader( new Findings( SrcTest.dummy ), new Url2License(), lOracle );
 
     @Test
     public void sunTools() {

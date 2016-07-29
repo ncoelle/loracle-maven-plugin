@@ -2175,4 +2175,48 @@ public class SrcTest {
         assertThat( new LicenseFromText( lOracle ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
     }
 
+    @Test
+    public void paranamer() {
+        String in = "/***\n" +
+                " *\n" +
+                " * Copyright (c) 2007 Paul Hammant\n" +
+                " * All rights reserved.\n" +
+                " *\n" +
+                " * Redistribution and use in source and binary forms, with or without\n" +
+                " * modification, are permitted provided that the following conditions\n" +
+                " * are met:\n" +
+                " * 1. Redistributions of source code must retain the above copyright\n" +
+                " *    notice, this list of conditions and the following disclaimer.\n" +
+                " * 2. Redistributions in binary form must reproduce the above copyright\n" +
+                " *    notice, this list of conditions and the following disclaimer in the\n" +
+                " *    documentation and/or other materials provided with the distribution.\n" +
+                " * 3. Neither the name of the copyright holders nor the names of its\n" +
+                " *    contributors may be used to endorse or promote products derived from\n" +
+                " *    this software without specific prior written permission.\n" +
+                " *\n" +
+                " * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\n" +
+                " * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n" +
+                " * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n" +
+                " * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE\n" +
+                " * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\n" +
+                " * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\n" +
+                " * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\n" +
+                " * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\n" +
+                " * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\n" +
+                " * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF\n" +
+                " * THE POSSIBILITY OF SUCH DAMAGE.\n" +
+                " */\n" +
+                "/**\n" +
+                " * Implementation of Paranamer which chooses between a series of Paranamer instances depending on which can supply data.\n" +
+                " * It prioritizes the paranamer instances according to the order they were passed in. \n" +
+                " *\n" +
+                " * @author Paul Hammant\n" +
+                " * @author Mauro Talevi\n" +
+                " */";
+
+        new LicenseFromText( lOracle ).firstDiff( in );
+
+        assertThat( new LicenseFromText( lOracle ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
+    }
+
 }

@@ -1,5 +1,6 @@
 package de.pfabulist.loracle.mojo;
 
+import com.esotericsoftware.minlog.Log;
 import de.pfabulist.loracle.attribution.CopyrightHolder;
 import de.pfabulist.loracle.attribution.GetHolder;
 import de.pfabulist.loracle.attribution.JarAccess;
@@ -10,6 +11,7 @@ import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
+import de.pfabulist.loracle.spi.CustomService;
 import de.pfabulist.nonnullbydefault.NonnullCheck;
 import de.pfabulist.unchecked.Unchecked;
 import org.apache.maven.artifact.Artifact;
@@ -69,13 +71,14 @@ public class LicenseCheckMojo {
     }
 
     public void config( List<LicenseDeclaration> licenseDeclarations, List<UrlDeclaration> urlDeclarations, int allowUrlsCheckedDaysBefore ) {
+
         configLicenseDeclarations( licenseDeclarations );
         configUrlDeclarations( urlDeclarations );
         configCheckUrls( allowUrlsCheckedDaysBefore );
     }
 
     private void configCheckUrls( int allowUrlsCheckedDaysBefore ) {
-        if( allowUrlsCheckedDaysBefore > 0 ) {
+        if( allowUrlsCheckedDaysBefore > 0 ){
             lOracle.allowUrlsCheckedDaysBefore( allowUrlsCheckedDaysBefore );
         }
 
@@ -113,7 +116,7 @@ public class LicenseCheckMojo {
         rootNode.accept( new DependencyNodeVisitor() {
             @Override
             public boolean visit( DependencyNode dependencyNode ) {
-                Artifact a = _nn( dependencyNode.getArtifact() );
+                Artifact a = _nn( _nn(dependencyNode).getArtifact() );
                 Coordinates coo = Coordinates.valueOf( a );
                 coordinates2License.add( coo );
                 coordinates2License.updateScope( coo, _orElseGet( a.getScope(), "compile" ) );
@@ -272,7 +275,6 @@ public class LicenseCheckMojo {
         coordinates2License.fromJar( src::check );
     }
 
-
     public void computeHolder() {
         coordinates2License.update( this::computeHolder );
     }
@@ -287,25 +289,25 @@ public class LicenseCheckMojo {
                         map( m -> new CopyrightHolder( _nn( m.group( "year" ) ), _nn( m.group( "holder" ) ) ) ).
                         findAny();
 
-        if ( ret.isPresent() ) {
+        if( ret.isPresent() ) {
             liCo.setHolder( ret );
             return;
         }
 
         ret = new ContentToLicense( lOracle, "by license file", log, andIsOr ).getHolder( liCo.getLicenseTxt() );
-        if ( ret.isPresent() ) {
+        if( ret.isPresent() ) {
             liCo.setHolder( ret );
             return;
         }
 
         ret = new ContentToLicense( lOracle, "by header file", log, andIsOr ).getHolder( liCo.getHeaderTxt() );
-        if ( ret.isPresent() ) {
+        if( ret.isPresent() ) {
             liCo.setHolder( ret );
             return;
         }
 
         ret = new ContentToLicense( lOracle, "by notice file", log, andIsOr ).getHolder( liCo.getNotice() );
-        if ( ret.isPresent() ) {
+        if( ret.isPresent() ) {
             liCo.setHolder( ret );
         }
 
@@ -328,10 +330,10 @@ public class LicenseCheckMojo {
     }
 
     public void computeLicense() {
-            coordinates2License.update( new LicenseIntelligence( lOracle, log )::compute );
+        coordinates2License.update( new LicenseIntelligence( lOracle, log )::compute );
     }
 
     public void downloadPages() {
-        coordinates2License.update( new Downloader( log, urlToLicense )::getExtension );
+        coordinates2License.update( new Downloader( log, urlToLicense, lOracle )::getExtension );
     }
 }

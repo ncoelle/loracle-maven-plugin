@@ -1722,9 +1722,6 @@
           "coo": "jline:jline:1.0"
         },
         {
-          "coo": "com.thoughtworks.paranamer:paranamer:2.3"
-        },
-        {
           "coo": "org.jvnet.jaxb2.maven2:maven-jaxb2-plugin:0.12.3"
         }
       ],
@@ -15501,7 +15498,7 @@
       },
       "urls": [
         "fedoraproject.org/wiki/licensing/wtfpl",
-        "wtfpl.net/"
+        "wtfpl"
       ],
       "longNames": [
         "wtfpl",
@@ -16798,6 +16795,7 @@
     }
   },
   "urlsInTime": {},
+  "urlToContent": {},
   "tooSimpleLongNames": [
     "map",
     "par",

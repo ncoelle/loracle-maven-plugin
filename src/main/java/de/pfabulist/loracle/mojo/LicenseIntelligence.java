@@ -70,8 +70,8 @@ public class LicenseIntelligence {
         if( liCo.getMavenLicenses().size() > 0 ) {
             String u = _nn( _nn( liCo.getMavenLicenses() ).get( 0 ) ).getUrl();      // todo gen
             if( !u.isEmpty() ) {
-                new Downloader( log, new Url2License() ).download( u );
-                txt = new Downloader( log, new Url2License() ).get( u );
+                new Downloader( log, new Url2License(), lOracle ).download( u );
+                txt = new Downloader( log, new Url2License(), lOracle ).get( u );
             }
         }
         MappedLicense t5 = lft.getLicense( txt );
@@ -110,32 +110,30 @@ public class LicenseIntelligence {
 
     }
 
-    public MappedLicense mavenLicenseToLicense( //Coordinates coo,
-                                                 // MappedLicense byCoordinates,
-                                                 Coordinates2License.MLicense mavenLicense ) {
+    public MappedLicense mavenLicenseToLicense( Coordinates2License.MLicense mavenLicense ) {
 
         Optional<String> name = Optional.of( mavenLicense.getName() );
         MappedLicense byName = name.map( lOracle::getByName ).orElse( MappedLicense.empty() );
 
-        if ( name.isPresent() && !byName.isPresent()) {
-            byName = getLicenseExtension( _nn( name.get() ));
+        if( name.isPresent() && !byName.isPresent() ) {
+            byName = getCustomLicenseByName( _nn( name.get() ) );
         }
 
         Optional<String> url = Optional.of( mavenLicense.getUrl() );
         MappedLicense byUrl = url.map( urlToLicense::getLicense ).orElse( MappedLicense.empty() );
 
         MappedLicense byUrlText = url.map( u -> {
-            if ( u.isEmpty()) {
+            if( u.isEmpty() ) {
                 return MappedLicense.empty();
             }
-            new Downloader( log, new Url2License() ).download( u );
-            String txt = new Downloader( log, new Url2License() ).get( u );
+            new Downloader( log, new Url2License(), lOracle ).download( u );
+            String txt = new Downloader( log, new Url2License(), lOracle ).get( u );
             if( txt.isEmpty() ) {
                 return MappedLicense.empty();
             }
             LicenseFromText lft = new LicenseFromText( lOracle );
             MappedLicense ret = lft.getLicense( txt );
-            if ( ret.isPresent() ) {
+            if( ret.isPresent() ) {
                 log.debug( "[full] " + u );
             }
             return ret;
@@ -145,7 +143,7 @@ public class LicenseIntelligence {
         MappedLicense byComments = new ContentToLicense( lOracle, "comments", log, true ).findLicenses( mavenLicense.getComment() );
 
         mavenLicense.setByName( byName );
-        if ( byUrlText.isPresent() ) {
+        if( byUrlText.isPresent() ) {
             mavenLicense.setByUrl( byUrlText );
         } else {
             mavenLicense.setByUrl( byUrl );
@@ -155,10 +153,10 @@ public class LicenseIntelligence {
         return new Decider().decide( byUrlText, byName, byUrl, byComments );
     }
 
-    private MappedLicense getLicenseExtension( String name ) {
+    private MappedLicense getCustomLicenseByName( String name ) {
         String licensep = Utils.getResourceAsString( "/de/pfabulist/loracle/licenses/" + name + ".json" );
 
-        if ( licensep.isEmpty() ) {
+        if( licensep.isEmpty() ) {
             log.debug( "no such license: " + name );
             return MappedLicense.empty();
         }

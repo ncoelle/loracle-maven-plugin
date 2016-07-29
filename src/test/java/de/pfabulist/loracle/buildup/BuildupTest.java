@@ -195,8 +195,8 @@ public class BuildupTest {
                                        lOracle.getOrThrowByName( "bsd-2-clause" ) );
 //        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.tachyonproject:tachyon-*:0.8.2" ),
 //                                       lOracle.getOrThrowByName( "apache-2" ) );
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "com.thoughtworks.paranamer:paranamer:2.3" ),
-                                       lOracle.getOrThrowByName( "bsd-2-clause" ) );
+//        lOracle.addLicenseForArtifact( Coordinates.valueOf( "com.thoughtworks.paranamer:paranamer:2.3" ), // by src header
+//                                       lOracle.getOrThrowByName( "bsd-2-clause" ) );
 
         lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.json4s:json4s-*:3.2.10" ),
                                        lOracle.getOrThrowByName( "apache-2" ) );
@@ -271,18 +271,12 @@ public class BuildupTest {
 
 //        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://asm.objectweb.org/license.html", "2016-06-08" );
 ////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://asm.ow2.org/license.html", "2016-06-08" ); // todo
-////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://antlr.org/license.html", "2016-06-08" ); // todo
 //        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://www.opensource.org/licenses/bsd-license.php", "2016-06-08" );
 ////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-4-clause" ), "http://hsqldb.org/web/hsqlLicense.html", "2016-06-08" ); // now new license
-//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://repo.aduna-software.org/legal/aduna-bsd.txt", "2016-06-08" );
-////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-4-clause" ), "http://www.jcabi.com/LICENSE.txt", "2016-06-09" );  // todo
-////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://antlr.org/license.html", "2016-06-09" );  // todo
 //        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/about/license.html", "2016-06-20" );
 //        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/license.html", "2016-06-20" );
-////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://msv.java.net/License.txt", "2016-06-24" );
-////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "mit" ), "http://www.bouncycastle.org/license.html", "2016-06-28" );
 
-        lOracle.addUrl( lOracle.getOrThrowByName( "wtfpl" ), "http://www.wtfpl.net/" );
+        lOracle.addUrl( lOracle.getOrThrowByName( "wtfpl" ), "http://www.wtfpl.net" );
 
         System.out.println( "----------------------- " );
         System.out.println( "------ ifross.org ----- " );
@@ -295,6 +289,13 @@ public class BuildupTest {
 
         Filess.write( _nn( _nn( Paths.get( "" ).toAbsolutePath() ).resolve( "src/main/resources/de/pfabulist/loracle/loracle.json" ) ),
                       getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
+
+        // ---
+
+        lOracle.addUrlContent( "http://www.apache.org/licenses/LICENSE-2.0", "/de/pfabulist/loracle/urls/apache-2.txt" );
+        lOracle.addUrlContent( "http://glassfish.java.net/public/CDDL+GPL_1_1.html", "/de/pfabulist/loracle/urls/glassfish_cddl+gpl_1_1" );
+        lOracle.addUrlContent( "http://glassfish.java.net/public/CDDL+GPL.html", "/de/pfabulist/loracle/urls/glassfish_cddl+gpl_1.0.txt" );
+        lOracle.addUrlContent( "http://www.eclipse.org/org/documents/epl-v10.php", "/de/pfabulist/loracle/urls/eclipse-v10.txt" );
 
         testAll( lOracle );
 
