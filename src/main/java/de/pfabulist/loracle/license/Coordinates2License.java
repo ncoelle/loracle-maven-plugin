@@ -472,6 +472,7 @@ public class Coordinates2License {
         }
 
         Path ff = Paths.get( "target/generated-sources/loracle/licenses/" + self.map( c -> c.getArtifactId() + "/" ).orElse( "" ) + "NOTICE.txt" );
+        Filess.createDirectories( _nn(ff.getParent()) );
         Filess.write( ff, getBytes( sb.toString() ) );
 
     }

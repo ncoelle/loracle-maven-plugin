@@ -15,7 +15,7 @@
 
 
     <artifactId>loracle-maven-plugin</artifactId>
-    <version>1.10</version>
+    <version>1.10.1</version>
     <packaging>maven-plugin</packaging>
 
     <name>loracle-maven-plugin</name>
