@@ -100,8 +100,7 @@ public class LOracleMojo extends AbstractMojo {
                     new LicenseCheckMojo( getLog(),
                                           Paths.get( _nn( getSession().getLocalRepository() ).getBasedir() ),
                                           getProject(),
-                                          getDependencyGraphBuilder(),
-                                          andIsOr );
+                                          getDependencyGraphBuilder());
 
             mojo.config( getLicenseDeclarations(), getUrlDeclarations(), allowUrlsCheckedDaysBefore );
             mojo.getDependencies();
@@ -117,6 +116,8 @@ public class LOracleMojo extends AbstractMojo {
             mojo.checkCompatibility();
 
             mojo.summery();
+
+            mojo.generateLicenseTxts();
             mojo.generateNotice();
             mojo.store();
 

@@ -6,6 +6,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -168,5 +169,17 @@ public class MappedLicense {
             }
         } );
     }
+
+    public static MappedLicense decide( MappedLicense... mls ) {
+        MappedLicense ret = Arrays.stream( mls )
+                .filter( MappedLicense::isPresent )
+                .findFirst()
+                .orElse( MappedLicense.empty() );
+
+        Arrays.stream( mls ).forEach( ret::addOver );
+
+        return ret;
+    }
+
 
 }

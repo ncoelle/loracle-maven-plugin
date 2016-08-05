@@ -1,8 +1,10 @@
 package de.pfabulist.loracle.buildup;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import de.pfabulist.frex.Frex;
+import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
 import de.pfabulist.unchecked.Unchecked;
@@ -12,9 +14,11 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Map;
 
+import static de.pfabulist.kleinod.text.Strings.getBytes;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 
 /**
@@ -44,7 +48,7 @@ public class ExtractSpdxLicensesFromJSON {
         byte[] buf = new byte[ 3000000 ];
 
         int got = 0;
-        try( InputStream in = _nn( getClass().getResourceAsStream( "/de/pfabulist/loracle/spdx-full.json.txt" ) ) ) {
+        try( InputStream in = _nn( getClass().getResourceAsStream( "/de/pfabulist/loracle/spdx-full.json" ) ) ) {
             got = in.read( buf );
         } catch( IOException e ) {
             throw Unchecked.u( e );
@@ -91,18 +95,22 @@ public class ExtractSpdxLicensesFromJSON {
                 // filter non unique urls
 
                 Arrays.stream( url.split( Frex.txt( '\n' ).buildPatternString() ) ).
-//                        filter( u -> !u.equals( "http://opensource.org/licenses/Artistic-1.0" ) &&
-//                                !u.equals( "http://www.microsoft.com/opensource/licenses.mspx" ) &&
-//                                !u.equals( "http://opensource.org/licenses/MPL-2.0" ) &&
-//                                !u.equals( "http://www.mozilla.org/MPL/2.0/" ) &&
-//                                !u.equals( "https://fedoraproject.org/wiki/Licensing/Henry_Spencer_Reg-Ex_Library_License" )
-//
-//                        ).
-        forEach( u -> lOracle.addUrl( license, u ) );
+                        forEach( u -> lOracle.addUrl( license, u ) );
             }
 
             // osi approved
             lOracle.setOsiApproval( license, _nn( entry.getValue() ).osiApproved );
+
+            String licenseTxt = _nn(entry.getValue()).license;
+
+            Filess.write( _nn( _nn( Paths.get( "" ).toAbsolutePath() ).resolve( "src/main/resources/de/pfabulist/loracle/urls/" + license + ".txt" ) ),
+                          getBytes( licenseTxt ) );
+
+            lOracle.addUrlContent( "http://spdx.org/licenses/" + license + ".txt", "/de/pfabulist/loracle/urls/" + license + ".txt" );
+
+//            lOracle.addUrlContent( "http://spdx.org/" );
+
+
         }
     }
 }

@@ -34,7 +34,7 @@ public class Header {
                     buildCaseInsensitivePattern();
 
 
-    public static String getHeader( String in ) {
+    public static String getSrcHeader( String in ) {
         String[] lines = in.split( "\n" );
 
         AtomicReference<Boolean> afterClass = new AtomicReference<>( false );

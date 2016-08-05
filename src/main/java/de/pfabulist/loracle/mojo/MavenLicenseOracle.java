@@ -1,8 +1,11 @@
 package de.pfabulist.loracle.mojo;
 
+import com.ibm.icu.text.CharsetDetector;
+import com.ibm.icu.text.CharsetMatch;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.unchecked.functiontypes.FunctionE;
 import org.apache.maven.model.License;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
@@ -11,13 +14,16 @@ import org.apache.maven.plugin.logging.Log;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 import javax.annotation.Nullable;
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -68,9 +74,8 @@ public class MavenLicenseOracle {
         }
     }
 
-
     public Path getPom( Coordinates coords ) {
-        return _nn( coords.getSnapshotTolerantDir( localRepo ).resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".pom" ));
+        return _nn( coords.getSnapshotTolerantDir( localRepo ).resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".pom" ) );
     }
 
     public Path getArtifactOld( Coordinates coords ) {
@@ -89,70 +94,118 @@ public class MavenLicenseOracle {
 //        path = _nn( path.resolve( coords.getVersion() ) );
         Path dir = coords.getSnapshotTolerantDir( localRepo );
 
-
         Pattern pattern =
                 Frex.txt( _nn( dir.resolve( coords.getArtifactId() + "-" + coords.getVersion() ) ).toString() ).
                         then( Frex.or( Frex.alphaNum(), Frex.txt( '-' ) ).zeroOrMore().group( "suffix" ) ).
                         then( Frex.txt( ".jar" ) ).buildCaseInsensitivePattern();
 
         Path classic = _nn( dir.resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".jar" ) );
-        if ( !Files.exists( dir )) {
+        if( !Files.exists( dir ) ) {
             return classic;
         }
 
         return Filess.list( dir ).
                 filter( p -> {
                     Matcher matcher = pattern.matcher( p.toString() );
-                    if ( !matcher.find()   ) {
+                    if( !matcher.find() ) {
                         return false;
                     }
 
-                    switch( _nn(matcher.group("suffix")) ) {
+                    switch( _nn( matcher.group( "suffix" ) ) ) {
                         case "-sources":
                         case "-javadoc":
                             return false;
                         default:
                             return true;
                     }
-                }).
+                } ).
                 findFirst().
                 orElse( classic );
     }
 
     public Path getSrc( Coordinates coords ) {
-        return _nn( coords.getSnapshotTolerantDir( localRepo ).resolve( coords.getArtifactId() + "-" + coords.getVersion() + "-sources.jar" ));
+        return _nn( coords.getSnapshotTolerantDir( localRepo ).resolve( coords.getArtifactId() + "-" + coords.getVersion() + "-sources.jar" ) );
     }
 
     List<License> extractLicense( final Path pom ) {
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        try( Reader pathReader = Files.newBufferedReader( pom ) ) {
-            Model pomModel = _nn( reader.read( pathReader ) );
-
-            return _nn( pomModel.getLicenses() );
-
-        } catch( IOException | XmlPullParserException e ) {
-            log.warn( "\n++++++++++++++++++++++++++++++++++++++ " );
-            log.warn( "error extracting license from pom " + e );
-            log.warn( "++++++++++++++++++++++++++++++++++++++ \n" );
-        }
-
-        return Collections.emptyList();
+        return fromPom( pom, m -> Optional.ofNullable( m.getLicenses() ) ).orElse( Collections.emptyList() );
+//        if( !Files.exists( pom ) ) {
+//            log.warn( "no such pom file: " + pom );
+//            return Collections.emptyList();
+//        }
+//        MavenXpp3Reader reader = new MavenXpp3Reader();
+//        CharsetDetector cd = new CharsetDetector();
+//        try( InputStream iss = Files.newInputStream( pom );
+//             BufferedInputStream is = new BufferedInputStream( iss ) ) {
+//            cd.setText( is );
+//            @Nullable CharsetMatch[] cm = cd.detectAll();
+//            if( cm == null || cm.length == 0 ) {
+//                log.warn( "can't detect encoding: " + pom );
+//                return Collections.emptyList();
+//            }
+//            Reader pathReader = _nn( _nn( cm[ 0 ] ).getReader() );
+//            Model pomModel = _nn( reader.read( pathReader ) );
+//
+//            return _nn( pomModel.getLicenses() );
+//
+//        } catch( IOException | XmlPullParserException e ) {
+//            log.warn( "error extracting license from pom " + pom.toString() + ": " + e );
+//        }
+//
+//        return Collections.emptyList();
     }
 
     Optional<Coordinates> extractParent( Path pom ) {
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        try( Reader pathReader = Files.newBufferedReader( pom ) ) {
-            Model pomModel = _nn( reader.read( pathReader ) );
-
-            @Nullable Parent parent = pomModel.getParent();
+        return fromPom( pom, m -> {
+            @Nullable Parent parent = m.getParent();
             if( parent == null ) {
                 return Optional.empty();
             }
 
             return Optional.of( new Coordinates( _nn( parent.getGroupId() ), _nn( parent.getArtifactId() ), _nn( parent.getVersion() ) ) );
 
+        } );
+//        MavenXpp3Reader reader = new MavenXpp3Reader();
+//        try( Reader pathReader = Files.newBufferedReader( pom ) ) {
+//            Model pomModel = _nn( reader.read( pathReader ) );
+//
+//            @Nullable Parent parent = pomModel.getParent();
+//            if( parent == null ) {
+//                return Optional.empty();
+//            }
+//
+//            return Optional.of( new Coordinates( _nn( parent.getGroupId() ), _nn( parent.getArtifactId() ), _nn( parent.getVersion() ) ) );
+//
+//        } catch( IOException | XmlPullParserException e ) {
+//            log.warn( "error extracting parent from pom " + e );
+//        }
+//
+//        return Optional.empty();
+    }
+
+    <T> Optional<T> fromPom( Path pom, FunctionE<Model, Optional<T>, Exception> func ) {
+        if( !Files.exists( pom ) ) {
+            log.warn( "no such pom file: " + pom );
+            return Optional.empty();
+        }
+
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        CharsetDetector cd = new CharsetDetector();
+        try( InputStream iss = Files.newInputStream( pom );
+             BufferedInputStream is = new BufferedInputStream( iss ) ) {
+            cd.setText( is );
+            @Nullable CharsetMatch[] cm = cd.detectAll();
+            if( cm == null || cm.length == 0 ) {
+                log.warn( "can't detect encoding of pom: " + pom );
+                return Optional.empty();
+            }
+            Reader pathReader = _nn( _nn( cm[ 0 ] ).getReader() );
+            Model pomModel = _nn( reader.read( pathReader ) );
+
+            return _nn( func.apply( pomModel ) );
+
         } catch( IOException | XmlPullParserException e ) {
-            log.warn( "error extracting parent from pom " + e );
+            log.warn( "error extracting license from pom " + pom.toString() + ": " + e );
         }
 
         return Optional.empty();

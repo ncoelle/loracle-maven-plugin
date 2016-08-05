@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.mojo.Url2License;
 import de.pfabulist.unchecked.Unchecked;
 
 import java.io.IOException;
@@ -46,13 +45,13 @@ public class JSONStartup {
         return new Gson().fromJson( jsonstr, LOracle.class );
     }
 
-    public static Coordinates2License previous( boolean andIsOr ) {
+    public static Coordinates2License previous( ) {
 
         Path previuos = getLoracleJson();
 
         if ( !Files.exists( previuos )) {
             Coordinates2License ret = new Coordinates2License();
-            ret.setAndIsOr( andIsOr );
+            ret.setAndIsOr( true );
             return ret;
         }
 
@@ -74,7 +73,7 @@ public class JSONStartup {
         String jsonstr = new String( buf, 0, got, StandardCharsets.UTF_8 );
 
         Coordinates2License ret = new Gson().fromJson( jsonstr, Coordinates2License.class );
-        ret.setAndIsOr( andIsOr );
+        ret.setAndIsOr( true );
         return ret;
 
     }
@@ -91,10 +90,4 @@ public class JSONStartup {
         return previous;
     }
 
-    public static Url2License urls() {
-        Path previous = _nn( Paths.get( ".loracle/urls.json").toAbsolutePath() );
-        Filess.createDirectories( _nn(previous.getParent() ));
-
-        return new Url2License();
-    }
 }

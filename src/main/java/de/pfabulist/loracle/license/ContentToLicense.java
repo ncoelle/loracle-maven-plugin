@@ -5,9 +5,6 @@ import de.pfabulist.loracle.attribution.CopyrightHolder;
 import de.pfabulist.loracle.mojo.Findings;
 import de.pfabulist.loracle.mojo.UrlToLicense;
 
-import java.nio.MappedByteBuffer;
-import java.util.Arrays;
-import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,15 +29,13 @@ public class ContentToLicense {
                     buildCaseInsensitivePattern();
 
     private final LOracle lOracle;
-    private final String dscr;
     private final And and;
     private final Findings log;
     private final UrlToLicense urlToLicense;
 
-    public ContentToLicense( LOracle lOracle, String dscr, Findings log, boolean andIsOr ) {
+    public ContentToLicense( LOracle lOracle, Findings log ) {
         this.lOracle = lOracle;
-        this.dscr = dscr;
-        this.and = new And( lOracle, log, andIsOr );
+        this.and = new And( lOracle, log, true );
         this.log = log;
         this.urlToLicense = new UrlToLicense( lOracle, log );
     }
@@ -53,7 +48,7 @@ public class ContentToLicense {
                     //But( Frex.txt( ' ' ) ).oneOrMore().group( "addr" ) ).
                             buildCaseInsensitivePattern();
 
-    public MappedLicense byUrl( String str ) {
+    public MappedLicense byUrl( String str, String dscr ) {
         Matcher matcher = page.matcher( str );
 
         MappedLicense ret = MappedLicense.empty();
@@ -89,10 +84,10 @@ public class ContentToLicense {
 //    }
 //
 
-    public MappedLicense findLicenses( String str ) {
+    public MappedLicense findLicenses( String str, String dscr ) {
 
         MappedLicense name = lOracle.findLongNames( and, str );
-        MappedLicense url = byUrl( str );
+        MappedLicense url = byUrl( str, dscr );
 
         // todo merge
 

@@ -1,15 +1,11 @@
 package de.pfabulist.loracle.mojo;
 
 import com.google.gson.Gson;
-import de.pfabulist.frex.Frex;
 import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.buildup.JSONStartup;
-import de.pfabulist.loracle.license.Coordinates;
-import de.pfabulist.loracle.license.Coordinates2License;
-import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.license.Normalizer;
+import de.pfabulist.loracle.license.*;
 import de.pfabulist.unchecked.Unchecked;
-import org.jsoup.Jsoup;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -18,9 +14,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 
-import static de.pfabulist.kleinod.text.Strings.getBytes;
+import static de.pfabulist.frex.Frex.txt;
 import static de.pfabulist.kleinod.text.Strings.newString;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 
@@ -33,14 +33,12 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 public class Downloader {
 
     private final Findings log;
-    private final Url2License url2License;
     Normalizer normalizer = new Normalizer();
-    private boolean noInternet = true;
+    //private boolean noInternet = true;
     private final LOracle lOracle;
 
-    public Downloader( Findings log, Url2License url2License, LOracle lOracle ) {
+    public Downloader( Findings log, LOracle lOracle ) {
         this.log = log;
-        this.url2License = url2License;
         this.lOracle = lOracle;
     }
 
@@ -101,12 +99,12 @@ public class Downloader {
         Filess.createDirectories( _nn( path.getParent() ) );
 
         Optional<String> res = lOracle.getUrlContent( url );
-        if ( !res.isPresent()) {
-            log.debug( "    url not known: " + url );
+        if( !res.isPresent() ) {
+            log.debug( "    url not stored: " + url );
             return;
         }
 
-        try( @Nullable InputStream is = getClass().getResourceAsStream( res.get() )) {
+        try( @Nullable InputStream is = getClass().getResourceAsStream( res.get() ) ) {
             if( is == null ) {
                 log.debug( "    not found: " + getUrlPath( url ) );
                 return;
@@ -118,25 +116,29 @@ public class Downloader {
             // not stored
         }
 
-        if( noInternet ) {
-            log.warn( "       not found " + url );
-            log.warn( "[try]  add page src as resource: /de/pfabulist/loracle/urls/" + getUrlPath( url ) );
-            log.warn( "       see loracle-maven-plugin docu for more details" );
-            return;
-        }
+        log.warn( "       not found " + url );
+        log.warn( "[try]  add page src as resource see loracle-custom" );
+        return;
 
-        log.debug( "    trying " );
-        try {
-            Files.write( path, getBytes( _nn( _nn( _nn( Jsoup.connect( url ).get() ).body() ).text() ) ) );
-            log.debug( "    success " );
-        } catch( Exception e ) {
-            e.printStackTrace();
-            log.warn( "no internet or 404: " + url );
-            return;
-        }
+//        if( noInternet ) {
+//            log.warn( "       not found " + url );
+//            log.warn( "[try]  add page src as resource: /de/pfabulist/loracle/urls/" + getUrlPath( url ) );
+//            log.warn( "       see loracle-maven-plugin docu for more details" );
+//            return;
+//        }
+//
+//        log.debug( "    trying " );
+//        try {
+//            Files.write( path, getBytes( _nn( _nn( _nn( Jsoup.connect( url ).get() ).body() ).text() ) ) );
+//            log.debug( "    success " );
+//        } catch( Exception e ) {
+//            e.printStackTrace();
+//            log.warn( "no internet or 404: " + url );
+//            return;
+//        }
     }
 
-    private static final String urlspecial = Frex.or( Frex.txt( ':' ), Frex.txt( '/' ) ).buildPattern().toString();
+    private static final String urlspecial = txt( ':' ).or( txt( '/' ) ).or( txt( '*' ) ).or( txt( '"' ) ).or( txt( '<' ) ).or( txt( '>' ) ).or( txt( '?' ) ).or( txt( '\\' ) ).buildPattern().toString();
 
     private String getUrlPath( String url ) {
         String u = normalizer.normalizeUrl( url ).orElse( url );
@@ -159,7 +161,7 @@ public class Downloader {
     }
 
     public void setNoInternet() {
-        noInternet = true;
+        // noInternet = true;
     }
 
     public static Optional<Coordinates2License.LiCo> getLico( Coordinates coo ) {
@@ -184,6 +186,106 @@ public class Downloader {
         String jsonstr = new String( buf, 0, got, StandardCharsets.UTF_8 );
 
         return Optional.of( new Gson().fromJson( jsonstr, Coordinates2License.LiCo.class ) );
+    }
+
+    public void generateLicensesTxt( String prefix, Coordinates coordinates, Coordinates2License.LiCo liCo ) {
+        Path src = _nn( Paths.get( "target/generated-sources/loracle/coordinates/" + coordinates.toFilename() + "/license-0.txt" ).toAbsolutePath() );
+
+        if( Files.exists( src ) && Filess.size( src ) > 0 ) {
+
+            String fname = coordinates.toFilename() + "-license.txt";
+
+            getEmptyNoticeLicenseTarget( prefix, coordinates.toFilename() + "-license.txt" ).ifPresent( tgt -> Filess.copy( src, tgt ) );
+            liCo.setLicenseFilenames( Collections.singletonList( fname ));
+            return;
+        }
+
+        List<String> fnames = new ArrayList<>();
+        liCo.getLicense().ifPresent( li -> lOracle.getByName( li ).ifPresent(
+                license -> LicenseIDs.flattenToStrings( license ).
+                        forEach( lstr -> {
+                            String fname = onPredefLicense( lstr,
+                                                            ( filename, is ) -> getEmptyNoticeLicenseTarget( prefix, filename ).ifPresent( tgt -> Filess.copy( is, tgt ) ) ).
+                                    orElseGet( () -> onUrldefLicense( lstr,
+                                                                      ( filename, is ) -> getEmptyNoticeLicenseTarget( prefix, filename ).ifPresent( tgt -> Filess.copy( is, tgt ) ) ).
+                                            orElse( "" ) );
+                            if( fname.isEmpty() ) {
+                                log.warn( "can not find text for " + lstr );
+                            } else {
+                                fnames.add( fname );
+                            }
+
+                        } ) ) );
+
+        liCo.setLicenseFilenames( fnames );
+    }
+
+    private Optional<Path> getEmptyNoticeLicenseTarget( String prefix, String fname ) {
+        final String filename = prefix + "/" + fname;
+        Path tgt = _nn( Paths.get( "target/generated-sources/loracle/licenses/" + filename ).toAbsolutePath() );
+        if( Files.exists( tgt ) ) {
+            return Optional.empty();
+        }
+
+        Filess.createDirectories( _nn( tgt.getParent() ) );
+
+        return Optional.of( tgt );
+    }
+
+    @SuppressFBWarnings( "REC_CATCH_EXCEPTION" )
+    public Optional<String> onPredefLicense( String lstr, BiConsumer<String, InputStream> isConsumer ) {
+
+        String fname = Normalizer.toFilename( lstr ) + ".txt";
+
+        try( @Nullable InputStream is = Downloader.class.getResourceAsStream( "/de/pfabulist/loracle/urls/" + fname ) ) {
+            if( is == null ) {
+                log.debug( "no prefdef license text found for: " + lstr );
+                return Optional.empty();
+            }
+            isConsumer.accept( fname, is );
+
+            return Optional.of( fname );
+        } catch( Exception e ) {
+            log.debug( "no prefdef license text found for: " + lstr );
+        }
+
+        return Optional.empty();
+    }
+
+    @SuppressFBWarnings( "REC_CATCH_EXCEPTION" )
+    public Optional<String> onUrldefLicense( String str, BiConsumer<String, InputStream> isConsumer ) {
+
+        Optional<LicenseID> olicense = lOracle.getByName( str ).noReason();
+
+        if( !olicense.isPresent() ) {
+            return Optional.empty();
+        }
+
+        LicenseID license = _nn( olicense.get() );
+
+        Optional<String> ourl = lOracle.getMore( license ).urls.stream().filter( u -> lOracle.getUrlContent( u ).isPresent() ).findFirst();
+
+        if( !ourl.isPresent() ) {
+            return Optional.empty();
+        }
+
+        String url = _nn( ourl.get() );
+        String fname = Normalizer.toFilename( url ) + ".txt";
+        String res = _nn( lOracle.getUrlContent( url ).get() ); // good by first stream
+
+        try( @Nullable InputStream is = Downloader.class.getResourceAsStream( res ) ) {
+            if( is == null ) {
+                log.warn( "urlcontent but no resource " + url );
+                return Optional.empty();
+            }
+            isConsumer.accept( fname, is );
+
+            return Optional.of( fname );
+        } catch( Exception e ) {
+            log.warn( "urlcontent but no resource " + url );
+        }
+
+        return Optional.empty();
     }
 
 }

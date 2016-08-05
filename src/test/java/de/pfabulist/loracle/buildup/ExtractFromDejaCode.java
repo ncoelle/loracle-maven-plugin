@@ -10,10 +10,14 @@ import de.pfabulist.loracle.license.Normalizer;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
 import de.pfabulist.loracle.license.SingleLicense;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,6 +29,7 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
+@SuppressFBWarnings("REC_CATCH_EXCEPTION")
 public class ExtractFromDejaCode {
 
     Normalizer normalizer = new Normalizer();
@@ -87,7 +92,7 @@ public class ExtractFromDejaCode {
     Optional<LicenseID> propLicense( LOracle lOracle, String key, Optional<LicenseID> one, Optional<LicenseID> two, Optional<LicenseID> three ) {
 
         if( one.isPresent() && two.isPresent() && three.isPresent() ) {
-            if( one.get().equals( two.get() ) && two.get().equals( three.get() ) ) {
+            if( _nn(one.get()).equals( two.get() ) && _nn(two.get()).equals( three.get() ) ) {
 //                System.out.println( "3 set, old" );
 //                System.out.println( one + " : " + two + " : " + three );
                 return one;
@@ -115,7 +120,7 @@ public class ExtractFromDejaCode {
         }
 
         if( !one.isPresent() && two.isPresent() && three.isPresent() ) {
-            if( two.get().equals( three.get() ) ) {
+            if( _nn(two.get()).equals( three.get() ) ) {
 //                System.out.println( "2,3 set, old" );
                 return two;
             }
@@ -126,7 +131,7 @@ public class ExtractFromDejaCode {
         }
 
         if( one.isPresent() && !two.isPresent() && three.isPresent() ) {
-            if( one.get().equals( three.get() ) ) {
+            if( _nn(one.get()).equals( three.get() ) ) {
 //                System.out.println( "1,3 set, old" );
                 return one;
             }
@@ -137,7 +142,7 @@ public class ExtractFromDejaCode {
         }
 
         if( one.isPresent() && two.isPresent() && !three.isPresent() ) {
-            if( one.get().equals( two.get() ) ) {
+            if( _nn(one.get()).equals( two.get() ) ) {
 //                System.out.println( "1,2 set, old" );
                 return two;
             }
@@ -149,6 +154,7 @@ public class ExtractFromDejaCode {
 
 //        System.out.println( "1,2,3 not set, new: " + key );
 
+        String oldKey = key;
         if( key.equals( "indiana-extreme" ) ) {
             key = "indiana-extreme-1.1.1";
         }
@@ -222,6 +228,11 @@ public class ExtractFromDejaCode {
         try {
             LicenseID ret = lOracle.newSingle( key, false );
             lOracle.getMore( ret ).attributes.setFromDeja();
+            System.out.println( "+++ deja ++ " + ret + "    " + "/de/pfabulist/loracle/deja/" + oldKey + ".LICENSE");
+            try( InputStream is = _nn(ExtractFromDejaCode.class.getResourceAsStream( "/de/pfabulist/loracle/deja/" + oldKey + ".LICENSE" ))) {
+                Filess.copy( is, _nn(Paths.get( "src/main/resources/de/pfabulist/loracle/urls/" + key + ".txt" ).toAbsolutePath()), StandardCopyOption.REPLACE_EXISTING );
+            }
+            //lOracle.addUrlContent(  );
             return Optional.of( ret );
         } catch( Exception e ) {
             System.out.println( "known (probably guess) " + key );
@@ -242,7 +253,7 @@ public class ExtractFromDejaCode {
             if( uu.isPresent() ) {
                 if( !_nn( uu.get() ).equals( "opensource.org/licenses/bsd-license" ) ) {
                     // bsd is time based
-                    lOracle.addUrl( licenseID, uu.get() );
+                    lOracle.addUrl( licenseID, _nn(uu.get()) );
                 } else {
                     System.out.printf( licenseID.toString() );
                     int i = 0;

@@ -10,6 +10,10 @@ import java.util.Optional;
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
+/**
+ * a single license can be modified by adding (an or several?) exception(s)
+ * or a plus for "or later"
+ */
 public class ModifiedSingleLicense implements LicenseID {
 
     private final String base;
@@ -53,5 +57,13 @@ public class ModifiedSingleLicense implements LicenseID {
     @Override
     public String toString() {
         return base + (orLater ? "+" : "" ) + exception.map( e -> " with " + e ).orElse( "" );
+    }
+
+    public Optional<LicenseExclude> getException() {
+        return exception;
+    }
+
+    public String getBase() {
+        return base;
     }
 }

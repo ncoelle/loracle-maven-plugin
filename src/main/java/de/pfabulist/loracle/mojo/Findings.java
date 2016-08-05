@@ -7,6 +7,8 @@ import org.apache.maven.plugin.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
  * SPDX-License-Identifier: BSD-2-Clause
@@ -88,20 +90,20 @@ public class Findings implements Log {
 
     @Override
     public void error( CharSequence content ) {
-        fails.add( content.toString() );
+        fails.add( _nn(content).toString() );
         mavenLog.error( content );
     }
 
     @Override
     public void error( CharSequence content, Throwable error ) {
-        fails.add( content.toString() );
+        fails.add( _nn(content).toString() );
         mavenLog.error( content, error );
 
     }
 
     @Override
     public void error( Throwable error ) {
-        fails.add( error.getMessage() );
+        fails.add( _nn(error).getMessage() );
         mavenLog.error( error );
     }
 

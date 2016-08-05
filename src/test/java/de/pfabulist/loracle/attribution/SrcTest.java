@@ -23,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SrcTest {
 
     private LOracle lOracle = JSONStartup.start().spread();
+    private final ContentToLicense ctl = new ContentToLicense( lOracle, new Findings( dummy ) );
 
     @Test
     public void tt() {
@@ -861,7 +862,7 @@ public class SrcTest {
                         "    }\r\n" +
                         "}\r";
 
-        hh = Header.getHeader( hh );
+        hh = Header.getSrcHeader( hh );
 
 //        Matcher matcher = ContentToLicense.page.matcher( hh );
 //        if ( matcher.find() ) {
@@ -871,10 +872,8 @@ public class SrcTest {
         Matcher matcher = ContentToLicense.page.matcher( "//   http://opensource.org/licenses/cpl1.0.php\r\n" );
         assertThat( matcher.find() ).isTrue();
 
-        ContentToLicense ctl = new ContentToLicense( lOracle, "testing", new Findings( dummy ), true );
-
-        System.out.println( ctl.byUrl( hh ) );
-        assertThat( ctl.byUrl( hh ).isPresent() ).isTrue();
+        System.out.println( ctl.byUrl( hh, "testing" ) );
+        assertThat( ctl.byUrl( hh, "testing" ).isPresent() ).isTrue();
 
     }
 
@@ -886,9 +885,7 @@ public class SrcTest {
         assertThat( matcher.find() ).isTrue();
         System.out.println( matcher.group( "addr" ) );
 
-        ContentToLicense ctl = new ContentToLicense( lOracle, "testing", new Findings( dummy ), true );
-
-        assertThat( ctl.byUrl( in ).isPresent() ).isTrue();
+        assertThat( ctl.byUrl( in, "testing" ).isPresent() ).isTrue();
     }
 
     @Test

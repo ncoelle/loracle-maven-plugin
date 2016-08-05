@@ -8,14 +8,13 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javax.annotation.Nullable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import java.util.function.BiPredicate;
+import java.util.function.*;
 
 import static de.pfabulist.kleinod.text.Strings.getBytes;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
@@ -80,13 +79,16 @@ public class Coordinates2License {
         private String message = "";
         private String licenseTxt = "";
         private String headerTxt = "";
-        transient private boolean used = false;
         private String licenseTxtLicense = "";
         private String headerLicense = "";
         private String pomLicense = "";
         private String byCoordinates = "";
         private String notice = "";
         private String pomHeaderLicense = "";
+        private List<String> licenseFilenames = Collections.emptyList();
+
+        transient private boolean used = false;
+        transient private List<String> useedBy = new ArrayList<>();
 
         public String getPomHeader() {
             return pomHeader;
@@ -247,12 +249,21 @@ public class Coordinates2License {
         public void setMavenLicenses( List<MLicense> mavenLicenses ) {
             this.mavenLicenses = mavenLicenses;
         }
+
+        public void setLicenseFilenames( List<String> licenseFilenames ) {
+            this.licenseFilenames = licenseFilenames;
+        }
+
+        public List<String> getLicenseFilenames() {
+            return licenseFilenames;
+        }
     }
 
     private Map<Coordinates, LiCo> list = new HashMap<>();
     private boolean andIsOr = false;
     @Nullable
     transient private Findings log;
+    private transient Optional<Coordinates> self = Optional.empty();
 
     public void add( Coordinates coo ) {
         list.putIfAbsent( coo, new LiCo() );
@@ -273,7 +284,7 @@ public class Coordinates2License {
         }
     }
 
-    int getScopeLevel( String scope ) {
+    public static int getScopeLevel( String scope ) {
         switch( scope ) {
             case "plugin":
                 return 8;
@@ -292,7 +303,7 @@ public class Coordinates2License {
             case "compile":
                 return 1;
             default:
-                getLog().warn( "unexpected scope " + scope );
+//                getLog().warn( "unexpected scope " + scope );
                 return 100;
         }
     }
@@ -305,15 +316,20 @@ public class Coordinates2License {
         list.forEach( ( c, coli ) -> {
             if( coli.isUsed() ) {
                 f.accept( c, coli );
-//                getLog().debug( "license for " + c + " is ..." );
-//                if( !coli.getLicense().isPresent() ) {
-//                    coli.setLicense( _nn( f.apply( c ) ) );
-//                    getLog().debug( "license for " + c + " is (found) to be " + coli.getLicense() );
-//                } else {
-//                    getLog().debug( "license for " + c + " is known to be " + coli.getLicense().get() );
-//                }
             }
         } );
+    }
+
+    public void update( Predicate<LiCo> pred, BiConsumer<Coordinates, LiCo> f ) {
+        list.forEach( ( c, coli ) -> {
+            if( coli.isUsed() && pred.test( coli ) ) {
+                f.accept( c, coli );
+            }
+        } );
+    }
+
+    public void setSelf( Coordinates coo ) {
+        self = Optional.of( coo );
     }
 
     public Optional<LiCo> get( Coordinates coordinates ) {
@@ -369,9 +385,12 @@ public class Coordinates2License {
                                                   lico.getLicense().map( Object::toString ).orElse( "-" ) ) +
                                            lico.getHolder().map( Object::toString ).orElse( "-" ) );
                     if( !lico.getLicense().isPresent() ) {
+                        lico.useedBy.forEach( u -> getLog().error( "   used by: " + u ) );
                         getLog().error( "   no license found" );
                     }
+
                     if( !lico.getMessage().isEmpty() ) {
+                        lico.useedBy.forEach( u -> getLog().error( "   used by " + u ) );
                         getLog().error( "   " + lico.getMessage() );
                     }
                     getLog().debug( "    [sum]              " + lico.getLicenseReason() );
@@ -410,26 +429,49 @@ public class Coordinates2License {
     public void generateNotice() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(
-                "   =========================================================================\n" +
-                        "   ==  NOTICE file corresponding Notice file standard as described in                     ==\n" +
-                        "   ==  the loracle-maven-plugin ,                                   ==\n" +
-                        "   ==                       ==\n" +
-                        "   =========================================================================\n" +
-                        "\n" +
-                        "   This is <loracle-maven-plugin-version foo>\n" +
-                        "   copyright pfabulist.de licensed under BSD-2-clause\n" +
-                        "\n" +
-                        "   It includes the following software\n" +
-                        "   Please read the different LICENSE files present in the de.pfabulist.loracle directory of\n" +
-                        "   this distribution.\n\n\n" );
+        if( !self.isPresent() ) {
+            sb.append( "what ???\n\n" );
+        } else {
 
-        list.entrySet().stream().
-                filter( e -> entryPred( e, ( coo, lico ) -> lico.isUsed() && getScopeLevel( lico.getScope() ) < getScopeLevel( "test" ) ) ).
-                sorted( ( a, b ) -> entryComp( a, b, ( cooA, x, cooB, y ) -> cooA.toString().compareTo( cooB.toString() ) ) );
-//                forEach( sb.append( li ) );
+            LiCo selfLico = _nn( get( _nn( self.get() ) ).get() );
+            sb.append( "This is " ).append( self.map( Object::toString ).orElse( "?" ) ).append( "\n" );
+            sb.append( "it is licensed under:  " ).append( selfLico.getLicense().get() ).append( "\n" );
+            selfLico.getLicenseFilenames().forEach( fn -> sb.append( "see license file:      " ).append( fn ).append( "\n" ) );
+            sb.append( "copyright holder:      " ).append( selfLico.getCopyrightHolder().map( Object::toString ).orElse( "" ) ).append( "\n\n" );
+            sb.append( "It includes the following software:\n\n" );
 
-        Path ff = Paths.get( "target/generated-sources/loracle/NOTICE.txt" );
+//
+//        sb.append(
+//                "   =========================================================================\n" +
+//                        "   ==  NOTICE file corresponding Notice file standard as described in                     ==\n" +
+//                        "   ==  the loracle-maven-plugin ,                                   ==\n" +
+//                        "   ==                       ==\n" +
+//                        "   =========================================================================\n" +
+//                        "\n" +
+//                        "   This is <loracle-maven-plugin-version foo>\n" +
+//                        "   copyright pfabulist.de licensed under BSD-2-clause\n" +
+//                        "\n" +
+//                        "   It includes the following software\n" +
+//                        "   Please read the different LICENSE files present in the de.pfabulist.loracle directory of\n" +
+//                        "   this distribution.\n\n\n" );
+//
+
+            list.entrySet().stream().
+                    filter( e -> entryPred( e, ( coo, lico ) -> lico.isUsed() && getScopeLevel( lico.getScope() ) < getScopeLevel( "test" ) ) ).
+                    filter( e -> !_nn( e.getKey() ).equals( self.get() ) ).
+                    sorted( ( a, b ) -> entryComp( a, b, ( cooA, x, cooB, y ) -> cooA.toString().compareTo( cooB.toString() ) ) ).
+                    forEach( ec( ( coo, lico ) -> {
+                        sb.append( coo.getArtifactId() ).append( "\n" ).
+                                append( "   full name:         " ).append( coo.toString() ).append( "\n" ).
+                                append( "   licensed under:    " ).append( lico.getLicense().map( Object::toString ).orElse( "-" ) ).append( "\n" ).
+                                append( "   copyright holder:  " ).append( lico.getCopyrightHolder().map( Object::toString ).orElse( "" ) ).append( "\n" );
+                        lico.getLicenseFilenames().forEach( fn -> sb.append( "   see license file:  " ).append( fn ).append( "\n" ) );
+                        sb.append( "\n" );
+                    } ) );
+
+        }
+
+        Path ff = Paths.get( "target/generated-sources/loracle/licenses/" + self.map( c -> c.getArtifactId() + "/" ).orElse( "" ) + "NOTICE.txt" );
         Filess.write( ff, getBytes( sb.toString() ) );
 
     }
@@ -477,12 +519,24 @@ public class Coordinates2License {
         return bipred.test( entry.getKey(), entry.getValue() );
     }
 
+    public static <K, V> void entryConsumer( Map.Entry<K, V> entry, BiConsumer<K, V> func ) {
+        func.accept( entry.getKey(), entry.getValue() );
+    }
+
+    public static <K, V> Consumer<Map.Entry<K, V>> ec( BiConsumer<K, V> func ) {
+        return e -> func.accept( e.getKey(), e.getValue() );
+    }
+
     public interface Function4<A, B, C, D, R> {
         R apply( A a, B b, C c, D d );
     }
 
     public static <K, V> int entryComp( Map.Entry<K, V> a, Map.Entry<K, V> b, Function4<K, V, K, V, Integer> f4 ) {
         return f4.apply( _nn( a.getKey() ), _nn( a.getValue() ), _nn( b.getKey() ), _nn( b.getValue() ) );
+    }
+
+    public void addUse( Coordinates coo, String use ) {
+        get( coo ).ifPresent( liCo -> liCo.useedBy.add( use ) );
     }
 
 }

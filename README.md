@@ -10,9 +10,10 @@ It checks checks that
  * every dependency has a declared known license
  * license compatibility is valid (some)
 
+It generate a directory with NOTICE.txt and files all references licenses
+
 Note
 
- * does not generate notes listing all dependend licenses
  * does not set licence headers in source
 
 ## Use
@@ -44,44 +45,58 @@ Note
             </licenseDeclaration>
         </licenseDeclarations>
 
-   The coordinates allow '\*' to declare patterns. The '\*' only works within groupid and artifactid
+For non spdx licenses it is recommended to use this second form. Loracle will then interpret this ulrs content to
+compute the license. Note the urls content must be known to loracle. Some are set already. If loracle complains
+use the extension machanism to add url contents.
 
- * Url Declarations
+        <licenseDeclarations>
+            <licenseDeclaration>
+                <coordinates>a.b:foo:1.0</coordinates>
+                <url>http://i.a.url</url>
+            </licenseDeclaration>
+        </licenseDeclarations>
 
-        <urlDeclarations>
-            <urlDeclaration>
-                <url>a.b:foo:1.0</url>
-                <license>apache-2</license>
-                <checkedAt>2016-02-03</checkedAt>
-            </urlDeclaration>
-        </urlDeclarations>
-
-    Urls may declare a license but these tend to be volatile over time. So its only good for a while
-
- * allowUrlsCheckedDaysBefore
-
-        <allowUrlsCheckedDaysBefore>100</allowUrlsCheckedDaysBefore>
-
- To allow urls that are only good for a time.
- Note: The declaration is by absolute time and this flag relative, i.e. you builds will fail eventually and force you to recheck the urls.
+   The coordinates allow '\*' to declare patterns.
 
  * stopOnError
 
         <stopOnError>false</stopOnError>
 
-  To prevent build breakage set this flag. It meant for multi module builds, to see all results in one run.
-
- * andIsOr
-
-        <andIsOr>true</andIsOr>
-
- There is no maven defined meaning of 2 or more license declarations in a pom. The defensive approach is to
-        assume 'and' combination. But checking the artifact it is often meant as 'or'.
-        This flag switches the behaviour to 'or'.
+  To prevent build breakage set this flag.
 
 
+### Extension Mechanism via dependency
 
-### Non-open Source needs
+You can add a dependency to the plugin. Thus you can add knowhow to the plugin, e.g.
+
+                <plugin>
+                    <groupId>de.pfabulist</groupId>
+                    <artifactId>loracle-maven-plugin</artifactId>
+                    <version> -latest-- </version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>de.pfabulist.loracle</groupId>
+                            <artifactId>loracle-found</artifactId>
+                            <version>0.4</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>license-check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+The loracle-custom project allows extensions to loracle. For example see the loracle-found project.
+This is especially useful it you want to build-up a knowhow-base to be used in several projects.
+
+
+## Non-open Source needs
 
 If you develop an non open project you still need to assign a license to your project, otherwise loracle will complain.
 i.e. declare your project closed:
@@ -94,6 +109,60 @@ i.e. declare your project closed:
 
 This also means that any copy left licenses with a stronger than 'compile' scope will break your build
 
+
+## What to do if loracle stopes your build because a license is not found?
+
+1) Use all loracle provided options
+
+1a) run mvn dependency:sources, mvn clean install
+
+This fetches source files from the repo/maven-central. Loracle may find information in the sources
+
+1b) add loracle-found as dependency (see above), mvn clean install
+
+Loracle might find the missing information there
+
+2) From now on open an issue for loracle or lorale-found. I'd like to improve it continuously
+
+2a) Look up the relevant webpage for license informaton. Add it as configuration
+
+2b) Look at the source page for license notes, License.txt, Notice.txt, src header. Add it to configuration or extension
+
+2c) Same as 2b but add the found license text to a loracle custom derived library and let loracle figure the license out.
+
+
+## What to do if loracle stops your build because of license compatibility reasons ?
+
+3) for strong copy left/ reciprocal reasons ?
+
+3a) it it is gpl-2, gpl-3, agpl-2, agpl-3: remember the fsf likes to sues and always wins. Change your license or exchange the problematic library
+
+3b) if is because of json: use a different json lib or add "use it for good, not evil" to your license.
+Caution the later makes your project non open source.
+
+3c) other copy left licenses: Same as 3a) except you don't sued as fast.
+
+3d) you need to use a copy left lib. Change you work to the same copy left lib and publish the source.
+Remember publishing your work does nor prevent you from making money from it.
+
+4) Because of contradictory advertising clauses: same as 3c)
+
+## Loracle stops your build but you don't care
+
+5) Set setOnError to false and pray that nobody sues. You could still ask/pay a lawyer whether you really have problem.
+Remember loracle can not give legal advice. The tool might still help you and lawyer to find interesting points.
+
+## Design guidelines
+
+Loracle works almost completely offline. All information is in the plugin, dependencies or the configured maven repos.
+This makes the results repeatable, independent off any changes on the web. Any changes will reflect in different version of
+  loracle or dependencies.
+
+# Notice
+
+Loracle generates a Notice file: NOTICE.txt and a list of relevant license files.
+These files are in generated-source/loracle/licenses/<arifact-name>.
+So this works for multimodule builds.
 
 ## older notes
 

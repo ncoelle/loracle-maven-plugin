@@ -2,16 +2,13 @@ package de.pfabulist.loracle.attribution;
 
 import de.pfabulist.frex.Frex;
 import de.pfabulist.kleinod.nio.Filess;
-import de.pfabulist.loracle.license.ContentToLicense;
+import de.pfabulist.loracle.Utils;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.license.MappedLicense;
-import de.pfabulist.loracle.license.Normalizer;
 import de.pfabulist.loracle.mojo.Findings;
 import de.pfabulist.loracle.mojo.MavenLicenseOracle;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -32,7 +29,6 @@ public class JarAccess {
     private final LOracle lOracle;
     private final MavenLicenseOracle mlo;
     private final Findings log;
-    private final boolean andIsOr;
 
     private static Pattern licensePattern =
             Frex.or( Frex.txt( "LICENSE" ), Frex.txt( "META-INF/LICENSE" )).then( Frex.any().zeroOrMore() ).
@@ -47,11 +43,10 @@ public class JarAccess {
                     buildCaseInsensitivePattern();
 
 
-    public JarAccess( LOracle lOracle, MavenLicenseOracle mlo, Findings log, boolean andIsOr ) {
+    public JarAccess( LOracle lOracle, MavenLicenseOracle mlo, Findings log ) {
         this.lOracle = lOracle;
         this.mlo = mlo;
         this.log = log;
-        this.andIsOr = andIsOr;
     }
 
 
@@ -61,12 +56,11 @@ public class JarAccess {
 
         if ( !Files.exists(src)) {
             log.warn( "no jar available " + coo );
-//            log.warn( "[try] mvn dependency:source" );
             return;
         }
 
         try( InputStream in = Filess.newInputStream( src ) ) {
-            String file = GetHolder.unzipToString( in, licensePattern );
+            String file = Utils.unzipToString( in, licensePattern );
 
             if( file.isEmpty() ) {
                 log.debug( "artifact source" + coo + " has no license file" );

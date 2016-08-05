@@ -2,32 +2,23 @@ package de.pfabulist.loracle.attribution;
 
 import de.pfabulist.frex.Frex;
 import de.pfabulist.kleinod.nio.Filess;
-import de.pfabulist.kleinod.nio.IO;
+import de.pfabulist.loracle.Utils;
 import de.pfabulist.loracle.license.ContentToLicense;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.mojo.Findings;
 import de.pfabulist.loracle.mojo.MavenLicenseOracle;
-import de.pfabulist.unchecked.functiontypes.ConsumerE;
-import de.pfabulist.unchecked.functiontypes.PredicateE;
 import org.apache.maven.model.License;
 
-import javax.annotation.Nullable;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BiConsumer;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
-import static de.pfabulist.kleinod.text.Strings.newString;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._orElseGet;
 import static de.pfabulist.unchecked.Unchecked.u;
@@ -93,7 +84,7 @@ public class GetHolder {
         Path jar = mlo.getArtifact( coo );
 
         try( InputStream in = Filess.newInputStream( jar ) ) {
-            String notice = unzipToString( in, noticePattern );
+            String notice = Utils.unzipToString( in, noticePattern );
 
             lico.setNotice( notice );
             new LicenseWriter().write( coo, "notice", notice );
@@ -108,7 +99,7 @@ public class GetHolder {
         Path jar = mlo.getArtifact( coo );
 
         try( InputStream in = Filess.newInputStream( jar ) ) {
-            String notice = unzipToString( in, noticePattern );
+            String notice = Utils.unzipToString( in, noticePattern );
 
             if( notice.isEmpty() ) {
                 log.warn( "artifact " + coo + " licensed to apache-2 has not notice.txt file" );
@@ -129,30 +120,6 @@ public class GetHolder {
 
         return Optional.empty();
     }
-
-    public static String unzipToString( InputStream is, Pattern pat ) {
-        try( ZipInputStream zin = new ZipInputStream( is ) ) {
-
-            @Nullable ZipEntry ze;
-            while( ( ze = zin.getNextEntry() ) != null ) {
-
-                if( pat.matcher( ze.getName() ).matches() ) {
-
-                    ByteArrayOutputStream out = new ByteArrayOutputStream();
-                    IO.copy( zin, out );
-
-                    return newString( out.toByteArray() );
-                }
-                zin.closeEntry();
-            }
-        } catch( IOException e ) {
-            throw u( e );
-        }
-
-        return "";
-
-    }
-
 
 //    public static void onUnzip( InputStream is, Predicate<String> filter, BiConsumer<String, InputStream> action ) {
 //        try( ZipInputStream zin = new ZipInputStream( is ) ) {

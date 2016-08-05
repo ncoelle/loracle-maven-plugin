@@ -11,11 +11,6 @@ public class LicenseAttributes {
 
     private String attis;
 
-    //    transient private Optional<Boolean> copyLeft = Optional.empty();
-//    transient private Optional<Boolean> spdx = Optional.empty();
-//    transient private Optional<Boolean> osiApproved = Optional.empty();;
-//    transient private Optional<Boolean> fedora = Optional.empty();
-//
     public LicenseAttributes() {
         attis = "S O 2 3 F L W  ";
     }

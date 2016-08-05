@@ -156,4 +156,10 @@ public class Normalizer {
                 replaceAll( htmlws.toString(), " " );
     }
 
+    private static final String urlspecial = txt( ':' ).or( txt( '/' )).or( txt( '*' )).or( txt( '"')).or( txt( '<')).or( txt('>' )).or( txt( '?')).or( txt( '\\') ).or( txt(' ') ).buildPattern().toString();
+
+    public static String toFilename( String str ) {
+        return str.replaceAll( urlspecial, "_" );
+    }
+
 }

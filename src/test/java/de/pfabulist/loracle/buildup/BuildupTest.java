@@ -7,9 +7,13 @@ import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
 import de.pfabulist.loracle.license.MappedLicense;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Locale;
 
 import static de.pfabulist.kleinod.text.Strings.getBytes;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
@@ -131,6 +135,11 @@ public class BuildupTest {
         lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.0 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL" );
 
 
+        // gnu license urls
+        lOracle.addUrl( lOracle.getOrThrowByName( "LGPL-3.0+" ), "gnu.org/licenses/lgpl" );
+        lOracle.addUrl( lOracle.getOrThrowByName( "GPL-3.0+" ), "gnu.org/licenses/gpl" );
+
+
 
         System.out.println( "----------------------- " );
         System.out.println( "------ dejacode ------- " );
@@ -140,9 +149,6 @@ public class BuildupTest {
 
         System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
 
-
-        // gnu license urls
-        lOracle.addUrl( lOracle.getOrThrowByName( "LGPL-3.0+" ), "gnu.org/licenses/lgpl" );
 
 
         // creative commons urls
@@ -287,15 +293,15 @@ public class BuildupTest {
 
         System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
 
-        Filess.write( _nn( _nn( Paths.get( "" ).toAbsolutePath() ).resolve( "src/main/resources/de/pfabulist/loracle/loracle.json" ) ),
-                      getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
-
         // ---
 
         lOracle.addUrlContent( "http://www.apache.org/licenses/LICENSE-2.0", "/de/pfabulist/loracle/urls/apache-2.txt" );
         lOracle.addUrlContent( "http://glassfish.java.net/public/CDDL+GPL_1_1.html", "/de/pfabulist/loracle/urls/glassfish_cddl+gpl_1_1" );
         lOracle.addUrlContent( "http://glassfish.java.net/public/CDDL+GPL.html", "/de/pfabulist/loracle/urls/glassfish_cddl+gpl_1.0.txt" );
         lOracle.addUrlContent( "http://www.eclipse.org/org/documents/epl-v10.php", "/de/pfabulist/loracle/urls/eclipse-v10.txt" );
+
+        Filess.write( _nn( _nn( Paths.get( "" ).toAbsolutePath() ).resolve( "src/main/resources/de/pfabulist/loracle/loracle.json" ) ),
+                      getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
 
         testAll( lOracle );
 
@@ -570,6 +576,17 @@ public class BuildupTest {
         LOracle lOracle = JSONStartup.start().spread();
 
         testAll( lOracle );
+    }
+
+    @Ignore
+    @Test
+    public void lowercaseSPDX() {
+        System.out.println( Paths.get("").toAbsolutePath());
+
+        Filess.list( _nn(_nn(Paths.get("src/test/resources/de/pfabulist/loracle/spdx")).toAbsolutePath())).
+                forEach( src -> Filess.copy( src, _nn(_nn(Paths.get("src/main/resources/de/pfabulist/loracle/urls")).toAbsolutePath().
+                        resolve( src.getFileName().toString().toLowerCase( Locale.US ) ) ),
+                                             StandardCopyOption.REPLACE_EXISTING));
     }
 
     @Test

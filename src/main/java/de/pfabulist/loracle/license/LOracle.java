@@ -64,10 +64,12 @@ public class LOracle {
     private final transient SPDXParser parser;
     private final transient Normalizer normalizer = new Normalizer();
     private transient Map<Coordinates, LicenseID> coordinatesMap = new HashMap<>();
-    // new TreeMap<>( (c,d) -> c.matches( d ) ? 0 : (c.hashCode() - d.hashCode()));
     private transient Map<String, LicenseID> longNameMapper = new HashMap<>();
     private transient Map<String, LicenseID> urls = new HashMap<>();
     private Map<String,String> urlToContent = new HashMap<>();
+    private Map<String,String> coordinatesToUrl = new HashMap<>();
+
+//    private transient Map<String,LicenseID> computedUrls = new HashMap<>();
 
     private List<String> tooSimpleLongNames = new ArrayList<>();
 
@@ -114,6 +116,7 @@ public class LOracle {
         );
 
         // todo couldbes
+
         CustomService.getInstance().getAll().forEach( c -> {
             c.getCustomLicenses().forEach( l -> {
                 try {
@@ -131,9 +134,10 @@ public class LOracle {
                         addLicenseForArtifact( coo, li );
                     }
 
-//                    if ( !co.getUrl().isEmpty() ) {
-//
-//                    }
+                    if ( !co.getUrl().isEmpty() ) {
+                        addUrlForCoordinates( coo, co.getUrl() );
+                    }
+
                 } catch( Exception e ) {
                     Log.warn( "custom coordinates to license setting flawed " + co.getCoordinates() );
                 }
@@ -610,6 +614,14 @@ public class LOracle {
         }
 
         urlToContent.put( u.get(), res );
+    }
+
+    public void addUrlForCoordinates( Coordinates coo, String url ) {
+        coordinatesToUrl.put( coo.toString(), url );
+    }
+
+    public Optional<String> getUrlFromCoordinates( Coordinates coo ) {
+        return Optional.ofNullable( coordinatesToUrl.get( coo.toString() ));
     }
 
 

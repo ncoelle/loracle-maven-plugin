@@ -1,6 +1,5 @@
 package de.pfabulist.loracle.mojo;
 
-import com.esotericsoftware.minlog.Log;
 import de.pfabulist.loracle.attribution.CopyrightHolder;
 import de.pfabulist.loracle.attribution.GetHolder;
 import de.pfabulist.loracle.attribution.JarAccess;
@@ -11,7 +10,6 @@ import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
-import de.pfabulist.loracle.spi.CustomService;
 import de.pfabulist.nonnullbydefault.NonnullCheck;
 import de.pfabulist.unchecked.Unchecked;
 import org.apache.maven.artifact.Artifact;
@@ -24,6 +22,7 @@ import org.apache.maven.shared.dependency.graph.DependencyGraphBuilder;
 import org.apache.maven.shared.dependency.graph.DependencyNode;
 import org.apache.maven.shared.dependency.graph.traversal.DependencyNodeVisitor;
 
+import javax.annotation.Nullable;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +30,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
+import static de.pfabulist.loracle.license.Coordinates2License.getScopeLevel;
 import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 import static de.pfabulist.unchecked.NullCheck._orElseGet;
 
@@ -46,28 +46,35 @@ public class LicenseCheckMojo {
     private final LOracle lOracle;
     private final MavenProject mavenProject;
     private final DependencyGraphBuilder dependencyGraphBuilder;
-    private final boolean andIsOr;
-    private final Url2License urlToLicense;
+    private final LicenseIntelligence licenseIntelligence;
+    private final Downloader downloader;
+    private final ContentToLicense contentToLicense;
     private Optional<Coordinates> self = Optional.empty();
 
     private final Coordinates2License coordinates2License;
+    private final SrcAccess src;
+    private final JarAccess jarAccess;
+    private final SrcAccess srcAccess;
 
-    public LicenseCheckMojo( Findings log, Path localRepo, MavenProject project, DependencyGraphBuilder dependencyGraphBuilder, boolean andIsOr ) {
+    public LicenseCheckMojo( Findings log, Path localRepo, MavenProject project, DependencyGraphBuilder dependencyGraphBuilder ) {
         this.log = log;
         this.dependencyGraphBuilder = dependencyGraphBuilder;
         this.mlo = new MavenLicenseOracle( log, localRepo );
         this.lOracle = JSONStartup.start().spread();
         this.mavenProject = project;
-        this.andIsOr = andIsOr;
 
         log.info( "---------------------------------------" );
         log.info( "      loracle license check            " );
         log.info( "---------------------------------------" );
 
-        coordinates2License = JSONStartup.previous( andIsOr );
+        coordinates2License = JSONStartup.previous();
         coordinates2License.setLog( log );
-
-        urlToLicense = JSONStartup.urls();
+        licenseIntelligence = new LicenseIntelligence( lOracle, log );
+        downloader = new Downloader( log, lOracle );
+        contentToLicense = new ContentToLicense( lOracle, log );
+        src = new SrcAccess( lOracle, mlo, log );
+        jarAccess = new JarAccess( lOracle, mlo, log );
+        srcAccess = new SrcAccess( lOracle, mlo, log );
     }
 
     public void config( List<LicenseDeclaration> licenseDeclarations, List<UrlDeclaration> urlDeclarations, int allowUrlsCheckedDaysBefore ) {
@@ -108,6 +115,19 @@ public class LicenseCheckMojo {
         getNormalDependencies();
     }
 
+    private String getUse( DependencyNode node ) {
+        Artifact a = _nn(node.getArtifact());
+        String ret = _orElseGet( a.getScope(), "" );
+        @Nullable DependencyNode it = node.getParent();
+        while( it != null ) {
+            Coordinates coo = Coordinates.valueOf( _nn(it.getArtifact()));
+            ret = coo.toString() + " -> " + ret;
+            it = it.getParent();
+        }
+
+        return ret;
+    }
+
     private void getNormalDependencies() {
         ArtifactFilter artifactFilter = new ScopeArtifactFilter( Artifact.SCOPE_TEST );
 
@@ -120,9 +140,11 @@ public class LicenseCheckMojo {
                 Coordinates coo = Coordinates.valueOf( a );
                 coordinates2License.add( coo );
                 coordinates2License.updateScope( coo, _orElseGet( a.getScope(), "compile" ) );
+                coordinates2License.addUse( coo, getUse( _nn(dependencyNode )) );
 
                 if( !self.isPresent() ) {
                     self = Optional.of( coo );
+                    coordinates2License.setSelf( coo );
                 }
                 return true;
             }
@@ -169,30 +191,6 @@ public class LicenseCheckMojo {
 
     }
 
-//    @SuppressWarnings( "PMD.AvoidPrintStackTrace" )
-//    private MappedLicense licenseMapping( Coordinates coo ) {
-//        log.debug( coo.toString() + "    license is ..." );
-//        List<License> mavenLicenses = mlo.getMavenLicense( coo );
-//
-//        if( mavenLicenses.isEmpty() ) {
-//            mavenLicenses = Collections.singletonList( new License() );
-//        }
-//
-//        final MappedLicense byCoordinates = lOracle.getByCoordinates( coo );
-//
-//        And and = new And( lOracle, log, andIsOr );
-//
-//        try {
-//            return mavenLicenses.stream().
-//                    map( ml -> mavenLicenseToLicense( coo, byCoordinates, ml ) ).
-//                    collect( Collectors.reducing( MappedLicense.empty(), and::and ) );
-//        } catch( Exception ex ) {
-//            ex.printStackTrace();
-//            return MappedLicense.empty();
-//        }
-//
-//    }
-
     public String checkCompatibility( Coordinates coo, String licenseStr ) {
 
         LicenseID license = lOracle.getOrThrowByName( licenseStr );
@@ -201,7 +199,7 @@ public class LicenseCheckMojo {
 
         lOracle.getAttributes( license ).isFedoraApproved().ifPresent( fed -> {
             if( !fed ) {
-                ret.set( "bad license " + license + " used by " + coo + "  (not approved by fedora)" );
+                ret.set( "bad license " + license + " used by: " + coo + "  (not approved by fedora)" );
             }
         } );
 
@@ -261,8 +259,7 @@ public class LicenseCheckMojo {
     }
 
     public void src() {
-        SrcAccess src = new SrcAccess( lOracle, mlo, log, andIsOr );
-        coordinates2License.fromSrc( src::check );
+        coordinates2License.fromSrc( srcAccess::check );
 
     }
 
@@ -271,8 +268,7 @@ public class LicenseCheckMojo {
     }
 
     public void jars() {
-        JarAccess src = new JarAccess( lOracle, mlo, log, andIsOr );
-        coordinates2License.fromJar( src::check );
+        coordinates2License.fromJar( jarAccess::check );
     }
 
     public void computeHolder() {
@@ -294,19 +290,19 @@ public class LicenseCheckMojo {
             return;
         }
 
-        ret = new ContentToLicense( lOracle, "by license file", log, andIsOr ).getHolder( liCo.getLicenseTxt() );
+        ret = contentToLicense.getHolder( liCo.getLicenseTxt() ); // , "by license file"
         if( ret.isPresent() ) {
             liCo.setHolder( ret );
             return;
         }
 
-        ret = new ContentToLicense( lOracle, "by header file", log, andIsOr ).getHolder( liCo.getHeaderTxt() );
+        ret = contentToLicense.getHolder( liCo.getHeaderTxt() ); // , "by header file"
         if( ret.isPresent() ) {
             liCo.setHolder( ret );
             return;
         }
 
-        ret = new ContentToLicense( lOracle, "by notice file", log, andIsOr ).getHolder( liCo.getNotice() );
+        ret = contentToLicense.getHolder( liCo.getNotice() ); // , "by notice file"
         if( ret.isPresent() ) {
             liCo.setHolder( ret );
         }
@@ -319,7 +315,6 @@ public class LicenseCheckMojo {
     }
 
     public void getPomHeader() {
-        SrcAccess src = new SrcAccess( lOracle, mlo, log, andIsOr );
         coordinates2License.fromSrc( src::getPomHeader );
 
     }
@@ -330,10 +325,16 @@ public class LicenseCheckMojo {
     }
 
     public void computeLicense() {
-        coordinates2License.update( new LicenseIntelligence( lOracle, log )::compute );
+        coordinates2License.update( licenseIntelligence::compute );
     }
 
     public void downloadPages() {
-        coordinates2License.update( new Downloader( log, urlToLicense, lOracle )::getExtension );
+        coordinates2License.update( downloader::getExtension );
+    }
+
+    public void generateLicenseTxts() {
+        coordinates2License.update(
+                lico -> getScopeLevel( lico.getScope() ) < getScopeLevel( "test" ) ,
+                (coo, lico) -> downloader.generateLicensesTxt( self.map( Coordinates::getArtifactId).orElse( "notice" ), coo, lico ) );
     }
 }

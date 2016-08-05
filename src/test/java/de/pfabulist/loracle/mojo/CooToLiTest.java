@@ -26,7 +26,7 @@ public class CooToLiTest {
 
     private final LOracle lOracle = JSONStartup.start().spread();
     private final LicenseIntelligence lIntelligence = new LicenseIntelligence( lOracle, new Findings( SrcTest.dummy ));
-    private final Downloader downloader = new Downloader( new Findings( SrcTest.dummy ), new Url2License(), lOracle );
+    private final Downloader downloader = new Downloader( new Findings( SrcTest.dummy ), lOracle );
 
     @Test
     public void sunTools() {
