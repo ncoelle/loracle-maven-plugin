@@ -1,6 +1,5 @@
 package de.pfabulist.loracle.license;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -89,7 +88,7 @@ public class LicenseFromText {
 
             System.out.println( "\n  :: matched !" );
         } else {
-            System.out.println( "  :: start does NOT match: " +  frag.substring( 0, Math.min( 50, frag.length() ) ));
+            System.out.println( "  :: start does NOT match: " + frag /* .substring( 0, Math.min( 50, frag.length() ) ) */ );
         }
         System.out.println( "" );
     }
@@ -104,7 +103,6 @@ public class LicenseFromText {
             System.out.println( "end: " + frag.getLicense() + "\n" );
         } );
     }
-
 
     private static class SimpleMatch2 {
         private final String license;
@@ -832,14 +830,22 @@ public class LicenseFromText {
                               15,
                               /* Neither t*/"he name", // its either: "the name may not be used" or "neither the ... may be used"
                               // the names of
-                              150, // organization
-                              /*"may "*/ "be used to endorse or promote products derived from this software without specific prior written permission. " +
-                                      "THIS SOFTWARE IS PROVIDED BY THE ",  // COPYRIGHT HOLDERS AND CONTRIBUTORS ", or "AUTHOR"
-                              150, "AS IS", 2, // " or variants, e.g. ''
-                              " AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO," +
+                              150, // organization /*"may "*/
+                              "be used to endorse or promote products derived from this software without ",
+                              12, // specific
+                              "prior written permission. ",
+                              67, // For written permission, please contact clarkware@clarkware.com.
+                                      "THIS SOFTWARE IS PROVIDED ",  // BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ", or "AUTHOR"
+                              150,
+                              "AS IS",
+                              2, // " or variants, e.g. ''
+                              " AND ANY EXPRESS", // ed
+                              3,
+                              "OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO," +
                                       " THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. " +
-                                      "IN NO EVENT SHALL ", 150,  //THE COPYRIGHT", 10, OR CONTRIBUTORS ,    or AUTHOR
-                                      "BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE." ),
+                                      "IN NO EVENT SHALL ",
+                              150,  //THE COPYRIGHT", 10, OR CONTRIBUTORS ,    or AUTHOR
+                              "BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE." ),
 //            new SimpleMatch( "bsd-3-clause", BSD3_nonums, BSD3_part2 ),
 //            new SimpleMatch( "bsd-3-clause", BSD3_nonums, BSD3_part2_2 ),
             new SimpleMatch2( "apache-2", APACHE2 ),

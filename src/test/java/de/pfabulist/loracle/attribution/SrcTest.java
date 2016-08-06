@@ -2216,4 +2216,40 @@ public class SrcTest {
         assertThat( new LicenseFromText( lOracle ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
     }
 
+    @Test
+    public void jdependUrl() {
+        String in = "Copyright (C) 1999-2004 Clarkware Consulting, Inc.\n" +
+                "All Rights Reserved.\n" +
+                "\n" +
+                "Redistribution and use in source and binary forms, with or without\n" +
+                "modification, are permitted provided that the following conditions\n" +
+                "are met:\n" +
+                "\n" +
+                "   1. Redistributions of source code must retain the above copyright\n" +
+                "      notice, this list of conditions and the following disclaimer.\n" +
+                "\n" +
+                "   2. Redistributions in binary form must reproduce the above copyright\n" +
+                "      notice, this list of conditions and the following disclaimer in the\n" +
+                "      documentation and/or other materials provided with the distribution.\n" +
+                "\n" +
+                "   3. Neither the name of Clarkware Consulting, Inc. nor the names of its\n" +
+                "      contributors may be used to endorse or promote products derived\n" +
+                "      from this software without prior written permission. For written\n" +
+                "      permission, please contact clarkware@clarkware.com.\n" +
+                "\n" +
+                "THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES,\n" +
+                "INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND\n" +
+                "FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL\n" +
+                "CLARKWARE CONSULTING OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,\n" +
+                "INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n" +
+                "LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,\n" +
+                "OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\n" +
+                "LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\n" +
+                "NEGLIGENCE OR OTHERWISE) ARISING IN  ANY WAY OUT OF THE USE OF THIS SOFTWARE,\n" +
+                "EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.";
+        new LicenseFromText( lOracle ).firstDiff( in );
+
+        assertThat( new LicenseFromText( lOracle ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
+    }
+
 }

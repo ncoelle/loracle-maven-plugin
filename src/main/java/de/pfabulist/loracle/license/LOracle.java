@@ -621,7 +621,16 @@ public class LOracle {
     }
 
     public Optional<String> getUrlFromCoordinates( Coordinates coo ) {
-        return Optional.ofNullable( coordinatesToUrl.get( coo.toString() ));
+        Optional<String> ret = Optional.ofNullable( coordinatesToUrl.get( coo.toString() ));
+
+        if ( ret.isPresent()) {
+            return ret;
+        }
+
+        return coordinatesToUrl.keySet().stream().
+                filter( c -> Coordinates.valueOf( c ).matches( coo ) ).
+                findAny().
+                map( c -> _nn(coordinatesToUrl.get(c)));
     }
 
 

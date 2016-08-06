@@ -47,6 +47,18 @@ public class CooTest {
     }
 
     @Test
+    public void jdepend() {
+        Coordinates coo = Coordinates.valueOf( "jdepend:jdepend:2.4" );
+        Coordinates2License.LiCo lico = getNix();
+        assertThat( lico.getLicense().isPresent()).isFalse();
+        //downloader.get( coo, lico );
+
+        lIntelligence.compute( coo, lico );
+
+        assertThat( lico.getLicense() ).isPresent();
+    }
+
+    @Test
     public void jamon() {
         Coordinates coo = Coordinates.valueOf( "com.jamonapi:jamon:2.4" );
         Coordinates2License.LiCo lico = getNix();

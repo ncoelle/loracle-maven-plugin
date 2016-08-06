@@ -15,7 +15,7 @@
 
 
     <artifactId>loracle-maven-plugin</artifactId>
-    <version>1.10.1</version>
+    <version>1.10.2</version>
     <packaging>maven-plugin</packaging>
 
     <name>loracle-maven-plugin</name>
@@ -181,7 +181,7 @@
         <dependency>
             <groupId>de.pfabulist.loracle</groupId>
             <artifactId>loracle-found</artifactId>
-            <version>0.4</version>
+            <version>0.5</version>
             <scope>test</scope>
         </dependency>
 
