@@ -1,10 +1,12 @@
 package de.pfabulist.loracle.mojo;
 
 import com.google.gson.Gson;
-import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.*;
-import de.pfabulist.unchecked.Unchecked;
+import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Pathh;
+import de.pfabulist.roast.nio.Pathss;
+import de.pfabulist.roast.unchecked.Unchecked;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
@@ -22,7 +24,7 @@ import java.util.function.BiConsumer;
 
 import static de.pfabulist.frex.Frex.txt;
 import static de.pfabulist.kleinod.text.Strings.newString;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -92,11 +94,11 @@ public class Downloader {
 
         log.debug( "[download?] " + url );
 
-        Path path = _nn( Paths.get( "" ).resolve( "target/generated-sources/loracle/url/" + getUrlPath( url ) ) );
-        if( Files.exists( path ) ) {
+        Pathh path = Pathss.get( "" ).resolve( "target/generated-sources/loracle/url/" + getUrlPath( url ) );
+        if( Filess.exists( path ) ) {
             return;
         }
-        Filess.createDirectories( _nn( path.getParent() ) );
+        Filess.createDirectories( path.getParentOrThrow() );
 
         Optional<String> res = lOracle.getUrlContent( url );
         if( !res.isPresent() ) {
@@ -109,7 +111,7 @@ public class Downloader {
                 log.debug( "    not found: " + getUrlPath( url ) );
                 return;
             }
-            Files.copy( is, path );
+            Filess.copy( is, path );
             log.debug( "    found stored in loracle" );
             return;
         } catch( IOException e ) {

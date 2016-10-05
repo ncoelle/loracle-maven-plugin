@@ -1,13 +1,13 @@
 package de.pfabulist.loracle.mojo;
 
-import de.pfabulist.unchecked.Unchecked;
+import de.pfabulist.roast.unchecked.Unchecked;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -90,26 +90,26 @@ public class Findings implements Log {
 
     @Override
     public void error( CharSequence content ) {
-        fails.add( _nn(content).toString() );
+        fails.add( _nn( content ).toString() );
         mavenLog.error( content );
     }
 
     @Override
     public void error( CharSequence content, Throwable error ) {
-        fails.add( _nn(content).toString() );
+        fails.add( _nn( content ).toString() );
         mavenLog.error( content, error );
 
     }
 
     @Override
     public void error( Throwable error ) {
-        fails.add( _nn(error).getMessage() );
+        fails.add( _nn( error ).getMessage() );
         mavenLog.error( error );
     }
 
     public void throwOnError() {
-        if ( !fails.isEmpty()) {
-            throw Unchecked.u(new MojoFailureException( fails.get( 0 ) ));
+        if( !fails.isEmpty() ) {
+            throw Unchecked.u( new MojoFailureException( fails.get( 0 ) ) );
         }
     }
 }

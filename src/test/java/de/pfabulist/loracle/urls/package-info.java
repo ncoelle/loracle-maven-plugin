@@ -6,4 +6,4 @@
 @NonnullByDefault
 package de.pfabulist.loracle.urls;
 
-import de.pfabulist.nonnullbydefault.NonnullByDefault;
+import de.pfabulist.roast.nonnullbydefault.NonnullByDefault;

@@ -1,25 +1,25 @@
 package de.pfabulist.loracle.buildup;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import de.pfabulist.frex.Frex;
-import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
-import de.pfabulist.unchecked.Unchecked;
+import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Pathss;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Map;
 
 import static de.pfabulist.kleinod.text.Strings.getBytes;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
+import static de.pfabulist.roast.lang.Classs.getClasss;
+import static de.pfabulist.roast.unchecked.Unchecked.u;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -48,10 +48,10 @@ public class ExtractSpdxLicensesFromJSON {
         byte[] buf = new byte[ 3000000 ];
 
         int got = 0;
-        try( InputStream in = _nn( getClass().getResourceAsStream( "/de/pfabulist/loracle/spdx-full.json" ) ) ) {
+        try( InputStream in = getClasss( this ).getResourceAsStreamOrThrow( "/de/pfabulist/loracle/spdx-full.json" ) ) {
             got = in.read( buf );
         } catch( IOException e ) {
-            throw Unchecked.u( e );
+            throw u(e);
         }
 
         Map<String, LInfo> map = new Gson().fromJson( new String( buf, 0, got ), type );
@@ -101,15 +101,14 @@ public class ExtractSpdxLicensesFromJSON {
             // osi approved
             lOracle.setOsiApproval( license, _nn( entry.getValue() ).osiApproved );
 
-            String licenseTxt = _nn(entry.getValue()).license;
+            String licenseTxt = _nn( entry.getValue() ).license;
 
-            Filess.write( _nn( _nn( Paths.get( "" ).toAbsolutePath() ).resolve( "src/main/resources/de/pfabulist/loracle/urls/" + license + ".txt" ) ),
+            Filess.write( Pathss.get( "" ).toAbsolutePath().resolve( "src/main/resources/de/pfabulist/loracle/urls/" + license + ".txt" ),
                           getBytes( licenseTxt ) );
 
             lOracle.addUrlContent( "http://spdx.org/licenses/" + license + ".txt", "/de/pfabulist/loracle/urls/" + license + ".txt" );
 
 //            lOracle.addUrlContent( "http://spdx.org/" );
-
 
         }
     }

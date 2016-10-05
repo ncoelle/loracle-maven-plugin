@@ -1,15 +1,13 @@
 package de.pfabulist.loracle.license;
 
-import de.pfabulist.kleinod.collection.P;
+import de.pfabulist.kleinod.collection.Ref;
 import de.pfabulist.loracle.mojo.Findings;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -66,7 +64,7 @@ public class And {
             return l;
         }
 
-        AtomicReference<MappedLicense> ret = new AtomicReference<>( MappedLicense.empty() );
+        Ref<MappedLicense> ret = new Ref<>( MappedLicense.empty() );
         l.ifPresent( left -> r.ifPresent( right -> {
             if( andIsOr ) {
                 ret.set( MappedLicense.of( lOracle.getOr( left, right ), "or'ed" ) );//  (" + l.getReason() + "), (" + r.getReason() + ")" ) );
@@ -76,7 +74,7 @@ public class And {
             }
         } ) );
 
-        MappedLicense rett = _nn( ret.get() );
+        MappedLicense rett =  ret._get();
 
         rett.addOverFrom( l );
         rett.addOverFrom( r );

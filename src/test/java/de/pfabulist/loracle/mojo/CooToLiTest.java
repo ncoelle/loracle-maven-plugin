@@ -6,7 +6,7 @@ import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.unchecked.Unchecked;
+import de.pfabulist.roast.unchecked.Unchecked;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 /**

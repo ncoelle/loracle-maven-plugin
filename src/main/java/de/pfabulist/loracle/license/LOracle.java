@@ -2,7 +2,6 @@ package de.pfabulist.loracle.license;
 
 import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
-import de.pfabulist.kleinod.collection.P;
 import de.pfabulist.loracle.spi.CustomService;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -24,9 +23,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
-import static de.pfabulist.unchecked.NullCheck._orElseGet;
-import static de.pfabulist.unchecked.NullCheck._orElseThrow;
+import static de.pfabulist.roast.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._orElseGet;
+import static de.pfabulist.roast.NonnullCheck._orElseThrow;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -56,7 +55,7 @@ public class LOracle {
     private Map<String, Boolean> licenseExceptions = new HashMap<>();
     private Map<String, More> composites = new HashMap<>();
 
-    private Map<String, P<String, String>> urlsInTime = new TreeMap<>( String::compareTo );
+//    private Map<String, P<String, String>> urlsInTime = new TreeMap<>( String::compareTo );
 
     private final transient Map<String, Set<LicenseID>> couldbeNames = new HashMap<>();
     private final transient Map<String, Set<LicenseID>> couldbeUrls = new HashMap<>();
@@ -66,8 +65,8 @@ public class LOracle {
     private transient Map<Coordinates, LicenseID> coordinatesMap = new HashMap<>();
     private transient Map<String, LicenseID> longNameMapper = new HashMap<>();
     private transient Map<String, LicenseID> urls = new HashMap<>();
-    private Map<String,String> urlToContent = new HashMap<>();
-    private Map<String,String> coordinatesToUrl = new HashMap<>();
+    private Map<String, String> urlToContent = new HashMap<>();
+    private Map<String, String> coordinatesToUrl = new HashMap<>();
 
 //    private transient Map<String,LicenseID> computedUrls = new HashMap<>();
 
@@ -126,26 +125,24 @@ public class LOracle {
                     Log.warn( "custom license is known (ignored) " + l.getId() );
                 }
             } );
-            c.getCoordinates().forEach( co ->{
+            c.getCoordinates().forEach( co -> {
                 try {
                     Coordinates coo = Coordinates.valueOf( co.getCoordinates() );
-                    if ( !co.getLicense().isEmpty()) {
+                    if( !co.getLicense().isEmpty() ) {
                         LicenseID li = getOrThrowByName( co.getLicense() );
                         addLicenseForArtifact( coo, li );
                     }
 
-                    if ( !co.getUrl().isEmpty() ) {
+                    if( !co.getUrl().isEmpty() ) {
                         addUrlForCoordinates( coo, co.getUrl() );
                     }
 
                 } catch( Exception e ) {
                     Log.warn( "custom coordinates to license setting flawed " + co.getCoordinates() );
                 }
-            });
+            } );
             c.getUrls().forEach( u -> addUrlContent( u.getUrl(), u.getResource() ) );
         } );
-
-
 
         return this;
     }
@@ -183,7 +180,7 @@ public class LOracle {
     }
 
     public SingleLicense newSingle( String name, More more ) {
-        if ( getByName( name ).isPresent() ) {
+        if( getByName( name ).isPresent() ) {
             throw new IllegalArgumentException( "not a new license" );
         }
 
@@ -224,7 +221,7 @@ public class LOracle {
         Log.warn( "removing could be (so that it can be a new single id) " + name );
         Set<LicenseID> guesses = guessByName( name );
         couldbeNames.remove( name );
-        guesses.stream().forEach( l -> getMore( l ).couldbeName.remove( name ) );
+        guesses.forEach( l -> getMore( l ).couldbeName.remove( name ) );
     }
 
     public More getMore( LicenseID licenseID ) {
@@ -389,9 +386,9 @@ public class LOracle {
 
         Optional<LicenseID> ret = Optional.ofNullable( urls.get( rel.get() ) );
         if( ret.isPresent() ) {
-            if( urlsInTime.containsKey( rel.get() ) ) {
-                return MappedLicense.of( ret, "by url " + url + " checked at: " + _nn( urlsInTime.get( rel.get() ) ).i0 );
-            }
+//            if( urlsInTime.containsKey( rel.get() ) ) {
+//                return MappedLicense.of( ret, "by url " + url + " checked at: " + _nn( urlsInTime.get( rel.get() ) ).i0 );
+//            }
             return MappedLicense.of( ret, "by url " + url );
         }
 
@@ -520,31 +517,31 @@ public class LOracle {
         urls.put( rel, license );
     }
 
-    public void addUrlCheckedAt( LicenseID license, String url, String date ) {
-        Log.info( "added url checkedat " + url + " " + license + " " + date );
-        String norm = normalizer.normalizeUrl( url ).orElseThrow( () -> new IllegalArgumentException( "can't normalize this url: " + url ) );
-        urlsInTime.put( norm, P.of( date, license.toString() ) );
-    }
+//    public void addUrlCheckedAt( LicenseID license, String url, String date ) {
+//        Log.info( "added url checkedat " + url + " " + license + " " + date );
+//        String norm = normalizer.normalizeUrl( url ).orElseThrow( () -> new IllegalArgumentException( "can't normalize this url: " + url ) );
+//        urlsInTime.put( norm, P.of( date, license.toString() ) );
+//    }
 
-    public void allowUrlsCheckedDaysBefore( int days ) {
-        LocalDate now = LocalDate.now();
-
-        urlsInTime.forEach( ( u, p ) -> {
-            try {
-                LocalDate checked = _nn( LocalDate.parse( p.i0 ) );
-
-                if( ChronoUnit.DAYS.between( checked, now ) < days ) {
-                    addUrl( getOrThrowByName( p.i1 ), u );
-                    Log.info( "url " + u + " was checked to be " + p.i1 );
-                } else {
-                    Log.warn( "url " + u + " was checked too long ago: days " + checked );
-                }
-
-            } catch( DateTimeParseException e ) {
-                Log.warn( "not a date " + p.i0 );
-            }
-        } );
-    }
+//    public void allowUrlsCheckedDaysBefore( int days ) {
+//        LocalDate now = LocalDate.now();
+//
+//        urlsInTime.forEach( ( u, p ) -> {
+//            try {
+//                LocalDate checked = _nn( LocalDate.parse( p.i0 ) );
+//
+//                if( ChronoUnit.DAYS.between( checked, now ) < days ) {
+//                    addUrl( getOrThrowByName( p.i1 ), u );
+//                    Log.info( "url " + u + " was checked to be " + p.i1 );
+//                } else {
+//                    Log.warn( "url " + u + " was checked too long ago: days " + checked );
+//                }
+//
+//            } catch( DateTimeParseException e ) {
+//                Log.warn( "not a date " + p.i0 );
+//            }
+//        } );
+//    }
 
     public int getSingleLicenseCount() {
         return singles.size();
@@ -604,12 +601,12 @@ public class LOracle {
     }
 
     public Optional<String> getUrlContent( String url ) {
-        return normalizer.normalizeUrl( url ).flatMap( u -> Optional.ofNullable( urlToContent.get( u )));
+        return normalizer.normalizeUrl( url ).flatMap( u -> Optional.ofNullable( urlToContent.get( u ) ) );
     }
 
     public void addUrlContent( String url, String res ) {
         Optional<String> u = normalizer.normalizeUrl( url );
-        if ( !u.isPresent()) {
+        if( !u.isPresent() ) {
             throw new IllegalArgumentException( "huhh" );
         }
 
@@ -621,18 +618,16 @@ public class LOracle {
     }
 
     public Optional<String> getUrlFromCoordinates( Coordinates coo ) {
-        Optional<String> ret = Optional.ofNullable( coordinatesToUrl.get( coo.toString() ));
+        Optional<String> ret = Optional.ofNullable( coordinatesToUrl.get( coo.toString() ) );
 
-        if ( ret.isPresent()) {
+        if( ret.isPresent() ) {
             return ret;
         }
 
         return coordinatesToUrl.keySet().stream().
                 filter( c -> Coordinates.valueOf( c ).matches( coo ) ).
                 findAny().
-                map( c -> _nn(coordinatesToUrl.get(c)));
+                map( c -> _nn( coordinatesToUrl.get( c ) ) );
     }
-
-
 
 }

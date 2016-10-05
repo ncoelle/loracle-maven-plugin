@@ -1,12 +1,16 @@
 package de.pfabulist.loracle.license;
 
+import de.pfabulist.loracle.mojo.Findings;
+import de.pfabulist.roast.collection.P;
+import org.apache.maven.plugin.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -16,19 +20,41 @@ import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
 public class LicenseFromText {
 
     private final LOracle lOracle;
+    private final Log log;
 
-    public LicenseFromText( LOracle lOracle ) {
+    public LicenseFromText( LOracle lOracle, Log log ) {
         this.lOracle = lOracle;
+        this.log = log;
     }
 
+//    public MappedLicense getLicense( String txt ) {
+//        String norm = new Normalizer().norm( txt );
+//
+//        return byFragments2.stream().
+//                map( f -> match( f, norm ) ).
+//                filter( Optional::isPresent ).
+//                findFirst().map( l -> MappedLicense.of( l, "by full text" ) ).
+//                orElse( MappedLicense.empty() );
+//
+//    }
+
+    // todo exceptions
+
     public MappedLicense getLicense( String txt ) {
-        String norm = new Normalizer().norm( txt );
+//        List<String> norm = new ArrayList<>();
+//        norm.add( new Normalizer().norm( txt ) );
+
+        List<P<String, MappedLicense>> textPieceToLicense = new ArrayList<>();
+        textPieceToLicense.add( P.of( new Normalizer().norm( txt ), MappedLicense.empty() ));
+
+        And and = new And( lOracle, new Findings( log ), true );
 
         return byFragments2.stream().
-                map( f -> match( f, norm ) ).
+                map( f -> match3( f, textPieceToLicense ) ).
                 filter( Optional::isPresent ).
-                findFirst().map( l -> MappedLicense.of( l, "by full text" ) ).
-                orElse( MappedLicense.empty() );
+                map( l -> MappedLicense.of( l, "by full text" ) ).
+                reduce( and::and ).
+                orElseGet( MappedLicense::empty );
 
     }
 
@@ -50,6 +76,56 @@ public class LicenseFromText {
         }
 
         return Optional.of( lOracle.getOrThrowByName( simpl.getLicense() ) );
+    }
+
+    public Optional<LicenseID> match3( SimpleMatch2 frag, List<P<String, MappedLicense>> txts ) {
+
+        WorkOnOne<P<String, MappedLicense>> woo = new WorkOnOne<>( txts.stream() );
+        List<P<String, MappedLicense>> ll = woo.work( t -> match3( frag, t ),
+                                                      ( rr, t ) -> Splitter.cutMiddle( t.i0, rr.i0, rr.i1, lOracle.getByName( frag.getLicense() ) ) );
+
+        if( woo.foundp() ) {
+            txts.clear();
+            txts.addAll( ll );
+            return Optional.of( lOracle.getOrThrowByName( frag.getLicense() ) );
+        }
+
+        return Optional.empty();
+
+    }
+
+    public Optional<P<Integer, Integer>> match3( SimpleMatch2 simpl, P<String, MappedLicense> pair ) {
+
+        pair.with( ( t, l ) -> true );
+
+        if( pair.i1.isPresent() ) {
+            return Optional.empty();
+        }
+
+        String txt = pair.i0;
+
+        int startPos = Integer.MAX_VALUE;
+        int pos = 0;
+        for( int i = 0; i < simpl.getFragments().size(); i++ ) {
+            String frag = _nn( simpl.getFragments().get( i ) );
+            int nextPos = txt.indexOf( frag, pos );
+            if( nextPos < 0 || nextPos > pos + _nn( simpl.getMaxAny().get( i ) ) ) {
+//                if ( nextPos > 0 ) {
+//                    String duh = in.substring( pos );
+//                    String foo = in.substring( nextPos );
+//                    int g = 0;
+//                }
+                return Optional.empty();
+            }
+
+            if( nextPos < startPos ) {
+                startPos = nextPos;
+            }
+
+            pos = nextPos + frag.length();
+        }
+
+        return Optional.of( P.of( startPos, pos ) );
     }
 
 //    private boolean findBSD3( String norm ) {
@@ -835,7 +911,7 @@ public class LicenseFromText {
                               12, // specific
                               "prior written permission. ",
                               67, // For written permission, please contact clarkware@clarkware.com.
-                                      "THIS SOFTWARE IS PROVIDED ",  // BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ", or "AUTHOR"
+                              "THIS SOFTWARE IS PROVIDED ",  // BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ", or "AUTHOR"
                               150,
                               "AS IS",
                               2, // " or variants, e.g. ''

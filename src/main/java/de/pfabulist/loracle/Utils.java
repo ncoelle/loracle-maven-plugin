@@ -2,20 +2,18 @@ package de.pfabulist.loracle;
 
 import de.pfabulist.kleinod.nio.IO;
 import de.pfabulist.loracle.buildup.JSONStartup;
-import de.pfabulist.unchecked.Unchecked;
 
 import javax.annotation.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import static de.pfabulist.kleinod.text.Strings.newString;
-import static de.pfabulist.unchecked.Unchecked.u;
+import static de.pfabulist.roast.unchecked.Unchecked.u;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -40,7 +38,7 @@ public class Utils {
                 got += once;
             }
         } catch( IOException e ) {
-            throw Unchecked.u( e );
+            throw u( e );
         }
 
         return new String( buf, 0, got, StandardCharsets.UTF_8 );

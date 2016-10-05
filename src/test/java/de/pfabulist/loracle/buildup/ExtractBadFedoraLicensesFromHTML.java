@@ -1,10 +1,9 @@
 package de.pfabulist.loracle.buildup;
 
-import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
-import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
+import de.pfabulist.roast.nio.Filess;
 
 import java.nio.charset.Charset;
 import java.util.Optional;
@@ -14,7 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import static de.pfabulist.frex.Frex.fullWord;
 import static de.pfabulist.frex.Frex.txt;
 
 /**

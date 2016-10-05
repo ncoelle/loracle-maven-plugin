@@ -28,7 +28,7 @@ public class LicenseIntelligence {
         this.lOracle = lOracle;
         this.log = log;
         this.urlToLicense = new UrlToLicense( lOracle, log );
-        lft = new LicenseFromText( lOracle );
+        lft = new LicenseFromText( lOracle, log );
         contentToLicense = new ContentToLicense( lOracle, log );
     }
 
@@ -92,7 +92,7 @@ public class LicenseIntelligence {
     private MappedLicense computeByPomHeader( Coordinates2License.LiCo liCo ) {
         MappedLicense license = lft.getLicense( liCo.getPomHeader() );
         if( license.isPresent() ) {
-//            log.debug( "[woo] " + coordinates + " -> " + t2 );
+//            log.debug( "[woo] " + coordinates + " -> " + niotest );
             liCo.setPomHeaderLicense( license );
         }
         return license;

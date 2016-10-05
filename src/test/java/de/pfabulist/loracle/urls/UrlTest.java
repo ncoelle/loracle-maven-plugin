@@ -22,7 +22,7 @@ public class UrlTest {
     public void aduna() {
         LOracle lOracle = JSONStartup.start().spread();
 
-        LicenseFromText lft = new LicenseFromText( lOracle );
+        LicenseFromText lft = new LicenseFromText( lOracle, log );
         Downloader dl = new Downloader( log, lOracle );
         dl.download( "repo.aduna-software.org/legal/aduna-bsd" );
 

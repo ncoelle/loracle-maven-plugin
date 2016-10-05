@@ -1,7 +1,8 @@
 package de.pfabulist.loracle.license;
 
-import de.pfabulist.unchecked.Unchecked;
-import de.pfabulist.unchecked.functiontypes.ConsumerE;
+import de.pfabulist.roast.functiontypes.Consumerr;
+import de.pfabulist.roast.functiontypes.Supplierr;
+import de.pfabulist.roast.unchecked.Unchecked;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
@@ -10,10 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -67,17 +67,17 @@ public class MappedLicense {
         return license != null;
     }
 
-    public LicenseID orElseThrow( Supplier<Exception> ex ) {
+    public LicenseID orElseThrow( Supplierr<Exception> ex ) {
         if( !isPresent() ) {
-            throw Unchecked.u( _nn( ex.get() ) );
+            throw Unchecked.u( ex.get() );
         }
 
         return _nn( license );
     }
 
-    public void ifPresent( ConsumerE<LicenseID, Exception> con ) {
+    public void ifPresent( Consumerr<LicenseID> con ) {
         if( isPresent() ) {
-            con.accept( license );
+            con.accept( _nn( license ));
         }
     }
 

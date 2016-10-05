@@ -3,9 +3,9 @@ package de.pfabulist.loracle.mojo;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 import de.pfabulist.frex.Frex;
-import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.license.Coordinates;
-import de.pfabulist.unchecked.functiontypes.FunctionE;
+import de.pfabulist.roast.functiontypes.Functionn;
+import de.pfabulist.roast.nio.Filess;
 import org.apache.maven.model.License;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
@@ -23,15 +23,11 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-import static de.pfabulist.frex.Frex.txt;
-import static de.pfabulist.kleinod.text.Strings.newString;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
-import static de.pfabulist.unchecked.NullCheck._orElseGet;
+import static de.pfabulist.roast.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._orElseGet;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -183,7 +179,7 @@ public class MavenLicenseOracle {
 //        return Optional.empty();
     }
 
-    <T> Optional<T> fromPom( Path pom, FunctionE<Model, Optional<T>, Exception> func ) {
+    <T> Optional<T> fromPom( Path pom, Functionn<Model, Optional<T>> func ) {
         if( !Files.exists( pom ) ) {
             log.warn( "no such pom file: " + pom );
             return Optional.empty();

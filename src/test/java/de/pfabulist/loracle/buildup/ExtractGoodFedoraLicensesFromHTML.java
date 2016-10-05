@@ -1,10 +1,9 @@
 package de.pfabulist.loracle.buildup;
 
-import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
-import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
+import de.pfabulist.roast.nio.Filess;
 
 import java.nio.charset.Charset;
 import java.util.Optional;
@@ -15,6 +14,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static de.pfabulist.frex.Frex.txt;
+import static de.pfabulist.roast.lang.Classs.getClasss;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -61,7 +61,7 @@ public class ExtractGoodFedoraLicensesFromHTML {
     public Stream<FedoraInfo> getFedoraInfo() {
         AtomicReference<FedoraInfo> fi = new AtomicReference<>( new FedoraInfo() );
 
-        return Filess.lines( getClass().getResourceAsStream( "/de/pfabulist/loracle/fedora-goodlicenses-html-fragment.txt" ), Charset.forName( "UTF-8" ) ).
+        return Filess.lines( getClasss( this ).getResourceAsStreamOrThrow( "/de/pfabulist/loracle/fedora-goodlicenses-html-fragment.txt" ), Charset.forName( "UTF-8" ) ).
                 map( l -> {
                     Matcher nameMather;
 

@@ -10,8 +10,6 @@ import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
-import de.pfabulist.nonnullbydefault.NonnullCheck;
-import de.pfabulist.unchecked.Unchecked;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
 import org.apache.maven.artifact.resolver.filter.ScopeArtifactFilter;
@@ -31,8 +29,9 @@ import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 import static de.pfabulist.loracle.license.Coordinates2License.getScopeLevel;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
-import static de.pfabulist.unchecked.NullCheck._orElseGet;
+import static de.pfabulist.roast.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._orElseGet;
+import static de.pfabulist.roast.functiontypes.Supplierr.v;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -81,20 +80,20 @@ public class LicenseCheckMojo {
 
         configLicenseDeclarations( licenseDeclarations );
         configUrlDeclarations( urlDeclarations );
-        configCheckUrls( allowUrlsCheckedDaysBefore );
+//        configCheckUrls( allowUrlsCheckedDaysBefore );
     }
 
-    private void configCheckUrls( int allowUrlsCheckedDaysBefore ) {
-        if( allowUrlsCheckedDaysBefore > 0 ){
-            lOracle.allowUrlsCheckedDaysBefore( allowUrlsCheckedDaysBefore );
-        }
-
-    }
+//    private void configCheckUrls( int allowUrlsCheckedDaysBefore ) {
+//        if( allowUrlsCheckedDaysBefore > 0 ){
+//            lOracle.allowUrlsCheckedDaysBefore( allowUrlsCheckedDaysBefore );
+//        }
+//
+//    }
 
     private void configUrlDeclarations( List<UrlDeclaration> urlDeclarations ) {
         urlDeclarations.forEach( ud -> {
             LicenseID license = lOracle.getOrThrowByName( ud.getLicense() );
-            lOracle.addUrlCheckedAt( license, ud.getUrl(), ud.getCheckedAt() );
+  //          lOracle.addUrlCheckedAt( license, ud.getUrl(), ud.getCheckedAt() );
             log.debug( "setting " + ud.getUrl() + " -> " + license + ", check at " + ud.getCheckedAt() );
         } );
     }
@@ -131,7 +130,7 @@ public class LicenseCheckMojo {
     private void getNormalDependencies() {
         ArtifactFilter artifactFilter = new ScopeArtifactFilter( Artifact.SCOPE_TEST );
 
-        DependencyNode rootNode = Unchecked.u( () -> _nn( dependencyGraphBuilder.buildDependencyGraph( mavenProject, artifactFilter ) ) );
+        DependencyNode rootNode = v( () -> _nn( dependencyGraphBuilder.buildDependencyGraph( mavenProject, artifactFilter )));
 
         rootNode.accept( new DependencyNodeVisitor() {
             @Override
@@ -280,7 +279,7 @@ public class LicenseCheckMojo {
 
         Optional<CopyrightHolder> ret =
                 liCo.getMavenLicenses().stream().
-                        map( ml -> ContentToLicense.copyRightPattern.matcher( NonnullCheck._orElseGet( ml.getComment(), "" ) ) ).
+                        map( ml -> ContentToLicense.copyRightPattern.matcher( _orElseGet( ml.getComment(), "" ) ) ).
                         filter( Matcher::matches ).
                         map( m -> new CopyrightHolder( _nn( m.group( "year" ) ), _nn( m.group( "holder" ) ) ) ).
                         findAny();

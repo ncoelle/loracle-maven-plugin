@@ -4,7 +4,6 @@ import de.pfabulist.frex.Frex;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.Stack;
 import java.util.regex.Matcher;
@@ -19,7 +18,7 @@ import static de.pfabulist.loracle.license.SPDXParser.TokTyp.closeBracket;
 import static de.pfabulist.loracle.license.SPDXParser.TokTyp.openBracket;
 import static de.pfabulist.loracle.license.SPDXParser.TokTyp.orTok;
 import static de.pfabulist.loracle.license.SPDXParser.TokTyp.text;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab

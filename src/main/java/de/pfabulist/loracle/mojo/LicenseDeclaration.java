@@ -1,13 +1,11 @@
 package de.pfabulist.loracle.mojo;
 
 import de.pfabulist.loracle.license.Coordinates;
-import de.pfabulist.loracle.license.LicenseID;
 import org.apache.maven.plugin.MojoFailureException;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
-import static de.pfabulist.unchecked.NullCheck._orElseThrow;
+import static de.pfabulist.roast.NonnullCheck._orElseThrow;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab

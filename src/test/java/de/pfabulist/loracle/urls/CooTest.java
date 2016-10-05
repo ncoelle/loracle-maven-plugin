@@ -5,19 +5,16 @@ import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.license.LicenseFromText;
-import de.pfabulist.loracle.license.MappedLicense;
 import de.pfabulist.loracle.mojo.Downloader;
 import de.pfabulist.loracle.mojo.Findings;
 import de.pfabulist.loracle.mojo.LicenseIntelligence;
-import de.pfabulist.unchecked.Unchecked;
+import de.pfabulist.roast.unchecked.Unchecked;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

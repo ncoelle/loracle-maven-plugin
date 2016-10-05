@@ -4,14 +4,15 @@ import de.pfabulist.frex.Frex;
 import de.pfabulist.frex.Single;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
-import de.pfabulist.kleinod.nio.Filess;
+import de.pfabulist.roast.nio.Filess;
 
 import java.nio.charset.Charset;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
+import static de.pfabulist.roast.lang.Classs.getClasss;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -74,8 +75,8 @@ public class ExtractSpdxLicensesFromHTML {
 
         AtomicReference<Boolean> skip = new AtomicReference<>( true );
 
-        Filess.lines( _nn( getClass().getResourceAsStream( "/de/pfabulist/loracle/spdx-licenses-html-fragment.txt" ) ), Charset.forName( "UTF-8" ) ).
-                filter( l -> isLineAfterTR( skip, l ) ).
+        Filess.lines( getClasss( this ).getResourceAsStreamOrThrow( "/de/pfabulist/loracle/spdx-licenses-html-fragment.txt" ), Charset.forName( "UTF-8" ) ).
+        filter( l -> isLineAfterTR( skip, l ) ).
                 forEach( l -> {
                     Matcher matcher = idpat.matcher( l );
                     if( !matcher.matches() ) {

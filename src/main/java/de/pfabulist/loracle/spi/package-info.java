@@ -6,4 +6,4 @@
 @NonnullByDefault
 package de.pfabulist.loracle.spi;
 
-import de.pfabulist.nonnullbydefault.NonnullByDefault;
+import de.pfabulist.roast.nonnullbydefault.NonnullByDefault;

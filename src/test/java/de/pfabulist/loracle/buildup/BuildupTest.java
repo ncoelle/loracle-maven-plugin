@@ -1,22 +1,22 @@
 package de.pfabulist.loracle.buildup;
 
 import com.google.gson.GsonBuilder;
-import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
 import de.pfabulist.loracle.license.MappedLicense;
+import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Pathss;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Locale;
 
 import static de.pfabulist.kleinod.text.Strings.getBytes;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -134,12 +134,9 @@ public class BuildupTest {
         lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL_1_1" );
         lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.0 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL" );
 
-
         // gnu license urls
         lOracle.addUrl( lOracle.getOrThrowByName( "LGPL-3.0+" ), "gnu.org/licenses/lgpl" );
         lOracle.addUrl( lOracle.getOrThrowByName( "GPL-3.0+" ), "gnu.org/licenses/gpl" );
-
-
 
         System.out.println( "----------------------- " );
         System.out.println( "------ dejacode ------- " );
@@ -148,8 +145,6 @@ public class BuildupTest {
         new ExtractFromDejaCode().go( lOracle );
 
         System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
-
-
 
         // creative commons urls
         lOracle.addUrl( lOracle.getOrThrowByName( "cc0-1.0" ), "http://creativecommons.org/publicdomain/zero/1.0/" );
@@ -168,8 +163,6 @@ public class BuildupTest {
 
 //        LicenseID bouncy = lOracle.newSingle( "bouncycastle", false ); // is really mit
 //        lOracle.addUrl( bouncy, "bouncyastle.org/license.html" ); // todo
-
-
 
         // by artifact
         // lOracle.addLicenseForArtifact( Coordinates.valueOf( "dom4j:dom4j:1.6.1" ), lOracle.getOrThrowByName( "dom4j" ) ); found in license
@@ -300,7 +293,7 @@ public class BuildupTest {
         lOracle.addUrlContent( "http://glassfish.java.net/public/CDDL+GPL.html", "/de/pfabulist/loracle/urls/glassfish_cddl+gpl_1.0.txt" );
         lOracle.addUrlContent( "http://www.eclipse.org/org/documents/epl-v10.php", "/de/pfabulist/loracle/urls/eclipse-v10.txt" );
 
-        Filess.write( _nn( _nn( Paths.get( "" ).toAbsolutePath() ).resolve( "src/main/resources/de/pfabulist/loracle/loracle.json" ) ),
+        Filess.write( Pathss.get( "" ).toAbsolutePath().resolve( "src/main/resources/de/pfabulist/loracle/loracle.json" ),
                       getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
 
         testAll( lOracle );
@@ -349,7 +342,7 @@ public class BuildupTest {
 
         assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "org.scala-lang:scalap:2.10.0" ) ).isPresent() ).isTrue();
 
-        lOracle.allowUrlsCheckedDaysBefore( 100 );
+//        lOracle.allowUrlsCheckedDaysBefore( 100 );
 //        System.out.println( lOracle.guessByUrl( "http://www.opensource.org/licenses/bsd-license.php" ) );
         assertThat( lOracle.getByUrl( "http://www.opensource.org/licenses/bsd-license.php" ).isPresent() ).isTrue();
 
@@ -357,7 +350,7 @@ public class BuildupTest {
 
         assertThat( lOracle.getByUrl( "http://foo/cddl+gpl_1_1" ).isPresent() ).isTrue();
 
-        assertThat( lOracle.getByUrl( "http://www.opensource.org/licenses/mit-license.php" )).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "mit" ), "testing" ) );
+        assertThat( lOracle.getByUrl( "http://www.opensource.org/licenses/mit-license.php" ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "mit" ), "testing" ) );
 
     }
 
@@ -581,12 +574,13 @@ public class BuildupTest {
     @Ignore
     @Test
     public void lowercaseSPDX() {
-        System.out.println( Paths.get("").toAbsolutePath());
+        System.out.println( Paths.get( "" ).toAbsolutePath() );
 
-        Filess.list( _nn(_nn(Paths.get("src/test/resources/de/pfabulist/loracle/spdx")).toAbsolutePath())).
-                forEach( src -> Filess.copy( src, _nn(_nn(Paths.get("src/main/resources/de/pfabulist/loracle/urls")).toAbsolutePath().
-                        resolve( src.getFileName().toString().toLowerCase( Locale.US ) ) ),
-                                             StandardCopyOption.REPLACE_EXISTING));
+        Filess.list( Pathss.get( "src/test/resources/de/pfabulist/loracle/spdx" ).toAbsolutePath() ).
+                forEach( src -> Filess.copy( src,
+                                             Pathss.get( "src/main/resources/de/pfabulist/loracle/urls" ).toAbsolutePath().
+                                                     resolve( src.getFileName().toString().toLowerCase( Locale.US ) ),
+                                             StandardCopyOption.REPLACE_EXISTING ) );
     }
 
     @Test

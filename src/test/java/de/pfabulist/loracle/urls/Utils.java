@@ -1,6 +1,6 @@
 package de.pfabulist.loracle.urls;
 
-import de.pfabulist.unchecked.Unchecked;
+import de.pfabulist.roast.unchecked.Unchecked;
 
 import java.io.IOException;
 import java.io.InputStream;

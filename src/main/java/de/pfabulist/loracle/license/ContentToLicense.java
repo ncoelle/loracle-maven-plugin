@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -96,7 +96,7 @@ public class ContentToLicense {
 
 //
 //        return
-//                Arrays.stream( str.split( "\n" ) ).
+//                Arrays.stream( str.cutMiddle( "\n" ) ).
 //                        map( this::byLongNameSearchInLine ).
 //                        filter( MappedLicense::isPresent ).
 //                        findFirst().

@@ -2,7 +2,7 @@ package de.pfabulist.loracle.mojo;
 
 import javax.annotation.Nullable;
 
-import static de.pfabulist.unchecked.NullCheck._orElseThrow;
+import static de.pfabulist.roast.NonnullCheck._orElseThrow;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab

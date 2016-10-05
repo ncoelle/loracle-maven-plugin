@@ -3,26 +3,27 @@ package de.pfabulist.loracle.buildup;
 import com.esotericsoftware.minlog.Log;
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
-import de.pfabulist.kleinod.nio.Filess;
-import de.pfabulist.kleinod.nio.Pathss;
 import de.pfabulist.kleinod.nio.UnzipToPath;
 import de.pfabulist.loracle.license.Normalizer;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
 import de.pfabulist.loracle.license.SingleLicense;
+import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Pathh;
+import de.pfabulist.roast.nio.Pathss;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStream;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
+import static de.pfabulist.roast.lang.Classs.getClasss;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -36,10 +37,10 @@ public class ExtractFromDejaCode {
 
     public void go( LOracle lOracle ) {
 
-        Path tmp = Pathss.getTmpDir( "foo" );
+        Pathh tmp = Pathss.getTmpDirr( "foo" );
         Filess.createDirectories( tmp );
 
-        UnzipToPath.unzipToPath( _nn( ExtractFromDejaCode.class.getResourceAsStream( "licenses.zip" ) ), tmp );
+        UnzipToPath.unzipToPath( getClasss(this).getResourceAsStreamOrThrow( "licenses.zip" ), tmp );
 
         Filess.list( _nn( tmp.resolve( "licenses" ) ) ).
                 filter( f -> f.toString().endsWith( ".yml" ) ).

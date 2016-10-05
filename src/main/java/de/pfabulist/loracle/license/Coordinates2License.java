@@ -1,8 +1,8 @@
 package de.pfabulist.loracle.license;
 
-import de.pfabulist.kleinod.nio.Filess;
 import de.pfabulist.loracle.attribution.CopyrightHolder;
 import de.pfabulist.loracle.mojo.Findings;
+import de.pfabulist.roast.nio.Filess;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
@@ -17,8 +17,8 @@ import java.util.Optional;
 import java.util.function.*;
 
 import static de.pfabulist.kleinod.text.Strings.getBytes;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
-import static de.pfabulist.unchecked.NullCheck._orElseThrow;
+import static de.pfabulist.roast.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._orElseThrow;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -68,7 +68,7 @@ public class Coordinates2License {
         }
     }
 
-    @SuppressFBWarnings( { "URF_UNREAD_FIELD" } ) // txt only in tojson
+    @SuppressFBWarnings( { "URF_UNREAD_FIELD" } ) // txt only in toJson
     public static class LiCo {
         private Optional<String> license = Optional.empty();
         private String licenseReason = "";
@@ -472,7 +472,7 @@ public class Coordinates2License {
         }
 
         Path ff = Paths.get( "target/generated-sources/loracle/licenses/" + self.map( c -> c.getArtifactId() + "/" ).orElse( "" ) + "NOTICE.txt" );
-        Filess.createDirectories( _nn(ff.getParent()) );
+        Filess.createDirectories( _nn( ff.getParent()) );
         Filess.write( ff, getBytes( sb.toString() ) );
 
     }

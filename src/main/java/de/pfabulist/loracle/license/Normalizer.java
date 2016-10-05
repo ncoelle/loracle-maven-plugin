@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import static de.pfabulist.frex.Frex.fullWord;
 import static de.pfabulist.frex.Frex.or;
 import static de.pfabulist.frex.Frex.txt;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab

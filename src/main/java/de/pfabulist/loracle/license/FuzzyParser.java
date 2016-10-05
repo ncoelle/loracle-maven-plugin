@@ -18,7 +18,7 @@ import static de.pfabulist.loracle.license.FuzzyParser.TokTyp.openBracket;
 import static de.pfabulist.loracle.license.FuzzyParser.TokTyp.orTok;
 import static de.pfabulist.loracle.license.FuzzyParser.TokTyp.text;
 import static de.pfabulist.loracle.license.LicenseIDs.isOr;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab

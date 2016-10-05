@@ -18,8 +18,7 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-import static de.pfabulist.nonnullbydefault.NonnullCheck._ni;
-import static de.pfabulist.nonnullbydefault.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -71,15 +70,15 @@ public class LOracleMojo extends AbstractMojo {
     private Findings failures;
 
     public DependencyGraphBuilder getDependencyGraphBuilder() {
-        return _ni( dependencyGraphBuilder );
+        return _nn( dependencyGraphBuilder );
     }
 
     public MavenProject getProject() {
-        return _ni( project );
+        return _nn( project );
     }
 
     public MavenSession getSession() {
-        return _ni( session );
+        return _nn( session );
     }
 
     public List<LicenseDeclaration> getLicenseDeclarations() {
