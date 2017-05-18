@@ -8,22 +8,21 @@ import de.pfabulist.loracle.license.Normalizer;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
 import de.pfabulist.loracle.license.SingleLicense;
-import de.pfabulist.roast.nio.Filess;
-import de.pfabulist.roast.nio.Pathh;
-import de.pfabulist.roast.nio.Pathss;
+import de.pfabulist.roast.nio.Files_;
+import de.pfabulist.roast.nio.Paths_;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStream;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import static de.pfabulist.roast.NonnullCheck._nn;
-import static de.pfabulist.roast.lang.Classs.getClasss;
+import static de.pfabulist.roast.lang.Class_.getClass__;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -37,15 +36,18 @@ public class ExtractFromDejaCode {
 
     public void go( LOracle lOracle ) {
 
-        Pathh tmp = Pathss.getTmpDirr( "foo" );
-        Filess.createDirectories( tmp );
+        Path tmp = Paths_.getTmpDir( "foo" );
+        Files_.createDirectories( tmp );
 
-        UnzipToPath.unzipToPath( getClasss(this).getResourceAsStreamOrThrow( "licenses.zip" ), tmp );
+        UnzipToPath.unzipToPath( getClass__(this).getResourceAsStream_ot( "/de/pfabulist/loracle/buildup/licenses.zip" ), tmp );
 
-        Filess.list( _nn( tmp.resolve( "licenses" ) ) ).
+                Files_.list( _nn( tmp.resolve( "licenses" ) ) ).
                 filter( f -> f.toString().endsWith( ".yml" ) ).
                 forEach( f -> {
                     try {
+
+                        // System.out.printf( "YML ++++ " + f.toString() );
+
                         YamlReader reader = new YamlReader( new FileReader( f.toString() ) );
                         Object object = _nn( reader.read() );
                         //System.out.println( object );
@@ -87,7 +89,7 @@ public class ExtractFromDejaCode {
                     }
                 } );
 
-        Pathss.deleteRecursive( tmp );
+        Files_.deleteRecursive_( tmp );
     }
 
     Optional<LicenseID> propLicense( LOracle lOracle, String key, Optional<LicenseID> one, Optional<LicenseID> two, Optional<LicenseID> three ) {
@@ -231,7 +233,7 @@ public class ExtractFromDejaCode {
             lOracle.getMore( ret ).attributes.setFromDeja();
             System.out.println( "+++ deja ++ " + ret + "    " + "/de/pfabulist/loracle/deja/" + oldKey + ".LICENSE");
             try( InputStream is = _nn(ExtractFromDejaCode.class.getResourceAsStream( "/de/pfabulist/loracle/deja/" + oldKey + ".LICENSE" ))) {
-                Filess.copy( is, _nn(Paths.get( "src/main/resources/de/pfabulist/loracle/urls/" + key + ".txt" ).toAbsolutePath()), StandardCopyOption.REPLACE_EXISTING );
+                Files_.copy( is, Paths_.get__( "src/main/resources/de/pfabulist/loracle/urls/" + key + ".txt" ).toAbsolutePath_(), StandardCopyOption.REPLACE_EXISTING );
             }
             //lOracle.addUrlContent(  );
             return Optional.of( ret );

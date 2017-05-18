@@ -8,6 +8,7 @@ import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.ContentToLicense;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
+import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
 import org.apache.maven.artifact.Artifact;
@@ -30,8 +31,8 @@ import java.util.stream.Collectors;
 
 import static de.pfabulist.loracle.license.Coordinates2License.getScopeLevel;
 import static de.pfabulist.roast.NonnullCheck._nn;
-import static de.pfabulist.roast.NonnullCheck._orElseGet;
-import static de.pfabulist.roast.functiontypes.Supplierr.v;
+import static de.pfabulist.roast.NonnullCheck.n_or;
+import static de.pfabulist.roast.functiontypes.Supplier_.vn_;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -51,7 +52,7 @@ public class LicenseCheckMojo {
     private Optional<Coordinates> self = Optional.empty();
 
     private final Coordinates2License coordinates2License;
-    private final SrcAccess src;
+    //private final SrcAccess src;
     private final JarAccess jarAccess;
     private final SrcAccess srcAccess;
 
@@ -71,7 +72,7 @@ public class LicenseCheckMojo {
         licenseIntelligence = new LicenseIntelligence( lOracle, log );
         downloader = new Downloader( log, lOracle );
         contentToLicense = new ContentToLicense( lOracle, log );
-        src = new SrcAccess( lOracle, mlo, log );
+        //  src = new SrcAccess( lOracle, mlo, log );
         jarAccess = new JarAccess( lOracle, mlo, log );
         srcAccess = new SrcAccess( lOracle, mlo, log );
     }
@@ -93,7 +94,7 @@ public class LicenseCheckMojo {
     private void configUrlDeclarations( List<UrlDeclaration> urlDeclarations ) {
         urlDeclarations.forEach( ud -> {
             LicenseID license = lOracle.getOrThrowByName( ud.getLicense() );
-  //          lOracle.addUrlCheckedAt( license, ud.getUrl(), ud.getCheckedAt() );
+            //          lOracle.addUrlCheckedAt( license, ud.getUrl(), ud.getCheckedAt() );
             log.debug( "setting " + ud.getUrl() + " -> " + license + ", check at " + ud.getCheckedAt() );
         } );
     }
@@ -115,11 +116,11 @@ public class LicenseCheckMojo {
     }
 
     private String getUse( DependencyNode node ) {
-        Artifact a = _nn(node.getArtifact());
-        String ret = _orElseGet( a.getScope(), "" );
+        Artifact a = _nn( node.getArtifact() );
+        String ret = n_or( a.getScope(), "" );
         @Nullable DependencyNode it = node.getParent();
         while( it != null ) {
-            Coordinates coo = Coordinates.valueOf( _nn(it.getArtifact()));
+            Coordinates coo = Coordinates.valueOf( _nn( it.getArtifact() ) );
             ret = coo.toString() + " -> " + ret;
             it = it.getParent();
         }
@@ -130,16 +131,16 @@ public class LicenseCheckMojo {
     private void getNormalDependencies() {
         ArtifactFilter artifactFilter = new ScopeArtifactFilter( Artifact.SCOPE_TEST );
 
-        DependencyNode rootNode = v( () -> _nn( dependencyGraphBuilder.buildDependencyGraph( mavenProject, artifactFilter )));
+        DependencyNode rootNode = vn_( () -> _nn( dependencyGraphBuilder.buildDependencyGraph( mavenProject, artifactFilter ) ) );
 
         rootNode.accept( new DependencyNodeVisitor() {
             @Override
             public boolean visit( DependencyNode dependencyNode ) {
-                Artifact a = _nn( _nn(dependencyNode).getArtifact() );
+                Artifact a = _nn( _nn( dependencyNode ).getArtifact() );
                 Coordinates coo = Coordinates.valueOf( a );
                 coordinates2License.add( coo );
-                coordinates2License.updateScope( coo, _orElseGet( a.getScope(), "compile" ) );
-                coordinates2License.addUse( coo, getUse( _nn(dependencyNode )) );
+                coordinates2License.updateScope( coo, n_or( a.getScope(), "compile" ) );
+                coordinates2License.addUse( coo, getUse( _nn( dependencyNode ) ) );
 
                 if( !self.isPresent() ) {
                     self = Optional.of( coo );
@@ -183,9 +184,9 @@ public class LicenseCheckMojo {
 
         lico.setMLicenses(
                 mavenLicenses.stream().map(
-                        l -> new Coordinates2License.MLicense( _orElseGet( l.getName(), "" ),
-                                                               _orElseGet( l.getUrl(), "" ),
-                                                               _orElseGet( l.getComments(), "" ) ) ).
+                        l -> new Coordinates2License.MLicense( n_or( l.getName(), "" ),
+                                                               n_or( l.getUrl(), "" ),
+                                                               n_or( l.getComments(), "" ) ) ).
                         collect( Collectors.toList() ) );
 
     }
@@ -279,7 +280,7 @@ public class LicenseCheckMojo {
 
         Optional<CopyrightHolder> ret =
                 liCo.getMavenLicenses().stream().
-                        map( ml -> ContentToLicense.copyRightPattern.matcher( _orElseGet( ml.getComment(), "" ) ) ).
+                        map( ml -> ContentToLicense.copyRightPattern.matcher( n_or( ml.getComment(), "" ) ) ).
                         filter( Matcher::matches ).
                         map( m -> new CopyrightHolder( _nn( m.group( "year" ) ), _nn( m.group( "holder" ) ) ) ).
                         findAny();
@@ -314,7 +315,7 @@ public class LicenseCheckMojo {
     }
 
     public void getPomHeader() {
-        coordinates2License.fromSrc( src::getPomHeader );
+        coordinates2License.fromSrc( srcAccess::getPomHeader );
 
     }
 
@@ -333,7 +334,7 @@ public class LicenseCheckMojo {
 
     public void generateLicenseTxts() {
         coordinates2License.update(
-                lico -> getScopeLevel( lico.getScope() ) < getScopeLevel( "test" ) ,
-                (coo, lico) -> downloader.generateLicensesTxt( self.map( Coordinates::getArtifactId).orElse( "notice" ), coo, lico ) );
+                lico -> getScopeLevel( lico.getScope() ) < getScopeLevel( "test" ),
+                ( coo, lico ) -> downloader.generateLicensesTxt( self.map( Coordinates::getArtifactId ).orElse( "notice" ), coo, lico ) );
     }
 }

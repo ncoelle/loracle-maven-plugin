@@ -1,13 +1,12 @@
 package de.pfabulist.loracle.license;
 
 import de.pfabulist.loracle.attribution.CopyrightHolder;
-import de.pfabulist.loracle.mojo.Findings;
-import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Files_;
+import de.pfabulist.roast.nio.Paths_;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nullable;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,7 +17,7 @@ import java.util.function.*;
 
 import static de.pfabulist.kleinod.text.Strings.getBytes;
 import static de.pfabulist.roast.NonnullCheck._nn;
-import static de.pfabulist.roast.NonnullCheck._orElseThrow;
+import static de.pfabulist.roast.NonnullCheck.n_;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -309,7 +308,7 @@ public class Coordinates2License {
     }
 
     private Findings getLog() {
-        return _orElseThrow( log, () -> new IllegalStateException( "no logger" ) );
+        return n_( log, () -> new IllegalStateException( "no logger" ) );
     }
 
     public void update( BiConsumer<Coordinates, LiCo> f ) {
@@ -354,7 +353,7 @@ public class Coordinates2License {
     }
 
     private void scopeDependingLog( Coordinates coo, String message ) {
-        String scope = _orElseThrow( list.get( coo ), () -> new IllegalStateException( "huh" ) ).getScope();
+        String scope = n_( list.get( coo ), () -> new IllegalStateException( "huh" ) ).getScope();
 
         if( !scope.equals( "plugin" ) && !scope.equals( "test" ) ) {
             getLog().error( message );
@@ -471,9 +470,9 @@ public class Coordinates2License {
 
         }
 
-        Path ff = Paths.get( "target/generated-sources/loracle/licenses/" + self.map( c -> c.getArtifactId() + "/" ).orElse( "" ) + "NOTICE.txt" );
-        Filess.createDirectories( _nn( ff.getParent()) );
-        Filess.write( ff, getBytes( sb.toString() ) );
+        Path ff = Paths_.get_( "target/generated-sources/loracle/licenses/" + self.map( c -> c.getArtifactId() + "/" ).orElse( "" ) + "NOTICE.txt" );
+        Files_.createDirectories( _nn( ff.getParent()) );
+        Files_.write( ff, getBytes( sb.toString() ) );
 
     }
 

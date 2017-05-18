@@ -3,18 +3,19 @@ package de.pfabulist.loracle.buildup;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
-import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.collection.AtomicReference_;
+import de.pfabulist.roast.collection.AtomicReference_of;
+import de.pfabulist.roast.nio.Files_;
 
 import java.nio.charset.Charset;
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static de.pfabulist.frex.Frex.txt;
-import static de.pfabulist.roast.lang.Classs.getClasss;
+import static de.pfabulist.roast.lang.Class_.getClass__;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -45,55 +46,59 @@ public class ExtractGoodFedoraLicensesFromHTML {
     }
 
     //<td><a class="external free" href="http://www.openoffice.org/licenses/sissl_license.html">http://www.openoffice.org/licenses/sissl_license.html</a>
+    enum FerdoraUrl {
+        url,
+        id
+    }
     private Pattern pat =
             Frex.any().zeroOrMore().
                     then( Frex.txt( "href=\"" ) ).
-                    then( Frex.anyBut( Frex.txt( '"' )).oneOrMore().var( "url" )).
+                    then( Frex.anyBut( Frex.txt( '"' )).oneOrMore().var( FerdoraUrl.url )).
                     then( Frex.any().zeroOrMore()).
                     buildCaseInsensitivePattern();
 
     Pattern namepat = txt( "<td>" ).
-            then( Frex.anyBut( txt( '<' ) ).oneOrMore().var( "id" ) ).
+            then( Frex.anyBut( txt( '<' ) ).oneOrMore().var( FerdoraUrl.id ) ).
             then( Frex.whitespace().zeroOrMore() ).
             then( txt( "</td>" ) ).buildPattern();
 
 
     public Stream<FedoraInfo> getFedoraInfo() {
-        AtomicReference<FedoraInfo> fi = new AtomicReference<>( new FedoraInfo() );
+        AtomicReference_<FedoraInfo> fi = new AtomicReference_of<>( new FedoraInfo() );
 
-        return Filess.lines( getClasss( this ).getResourceAsStreamOrThrow( "/de/pfabulist/loracle/fedora-goodlicenses-html-fragment.txt" ), Charset.forName( "UTF-8" ) ).
+        return Files_.lines( getClass__( this ).getResourceAsStream_ot( "/de/pfabulist/loracle/fedora-goodlicenses-html-fragment.txt" ), Charset.forName( "UTF-8" ) ).
                 map( l -> {
                     Matcher nameMather;
 
-                    switch( fi.get().count ) {
+                    switch( fi.get_().count ) {
                         case 0:
                             break;
                         case 1:
                             nameMather = namepat.matcher( l );
                             if ( nameMather.matches() ) {
-                                fi.get().name = nameMather.group( "id" ).trim();
+                                fi.get_().name = nameMather.group( "id" ).trim();
                             }
                             break;
                         case 2:
                             nameMather = namepat.matcher( l );
                             if ( nameMather.matches() ) {
-                                fi.get().shortName = nameMather.group( "id" ).trim();
-                                //System.out.println("---" + fi.get().longName );
+                                fi.get_().shortName = nameMather.group( "id" ).trim();
+                                //System.out.println("---" + fi.get_().longName );
                             }
                             break;
                         case 3:
-                            fi.get().fsf = l.contains( "YES" ); // todo comments
+                            fi.get_().fsf = l.contains( "YES" ); // todo comments
                             break;
                         case 4:
-                            fi.get().gpl2Compatible = l.contains( "YES" );
+                            fi.get_().gpl2Compatible = l.contains( "YES" );
                             break;
                         case 5:
-                            fi.get().gpl3Compatible = l.contains( "YES" );
+                            fi.get_().gpl3Compatible = l.contains( "YES" );
                             break;
                         case 6:
                             Matcher matcher = pat.matcher( l );
                             if ( matcher.matches()) {
-                                fi.get().url = matcher.group( "url" );
+                                fi.get_().url = matcher.group( "url" );
                             }
                             break;
                         case 7:
@@ -102,11 +107,11 @@ public class ExtractGoodFedoraLicensesFromHTML {
                             throw new IllegalArgumentException( "huh" );
                     }
 
-                    FedoraInfo ret = fi.get();
+                    FedoraInfo ret = fi.get_();
                     ret.count++;
 
                     if( ret.count == 8 ) {
-                        fi.set( new FedoraInfo() );
+                        fi.set_( new FedoraInfo() );
                     }
                     return ret;
                 } ).

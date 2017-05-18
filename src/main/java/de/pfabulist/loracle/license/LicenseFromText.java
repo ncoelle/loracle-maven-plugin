@@ -1,8 +1,6 @@
 package de.pfabulist.loracle.license;
 
-import de.pfabulist.loracle.mojo.Findings;
 import de.pfabulist.roast.collection.P;
-import org.apache.maven.plugin.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,9 +18,9 @@ import static de.pfabulist.roast.NonnullCheck._nn;
 public class LicenseFromText {
 
     private final LOracle lOracle;
-    private final Log log;
+    private final Findings log;
 
-    public LicenseFromText( LOracle lOracle, Log log ) {
+    public LicenseFromText( LOracle lOracle, Findings log ) {
         this.lOracle = lOracle;
         this.log = log;
     }
@@ -47,7 +45,7 @@ public class LicenseFromText {
         List<P<String, MappedLicense>> textPieceToLicense = new ArrayList<>();
         textPieceToLicense.add( P.of( new Normalizer().norm( txt ), MappedLicense.empty() ));
 
-        And and = new And( lOracle, new Findings( log ), true );
+        And and = new And( lOracle, log, true );
 
         return byFragments2.stream().
                 map( f -> match3( f, textPieceToLicense ) ).
@@ -58,25 +56,26 @@ public class LicenseFromText {
 
     }
 
-    private Optional<LicenseID> match( SimpleMatch2 simpl, String in ) {
-        int pos = 0;
-        for( int i = 0; i < simpl.getFragments().size(); i++ ) {
-            String frag = _nn( simpl.getFragments().get( i ) );
-            int nextPos = in.indexOf( frag, pos );
-            if( nextPos < 0 || nextPos > pos + _nn( simpl.getMaxAny().get( i ) ) ) {
-//                if ( nextPos > 0 ) {
-//                    String duh = in.substring( pos );
-//                    String foo = in.substring( nextPos );
-//                    int g = 0;
-//                }
-                return Optional.empty();
-            }
-
-            pos = nextPos + frag.length();
-        }
-
-        return Optional.of( lOracle.getOrThrowByName( simpl.getLicense() ) );
-    }
+    // todo used ?
+//    private Optional<LicenseID> match( SimpleMatch2 simpl, String in ) {
+//        int pos = 0;
+//        for( int i = 0; i < simpl.getFragments().size(); i++ ) {
+//            String frag = _nn( simpl.getFragments().get( i ) );
+//            int nextPos = in.indexOf( frag, pos );
+//            if( nextPos < 0 || nextPos > pos + _nn( simpl.getMaxAny().get( i ) ) ) {
+////                if ( nextPos > 0 ) {
+////                    String duh = in.substring( pos );
+////                    String foo = in.substring( nextPos );
+////                    int g = 0;
+////                }
+//                return Optional.empty();
+//            }
+//
+//            pos = nextPos + frag.length();
+//        }
+//
+//        return Optional.of( lOracle.getOrThrowByName( simpl.getLicense() ) );
+//    }
 
     public Optional<LicenseID> match3( SimpleMatch2 frag, List<P<String, MappedLicense>> txts ) {
 

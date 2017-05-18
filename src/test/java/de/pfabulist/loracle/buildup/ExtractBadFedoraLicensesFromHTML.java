@@ -3,7 +3,7 @@ package de.pfabulist.loracle.buildup;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
-import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Files_;
 
 import java.nio.charset.Charset;
 import java.util.Optional;
@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static de.pfabulist.frex.Frex.txt;
+import static de.pfabulist.roast.NonnullCheck.n_;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -44,21 +45,22 @@ public class ExtractBadFedoraLicensesFromHTML {
 
     //<td><a class="external free" href="http://www.openoffice.org/licenses/sissl_license.html">http://www.openoffice.org/licenses/sissl_license.html</a>
     private Pattern pat =
+
             Frex.any().zeroOrMore().
                     then( Frex.txt( "href=\"" ) ).
-                    then( Frex.anyBut( Frex.txt( '"' ) ).oneOrMore().var( "url" ) ).
+                    then( Frex.anyBut( Frex.txt( '"' ) ).oneOrMore().var( ExtractGoodFedoraLicensesFromHTML.FerdoraUrl.url ) ).
                     then( Frex.any().zeroOrMore() ).
                     buildCaseInsensitivePattern();
 
     Pattern namepat = txt( "<td>" ).
-            then( Frex.anyBut( txt( '<' ) ).oneOrMore().var( "id" ) ).
+            then( Frex.anyBut( txt( '<' ) ).oneOrMore().var( ExtractGoodFedoraLicensesFromHTML.FerdoraUrl.id ) ).
             then( Frex.whitespace().zeroOrMore() ).
             then( txt( "</td>" ) ).buildPattern();
 
     public Stream<FedoraInfo> getFedoraInfo() {
         AtomicReference<FedoraInfo> fi = new AtomicReference<>( new FedoraInfo() );
 
-        return Filess.lines( getClass().getResourceAsStream( "/de/pfabulist/loracle/fedora-bad-html-fragment.txt" ), Charset.forName( "UTF-8" ) ).
+        return Files_.lines( n_( getClass().getResourceAsStream( "/de/pfabulist/loracle/fedora-bad-html-fragment.txt" )), Charset.forName( "UTF-8" ) ).
                 map( l -> {
                     Matcher nameMather;
 

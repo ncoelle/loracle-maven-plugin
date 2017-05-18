@@ -5,8 +5,8 @@ import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
 import de.pfabulist.loracle.license.MappedLicense;
-import de.pfabulist.roast.nio.Filess;
-import de.pfabulist.roast.nio.Pathss;
+import de.pfabulist.roast.nio.Files_;
+import de.pfabulist.roast.nio.Paths_;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Locale;
 
 import static de.pfabulist.kleinod.text.Strings.getBytes;
-import static de.pfabulist.roast.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck.n_;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -293,7 +293,7 @@ public class BuildupTest {
         lOracle.addUrlContent( "http://glassfish.java.net/public/CDDL+GPL.html", "/de/pfabulist/loracle/urls/glassfish_cddl+gpl_1.0.txt" );
         lOracle.addUrlContent( "http://www.eclipse.org/org/documents/epl-v10.php", "/de/pfabulist/loracle/urls/eclipse-v10.txt" );
 
-        Filess.write( Pathss.get( "" ).toAbsolutePath().resolve( "src/main/resources/de/pfabulist/loracle/loracle.json" ),
+        Files_.write( Paths_.get__( "" ).toAbsolutePath__().resolve_( "src/main/resources/de/pfabulist/loracle/loracle.json" ),
                       getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
 
         testAll( lOracle );
@@ -574,12 +574,12 @@ public class BuildupTest {
     @Ignore
     @Test
     public void lowercaseSPDX() {
-        System.out.println( Paths.get( "" ).toAbsolutePath() );
+        // System.out.println( Paths.get( "" ).toAbsolutePath() );
 
-        Filess.list( Pathss.get( "src/test/resources/de/pfabulist/loracle/spdx" ).toAbsolutePath() ).
-                forEach( src -> Filess.copy( src,
-                                             Pathss.get( "src/main/resources/de/pfabulist/loracle/urls" ).toAbsolutePath().
-                                                     resolve( src.getFileName().toString().toLowerCase( Locale.US ) ),
+        Files_.list( Paths_.get__( "src/test/resources/de/pfabulist/loracle/spdx" ).toAbsolutePath_() ).
+                forEach( src -> Files_.copy( src,
+                                             Paths_.get__( "src/main/resources/de/pfabulist/loracle/urls" ).toAbsolutePath_().
+                                                     resolve( n_(src.getFileName()).toString().toLowerCase( Locale.US ) ),
                                              StandardCopyOption.REPLACE_EXISTING ) );
     }
 

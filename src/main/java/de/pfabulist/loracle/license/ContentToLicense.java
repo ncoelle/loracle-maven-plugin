@@ -2,7 +2,6 @@ package de.pfabulist.loracle.license;
 
 import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.attribution.CopyrightHolder;
-import de.pfabulist.loracle.mojo.Findings;
 import de.pfabulist.loracle.mojo.UrlToLicense;
 
 import java.util.Optional;
@@ -19,13 +18,18 @@ import static de.pfabulist.roast.NonnullCheck._nn;
 @SuppressWarnings( "PMD.UnusedPrivateField" )
 public class ContentToLicense {
 
+    enum CopyrightVariables {
+        holder,
+        year
+    }
+
     static public final Pattern copyRightPattern =
             Frex.or( Frex.txt( "Copyright " ) ).
                     then( Frex.txt( "(C) " ).zeroOrOnce() ).
-                    then( Frex.or( Frex.number(), Frex.txt( '-' ), Frex.txt( ',' ), Frex.whitespace() ).oneOrMore().var( "year" ) ).
+                    then( Frex.or( Frex.number(), Frex.txt( '-' ), Frex.txt( ',' ), Frex.whitespace() ).oneOrMore().var( CopyrightVariables.year ) ).
                     then( Frex.txt( ' ' ) ).
                     then( Frex.txt( "(C) " ).zeroOrOnce() ).
-                    then( Frex.anyBut( Frex.txt( '\n' ) ).oneOrMore().var( "holder" ) ).
+                    then( Frex.anyBut( Frex.txt( '\n' ) ).oneOrMore().var( CopyrightVariables.holder ) ).
                     buildCaseInsensitivePattern();
 
     private final LOracle lOracle;
@@ -40,9 +44,14 @@ public class ContentToLicense {
         this.urlToLicense = new UrlToLicense( lOracle, log );
     }
 
+
+    enum AddressPage {
+        addr
+    }
+
     public final static Pattern page =
             Frex.or( Frex.txt( "http://" ), Frex.txt( "https://" ) ).
-                    then( Frex.any().oneOrMore().lazy() ).group( "addr" ).
+                    then( Frex.any().oneOrMore().lazy() ).var( AddressPage.addr ).
                     then( Frex.txt( '.' ).zeroOrOnce()).
                     then( Frex.or( Frex.txt( ' ' ), Frex.txt( '\n' ), Frex.txt( '\r' ) ) ).
                     //But( Frex.txt( ' ' ) ).oneOrMore().group( "addr" ) ).

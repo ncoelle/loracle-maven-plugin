@@ -41,6 +41,16 @@ public class FuzzyParser {
         text
     }
 
+    enum TokenVariables {
+        before,
+        closed,
+        open,
+        or,
+        and,
+        rest
+    }
+
+
     public static class Tok {
 
         final TokTyp typ;
@@ -81,12 +91,12 @@ public class FuzzyParser {
         return liBuilder( tok(  LOracle.trim( in )) );
     }
 
-    private static Pattern first = Frex.any().zeroOrMore().lazy().var( "before" ).
-            then( Frex.or( txt( ')' ).var( "closed" ),
-                           txt( '(' ).var( "open" ),
-                           fullWord( "or" ).var( "or" ),
-                           fullWord( "and" ).var( "and" ) ) ).
-            then( Frex.any().zeroOrMore().var( "rest" ) ).
+    private static Pattern first = Frex.any().zeroOrMore().lazy().var( SPDXParser.TokenVariables.before ).
+            then( Frex.or( txt( ')' ).var( SPDXParser.TokenVariables.closed ),
+                           txt( '(' ).var( SPDXParser.TokenVariables.open ),
+                           fullWord( "or" ).var( SPDXParser.TokenVariables.or ),
+                           fullWord( "and" ).var( SPDXParser.TokenVariables.and ) ) ).
+            then( Frex.any().zeroOrMore().var( SPDXParser.TokenVariables.rest ) ).
             buildCaseInsensitivePattern();
 
     private Stream<Tok> tok( String in ) {
@@ -125,15 +135,22 @@ public class FuzzyParser {
     }
 
     static Frex word = Frex.or( Frex.alphaNum(), txt( '-' ).or( txt( '.' ) ) ).oneOrMore();
-    static Pattern namePattern = Frex.any().oneOrMore().lazy().var( "name" ).
+
+    enum NamePatternVars {
+        name,
+        plus,
+        exception
+    }
+
+    static Pattern namePattern = Frex.any().oneOrMore().lazy().var( NamePatternVars.name).
 //                    then( Frex.whitespace().zeroOrMore()).
 //                    then( Frex.or( Frex.number(), txt('.')).zeroOrMore()).var( "name" ).
 //                    then( Frex.whitespace().zeroOrMore()).
-                    then( txt( '+' ).var( "plus" ).zeroOrOnce() ).
+                    then( txt( '+' ).var( NamePatternVars.plus ).zeroOrOnce() ).
                     then( Frex.whitespace().zeroOrMore().
                             then( txt( "WITH" ) ).
                             then( Frex.whitespace().zeroOrMore() ).
-                            then( word.var( "exception" ) ).zeroOrOnce() ).
+                            then( word.var( NamePatternVars.exception ) ).zeroOrOnce() ).
                     buildCaseInsensitivePattern();
 
     public LicenseID getExtended( String nameExpr ) {

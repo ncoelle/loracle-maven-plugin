@@ -4,6 +4,7 @@ import de.pfabulist.loracle.license.And;
 import de.pfabulist.loracle.license.ContentToLicense;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
+import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseFromText;
 import de.pfabulist.loracle.license.MappedLicense;

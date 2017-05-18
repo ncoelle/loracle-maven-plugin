@@ -3,7 +3,7 @@ package de.pfabulist.loracle.buildup;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.frex.Single;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Files_;
 
 import java.nio.charset.Charset;
 import java.util.concurrent.atomic.AtomicReference;
@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static de.pfabulist.roast.NonnullCheck._nn;
-import static de.pfabulist.roast.lang.Classs.getClasss;
+import static de.pfabulist.roast.lang.Class_.getClass__;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -36,7 +36,7 @@ public class ExtractSPDXExceptionsFromHTML {
         Frex anyButDoubleQuote = Frex.anyBut( doubleQuote ).oneOrMore();
         Pattern idpat = anyButDoubleQuote.
                 then( Frex.txt( "\"./" ) ).
-                then( anyButDoubleQuote.var( "id" ) ).
+                then( anyButDoubleQuote.var( IdPatVars.id ) ).
                 then( Frex.txt( ".html\"" ) ).
                 then( Frex.any().zeroOrMore() ).buildPattern();
 
@@ -45,7 +45,7 @@ public class ExtractSPDXExceptionsFromHTML {
         AtomicReference<Boolean> skip = new AtomicReference<>( true );
 
         return
-                Filess.lines( getClasss( this ).getResourceAsStreamOrThrow( "/de/pfabulist/loracle/spdx-exceptions-html-fragment.txt" ), Charset.forName( "UTF-8" ) ).
+                Files_.lines( getClass__( this ).getResourceAsStream_ot( "/de/pfabulist/loracle/spdx-exceptions-html-fragment.txt" ), Charset.forName( "UTF-8" ) ).
                         filter( l -> isLineAfterTR( skip, l ) ).
                         map( l -> {
                             Matcher matcher = idpat.matcher( l );
@@ -57,7 +57,6 @@ public class ExtractSPDXExceptionsFromHTML {
                         } );
 
     }
-
     private boolean isLineAfterTR( AtomicReference<Boolean> skip, String l ) {
         if( l.trim().equals( "<tr>" ) ) {
             skip.set( false );
@@ -68,6 +67,10 @@ public class ExtractSPDXExceptionsFromHTML {
             skip.set( true );
             return true;
         }
+    }
+
+    enum IdPatVars {
+        id
     }
 
 }

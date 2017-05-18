@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Files_;
+import de.pfabulist.roast.nio.Path_;
+import de.pfabulist.roast.nio.Paths_;
 import de.pfabulist.roast.unchecked.Unchecked;
 
 import java.io.IOException;
@@ -81,13 +83,13 @@ public class JSONStartup {
     public static void previousOut( Coordinates2License c2l ) {
         Path previous = getLoracleJson();
         Gson gson = new GsonBuilder().setPrettyPrinting().enableComplexMapKeySerialization().create();
-        Filess.write( previous, getBytes( gson.toJson( c2l ) ));
+        Files_.write( previous, getBytes( gson.toJson( c2l ) ));
     }
 
     private static Path getLoracleJson() {
-        Path previous = _nn( Paths.get( "target/generated-sources/loracle/loracle.json").toAbsolutePath() );
-        Filess.createDirectories( _nn(previous.getParent() ));
-        return previous;
+        Path_ previous = Paths_.get__( "target/generated-sources/loracle/loracle.json").toAbsolutePath__();
+        Files_.createDirectories_( previous.getParent_ot() );
+        return previous._r();
     }
 
 }

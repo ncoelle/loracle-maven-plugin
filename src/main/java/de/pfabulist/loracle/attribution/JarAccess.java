@@ -5,9 +5,9 @@ import de.pfabulist.loracle.Utils;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.mojo.Findings;
+import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.mojo.MavenLicenseOracle;
-import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Files_;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
 
-import static de.pfabulist.roast.NonnullCheck._orElseGet;
+import static de.pfabulist.roast.NonnullCheck.n_or;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -34,13 +34,13 @@ public class JarAccess {
             Frex.or( Frex.txt( "LICENSE" ), Frex.txt( "META-INF/LICENSE" )).then( Frex.any().zeroOrMore() ).
                     buildCaseInsensitivePattern();
 
-    static Pattern copyRightPattern =
-            Frex.or( Frex.txt( "Copyright " ) ).
-                    then( Frex.txt("(C) ").zeroOrOnce()).
-                    then( Frex.or( Frex.number(), Frex.txt( '-' ), Frex.txt( ',' ), Frex.whitespace() ).oneOrMore().var( "year" ) ).
-                    then( Frex.txt( ' ' ) ).
-                    then( Frex.anyBut( Frex.txt( '\n' ) ).oneOrMore().var( "holder" ) ).
-                    buildCaseInsensitivePattern();
+//    static Pattern copyRightPattern =
+//            Frex.or( Frex.txt( "Copyright " ) ).
+//                    then( Frex.txt("(C) ").zeroOrOnce()).
+//                    then( Frex.or( Frex.number(), Frex.txt( '-' ), Frex.txt( ',' ), Frex.whitespace() ).oneOrMore().var( "year" ) ).
+//                    then( Frex.txt( ' ' ) ).
+//                    then( Frex.anyBut( Frex.txt( '\n' ) ).oneOrMore().var( "holder" ) ).
+//                    buildCaseInsensitivePattern();
 
 
     public JarAccess( LOracle lOracle, MavenLicenseOracle mlo, Findings log ) {
@@ -59,7 +59,7 @@ public class JarAccess {
             return;
         }
 
-        try( InputStream in = Filess.newInputStream( src ) ) {
+        try( InputStream in = Files_.newInputStream( src ) ) {
             String file = Utils.unzipToString( in, licensePattern );
 
             if( file.isEmpty() ) {
@@ -73,7 +73,7 @@ public class JarAccess {
             new LicenseWriter().write( coo, "license", file );
 
         } catch( IOException e ) {
-            log.warn( _orElseGet( e.getMessage(), "pattern problem" ) );
+            log.warn( n_or( e.getMessage(), "pattern problem" ) );
         }
     }
 

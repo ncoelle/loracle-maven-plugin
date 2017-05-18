@@ -5,9 +5,9 @@ import de.pfabulist.loracle.Utils;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.mojo.Findings;
+import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.mojo.MavenLicenseOracle;
-import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Files_;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +16,7 @@ import java.nio.file.Path;
 import java.util.regex.Pattern;
 
 import static de.pfabulist.kleinod.text.Strings.newString;
-import static de.pfabulist.roast.NonnullCheck._orElseGet;
+import static de.pfabulist.roast.NonnullCheck.n_or;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -52,7 +52,7 @@ public class SrcAccess {
             return;
         }
 
-        try( InputStream in = Filess.newInputStream( src ) ) {
+        try( InputStream in = Files_.newInputStream( src ) ) {
             String file = Utils.unzipToString( in, javaPattern );
 
             if( file.isEmpty() ) {
@@ -74,7 +74,7 @@ public class SrcAccess {
 //            extractLicense( lOracle, lico, file, log, andIsOr );
 
         } catch( IOException e ) {
-            log.warn( _orElseGet( e.getMessage(), "pattern problem" ) );
+            log.warn( n_or( e.getMessage(), "pattern problem" ) );
         }
     }
 
@@ -87,7 +87,7 @@ public class SrcAccess {
             return;
         }
 
-        String header = Header.getPomHeader( newString( Filess.readAllBytes( src )));
+        String header = Header.getPomHeader( newString( Files_.readAllBytes( src )));
         liCo.setPomHeader( header );
         if ( !header.isEmpty()) {
             new LicenseWriter().write( coordinates, "pom-header", header );

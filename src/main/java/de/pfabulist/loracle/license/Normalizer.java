@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 import static de.pfabulist.frex.Frex.fullWord;
 import static de.pfabulist.frex.Frex.or;
 import static de.pfabulist.frex.Frex.txt;
+import static de.pfabulist.loracle.license.Normalizer.UrlVeriables.relevant;
+import static de.pfabulist.loracle.license.Normalizer.WordVersionVariables.word;
 import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
@@ -54,19 +56,27 @@ public class Normalizer {
     static private final Pattern vVersion = txt( "v" ).then( or( Frex.number(), txt( '.' ), txt( ',' ) ).oneOrMore() ).buildCaseInsensitivePattern();
     static private final Pattern version = or( Frex.number(), txt( '.' ) ).oneOrMore().buildCaseInsensitivePattern();
 
-    static private final Pattern wordVversion = Frex.alpha().oneOrMore().var( "word" ).
+    enum WordVersionVariables {
+        word,
+        version
+    }
+
+    static private final Pattern wordVversion = Frex.alpha().oneOrMore().var( word ).
             then( Frex.txt( "v" ) ).
-            then( or( Frex.number(), txt( '.' ) ).oneOrMore().var( "version" ) ).
+            then( or( Frex.number(), txt( '.' ) ).oneOrMore().var( WordVersionVariables.version ) ).
             buildCaseInsensitivePattern();
 
-    static private final Pattern wordVersion = Frex.alpha().oneOrMore().var( "word" ).
-            then( or( Frex.number(), txt( '.' ) ).oneOrMore().var( "version" ) ).
+    static private final Pattern wordVersion = Frex.alpha().oneOrMore().var( word ).
+            then( or( Frex.number(), txt( '.' ) ).oneOrMore().var( WordVersionVariables.version ) ).
             buildCaseInsensitivePattern();
 
+    enum UrlVeriables {
+        relevant
+    }
 
     private static Pattern urlPattern = Frex.or( Frex.txt( "http://" ), Frex.txt( "https://" ) ).zeroOrOnce().
             then( Frex.txt( "www." ).zeroOrOnce() ).
-            then( Frex.any().oneOrMore().lazy().var( "relevant" ) ).
+            then( Frex.any().oneOrMore().lazy().var( relevant ) ).
             then( Frex.txt( "." ).then( Frex.alpha().oneOrMore() ).zeroOrOnce() ).
             //then( Frex.txt( '/' )).zeroOrOnce().
                     buildCaseInsensitivePattern();

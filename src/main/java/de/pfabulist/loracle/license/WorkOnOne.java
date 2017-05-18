@@ -1,7 +1,7 @@
 package de.pfabulist.loracle.license;
 
-import de.pfabulist.roast.functiontypes.BiFunctionn;
-import de.pfabulist.roast.functiontypes.Functionn;
+import de.pfabulist.roast.functiontypes.BiFunction_;
+import de.pfabulist.roast.functiontypes.Function_;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -23,8 +23,8 @@ public class WorkOnOne<E> {
         this.stream = stream;
     }
 
-    public <R> List<E> work( Functionn<E, Optional<R>> test,
-                             BiFunctionn<R, E, List<E>> yes ) {
+    public <R> List<E> work( Function_<E, Optional<R>> test,
+                             BiFunction_<R, E, List<E>> yes ) {
 
         return stream.
                 map( e -> {
@@ -32,8 +32,8 @@ public class WorkOnOne<E> {
                         return Collections.singletonList( e );
                     }
 
-                    return test.apply( e ).
-                            map( hmm -> setState( yes.apply( hmm, e ) ) ).
+                    return test.apply_( e ).
+                            map( hmm -> setState( yes.apply_( hmm, e ) ) ).
                             orElse( Collections.singletonList( e ) );
 
                 } ).

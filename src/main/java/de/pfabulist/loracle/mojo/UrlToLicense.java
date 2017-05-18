@@ -1,5 +1,6 @@
 package de.pfabulist.loracle.mojo;
 
+import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseFromText;
 import de.pfabulist.loracle.license.MappedLicense;

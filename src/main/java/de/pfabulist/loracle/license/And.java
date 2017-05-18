@@ -1,13 +1,9 @@
 package de.pfabulist.loracle.license;
 
 import de.pfabulist.kleinod.collection.Ref;
-import de.pfabulist.loracle.mojo.Findings;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
-
-import static de.pfabulist.roast.NonnullCheck._nn;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab

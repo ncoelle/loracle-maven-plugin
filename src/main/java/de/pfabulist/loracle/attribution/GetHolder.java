@@ -6,9 +6,9 @@ import de.pfabulist.loracle.license.ContentToLicense;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.mojo.Findings;
+import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.mojo.MavenLicenseOracle;
-import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Files_;
 import org.apache.maven.model.License;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static de.pfabulist.roast.NonnullCheck._nn;
-import static de.pfabulist.roast.NonnullCheck._orElseGet;
+import static de.pfabulist.roast.NonnullCheck.n_or;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -41,11 +41,16 @@ public class GetHolder {
 //                    then( Frex.anyBut( Frex.txt( '\n' ) ).oneOrMore().var( "holder" ) ).
 //                    then( Frex.or( Frex.any(), Frex.txt( '\n' ) ).zeroOrMore() ).buildCaseInsensitivePattern();
 
+    enum CopyrightVariables {
+        holder,
+        year
+    }
+
     static Pattern commentsCopyRightPattern =
             Frex.or( Frex.txt( "Copyright " ) ).
-                    then( Frex.or( Frex.number(), Frex.txt( '-' ), Frex.txt( ',' ), Frex.whitespace() ).oneOrMore().var( "year" ) ).
+                    then( Frex.or( Frex.number(), Frex.txt( '-' ), Frex.txt( ',' ), Frex.whitespace() ).oneOrMore().var( CopyrightVariables.year ) ).
                     then( Frex.txt( ' ' ) ).
-                    then( Frex.any().oneOrMore().var( "holder" ) ).buildCaseInsensitivePattern();
+                    then( Frex.any().oneOrMore().var( CopyrightVariables.holder ) ).buildCaseInsensitivePattern();
 
     private final LOracle lOracle;
     private final MavenLicenseOracle mlo;
@@ -63,7 +68,7 @@ public class GetHolder {
 
         Optional<CopyrightHolder> ret =
                 mavenLicenses.stream().
-                        map( ml -> commentsCopyRightPattern.matcher( _orElseGet( ml.getComments(), "" ) ) ).
+                        map( ml -> commentsCopyRightPattern.matcher( n_or( ml.getComments(), "" ) ) ).
                         filter( Matcher::matches ).
                         map( m -> new CopyrightHolder( _nn( m.group( "year" ) ), _nn( m.group( "holder" ) ) ) ).
                         findAny();
@@ -82,14 +87,14 @@ public class GetHolder {
     public void getNotice( Coordinates coo, Coordinates2License.LiCo lico ) {
         Path jar = mlo.getArtifact( coo );
 
-        try( InputStream in = Filess.newInputStream( jar ) ) {
+        try( InputStream in = Files_.newInputStream( jar ) ) {
             String notice = Utils.unzipToString( in, noticePattern );
 
             lico.setNotice( notice );
             new LicenseWriter().write( coo, "notice", notice );
 
         } catch( IOException e ) {
-            log.warn( _orElseGet( e.getMessage(), "pattern problem" ) );
+            log.warn( n_or( e.getMessage(), "pattern problem" ) );
         }
     }
 
@@ -97,7 +102,7 @@ public class GetHolder {
     private Optional<CopyrightHolder> getApacheCopyrightHolder( Coordinates coo ) {
         Path jar = mlo.getArtifact( coo );
 
-        try( InputStream in = Filess.newInputStream( jar ) ) {
+        try( InputStream in = Files_.newInputStream( jar ) ) {
             String notice = Utils.unzipToString( in, noticePattern );
 
             if( notice.isEmpty() ) {
@@ -114,7 +119,7 @@ public class GetHolder {
             return Optional.of( new CopyrightHolder( _nn( ch.group( "year" ) ), _nn( ch.group( "holder" ) ) ) );
 
         } catch( IOException e ) {
-            log.warn( _orElseGet( e.getMessage(), "pattern problem" ) );
+            log.warn( n_or( e.getMessage(), "pattern problem" ) );
         }
 
         return Optional.empty();

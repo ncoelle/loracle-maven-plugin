@@ -3,9 +3,8 @@ package de.pfabulist.loracle.mojo;
 import com.google.gson.Gson;
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.*;
-import de.pfabulist.roast.nio.Filess;
-import de.pfabulist.roast.nio.Pathh;
-import de.pfabulist.roast.nio.Pathss;
+import de.pfabulist.roast.nio.Files_;
+import de.pfabulist.roast.nio.Paths_;
 import de.pfabulist.roast.unchecked.Unchecked;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -15,7 +14,6 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -94,11 +92,11 @@ public class Downloader {
 
         log.debug( "[download?] " + url );
 
-        Pathh path = Pathss.get( "" ).resolve( "target/generated-sources/loracle/url/" + getUrlPath( url ) );
-        if( Filess.exists( path ) ) {
+        Path path = Paths_.get__( "" ).resolve_( "target/generated-sources/loracle/url/" + getUrlPath( url ) );
+        if( Files_.exists( path ) ) {
             return;
         }
-        Filess.createDirectories( path.getParentOrThrow() );
+        Files_.createDirectories( path.getParent() );
 
         Optional<String> res = lOracle.getUrlContent( url );
         if( !res.isPresent() ) {
@@ -111,7 +109,7 @@ public class Downloader {
                 log.debug( "    not found: " + getUrlPath( url ) );
                 return;
             }
-            Filess.copy( is, path );
+            Files_.copy( is, path );
             log.debug( "    found stored in loracle" );
             return;
         } catch( IOException e ) {
@@ -148,7 +146,7 @@ public class Downloader {
     }
 
     public String get( String u ) {
-        Path path = _nn( Paths.get( "" ).resolve( "target/generated-sources/loracle/url/" + getUrlPath( u ) ) );
+        Path path = Paths_.get__( "" ).resolve_( "target/generated-sources/loracle/url/" + getUrlPath( u ) );
         if( !Files.exists( path ) ) {
             return "";
         }
@@ -158,7 +156,7 @@ public class Downloader {
             return "";
         }
 
-        return newString( Filess.readAllBytes( path ) );
+        return newString( Files_.readAllBytes( path ) );
 
     }
 
@@ -191,13 +189,13 @@ public class Downloader {
     }
 
     public void generateLicensesTxt( String prefix, Coordinates coordinates, Coordinates2License.LiCo liCo ) {
-        Path src = _nn( Paths.get( "target/generated-sources/loracle/coordinates/" + coordinates.toFilename() + "/license-0.txt" ).toAbsolutePath() );
+        Path src = Paths_.get__( "target/generated-sources/loracle/coordinates/" + coordinates.toFilename() + "/license-0.txt" ).toAbsolutePath_();
 
-        if( Files.exists( src ) && Filess.size( src ) > 0 ) {
+        if( Files.exists( src ) && Files_.size( src ) > 0 ) {
 
             String fname = coordinates.toFilename() + "-license.txt";
 
-            getEmptyNoticeLicenseTarget( prefix, coordinates.toFilename() + "-license.txt" ).ifPresent( tgt -> Filess.copy( src, tgt ) );
+            getEmptyNoticeLicenseTarget( prefix, coordinates.toFilename() + "-license.txt" ).ifPresent( tgt -> Files_.copy( src, tgt ) );
             liCo.setLicenseFilenames( Collections.singletonList( fname ));
             return;
         }
@@ -207,9 +205,9 @@ public class Downloader {
                 license -> LicenseIDs.flattenToStrings( license ).
                         forEach( lstr -> {
                             String fname = onPredefLicense( lstr,
-                                                            ( filename, is ) -> getEmptyNoticeLicenseTarget( prefix, filename ).ifPresent( tgt -> Filess.copy( is, tgt ) ) ).
+                                                            ( filename, is ) -> getEmptyNoticeLicenseTarget( prefix, filename ).ifPresent( tgt -> Files_.copy( is, tgt ) ) ).
                                     orElseGet( () -> onUrldefLicense( lstr,
-                                                                      ( filename, is ) -> getEmptyNoticeLicenseTarget( prefix, filename ).ifPresent( tgt -> Filess.copy( is, tgt ) ) ).
+                                                                      ( filename, is ) -> getEmptyNoticeLicenseTarget( prefix, filename ).ifPresent( tgt -> Files_.copy( is, tgt ) ) ).
                                             orElse( "" ) );
                             if( fname.isEmpty() ) {
                                 log.warn( "can not find text for " + lstr );
@@ -224,12 +222,12 @@ public class Downloader {
 
     private Optional<Path> getEmptyNoticeLicenseTarget( String prefix, String fname ) {
         final String filename = prefix + "/" + fname;
-        Path tgt = _nn( Paths.get( "target/generated-sources/loracle/licenses/" + filename ).toAbsolutePath() );
+        Path tgt = Paths_.get__( "target/generated-sources/loracle/licenses/" + filename ).toAbsolutePath_();
         if( Files.exists( tgt ) ) {
             return Optional.empty();
         }
 
-        Filess.createDirectories( _nn( tgt.getParent() ) );
+        Files_.createDirectories( tgt.getParent() );
 
         return Optional.of( tgt );
     }

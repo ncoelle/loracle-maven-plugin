@@ -2,16 +2,15 @@ package de.pfabulist.loracle.attribution;
 
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.ContentToLicense;
+import de.pfabulist.loracle.license.FindingsDummy;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseFromText;
 import de.pfabulist.loracle.license.MappedLicense;
-import de.pfabulist.loracle.mojo.Findings;
+import de.pfabulist.loracle.license.Findings;
 import org.apache.maven.plugin.logging.Log;
 import org.jsoup.Jsoup;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 
 import static de.pfabulist.roast.NonnullCheck._nn;
@@ -25,8 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SrcTest {
 
     private LOracle lOracle = JSONStartup.start().spread();
-    private final ContentToLicense ctl = new ContentToLicense( lOracle, new Findings( dummy ) );
-    private Log log = SrcTest.dummy;
+    private final ContentToLicense ctl = new ContentToLicense( lOracle, new FindingsDummy() );
+ //   private Log log = SrcTest.dummy;
 
     @Test
     public void tt() {
@@ -978,7 +977,7 @@ public class SrcTest {
                 " *\n" +
                 " */\n";
 
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( one ).isPresent() ).isTrue();
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( one ).isPresent() ).isTrue();
     }
 
     @Test
@@ -1015,9 +1014,9 @@ public class SrcTest {
                 "\n";
 
 
-        new LicenseFromText( lOracle, log ).firstDiff( in );
+        new LicenseFromText( lOracle, new FindingsDummy() ).firstDiff( in );
 
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
     }
 
     @Test
@@ -1052,9 +1051,9 @@ public class SrcTest {
                 " // which is not \"correct\", but it is useful so I don't generate NaN\n" +
                 " // in my output\n" +
                 " */";
-        new LicenseFromText( lOracle, log ).firstDiff( in );
+        new LicenseFromText( lOracle, new FindingsDummy() ).firstDiff( in );
 
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
     }
 
     @Test
@@ -1064,7 +1063,7 @@ public class SrcTest {
 
 //        System.out.println( new LicenseFromText( lOracle ).firstDiff( lots ));
 
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( lots ).isPresent() ).isTrue();
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( lots ).isPresent() ).isTrue();
 
     }
 
@@ -1355,8 +1354,8 @@ public class SrcTest {
                 "   See the License for the specific language governing permissions and\n" +
                 "   limitations under the License.\n";
 
-        new LicenseFromText( lOracle, log ).firstDiff( in );
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "apache-2" ), "tt" ) );
+        new LicenseFromText( lOracle, new FindingsDummy() ).firstDiff( in );
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "apache-2" ), "tt" ) );
     }
 
     private static String lots = "\n" +
@@ -2049,7 +2048,7 @@ public class SrcTest {
 //        System.out.println( in.indexOf( "Redist" ));
 //
 //        new LicenseFromText( lOracle ).firstDiff( in );
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
 
     }
 
@@ -2057,9 +2056,9 @@ public class SrcTest {
     public void scalap() {
         String in = "Documentation Download Community Contribute Source Code Scala on Twitter Scala License Copyright (c) 2002-  EPFL Copyright (c) 2011-  Lightbend, Inc. (formerly Typesafe, Inc.) All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. Neither the name of the EPFL nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. Documentation Getting Started API Overviews/Guides Tutorials Language Specification Download Stable Release Development Release Community Community Mailing Lists Chat Rooms & More Libraries and Tools Contribute How to Help Report an Issue Scala Blog Archive Code of Conduct License Copyright © 2002- École Polytechnique Fédérale de Lausanne (EPFL) Lausanne, Switzerland";
 
-        new LicenseFromText( lOracle, log ).firstDiff( in );
+        new LicenseFromText( lOracle, new FindingsDummy() ).firstDiff( in );
 
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
     }
 
     @Test
@@ -2096,9 +2095,9 @@ public class SrcTest {
                 "SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.";
 
 
-        new LicenseFromText( lOracle, log ).firstDiff( in );
+        new LicenseFromText( lOracle, new FindingsDummy() ).firstDiff( in );
 
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
     }
 
     @Test
@@ -2170,9 +2169,9 @@ public class SrcTest {
                 "This software consists of voluntary contributions made by many individuals on behalf of the\n" +
                 "Hypersonic SQL Group.\n";
 
-        new LicenseFromText( lOracle, log ).firstDiff( in );
+        new LicenseFromText( lOracle, new FindingsDummy() ).firstDiff( in );
 
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
     }
 
     @Test
@@ -2214,9 +2213,9 @@ public class SrcTest {
                 " * @author Mauro Talevi\n" +
                 " */";
 
-        new LicenseFromText( lOracle, log ).firstDiff( in );
+        new LicenseFromText( lOracle, new FindingsDummy() ).firstDiff( in );
 
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
     }
 
     @Test
@@ -2250,9 +2249,9 @@ public class SrcTest {
                 "LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\n" +
                 "NEGLIGENCE OR OTHERWISE) ARISING IN  ANY WAY OUT OF THE USE OF THIS SOFTWARE,\n" +
                 "EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.";
-        new LicenseFromText( lOracle, log ).firstDiff( in );
+        new LicenseFromText( lOracle, new FindingsDummy() ).firstDiff( in );
 
-        assertThat( new LicenseFromText( lOracle, log ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
+        assertThat( new LicenseFromText( lOracle, new FindingsDummy() ).getLicense( in ) ).isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "tt" ) );
     }
 
 //    @Test

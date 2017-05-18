@@ -1,5 +1,6 @@
 package de.pfabulist.loracle.mojo;
 
+import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.roast.unchecked.Unchecked;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
@@ -14,12 +15,12 @@ import static de.pfabulist.roast.NonnullCheck._nn;
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-public class Findings implements Log {
+public class FindingsMaven implements Log, Findings {
 
     private final Log mavenLog;
     private final List<String> fails = new ArrayList<>();
 
-    public Findings( Log mavenLog ) {
+    public FindingsMaven( Log mavenLog ) {
         this.mavenLog = mavenLog;
     }
 

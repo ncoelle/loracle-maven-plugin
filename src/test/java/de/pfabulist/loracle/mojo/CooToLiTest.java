@@ -5,6 +5,8 @@ import de.pfabulist.loracle.attribution.SrcTest;
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
+import de.pfabulist.loracle.license.Findings;
+import de.pfabulist.loracle.license.FindingsDummy;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.roast.unchecked.Unchecked;
 import org.junit.Test;
@@ -25,8 +27,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class CooToLiTest {
 
     private final LOracle lOracle = JSONStartup.start().spread();
-    private final LicenseIntelligence lIntelligence = new LicenseIntelligence( lOracle, new Findings( SrcTest.dummy ));
-    private final Downloader downloader = new Downloader( new Findings( SrcTest.dummy ), lOracle );
+    private final LicenseIntelligence lIntelligence = new LicenseIntelligence( lOracle, new FindingsDummy() );
+    private final Downloader downloader = new Downloader( new FindingsDummy(), lOracle );
 
     @Test
     public void sunTools() {

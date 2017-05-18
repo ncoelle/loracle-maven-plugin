@@ -3,11 +3,11 @@ package de.pfabulist.loracle.attribution;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.roast.nio.Files_;
+import de.pfabulist.roast.nio.Paths_;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static de.pfabulist.kleinod.text.Strings.getBytes;
 import static de.pfabulist.roast.NonnullCheck._nn;
@@ -21,13 +21,13 @@ public class LicenseWriter {
 
     public void write( Coordinates coo, String name, String txt ) {
         if ( !txt.isEmpty()) {
-            Filess.write( getPath( coo, name ), getBytes( txt ) );
+            Files_.write( getPath( coo, name ), getBytes( txt ) );
         }
     }
 
     public static Path getPath( Coordinates coo, String name ) {
-        Path dir = _nn( Paths.get( "target/generated-sources/loracle/coordinates/" + coo.toFilename() ).toAbsolutePath() );
-        Filess.createDirectories( dir );
+        Path dir = Paths_.get__( "target/generated-sources/loracle/coordinates/" + coo.toFilename() ).toAbsolutePath_();
+        Files_.createDirectories( dir );
         int idx = 0;
         while ( true ) {
             Path ret = _nn(dir.resolve( name + "-"+ idx + ".txt" ));
@@ -59,10 +59,10 @@ public class LicenseWriter {
 
         if ( !lico.getLicenseTxt().isEmpty()) {
             String licenseName = coo.toFilename() + "-license.txt";
-            Path path = _nn( Paths.get( "target/generated-sources/loracle/licenses/" + licenseName ).toAbsolutePath() );
-            Filess.createDirectories( _nn(path.getParent() ));
+            Path path = Paths_.get__( "target/generated-sources/loracle/licenses/" + licenseName ).toAbsolutePath_();
+            Files_.createDirectories( _nn(path.getParent() ));
 
-            Filess.write( path, getBytes( lico.getLicenseTxt() ) );
+            Files_.write( path, getBytes( lico.getLicenseTxt() ) );
             return licenseName;
         }
 

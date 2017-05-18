@@ -5,7 +5,7 @@ import org.apache.maven.plugin.MojoFailureException;
 
 import javax.annotation.Nullable;
 
-import static de.pfabulist.roast.NonnullCheck._orElseThrow;
+import static de.pfabulist.roast.NonnullCheck.n_;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -18,7 +18,7 @@ public class LicenseDeclaration {
     private @Nullable String license;
 
     public Coordinates getCoordinates() {
-        return Coordinates.valueOf( _orElseThrow( coordinates,
+        return Coordinates.valueOf( n_( coordinates,
                 () -> new MojoFailureException( "no coordinates set in configuration of LicenseDeclarations in LOracle Plugin" ) ) );
     }
 
@@ -27,7 +27,7 @@ public class LicenseDeclaration {
     }
 
     public String getLicense() {
-        return _orElseThrow( license, () -> new IllegalArgumentException( "no license set in LicenseDeclaration") );
+        return n_( license, () -> new IllegalArgumentException( "no license set in LicenseDeclaration") );
     }
 
     public void setLicense( String license ) {

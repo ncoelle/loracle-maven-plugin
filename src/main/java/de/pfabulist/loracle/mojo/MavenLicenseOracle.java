@@ -4,13 +4,13 @@ import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.license.Coordinates;
-import de.pfabulist.roast.functiontypes.Functionn;
-import de.pfabulist.roast.nio.Filess;
+import de.pfabulist.loracle.license.Findings;
+import de.pfabulist.roast.functiontypes.Function_;
+import de.pfabulist.roast.nio.Files_;
 import org.apache.maven.model.License;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.apache.maven.plugin.logging.Log;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 import javax.annotation.Nullable;
@@ -27,7 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static de.pfabulist.roast.NonnullCheck._nn;
-import static de.pfabulist.roast.NonnullCheck._orElseGet;
+import static de.pfabulist.roast.NonnullCheck.n_or;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -36,10 +36,10 @@ import static de.pfabulist.roast.NonnullCheck._orElseGet;
 
 public class MavenLicenseOracle {
 
-    private final Log log;
+    private final Findings log;
     private final Path localRepo;
 
-    public MavenLicenseOracle( Log log, Path localRepo ) {
+    public MavenLicenseOracle( Findings log, Path localRepo ) {
         this.log = log;
         this.localRepo = localRepo;
     }
@@ -52,7 +52,7 @@ public class MavenLicenseOracle {
 
             if( !licenses.isEmpty() ) {
                 log.debug( "      licenses found " );
-                licenses.forEach( l -> log.debug( "         " + _orElseGet( l.getName(), "-" ) + " : " + _orElseGet( l.getUrl(), "-" ) ) );
+                licenses.forEach( l -> log.debug( "         " + n_or( l.getName(), "-" ) + " : " + n_or( l.getUrl(), "-" ) ) );
                 return licenses;
             }
 
@@ -83,6 +83,10 @@ public class MavenLicenseOracle {
         return ret;
     }
 
+    enum ArtifactNameVariables {
+        suffix
+    }
+
     public Path getArtifact( Coordinates coords ) {
 //        Path path = localRepo;
 //        path = _nn( path.resolve( coords.getGroupId().replace( '.', '/' ) ) );
@@ -92,7 +96,7 @@ public class MavenLicenseOracle {
 
         Pattern pattern =
                 Frex.txt( _nn( dir.resolve( coords.getArtifactId() + "-" + coords.getVersion() ) ).toString() ).
-                        then( Frex.or( Frex.alphaNum(), Frex.txt( '-' ) ).zeroOrMore().group( "suffix" ) ).
+                        then( Frex.or( Frex.alphaNum(), Frex.txt( '-' ) ).zeroOrMore().var( ArtifactNameVariables.suffix ) ).
                         then( Frex.txt( ".jar" ) ).buildCaseInsensitivePattern();
 
         Path classic = _nn( dir.resolve( coords.getArtifactId() + "-" + coords.getVersion() + ".jar" ) );
@@ -100,7 +104,7 @@ public class MavenLicenseOracle {
             return classic;
         }
 
-        return Filess.list( dir ).
+        return Files_.list( dir ).
                 filter( p -> {
                     Matcher matcher = pattern.matcher( p.toString() );
                     if( !matcher.find() ) {
@@ -179,7 +183,7 @@ public class MavenLicenseOracle {
 //        return Optional.empty();
     }
 
-    <T> Optional<T> fromPom( Path pom, Functionn<Model, Optional<T>> func ) {
+    <T> Optional<T> fromPom( Path pom, Function_<Model, Optional<T>> func ) {
         if( !Files.exists( pom ) ) {
             log.warn( "no such pom file: " + pom );
             return Optional.empty();
@@ -198,7 +202,7 @@ public class MavenLicenseOracle {
             Reader pathReader = _nn( _nn( cm[ 0 ] ).getReader() );
             Model pomModel = _nn( reader.read( pathReader ) );
 
-            return _nn( func.apply( pomModel ) );
+            return _nn( func.apply_( pomModel ) );
 
         } catch( IOException | XmlPullParserException e ) {
             log.warn( "error extracting license from pom " + pom.toString() + ": " + e );

@@ -1,11 +1,12 @@
 package de.pfabulist.loracle.urls;
 
 import de.pfabulist.loracle.buildup.JSONStartup;
+import de.pfabulist.loracle.license.FindingsDummy;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseFromText;
 import de.pfabulist.loracle.license.MappedLicense;
 import de.pfabulist.loracle.mojo.Downloader;
-import de.pfabulist.loracle.mojo.Findings;
+import de.pfabulist.loracle.license.Findings;
 import org.apache.maven.plugin.logging.Log;
 import org.junit.Test;
 
@@ -113,6 +114,6 @@ public class UrlTest {
         }
     };
 
-    private static Findings log = new Findings( mlog );
+    private static Findings log = new FindingsDummy();
 
 }

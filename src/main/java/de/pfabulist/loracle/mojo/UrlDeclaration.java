@@ -2,7 +2,7 @@ package de.pfabulist.loracle.mojo;
 
 import javax.annotation.Nullable;
 
-import static de.pfabulist.roast.NonnullCheck._orElseThrow;
+import static de.pfabulist.roast.NonnullCheck.n_;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -16,7 +16,7 @@ public class UrlDeclaration {
     @Nullable String checkedAt;
 
     public String getUrl() {
-        return _orElseThrow( url, () -> new IllegalArgumentException( "no url in url declaration" ));
+        return n_( url, () -> new IllegalArgumentException( "no url in url declaration" ));
     }
 
     public void setUrl( @Nullable String url ) {
@@ -24,7 +24,7 @@ public class UrlDeclaration {
     }
 
     public String getLicense() {
-        return _orElseThrow( license, () -> new IllegalArgumentException( "no license in url declaration" ));
+        return n_( license, () -> new IllegalArgumentException( "no license in url declaration" ));
     }
 
     public void setLicense( @Nullable String license ) {
@@ -32,7 +32,7 @@ public class UrlDeclaration {
     }
 
     public String getCheckedAt() {
-        return _orElseThrow( checkedAt, () -> new IllegalArgumentException( "no date in url declaration" ));
+        return n_( checkedAt, () -> new IllegalArgumentException( "no date in url declaration" ));
     }
 
     public void setCheckedAt( @Nullable String checkedAt ) {

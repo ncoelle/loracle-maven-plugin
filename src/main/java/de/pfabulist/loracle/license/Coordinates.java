@@ -23,8 +23,12 @@ import static de.pfabulist.roast.NonnullCheck._nn;
 
 public class Coordinates {
 
+    enum SnapshotVariables {
+        base
+    }
+
     public static final Pattern snapshot =
-            Frex.any().oneOrMore().lazy().var( "base" ).
+            Frex.any().oneOrMore().lazy().var( SnapshotVariables.base ).
                     then( Frex.digit().times( 8 ) ).
                     then( Frex.txt( '.' ) ).
                     then( Frex.digit().times( 6 ) ).
@@ -135,7 +139,7 @@ public class Coordinates {
         Pattern pat =
                 txt.subList( 1, txt.size() ).stream().
                         map( Frex::txt ).
-                        collect( Collectors.reducing( Frex.txt( _nn( txt.get( 0 ) ) ), ( f, g ) -> f.then( Frex.anyBut( Frex.txt( ':' ) ).zeroOrMore() ).then( g ) ) ).
+                        reduce( Frex.txt( _nn( txt.get( 0 ) ) ), ( f, g ) -> f.then( Frex.anyBut( Frex.txt( ':' ) ).zeroOrMore() ).then( g ) ).
                         buildCaseInsensitivePattern();
 
         return pat.matcher( other.coo ).matches();

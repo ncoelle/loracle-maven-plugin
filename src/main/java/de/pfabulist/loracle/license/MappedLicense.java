@@ -1,7 +1,7 @@
 package de.pfabulist.loracle.license;
 
-import de.pfabulist.roast.functiontypes.Consumerr;
-import de.pfabulist.roast.functiontypes.Supplierr;
+import de.pfabulist.roast.functiontypes.Consumer_;
+import de.pfabulist.roast.functiontypes.Supplier_;
 import de.pfabulist.roast.unchecked.Unchecked;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -67,17 +67,17 @@ public class MappedLicense {
         return license != null;
     }
 
-    public LicenseID orElseThrow( Supplierr<Exception> ex ) {
+    public LicenseID orElseThrow( Supplier_<Exception> ex ) {
         if( !isPresent() ) {
-            throw Unchecked.u( ex.get() );
+            throw Unchecked.u( ex.get_() );
         }
 
         return _nn( license );
     }
 
-    public void ifPresent( Consumerr<LicenseID> con ) {
+    public void ifPresent( Consumer_<LicenseID> con ) {
         if( isPresent() ) {
-            con.accept( _nn( license ));
+            con.accept_( _nn( license ));
         }
     }
 

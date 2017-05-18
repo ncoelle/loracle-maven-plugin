@@ -1,10 +1,13 @@
 package de.pfabulist.loracle.mojo;
 
+import de.pfabulist.loracle.license.Findings;
+import de.pfabulist.roast.nio.Paths_;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -14,11 +17,11 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.shared.dependency.graph.DependencyGraphBuilder;
 
 import javax.annotation.Nullable;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
 import static de.pfabulist.roast.NonnullCheck._nn;
+import static de.pfabulist.roast.NonnullCheck.n_;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -96,8 +99,8 @@ public class LOracleMojo extends AbstractMojo {
         try {
 
             LicenseCheckMojo mojo =
-                    new LicenseCheckMojo( getLog(),
-                                          Paths.get( _nn( getSession().getLocalRepository() ).getBasedir() ),
+                    new LicenseCheckMojo( new FindingsMaven( getLog()),
+                                          Paths_.get_( n_( getSession().getLocalRepository() ).getBasedir() ),
                                           getProject(),
                                           getDependencyGraphBuilder());
 
@@ -130,17 +133,19 @@ public class LOracleMojo extends AbstractMojo {
         }
 
         if( stopOnError ) {
-            getLog().throwOnError();
+            if ( getLog() instanceof Findings ) {
+                ((Findings)getLog()).throwOnError();
+            }
         }
 
     }
 
 
     @Override
-    public Findings getLog() {
+    public Log getLog() {
         if( failures == null ) {
-            failures = new Findings( super.getLog() );
+            failures = new FindingsMaven( super.getLog() );
         }
-        return failures;
+        return (Log)failures;
     }
 }

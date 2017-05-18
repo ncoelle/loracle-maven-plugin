@@ -24,8 +24,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static de.pfabulist.roast.NonnullCheck._nn;
-import static de.pfabulist.roast.NonnullCheck._orElseGet;
-import static de.pfabulist.roast.NonnullCheck._orElseThrow;
+import static de.pfabulist.roast.NonnullCheck.n_;
+import static de.pfabulist.roast.NonnullCheck.n_or;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -226,8 +226,8 @@ public class LOracle {
 
     public More getMore( LicenseID licenseID ) {
 
-        return _orElseGet( singles.get( licenseID.getId() ),
-                           () -> _orElseThrow( composites.get( licenseID.getId() ),
+        return n_or( singles.get( licenseID.getId() ),
+                           () -> n_( composites.get( licenseID.getId() ),
                                                () -> new IllegalArgumentException( "no such license: " + licenseID ) ) );
     }
 
@@ -235,7 +235,11 @@ public class LOracle {
         return getMore( l ).attributes;
     }
 
-    private static Pattern withVersion = Frex.any().oneOrMore().lazy().var( "base" ).
+    enum BaseVariables {
+        base
+    }
+
+    private static Pattern withVersion = Frex.any().oneOrMore().lazy().var( BaseVariables.base ).
             then( Frex.txt( ' ' ) ).then( Frex.or( Frex.number(), Frex.txt( '.' ) ).oneOrMore() ).buildCaseInsensitivePattern();
 
     public void addLongName( LicenseID license, String longName ) {
@@ -296,7 +300,7 @@ public class LOracle {
         return Optional.ofNullable( longNameMapper.get( normalizer.reduce( name ) ) );
     }
 
-    private static final Pattern orLater = Frex.any().oneOrMore().var( "base" ).then( Frex.txt( " or later" ) ).buildCaseInsensitivePattern();
+    private static final Pattern orLater = Frex.any().oneOrMore().var( BaseVariables.base ).then( Frex.txt( " or later" ) ).buildCaseInsensitivePattern();
 
     public MappedLicense getByName( String name ) {
 
@@ -372,10 +376,14 @@ public class LOracle {
         licenseExceptions.put( lower, spdx );
     }
 
+    enum LongUrlVariables {
+        fname
+    }
+
     private static final Pattern urlWithLongname =
             Frex.any().oneOrMore().lazy().
                     then( Frex.txt( '/' ) ).
-                    then( Frex.anyBut( Frex.txt( '/' ) ).oneOrMore().var( "fname" ) ).buildCaseInsensitivePattern();
+                    then( Frex.anyBut( Frex.txt( '/' ) ).oneOrMore().var( LongUrlVariables.fname ) ).buildCaseInsensitivePattern();
 
     public MappedLicense getByUrl( String url ) {
 
@@ -451,7 +459,7 @@ public class LOracle {
 
     public Set<LicenseID> guessByUrl( String url ) {
 
-        return normalizer.normalizeUrl( url ).map( u -> _orElseGet( couldbeUrls.get( u ), new HashSet<LicenseID>() ) ).orElseGet( HashSet::new );
+        return normalizer.normalizeUrl( url ).map( u -> n_or( couldbeUrls.get( u ), new HashSet<LicenseID>() ) ).orElseGet( HashSet::new );
     }
 
     public void addCouldBeUrl( LicenseID license, String url ) {
