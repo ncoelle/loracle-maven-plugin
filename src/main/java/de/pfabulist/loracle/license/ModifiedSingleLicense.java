@@ -9,7 +9,7 @@ import java.util.Optional;
  * Copyright (c) 2006 - 2016, Stephan Pfab
  * SPDX-License-Identifier: BSD-2-Clause
  *
- * a single license can be modified by adding (an or several?) exception(s)
+ * a single license can be modified by adding (one or several?) exception(s)
  * or a plus for "or later"
  */
 public class ModifiedSingleLicense implements LicenseID {

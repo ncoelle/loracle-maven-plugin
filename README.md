@@ -10,7 +10,7 @@ It checks checks that
  * every dependency has a declared known license
  * license compatibility is valid (some)
 
-It generate a directory with NOTICE.txt and files all references licenses
+It generates a directory with NOTICE.txt and files all references licenses
 
 Note
 
@@ -47,7 +47,7 @@ Note
 
 For non spdx licenses it is recommended to use this second form. Loracle will then interpret this ulrs content to
 compute the license. Note the urls content must be known to loracle. Some are set already. If loracle complains
-use the extension machanism to add url contents.
+use the extension mechanism to add url contents.
 
         <licenseDeclarations>
             <licenseDeclaration>
@@ -162,7 +162,7 @@ This makes the results repeatable, independent off any changes on the web. Any c
 
 Loracle generates a Notice file: NOTICE.txt and a list of relevant license files.
 These files are in generated-source/loracle/licenses/<arifact-name>.
-So this works for multimodule builds.
+So this works for multi module builds.
 
 ## older notes
 
@@ -408,7 +408,17 @@ So you found a license at http://i.am.a.license/i/promise.really and looking at 
 ### Mapping by License Text
  
  Hard to believe but the cases I am looking at have almost never any license test. (poms and java artifacts)
- So there is no answer here (yet).
+
+  There are not many places where full license texts remain in jars and source-jars. 
+  
+The best is in META-INF/LICENSE.
+
+The other is via url. 
+
+Mapping license text to license ids is hard because simple wording differences, as e.g. more names, is very hard
+ to separate from things like 'except' or 'but'.
+ 
+ Note: the LICENSE file in the source directory is not in any maven jars.
   
 ### Mapping by Artifact ID/ Coordinates
   
@@ -430,7 +440,9 @@ Now with many different ways to identify a license it just might be possible tha
 ### Summery
      
 As long a the world does not move en mass to SPDX license identifiers license identification stays a game.
-     Good for me. Because this is a side project and fiddling with heuristics is fun.
+     Good for me. 
+     
+Because this is a side project and fiddling with heuristics is fun.
       If you want an easy check that does most of the simple work: use the plugin and look at the warning once in a while.
       If it stops the build. Check the artifact.
      If you need law advice please consult a lawyer in your relevant country. 

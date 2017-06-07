@@ -1,14 +1,13 @@
 package de.pfabulist.loracle.mojo;
 
 import com.google.gson.Gson;
-import de.pfabulist.loracle.attribution.SrcTest;
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
-import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.license.FindingsDummy;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.roast.unchecked.Unchecked;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -66,19 +65,21 @@ public class CooToLiTest {
     }
 
 
-    @Test
-    public void asm() {
-        Coordinates coo = Coordinates.valueOf( "org.ow2.asm:asm:4.1" );
-        Coordinates2License.LiCo lico = getLico( coo );
-
-        downloader.setNoInternet();
-        downloader.get( coo, lico );
-
-        lIntelligence.compute( coo, lico );
-
-        assertThat( lico.getLicense() ).
-                isEqualTo( Optional.of( "bsd-3-clause" ));
-    }
+    // todo move to extra package
+//    @Test
+//    public void asm() {
+//        Coordinates coo = Coordinates.valueOf( "org.ow2.asm:asm:4.1" );
+//        Coordinates2License.LiCo lico = getLico( coo );
+//
+//        downloader.setNoInternet();
+//        downloader.get( coo, lico );
+//
+//
+//        lIntelligence.compute( coo, lico );
+//
+//        assertThat( lico.getLicense() ).
+//                isEqualTo( Optional.of( "bsd-3-clause" ));
+//    }
 
 
 

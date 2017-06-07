@@ -17,6 +17,7 @@ public class SingleLicense implements LicenseID {
         this.id = id;
     }
 
+    @Override
     public String getId() {
         return id;
     }

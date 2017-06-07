@@ -3,11 +3,10 @@ package de.pfabulist.loracle.license;
 import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.spi.CustomService;
+import de.pfabulist.loracle.spi.LicenseTextToLicenseIdService;
+import de.pfabulist.loracle.text.Normalizer;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -124,7 +123,7 @@ public class LOracle {
                 } catch( Exception e ) {
                     Log.warn( "custom license is known (ignored) " + l.getId() );
                 }
-            } );
+            } );               
             c.getCoordinates().forEach( co -> {
                 try {
                     Coordinates coo = Coordinates.valueOf( co.getCoordinates() );
@@ -143,6 +142,12 @@ public class LOracle {
             } );
             c.getUrls().forEach( u -> addUrlContent( u.getUrl(), u.getResource() ) );
         } );
+
+
+
+        LicenseTextToLicenseIdService.getInstance().getAll().forEach(
+                        t -> LicenseFromText.licenseTextsToLicenses.addAll( t.getByFragments() ));
+
 
         return this;
     }

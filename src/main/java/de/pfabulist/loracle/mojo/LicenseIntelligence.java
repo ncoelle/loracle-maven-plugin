@@ -44,6 +44,8 @@ public class LicenseIntelligence {
 
         MappedLicense sum = MappedLicense.decide( byCoo, byPom, byLicenseFile, byPomHeader, bySrcHeader, byNotice /*, t5 */ );
 
+        //liCo.print();
+
         if( sum.isPresent() ) {
             liCo.setLicense( sum );
             //log.debug( "coordinates + pom: " + coordinates + " -> " +sum.toString()  );
@@ -70,6 +72,7 @@ public class LicenseIntelligence {
 
         log.debug( "done found?: " + sum.toString() );
 
+        liCo.print();
     }
 
     private MappedLicense computeByNotice( Coordinates2License.LiCo liCo ) {

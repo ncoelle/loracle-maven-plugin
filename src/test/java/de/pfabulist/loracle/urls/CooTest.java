@@ -31,30 +31,31 @@ public class CooTest {
     private final LicenseIntelligence lIntelligence = new LicenseIntelligence( lOracle, new FindingsDummy());
     private final Downloader downloader = new Downloader( new FindingsDummy(), lOracle );
 
+    // todo extra package
+//    @Test
+//    public void relax() {
+//        Coordinates coo = Coordinates.valueOf( "relaxngDatatype:relaxngDatatype:20020414" );
+//        Coordinates2License.LiCo lico = getLico( coo );
+//        assertThat( lico.getLicense().isPresent()).isFalse();
+//        //downloader.get( coo, lico );
+//
+//        lIntelligence.compute( coo, lico );
+//
+//        assertThat( lico.getLicense() ).isPresent();
+//    }
 
-    @Test
-    public void relax() {
-        Coordinates coo = Coordinates.valueOf( "relaxngDatatype:relaxngDatatype:20020414" );
-        Coordinates2License.LiCo lico = getLico( coo );
-        assertThat( lico.getLicense().isPresent()).isFalse();
-        //downloader.get( coo, lico );
-
-        lIntelligence.compute( coo, lico );
-
-        assertThat( lico.getLicense() ).isPresent();
-    }
-
-    @Test
-    public void jdepend() {
-        Coordinates coo = Coordinates.valueOf( "jdepend:jdepend:2.4" );
-        Coordinates2License.LiCo lico = getNix();
-        assertThat( lico.getLicense().isPresent()).isFalse();
-        //downloader.get( coo, lico );
-
-        lIntelligence.compute( coo, lico );
-
-        assertThat( lico.getLicense() ).isPresent();
-    }
+    // todo extra package
+//    @Test
+//    public void jdepend() {
+//        Coordinates coo = Coordinates.valueOf( "jdepend:jdepend:2.4" );
+//        Coordinates2License.LiCo lico = getNix();
+//        assertThat( lico.getLicense().isPresent()).isFalse();
+//        //downloader.get( coo, lico );
+//
+//        lIntelligence.compute( coo, lico );
+//
+//        assertThat( lico.getLicense() ).isPresent();
+//    }
 
     @Test
     public void jamon() {
@@ -69,17 +70,18 @@ public class CooTest {
     }
 
 
-    @Test
-    public void hibernatejpa() {
-        Coordinates coo = Coordinates.valueOf( "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" );
-        Coordinates2License.LiCo lico = getNix();
-        assertThat( lico.getLicense().isPresent()).isFalse();
-//        downloader.getExtension( coo, lico );
-
-        lIntelligence.compute( coo, lico );
-
-        assertThat( lico.getLicense() ).isPresent();
-    }
+    // todo extra package
+//    @Test
+//    public void hibernatejpa() {
+//        Coordinates coo = Coordinates.valueOf( "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" );
+//        Coordinates2License.LiCo lico = getNix();
+//        assertThat( lico.getLicense().isPresent()).isFalse();
+////        downloader.getExtension( coo, lico );
+//
+//        lIntelligence.compute( coo, lico );
+//
+//        assertThat( lico.getLicense() ).isPresent();
+//    }
 
 //    @Test
 //    public void relaxViaUrl() {

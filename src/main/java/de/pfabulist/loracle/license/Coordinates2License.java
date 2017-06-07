@@ -256,6 +256,12 @@ public class Coordinates2License {
         public List<String> getLicenseFilenames() {
             return licenseFilenames;
         }
+
+        public void print() {
+            System.out.println( "lico" );
+            System.out.println( "   licenseTxt " + licenseTxt );
+            System.out.println( "   licenseTxtLicense " + licenseTxtLicense  );
+        }
     }
 
     private Map<Coordinates, LiCo> list = new HashMap<>();
@@ -434,7 +440,7 @@ public class Coordinates2License {
 
             LiCo selfLico = _nn( get( _nn( self.get() ) ).get() );
             sb.append( "This is " ).append( self.map( Object::toString ).orElse( "?" ) ).append( "\n" );
-            sb.append( "it is licensed under:  " ).append( selfLico.getLicense().get() ).append( "\n" );
+            sb.append( "it is licensed under:  " ).append( selfLico.getLicense().orElse( "no license") ).append( "\n" );
             selfLico.getLicenseFilenames().forEach( fn -> sb.append( "see license file:      " ).append( fn ).append( "\n" ) );
             sb.append( "copyright holder:      " ).append( selfLico.getCopyrightHolder().map( Object::toString ).orElse( "" ) ).append( "\n\n" );
             sb.append( "It includes the following software:\n\n" );

@@ -21,98 +21,39 @@ public class UrlTest {
 
     @Test
     public void aduna() {
-        LOracle lOracle = JSONStartup.start().spread();
+        String txt = "Copyright Aduna (http://www.aduna-software.com/) 2001-2013\n" +
+                "All rights reserved.\n" +
+                "\n" +
+                "Redistribution and use in source and binary forms, with or without modification,\n" +
+                "are permitted provided that the following conditions are met:\n" +
+                "\n" +
+                "    * Redistributions of source code must retain the above copyright notice,\n" +
+                "      this list of conditions and the following disclaimer.\n" +
+                "    * Redistributions in binary form must reproduce the above copyright notice,\n" +
+                "      this list of conditions and the following disclaimer in the documentation\n" +
+                "      and/or other materials provided with the distribution.\n" +
+                "    * Neither the name of the copyright holder nor the names of its contributors\n" +
+                "      may be used to endorse or promote products derived from this software\n" +
+                "      without specific prior written permission.\n" +
+                "\n" +
+                "THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\n" +
+                "ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\n" +
+                "WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n" +
+                "DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\n" +
+                "ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n" +
+                "(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\n" +
+                "ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n" +
+                "(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\n" +
+                "SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.";
 
-        LicenseFromText lft = new LicenseFromText( lOracle, log );
+        LOracle lOracle = JSONStartup.start();
+
         Downloader dl = new Downloader( log, lOracle );
         dl.download( "repo.aduna-software.org/legal/aduna-bsd" );
 
+        assertThat( dl.get("http://repo.aduna-software.org/legal/aduna-bsd.txt").equals( txt ) );
 
-        assertThat( lft.getLicense( dl.get("http://repo.aduna-software.org/legal/aduna-bsd.txt") ) ).
-                isEqualTo( MappedLicense.of( lOracle.getOrThrowByName( "bsd-3-clause" ), "test"));
     }
-
-    public static final Log mlog = new Log() {
-        @Override
-        public boolean isDebugEnabled() {
-            return false;
-        }
-
-        @Override
-        public void debug( CharSequence content ) {
-
-        }
-
-        @Override
-        public void debug( CharSequence content, Throwable error ) {
-
-        }
-
-        @Override
-        public void debug( Throwable error ) {
-
-        }
-
-        @Override
-        public boolean isInfoEnabled() {
-            return false;
-        }
-
-        @Override
-        public void info( CharSequence content ) {
-
-        }
-
-        @Override
-        public void info( CharSequence content, Throwable error ) {
-
-        }
-
-        @Override
-        public void info( Throwable error ) {
-
-        }
-
-        @Override
-        public boolean isWarnEnabled() {
-            return false;
-        }
-
-        @Override
-        public void warn( CharSequence content ) {
-
-        }
-
-        @Override
-        public void warn( CharSequence content, Throwable error ) {
-
-        }
-
-        @Override
-        public void warn( Throwable error ) {
-
-        }
-
-        @Override
-        public boolean isErrorEnabled() {
-            return false;
-        }
-
-        @Override
-        public void error( CharSequence content ) {
-
-        }
-
-        @Override
-        public void error( CharSequence content, Throwable error ) {
-
-        }
-
-        @Override
-        public void error( Throwable error ) {
-
-        }
-    };
 
     private static Findings log = new FindingsDummy();
 

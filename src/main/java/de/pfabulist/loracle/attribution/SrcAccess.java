@@ -47,7 +47,7 @@ public class SrcAccess {
         Path src = mlo.getSrc( coo );
 
         if ( !Files.exists(src)) {
-            log.warn( "no src available " + coo );
+            log.warn( "no src available " + coo + "  at " + src );
             log.warn( "[try] mvn dependency:source" );
             return;
         }

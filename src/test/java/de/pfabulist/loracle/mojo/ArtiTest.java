@@ -1,11 +1,5 @@
 package de.pfabulist.loracle.mojo;
 
-import de.pfabulist.loracle.attribution.SrcTest;
-import de.pfabulist.loracle.license.Coordinates;
-import org.junit.Test;
-
-import java.nio.file.Paths;
-
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
  * SPDX-License-Identifier: BSD-2-Clause

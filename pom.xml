@@ -14,11 +14,11 @@
     </parent>
 
 
-    <artifactId>loracle-exp</artifactId>
-    <version>1.11.7</version>
+    <artifactId>loracle-maven-plugin</artifactId>
+    <version>1.12</version>
     <packaging>maven-plugin</packaging>
 
-    <name>loracle-exp</name>
+    <name>loracle-maven-plugin</name>
     <description>maven plugin to check the licenses of all dependencies and possible incompatibilities</description>
     <url>http://www.github.com/openCage/loracle-maven-plugin</url>
 
@@ -182,7 +182,7 @@
         <dependency>
             <groupId>de.pfabulist.loracle</groupId>
             <artifactId>loracle-custom</artifactId>
-            <version>0.2.6</version>
+            <version>0.4</version>
         </dependency>
 
         <dependency>
@@ -194,7 +194,7 @@
         <dependency>
             <groupId>de.pfabulist.loracle</groupId>
             <artifactId>loracle-found</artifactId>
-            <version>0.7.1</version>
+            <version>0.7.2</version>
             <scope>test</scope>
         </dependency>
 

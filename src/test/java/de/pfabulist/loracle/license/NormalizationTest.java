@@ -1,5 +1,6 @@
 package de.pfabulist.loracle.license;
 
+import de.pfabulist.loracle.text.Normalizer;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +15,7 @@ public class NormalizationTest {
 
     @Test
     public void noSpace() {
-        assertThat( new Normalizer().reduce( "ab1.0" )).isEqualTo( "ab 1" );
+        assertThat( Normalizer.reduce( "ab1.0" )).isEqualTo( "ab 1" );
     }
 
 }

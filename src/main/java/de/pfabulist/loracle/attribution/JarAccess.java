@@ -70,7 +70,7 @@ public class JarAccess {
             log.debug( coo.toString() + " found license file in jar"  );
 
             lico.setLicenseTxt( file );
-            new LicenseWriter().write( coo, "license", file );
+            new LicenseWriter().write( coo, "license", file ); // todo writer ??
 
         } catch( IOException e ) {
             log.warn( n_or( e.getMessage(), "pattern problem" ) );
