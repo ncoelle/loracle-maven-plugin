@@ -3,7 +3,7 @@ package de.pfabulist.loracle.mojo;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 import de.pfabulist.frex.Frex;
-import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.roast.functiontypes.Function_;
 import de.pfabulist.roast.nio.Files_;

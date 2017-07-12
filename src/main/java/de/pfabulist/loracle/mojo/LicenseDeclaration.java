@@ -1,6 +1,6 @@
 package de.pfabulist.loracle.mojo;
 
-import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.maven.Coordinates;
 import org.apache.maven.plugin.MojoFailureException;
 
 import javax.annotation.Nullable;

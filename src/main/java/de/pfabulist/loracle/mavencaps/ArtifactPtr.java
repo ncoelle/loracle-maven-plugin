@@ -1,6 +1,6 @@
 package de.pfabulist.loracle.mavencaps;
 
-import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.maven.Coordinates;
 
 
 /**

@@ -2,12 +2,11 @@ package de.pfabulist.loracle.mojo;
 
 import com.google.gson.Gson;
 import de.pfabulist.loracle.buildup.JSONStartup;
-import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.FindingsDummy;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.roast.unchecked.Unchecked;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class CooToLiTest {
 
     private final LOracle lOracle = JSONStartup.start().spread();
     private final LicenseIntelligence lIntelligence = new LicenseIntelligence( lOracle, new FindingsDummy() );
-    private final Downloader downloader = new Downloader( new FindingsDummy(), lOracle );
+  //  private final Downloader downloader = new Downloader( new FindingsDummy(), lOracle );
 
     @Test
     public void sunTools() {

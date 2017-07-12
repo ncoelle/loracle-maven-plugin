@@ -2,7 +2,7 @@ package de.pfabulist.loracle.mojo;
 
 import de.pfabulist.loracle.license.And;
 import de.pfabulist.loracle.license.ContentToLicense;
-import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.license.LOracle;

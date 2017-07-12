@@ -1,6 +1,7 @@
 package de.pfabulist.loracle.license;
 
 import de.pfabulist.loracle.attribution.CopyrightHolder;
+import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.roast.nio.Files_;
 import de.pfabulist.roast.nio.Paths_;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;

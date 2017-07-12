@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
+import de.pfabulist.loracle.util.GsonFromResource;
 import de.pfabulist.roast.nio.Files_;
 import de.pfabulist.roast.nio.Path_;
 import de.pfabulist.roast.nio.Paths_;
@@ -27,22 +28,43 @@ import static de.pfabulist.roast.NonnullCheck._nn;
 public class JSONStartup {
 
     public static LOracle start() {
-        byte[] buf = new byte[ 3000000 ];
+//        byte[] buf = new byte[ 3000000 ];
+//
+//        int got = 0;
+//        try( InputStream in = _nn( JSONStartup.class.getResourceAsStream( "/de/pfabulist/loracle/loracle.json" ) ) ) {
+//            while( true ) {
+//                int once = in.read( buf, got, 3000000 - got );
+//                if( once < 0 ) {
+//                    break;
+//                }
+//                got += once;
+//            }
+//        } catch( IOException e ) {
+//            throw Unchecked.u( e );
+//        }
 
-        int got = 0;
-        try( InputStream in = _nn( JSONStartup.class.getResourceAsStream( "/de/pfabulist/loracle/loracle.json" ) ) ) {
-            while( true ) {
-                int once = in.read( buf, got, 3000000 - got );
-                if( once < 0 ) {
-                    break;
-                }
-                got += once;
-            }
-        } catch( IOException e ) {
-            throw Unchecked.u( e );
-        }
+        String jsonstr = GsonFromResource.readResource( "/de/pfabulist/loracle/loracle.json" );//new String( buf, 0, got, StandardCharsets.UTF_8 );
 
-        String jsonstr = new String( buf, 0, got, StandardCharsets.UTF_8 );
+        return new Gson().fromJson( jsonstr, LOracle.class );
+    }
+
+    public static LOracle startSpdx() {
+//        byte[] buf = new byte[ 3000000 ];
+//
+//        int got = 0;
+//        try( InputStream in = _nn( JSONStartup.class.getResourceAsStream( "/de/pfabulist/loracle/loracle.json" ) ) ) {
+//            while( true ) {
+//                int once = in.read( buf, got, 3000000 - got );
+//                if( once < 0 ) {
+//                    break;
+//                }
+//                got += once;
+//            }
+//        } catch( IOException e ) {
+//            throw Unchecked.u( e );
+//        }
+
+        String jsonstr = GsonFromResource.readResource( "/de/pfabulist/loracle/loracle-collected.json" );//new String( buf, 0, got, StandardCharsets.UTF_8 );
 
         return new Gson().fromJson( jsonstr, LOracle.class );
     }

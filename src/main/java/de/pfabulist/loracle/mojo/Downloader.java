@@ -3,6 +3,7 @@ package de.pfabulist.loracle.mojo;
 import com.google.gson.Gson;
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.*;
+import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.text.Normalizer;
 import de.pfabulist.roast.nio.Files_;
 import de.pfabulist.roast.nio.Paths_;

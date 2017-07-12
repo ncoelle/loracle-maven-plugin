@@ -229,13 +229,13 @@ public class ExtractFromDejaCode {
         }
 
         try {
-            LicenseID ret = lOracle.newSingle( key, false );
-            lOracle.getMore( ret ).attributes.setFromDeja();
-            System.out.println( "+++ deja ++ " + ret + "    " + "/de/pfabulist/loracle/deja/" + oldKey + ".LICENSE");
+
+            System.out.println( "+++ deja ++ " + key + "    " + "/de/pfabulist/loracle/deja/" + oldKey + ".LICENSE");
             try( InputStream is = _nn(ExtractFromDejaCode.class.getResourceAsStream( "/de/pfabulist/loracle/deja/" + oldKey + ".LICENSE" ))) {
                 Files_.copy( is, Paths_.get__( "src/main/resources/de/pfabulist/loracle/urls/" + key + ".txt" ).toAbsolutePath_(), StandardCopyOption.REPLACE_EXISTING );
             }
-            //lOracle.addUrlContent(  );
+            LicenseID ret = lOracle.newSingle( key, false );
+            lOracle.getMore( ret ).attributes.setFromDeja();    //lOracle.addUrlContent(  );
             return Optional.of( ret );
         } catch( Exception e ) {
             System.out.println( "known (probably guess) " + key );

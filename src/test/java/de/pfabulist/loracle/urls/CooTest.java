@@ -2,12 +2,11 @@ package de.pfabulist.loracle.urls;
 
 import com.google.gson.Gson;
 import de.pfabulist.loracle.buildup.JSONStartup;
-import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.FindingsDummy;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.mojo.Downloader;
-import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.mojo.LicenseIntelligence;
 import de.pfabulist.roast.unchecked.Unchecked;
 import org.junit.Test;

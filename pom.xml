@@ -15,7 +15,7 @@
 
 
     <artifactId>loracle-maven-plugin</artifactId>
-    <version>1.12</version>
+    <version>1.13</version>
     <packaging>maven-plugin</packaging>
 
     <name>loracle-maven-plugin</name>
@@ -151,6 +151,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -177,12 +178,19 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.9.2</version>
+            <!--should go to test-->
         </dependency>
 
         <dependency>
             <groupId>de.pfabulist.loracle</groupId>
             <artifactId>loracle-custom</artifactId>
-            <version>0.4</version>
+            <version>0.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.pfabulist.loracle</groupId>
+            <artifactId>loracle-licenses-from</artifactId>
+            <version>0.1</version>
         </dependency>
 
         <dependency>
@@ -194,7 +202,7 @@
         <dependency>
             <groupId>de.pfabulist.loracle</groupId>
             <artifactId>loracle-found</artifactId>
-            <version>0.7.2</version>
+            <version>0.7.3</version>
             <scope>test</scope>
         </dependency>
 

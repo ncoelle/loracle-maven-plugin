@@ -2,6 +2,7 @@ package de.pfabulist.loracle.license;
 
 import com.esotericsoftware.minlog.Log;
 import de.pfabulist.frex.Frex;
+import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.spi.CustomService;
 import de.pfabulist.loracle.spi.LicenseTextToLicenseIdService;
 import de.pfabulist.loracle.text.Normalizer;
@@ -62,7 +63,7 @@ public class LOracle {
     private final transient SPDXParser parser;
     private final transient Normalizer normalizer = new Normalizer();
     private transient Map<Coordinates, LicenseID> coordinatesMap = new HashMap<>();
-    private transient Map<String, LicenseID> longNameMapper = new HashMap<>();
+    public transient Map<String, LicenseID> longNameMapper = new HashMap<>();
     private transient Map<String, LicenseID> urls = new HashMap<>();
     private Map<String, String> urlToContent = new HashMap<>();
     private Map<String, String> coordinatesToUrl = new HashMap<>();
@@ -75,7 +76,7 @@ public class LOracle {
         parser = new SPDXParser( this );
     }
 
-    public LOracle spread() {
+    public LOracle spreadNoexternals() {
         if( !longNameMapper.isEmpty() ) {
             throw new IllegalStateException( "can only be called after json construction" );
         }
@@ -83,7 +84,9 @@ public class LOracle {
         singles.forEach( ( name, more ) -> {
                              LicenseID lid = new SingleLicense( name );
                              more.urls.forEach( u -> urls.put( u, lid ) );
+                             // System.out.println( "-- " + lid);
                              more.longNames.forEach( l -> longNameMapper.putIfAbsent( l, lid ) );
+                             //more.longNames.forEach( l -> System.out.println( "--- longname " + l) );
                              more.specific.forEach( coo -> coordinatesMap.putIfAbsent( coo, lid ) );
                              more.couldbeName.forEach( n -> {
                                  couldbeNames.putIfAbsent( n, new HashSet<>() );
@@ -95,6 +98,10 @@ public class LOracle {
                              } );
                          }
         );
+
+
+        System.out.println( "    composites" );
+
 
         composites.forEach( ( name, more ) -> {
 
@@ -113,7 +120,21 @@ public class LOracle {
                             }
         );
 
+
+        return this;
+    }
+
+
+    public LOracle spread() {
+
+        System.out.println( "start spread" );
+
+        spreadNoexternals();
+
         // todo couldbes
+
+        System.out.println( "    custom licenses (loading)" );
+
 
         CustomService.getInstance().getAll().forEach( c -> {
             c.getCustomLicenses().forEach( l -> {
@@ -144,6 +165,7 @@ public class LOracle {
         } );
 
 
+        System.out.println( "    license text to id (loading)" );
 
         LicenseTextToLicenseIdService.getInstance().getAll().forEach(
                         t -> LicenseFromText.licenseTextsToLicenses.addAll( t.getByFragments() ));
@@ -248,7 +270,7 @@ public class LOracle {
             then( Frex.txt( ' ' ) ).then( Frex.or( Frex.number(), Frex.txt( '.' ) ).oneOrMore() ).buildCaseInsensitivePattern();
 
     public void addLongName( LicenseID license, String longName ) {
-        String reduced = normalizer.reduce( longName );
+        String reduced = Normalizer.reduce( longName );
         if( longNameMapper.containsKey( reduced ) ) {
             if( license.equals( longNameMapper.get( reduced ) ) ) {
                 return;
@@ -261,7 +283,7 @@ public class LOracle {
 
         Matcher versioned = withVersion.matcher( reduced );
         if( versioned.matches() ) {
-            addCouldbeName( license, _nn( versioned.group( "base" ) ) );
+            addCouldbeName( license, versioned.group( "base" ) ) ;
         }
 
         // todo refactor
@@ -585,13 +607,13 @@ public class LOracle {
 //    }
 
     public MappedLicense findLongNames( And and, String str ) {
-        String norm = normalizer.reduce( str );
+        String norm = Normalizer.reduce( str );
 
         return longNameMapper.entrySet().stream().
                 map( e -> {
                     String name = _nn( e.getKey() );
                     LicenseID li = _nn( e.getValue() );
-                    if( !tooSimpleLongNames.contains( name ) &&
+                    if( !Normalizer.tooSimpleLongNames.contains( name ) &&
                             fullNames( name ).matcher( norm ).find() ) {
                         return MappedLicense.of( li, "found name" );
                     } else {
@@ -609,9 +631,9 @@ public class LOracle {
 //                orElse( MappedLicense.empty() );
     }
 
-    public void addTooSimple( String... strs ) {
-        tooSimpleLongNames.addAll( Arrays.asList( strs ) );
-    }
+//    public void addTooSimple( String... strs ) {
+//        tooSimpleLongNames.addAll( Arrays.asList( strs ) );
+//    }
 
     public Optional<String> getUrlContent( String url ) {
         return normalizer.normalizeUrl( url ).flatMap( u -> Optional.ofNullable( urlToContent.get( u ) ) );

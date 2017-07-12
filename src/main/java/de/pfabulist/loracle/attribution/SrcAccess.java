@@ -2,7 +2,7 @@ package de.pfabulist.loracle.attribution;
 
 import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.Utils;
-import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.Findings;

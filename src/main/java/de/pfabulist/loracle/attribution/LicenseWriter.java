@@ -1,6 +1,6 @@
 package de.pfabulist.loracle.attribution;
 
-import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.roast.nio.Files_;

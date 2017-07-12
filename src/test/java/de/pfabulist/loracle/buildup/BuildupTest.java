@@ -1,7 +1,7 @@
 package de.pfabulist.loracle.buildup;
 
 import com.google.gson.GsonBuilder;
-import de.pfabulist.loracle.license.Coordinates;
+import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
 import de.pfabulist.loracle.license.MappedLicense;
@@ -11,7 +11,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Locale;
 
@@ -97,21 +97,41 @@ public class BuildupTest {
     @Test
     public void testBuildup() {
 
+        buildAfterExternal();
+        LOracle lOracle =
+                //new LOracle();
+                JSONStartup.start().spread();
+
+        testAll( lOracle );
+
+    }
+
+    public void buildAfterExternal() {
+        Path dir = Paths_.get__( "" ).toAbsolutePath__().resolve_( "src/main/resources/de/pfabulist/loracle/" );
+
+//        if ( Files_.exists_( dir.resolve( "local-json-done" ))) {
+//
+//            return;
+//        }
+
         System.out.println( "----------------------- " );
         System.out.println( "------ spdx ----------- " );
         System.out.println( "----------------------- " );
 
-        LOracle lOracle = new LOracle();
-
+        LOracle lOracle =
+                //new LOracle();
+                JSONStartup.startSpdx().spreadNoexternals();
         // add too simple
 
-        lOracle.addTooSimple( "map", "par", "free", "foundation", "fsf", "initial developer", "wide", "attribution" );
-        lOracle.addTooSimple( "only", "attribution only", "hp", "microsoft", "json", "closed", "government", "doc" );
-        lOracle.addTooSimple( "directory", "jetty", "sequence", "fork", "open", "regexp", "berkeley" );
-        // todo via dictionary ?
+//        lOracle.addTooSimple( "map", "par", "free", "foundation", "fsf", "initial developer", "wide", "attribution" );
+//        lOracle.addTooSimple( "only", "attribution only", "hp", "microsoft", "json", "closed", "government", "doc" );
+//        lOracle.addTooSimple( "directory", "jetty", "sequence", "fork", "open", "regexp", "berkeley" );
+//        // todo via dictionary ?
 
-        new ExtractSpdxLicensesFromJSON().go( lOracle );
-        new ExtractSPDXExceptionsFromHTML( lOracle );
+
+
+//        new ExtractSpdxLicensesFromJSON().go( lOracle );
+//        new ExtractSPDXExceptionsFromHTML( lOracle );
 
         System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
 
@@ -150,73 +170,35 @@ public class BuildupTest {
         lOracle.addUrl( lOracle.getOrThrowByName( "cc0-1.0" ), "http://creativecommons.org/publicdomain/zero/1.0/" );
 
         // new licenses
-        LicenseID closed = lOracle.newSingle( "closed", false );
-        lOracle.getMore( closed ).attributes.setGpl2Compatible( false );
-        lOracle.getMore( closed ).attributes.setGpl3Compatible( false );
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "aopalliance:aopalliance:1.0" ), lOracle.newSingle( "aop-pd", false ) ); // todo public domain ?
+        try {
+            LicenseID closed = lOracle.newSingle( "closed", false );
+            lOracle.getMore( closed ).attributes.setGpl2Compatible( false );
+            lOracle.getMore( closed ).attributes.setGpl3Compatible( false );
 
-        LicenseID hs = lOracle.newSingle( "HSQLDB", false ); // ~ BSD-4-clause , copyright ?
-        lOracle.addUrl( hs, " http://hsqldb.org/web/hsqlLicense.html" );
+            LicenseID hs = lOracle.newSingle( "HSQLDB", false ); // ~ BSD-4-clause , copyright ?
+            lOracle.addUrl( hs, " http://hsqldb.org/web/hsqlLicense.html" );
 
-        LicenseID gs = lOracle.newSingle( "gsbase-1.0", false );
-        lOracle.addUrl( gs, "gsbase.sourceforge.net/license.html" );
+            LicenseID gs = lOracle.newSingle( "gsbase-1.0", false );
+            lOracle.addUrl( gs, "gsbase.sourceforge.net/license.html" );
+        } catch( IllegalArgumentException e  ) {
+            // gibts schp
+        }
+
+
 
 //        LicenseID bouncy = lOracle.newSingle( "bouncycastle", false ); // is really mit
 //        lOracle.addUrl( bouncy, "bouncyastle.org/license.html" ); // todo
 
         // by artifact
         // lOracle.addLicenseForArtifact( Coordinates.valueOf( "dom4j:dom4j:1.6.1" ), lOracle.getOrThrowByName( "dom4j" ) ); found in license
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "dom4j:dom4j:1.6.1.redhat-6" ), lOracle.getOrThrowByName( "dom4j" ) ); // todo pattern ?
         // Copyright 2001-2005 (C) MetaStuff, Ltd. All Rights Reserved.
         // http://dom4j.sourceforge.net/dom4j-1.6.1/license.html
 
-        lOracle.addLicenseForArtifact( new Coordinates( "net.jcip", "jcip-annotations", "1.0" ), lOracle.getOrThrowByName( "CC-BY-2.5" ) );
 
 //        lOracle.addLicenseForArtifact( new Coordinates( "javax.servlet", "javax.servlet-api", "3.1.0" ),
 //                                       lOracle.getOrThrowByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ) );
         // better with pom
 
-        lOracle.addLicenseForArtifact( new Coordinates( "org.apache.httpcomponents", "httpclient", "4.0.1" ),
-                                       lOracle.getOrThrowByName( "Apache-2.0" ) );
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "net.sourceforge.pmd:pmd-*:5.4.1" ),
-                                       lOracle.getOrThrowByName( "bsd-4-clause" ) );
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.scala-lang:scala*:2.10.0" ), // TODO verify  or via timed url ?
-                                       lOracle.getOrThrowByName( "bsd-2-clause" ) );
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.scala-lang:scala*:2.10.5" ), // TODO verify
-                                       lOracle.getOrThrowByName( "bsd-2-clause" ) );
-//        lOracle.addLicenseForArtifact( Coordinates.valueOf( "antlr:antlr:2.7.7" ), // TODO verify, before antlr has antlr-pd
-//                                       lOracle.getOrThrowByName( "bsd-2-clause" ) );
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "antlr:antlr:3.5.2" ), // TODO verify, before antlr has antlr-pd
-                                       lOracle.getOrThrowByName( "bsd-2-clause" ) );
-//        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.antlr:ST4:4.0.4" ), // TODO verify, before antlr has antlr-pd
-//                                       lOracle.getOrThrowByName( "bsd-2-clause" ) );
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "jline:jline:1.0" ),
-                                       lOracle.getOrThrowByName( "bsd-2-clause" ) );
-//        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.tachyonproject:tachyon-*:0.8.2" ),
-//                                       lOracle.getOrThrowByName( "apache-2" ) );
-//        lOracle.addLicenseForArtifact( Coordinates.valueOf( "com.thoughtworks.paranamer:paranamer:2.3" ), // by src header
-//                                       lOracle.getOrThrowByName( "bsd-2-clause" ) );
-
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.json4s:json4s-*:3.2.10" ),
-                                       lOracle.getOrThrowByName( "apache-2" ) );
-
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "riffle:riffle:jar:0.1-dev" ),
-                                       lOracle.getOrThrowByName( "apache-2" ) );  // todo: holder: Concurrent, Inc. (http://www.concurrentinc.com/)
-
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "junitperf:junitperf:1.8" ),
-                                       lOracle.getOrThrowByName( "bsd-3-clause" ) );
-
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "com.sun:tools:*" ),
-                                       lOracle.getOrThrowByName( "cddl-1.1" ) ); // todo check
-
-//        lOracle.addLicenseForArtifact( Coordinates.valueOf( "asm:asm*:3.1" ),
-//                                       lOracle.getOrThrowByName( "bsd-3-clause" ) ); // now license full text
-
-        // todo: Copyright (C) 2001 Clarkware Consulting, Inc.
-        // https://github.com/clarkware/junitperf
-
-        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.jvnet.jaxb2.maven2:maven-jaxb2-plugin:0.12.3" ), // 0.13.2
-                                       lOracle.getOrThrowByName( "bsd-2-clause" ) );
         // https://github.com/highsource/maven-jaxb2-plugin,
         // https://github.com/highsource/maven-jaxb2-plugin/blob/master/LICENSE
         // Copyright (c) 2006-2014, Alexey Valikov.
@@ -295,17 +277,22 @@ public class BuildupTest {
 
         Files_.write( Paths_.get__( "" ).toAbsolutePath__().resolve_( "src/main/resources/de/pfabulist/loracle/loracle.json" ),
                       getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
+        Files_.write( dir.resolve( "local-json-done" ),
+                      getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
 
-        testAll( lOracle );
 
     }
 
     public void testAll( LOracle lOracle ) {
+
+        assertThat( lOracle.getByName( "apache" ).isPresent() ).isFalse();
+
         assertThat( lOracle.getByUrl( "http://www.apache.org/licenses/LICENSE-2.0" ).isPresent() ).isTrue();
+
         assertThat( lOracle.getByUrl( "http://www.apache.org/licenses/LICENSE-2.0.TXT" ).isPresent() ).isTrue();
         assertThat( lOracle.getByUrl( "http://www.opensource.org/licenses/mit-license.php" ).isPresent() ).isTrue();
         assertThat( lOracle.getByUrl( "glassfish.java.net/public/cddl+gpl_1_1" ).isPresent() ).isTrue();
-        assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "aopalliance:aopalliance:1.0" ) ).isPresent() ).isTrue();
+// in found        assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "aopalliance:aopalliance:1.0" ) ).isPresent() ).isTrue();
 
         // done via license o.ae.
 //        assertThat( lOracle.getByCoordinates( Coordinates.valueOf( "javax.servlet:javax.servlet-api:3.1.0" ) ) ).isEqualTo(
@@ -313,6 +300,8 @@ public class BuildupTest {
 
         assertThat( lOracle.getOrThrowByName( "MPL 2.0" ) ).isEqualTo( lOracle.getOrThrowByName( "mpl-2.0" ) );
         assertThat( lOracle.getByName( "MPL 2.0, and EPL 1.0" ).isPresent() ).isTrue();
+
+        System.out.println( lOracle.longNameMapper.get( "asl 1.1" ));
 
         assertThat( lOracle.getOrThrowByName( "ASL-1.1" ) ).isEqualTo( lOracle.getOrThrowByName( "apache-1.1" ) );
 
@@ -566,7 +555,13 @@ public class BuildupTest {
 
     @Test
     public void startup() {
-        LOracle lOracle = JSONStartup.start().spread();
+        buildAfterExternal();
+        
+        LOracle lOracle =
+                //new LOracle();
+                JSONStartup.start().spread();
+
+        System.out.println( "=============== " + lOracle.getSingleLicenseCount() + " === " + lOracle.longNameMapper.size());
 
         testAll( lOracle );
     }
