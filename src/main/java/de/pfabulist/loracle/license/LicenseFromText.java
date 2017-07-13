@@ -6,7 +6,7 @@ import de.pfabulist.loracle.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import java.util.stream.Collectors;
 
 /**
  * Copyright (c) 2006 - 2017, Stephan Pfab
@@ -42,12 +42,11 @@ public class LicenseFromText {
       //  licenseTextsToLicenses.forEach( f -> System.out.println( "        ++ " + f.getLicense()) );
         final String txtn = Normalizer.norm( txt );
 
-        Optional<String> lic = (Optional<String>)
-                licenseTextsToLicenses.stream().
-                        map( f -> f.matches( txtn ) ? Optional.of( f.getLicense() ) : Optional.empty() ).
-                        filter( Optional::isPresent ).
-                        map( Optional::get ).
-                        findFirst();
+        Optional<String> lic = licenseTextsToLicenses.stream().
+                filter( f -> f.matches( txtn ) ).
+                map( TextToLicense::getLicense ).
+                findFirst();
+
 
         //System.out.println( "     ++ "+ lic.isPresent());
 
