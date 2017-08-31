@@ -144,7 +144,7 @@ public class LOracle {
                 } catch( Exception e ) {
                     Log.warn( "custom license is known (ignored) " + l.getId() );
                 }
-            } );               
+            } );
             c.getCoordinates().forEach( co -> {
                 try {
                     Coordinates coo = Coordinates.valueOf( co.getCoordinates() );
@@ -201,10 +201,10 @@ public class LOracle {
         throw new IllegalArgumentException( "no such exception: " + ex );
     }
 
-    // todo to normalizer
-    public static String trim( String in ) {
-        return _nn( in.toLowerCase( Locale.US ) ).replaceAll( ",", " " ).trim();
-    }
+//    // todo to normalizer
+//    public static String trim( String in ) {
+//        return _nn( in.toLowerCase( Locale.US ) ).replaceAll( ",", " " ).trim();
+//    }
 
     public SingleLicense newSingle( String name, More more ) {
         if( getByName( name ).isPresent() ) {
@@ -218,7 +218,7 @@ public class LOracle {
     public SingleLicense newSingle( String name, boolean spdx ) {
         // todo test for extensions ( getAnd ... ?
 
-        String lower = trim( name );
+        String lower = Normalizer.trim( name );
 
         if( getByName( lower ).isPresent() ) {
             throw new IllegalArgumentException( "not a new single license: " + name );
@@ -230,9 +230,9 @@ public class LOracle {
             removeNameGuess( lower );
         }
 
-        singles.put( lower, new More( spdx ) );
-
         SingleLicense ret = new SingleLicense( lower );
+
+        singles.put( lower, new More( spdx ) );
 
         String lng = Arrays.stream( lower.split( "[- ]" ) ).collect( Collectors.joining( " " ) );
 
@@ -389,7 +389,7 @@ public class LOracle {
         return coordinatesMap.keySet().stream().
                 filter( c -> c.matches( coo ) ).
                 findAny().
-                map( c -> MappedLicense.of( _nn( coordinatesMap.get( c ) ), "by patterned coordinates " + c ) ).
+                map( c -> (MappedLicense)MappedLicense.of( _nn( coordinatesMap.get( c ) ), "by patterned coordinates " + c ) ).
                 orElse( MappedLicense.empty() );
     }
 

@@ -43,7 +43,7 @@ public class JSONStartup {
 //            throw Unchecked.u( e );
 //        }
 
-        String jsonstr = GsonFromResource.readResource( "/de/pfabulist/loracle/loracle.json" );//new String( buf, 0, got, StandardCharsets.UTF_8 );
+        String jsonstr = GsonFromResource.readResource( "/de/pfabulist/loracle/loracle-collected.json" );//new String( buf, 0, got, StandardCharsets.UTF_8 );
 
         return new Gson().fromJson( jsonstr, LOracle.class );
     }

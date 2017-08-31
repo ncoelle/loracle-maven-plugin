@@ -70,10 +70,10 @@ public class And {
             }
         } ) );
 
-        MappedLicense rett =  ret._get();
+        MappedSomeLicense rett =  (MappedSomeLicense)ret._get();
 
-        rett.addOverFrom( l );
-        rett.addOverFrom( r );
+//        rett.addOverFrom( l );
+//        rett.addOverFrom( r );
 
         return rett;
 

@@ -1,6 +1,7 @@
 package de.pfabulist.loracle.license;
 
 import de.pfabulist.frex.Frex;
+import de.pfabulist.loracle.text.Normalizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,7 @@ public class SPDXParser {
     }
 
     public LicenseID parse( String in ) {
-        return liBuilder( tok(  LOracle.trim( in )) );
+        return liBuilder( tok( Normalizer.trim( in )) );
     }
 
     private Stream<Tok> tok( String in ) {
@@ -178,7 +179,7 @@ public class SPDXParser {
         }
     }
 
-    public static class Parsed {
+    static class Parsed {
         final Optional<LicenseID> license;
         final Optional<TokTyp> op;
         final boolean closed;

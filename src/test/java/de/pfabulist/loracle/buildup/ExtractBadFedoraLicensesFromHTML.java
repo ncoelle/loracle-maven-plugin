@@ -133,12 +133,16 @@ public class ExtractBadFedoraLicensesFromHTML {
 
                         if ( gn.isEmpty() && gu.isEmpty() ) {
                             System.out.println("new bad");
-                            LicenseID nn = lOracle.newSingle( f.name, false );
-                            lOracle.getMore( nn ).attributes.setFromFedora();
-                            if ( !f.url.isEmpty() ) {
-                                lOracle.addUrl( nn, f.url );
+                            try {
+                                LicenseID nn = lOracle.newSingle( f.name, false );
+                                lOracle.getMore( nn ).attributes.setFromFedora();
+                                if( !f.url.isEmpty() ) {
+                                    lOracle.addUrl( nn, f.url );
+                                }
+                                lOracle.getAttributes( nn ).setFedoraApproved( false );
+                            } catch ( IllegalArgumentException e ) {
+                                System.out.println( "invalid2: " + e.getMessage() );
                             }
-                            lOracle.getAttributes( nn  ).setFedoraApproved( false );
                         }
                     }
 

@@ -1,6 +1,7 @@
 package de.pfabulist.loracle.license;
 
 import de.pfabulist.frex.Frex;
+import de.pfabulist.loracle.text.Normalizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,7 @@ public class FuzzyParser {
     }
 
     public LicenseID parse( String in ) {
-        return liBuilder( tok(  LOracle.trim( in )) );
+        return liBuilder( tok( Normalizer.trim( in )) );
     }
 
     private static Pattern first = Frex.any().zeroOrMore().lazy().var( SPDXParser.TokenVariables.before ).

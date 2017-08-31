@@ -3,11 +3,8 @@ package de.pfabulist.loracle.urls;
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.FindingsDummy;
 import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.license.LicenseFromText;
-import de.pfabulist.loracle.license.MappedLicense;
 import de.pfabulist.loracle.mojo.Downloader;
 import de.pfabulist.loracle.license.Findings;
-import org.apache.maven.plugin.logging.Log;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

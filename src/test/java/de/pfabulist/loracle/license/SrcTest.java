@@ -2,19 +2,10 @@ package de.pfabulist.loracle.license;
 
 import de.pfabulist.loracle.attribution.Header;
 import de.pfabulist.loracle.buildup.JSONStartup;
-import de.pfabulist.loracle.license.ContentToLicense;
-import de.pfabulist.loracle.license.FindingsDummy;
-import de.pfabulist.loracle.license.LOracle;
-import de.pfabulist.loracle.license.LicenseFromText;
-import de.pfabulist.loracle.license.MappedLicense;
-import de.pfabulist.loracle.license.Findings;
-import org.apache.maven.plugin.logging.Log;
-import org.jsoup.Jsoup;
 import org.junit.Test;
 
 import java.util.regex.Matcher;
 
-import static de.pfabulist.roast.NonnullCheck._nn;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

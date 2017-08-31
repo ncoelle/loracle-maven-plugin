@@ -22,7 +22,7 @@ DEFINITIONS
 
 "Standard Version" refers to the collection of Font Software components as distributed by the Copyright Holder.
 
-"Modified Version" refers to any derivative font software made by adding to, deleting, or substituting — in part or in whole -- any of the components of the Standard Version, by changing formats or by porting the Font Software to a new environment.
+"Modified Version" refers to any derivative font software made by adding to, deleting, or substituting ��� in part or in whole -- any of the components of the Standard Version, by changing formats or by porting the Font Software to a new environment.
 
 "Author" refers to any designer, engineer, programmer, technical writer or other person who contributed to the Font Software.
 

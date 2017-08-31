@@ -253,24 +253,33 @@ public class ExtractGoodFedoraLicensesFromHTML {
                             if ( !url.isPresent() ) {
 
                                 if ( f.name.equals( "Affero General Public License 3.0 with Zarafa trademark exceptions" )) {
-                          //          System.out.println( "   found new license: " );
+                                    System.out.println( "   found license with new exception" );
                                     // todo new exception ?
-                                    LicenseID newL = lOracle.newSingle( "AGPL-3.0 with Zarafa-trademark-exception", false );
-                                    lOracle.getMore( newL ).attributes.setFromFedora();
-                                    lOracle.addLongName( newL, "Affero General Public License 3.0 with Zarafa trademark exceptions" );
-                                    addFedoraInfo( lOracle, newL, f );
-                                    return;
+//
+//                                    System.out.println( lOracle.getByName1( "AGPL-3.0 with Zarafa-trademark-exception" ));
+//                                    System.out.println( lOracle.getByName( "AGPL-3.0 with Zarafa-trademark-exception" ));
+//
+//                                    LicenseID newL = lOracle.newSingle( "AGPL-3.0 with Zarafa-trademark-exception", false );
+//                                    lOracle.getMore( newL ).attributes.setFromFedora();
+//                                    lOracle.addLongName( newL, "Affero General Public License 3.0 with Zarafa trademark exceptions" );
+//                                    addFedoraInfo( lOracle, newL, f );
+                                   return;
                                 }
 
                                 if ( !f.shortName.contains( "GPL" ) &&
                                         !f.shortName.contains( "BSD" )  &&
                                         !f.shortName.equals( "Public Domain" ) )
                                 {
-                                    LicenseID newL = lOracle.newSingle( f.shortName, false );
-                                    lOracle.getMore( newL ).attributes.setFromFedora();
-                                    lOracle.addLongName( newL, f.name );
-                                    addFedoraInfo( lOracle, newL, f );
-                                    return;
+                                    try {
+                                        LicenseID newL = lOracle.newSingle( f.shortName, false );
+                                        lOracle.getMore( newL ).attributes.setFromFedora();
+                                        lOracle.addLongName( newL, f.name );
+                                        addFedoraInfo( lOracle, newL, f );
+                                        return;
+                                    } catch( IllegalArgumentException e ) {
+                                        System.out.println( "invalid: " + e.getMessage() );
+                                        return;
+                                    }
                                 }
 //                                switch( f.shortName ) {
 //                                    case "App-s2p" :

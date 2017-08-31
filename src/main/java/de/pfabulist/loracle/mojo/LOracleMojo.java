@@ -93,6 +93,7 @@ public class LOracleMojo extends AbstractMojo {
     }
 
     @SuppressWarnings( "PMD.AvoidPrintStackTrace" )
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
 
 

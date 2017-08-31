@@ -6,7 +6,6 @@ import de.pfabulist.loracle.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Copyright (c) 2006 - 2017, Stephan Pfab
