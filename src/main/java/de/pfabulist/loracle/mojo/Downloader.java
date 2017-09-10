@@ -143,7 +143,7 @@ public class Downloader {
     private static final String urlspecial = txt( ':' ).or( txt( '/' ) ).or( txt( '*' ) ).or( txt( '"' ) ).or( txt( '<' ) ).or( txt( '>' ) ).or( txt( '?' ) ).or( txt( '\\' ) ).buildPattern().toString();
 
     private String getUrlPath( String url ) {
-        String u = normalizer.normalizeUrl( url ).orElse( url );
+        String u = LoUrl.getReleventUrlPart( url ).orElse( url );
         return u.replaceAll( urlspecial, "_" );
     }
 

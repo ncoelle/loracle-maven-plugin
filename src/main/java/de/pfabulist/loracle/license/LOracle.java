@@ -413,7 +413,7 @@ public class LOracle {
 
     public MappedLicense getByUrl( String url ) {
 
-        Optional<String> rel = Normalizer.normalizeUrl( url );
+        Optional<String> rel = LoUrl.getReleventUrlPart( url );
         if( !rel.isPresent() ) {
             return MappedLicense.empty();
         }
@@ -485,7 +485,7 @@ public class LOracle {
 
     public Set<LicenseID> guessByUrl( String url ) {
 
-        return Normalizer.normalizeUrl( url ).map( u -> n_or( couldbeUrls.get( u ), new HashSet<LicenseID>() ) ).orElseGet( HashSet::new );
+        return LoUrl.getReleventUrlPart(  url ).map( u -> n_or( couldbeUrls.get( u ), new HashSet<LicenseID>() ) ).orElseGet( HashSet::new );
     }
 
     public void addCouldBeUrl( LicenseID license, String url ) {
@@ -494,7 +494,7 @@ public class LOracle {
 
     public void addUrl( LicenseID license, String url ) {
 
-        String rel = Normalizer.normalizeUrl( url ).orElseThrow( () -> new IllegalArgumentException( "not a url" ) );
+        String rel = LoUrl.getReleventUrlPart(  url ).orElseThrow( () -> new IllegalArgumentException( "not a url" ) );
 
         if( urls.containsKey( rel ) ) {
 
@@ -635,11 +635,11 @@ public class LOracle {
 //    }
 
     public Optional<String> getUrlContent( String url ) {
-        return Normalizer.normalizeUrl( url ).flatMap( u -> Optional.ofNullable( urlToContent.get( u ) ) );
+        return LoUrl.getReleventUrlPart( url ).flatMap( u -> Optional.ofNullable( urlToContent.get( u ) ) );
     }
 
     public void addUrlContent( String url, String res ) {
-        Optional<String> u = Normalizer.normalizeUrl( url );
+        Optional<String> u = LoUrl.getReleventUrlPart( url );
         if( !u.isPresent() ) {
             throw new IllegalArgumentException( "huhh" );
         }
