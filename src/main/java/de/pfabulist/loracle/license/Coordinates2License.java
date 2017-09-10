@@ -259,9 +259,10 @@ public class Coordinates2License {
         }
 
         public void print() {
-            System.out.println( "lico" );
+            System.out.println( "lico (coordinates2license)" );
             System.out.println( "   licenseTxt " + licenseTxt );
             System.out.println( "   licenseTxtLicense " + licenseTxtLicense  );
+            System.out.println( "   coo " + byCoordinates );
         }
     }
 

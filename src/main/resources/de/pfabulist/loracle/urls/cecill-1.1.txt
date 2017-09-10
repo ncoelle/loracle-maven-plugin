@@ -8,7 +8,7 @@ This Agreement is a free software license that is the result of discussions betw
 
 The following bodies are the authors of this license CeCILL (Ce : CEA, C : CNRS, I : INRIA, LL : Logiciel Libre):
 
-Commissariat �� l'Energie Atomique - CEA, a public scientific, technical and industrial establishment, having its principal place of business at 31-33 rue de la F��d��ration, 75752 PARIS cedex 15, France.
+Commissariat à l'Energie Atomique - CEA, a public scientific, technical and industrial establishment, having its principal place of business at 31-33 rue de la Fédération, 75752 PARIS cedex 15, France.
 
 Centre National de la Recherche Scientifique - CNRS, a public scientific and technological establishment, having its principal place of business at 3 rue Michel-Ange 75794 Paris cedex 16, France.
 
@@ -160,7 +160,7 @@ The Licensee having developed a Dynamic Module is the holder of the intellectual
      1. not to remove, or modify, in any or all manner, the intellectual property notices affixed to the Software; 
      2. to reproduce said notices, in an identical manner, in the copies of the Software.
 
-6.4.2. The Licensee undertakes not to directly or indirectly infringe the intellectual property rights of the Holder and/or Contributors and to take, where applicable, vis-��-vis its staff, any or all measures required to ensure respect for said intellectual property rights of the Holder and/or Contributors. 
+6.4.2. The Licensee undertakes not to directly or indirectly infringe the intellectual property rights of the Holder and/or Contributors and to take, where applicable, vis-à-vis its staff, any or all measures required to ensure respect for said intellectual property rights of the Holder and/or Contributors. 
 
 Article 7 - RELATED SERVICES  
 

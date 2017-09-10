@@ -1,7 +1,7 @@
 OCLC Research Public License 2.0
 Terms & Conditions Of Use
 May, 2002
-Copyright �� 2002. OCLC Online Computer Library Center, Inc. All Rights Reserved
+Copyright © 2002. OCLC Online Computer Library Center, Inc. All Rights Reserved
 
 PLEASE READ THIS DOCUMENT CAREFULLY. BY DOWNLOADING OR USING THE CODE BASE AND/OR DOCUMENTATION ACCOMPANYING THIS LICENSE (THE "License"), YOU AGREE TO THE FOLLOWING TERMS AND CONDITIONS OF THIS LICENSE.
 
@@ -18,7 +18,7 @@ A "Combined Work" results from combining and integrating all or parts of the Pro
 Section 3. Distribution Licensing Terms
 
 A. General Requirements
-Except as necessary to recognize third-party rights or third-party restriction (see below), a distribution of the Program in any of the forms listed below must not put any further restrictions on the recipient���s exercise of the rights granted herein.
+Except as necessary to recognize third-party rights or third-party restriction (see below), a distribution of the Program in any of the forms listed below must not put any further restrictions on the recipient’s exercise of the rights granted herein.
 
 As a Contributor, you represent that your Modification(s) are your original creation(s) and, to the best of your knowledge, no third party has any claim (including but not limited to intellectual property claims) relating to your Modification(s). You represent that each of your Modifications includes complete details of any third-party right or other third-party restriction associated with any part of your Modification (including a copy of any applicable license agreement).
 

@@ -168,7 +168,7 @@ public class FuzzyParser {
                 orElseThrow( () -> new IllegalArgumentException( "no such license: " + name ) );
 
         boolean plus = matcher.group( "plus" ) != null;
-        Optional<LicenseExclude> exception = Optional.ofNullable( matcher.group( "exception" ) ).
+        Optional<LicenseException> exception = Optional.ofNullable( matcher.group( "exception" ) ).
                 map( lOracle::getExceptionOrThrow );
 
         if ( license instanceof SingleLicense ) {

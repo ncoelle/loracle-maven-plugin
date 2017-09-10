@@ -61,7 +61,6 @@ public class LOracle {
     private final transient Map<String, Set<LicenseID>> couldbeUrls = new HashMap<>();
 
     private final transient SPDXParser parser;
-    private final transient Normalizer normalizer = new Normalizer();
     private transient Map<Coordinates, LicenseID> coordinatesMap = new HashMap<>();
     public transient Map<String, LicenseID> longNameMapper = new HashMap<>();
     private transient Map<String, LicenseID> urls = new HashMap<>();
@@ -175,7 +174,7 @@ public class LOracle {
     }
 
     // todo copy left ?
-    public LicenseID getOrLater( SingleLicense license, boolean orLater, Optional<LicenseExclude> exception ) {
+    public LicenseID getOrLater( SingleLicense license, boolean orLater, Optional<LicenseException> exception ) {
         if( !orLater && !exception.isPresent() ) {
             return license;
         }
@@ -192,10 +191,10 @@ public class LOracle {
         return ret;
     }
 
-    public LicenseExclude getExceptionOrThrow( String ex ) {
+    public LicenseException getExceptionOrThrow( String ex ) {
         String lower = ex.trim().toLowerCase( Locale.US );
         if( licenseExceptions.containsKey( lower ) ) {
-            return new LicenseExclude( lower );
+            return new LicenseException( lower );
         }
 
         throw new IllegalArgumentException( "no such exception: " + ex );
@@ -324,7 +323,7 @@ public class LOracle {
             // not found
         }
 
-        return Optional.ofNullable( longNameMapper.get( normalizer.reduce( name ) ) );
+        return Optional.ofNullable( longNameMapper.get( Normalizer.reduce( name ) ) );
     }
 
     private static final Pattern orLater = Frex.any().oneOrMore().var( BaseVariables.base ).then( Frex.txt( " or later" ) ).buildCaseInsensitivePattern();
@@ -349,7 +348,7 @@ public class LOracle {
             plus = true;
         }
 
-        Optional<LicenseID> ret = Optional.ofNullable( longNameMapper.get( normalizer.reduce( base ) ) );
+        Optional<LicenseID> ret = Optional.ofNullable( longNameMapper.get( Normalizer.reduce( base ) ) );
 
         if( ret.isPresent() ) {
             if( plus ) {
@@ -414,7 +413,7 @@ public class LOracle {
 
     public MappedLicense getByUrl( String url ) {
 
-        Optional<String> rel = normalizer.normalizeUrl( url );
+        Optional<String> rel = Normalizer.normalizeUrl( url );
         if( !rel.isPresent() ) {
             return MappedLicense.empty();
         }
@@ -481,12 +480,12 @@ public class LOracle {
     }
 
     public Set<LicenseID> guessByName( String name ) {
-        return Optional.ofNullable( couldbeNames.get( normalizer.reduce( name ) ) ).orElseGet( Collections::emptySet );
+        return Optional.ofNullable( couldbeNames.get( Normalizer.reduce( name ) ) ).orElseGet( Collections::emptySet );
     }
 
     public Set<LicenseID> guessByUrl( String url ) {
 
-        return normalizer.normalizeUrl( url ).map( u -> n_or( couldbeUrls.get( u ), new HashSet<LicenseID>() ) ).orElseGet( HashSet::new );
+        return Normalizer.normalizeUrl( url ).map( u -> n_or( couldbeUrls.get( u ), new HashSet<LicenseID>() ) ).orElseGet( HashSet::new );
     }
 
     public void addCouldBeUrl( LicenseID license, String url ) {
@@ -495,7 +494,7 @@ public class LOracle {
 
     public void addUrl( LicenseID license, String url ) {
 
-        String rel = normalizer.normalizeUrl( url ).orElseThrow( () -> new IllegalArgumentException( "not a url" ) );
+        String rel = Normalizer.normalizeUrl( url ).orElseThrow( () -> new IllegalArgumentException( "not a url" ) );
 
         if( urls.containsKey( rel ) ) {
 
@@ -636,11 +635,11 @@ public class LOracle {
 //    }
 
     public Optional<String> getUrlContent( String url ) {
-        return normalizer.normalizeUrl( url ).flatMap( u -> Optional.ofNullable( urlToContent.get( u ) ) );
+        return Normalizer.normalizeUrl( url ).flatMap( u -> Optional.ofNullable( urlToContent.get( u ) ) );
     }
 
     public void addUrlContent( String url, String res ) {
-        Optional<String> u = normalizer.normalizeUrl( url );
+        Optional<String> u = Normalizer.normalizeUrl( url );
         if( !u.isPresent() ) {
             throw new IllegalArgumentException( "huhh" );
         }

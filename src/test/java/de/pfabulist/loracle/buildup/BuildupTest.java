@@ -1,22 +1,18 @@
 package de.pfabulist.loracle.buildup;
 
-import com.google.gson.GsonBuilder;
 import de.pfabulist.loracle.license.MappedLicense;
 import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
-import de.pfabulist.loracle.license.MappedSomeLicense;
 import de.pfabulist.roast.nio.Files_;
 import de.pfabulist.roast.nio.Paths_;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Locale;
 
-import static de.pfabulist.kleinod.text.Strings.getBytes;
 import static de.pfabulist.roast.NonnullCheck.n_;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,16 +26,24 @@ public class BuildupTest {
 
     @Test
     public void spdx() {
-        LOracle lOracle = new LOracle();
-        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
+        buildAfterExternal();
+        LOracle lOracle =
+                //new LOracle();
+                JSONStartup.start().spread();
+//        LOracle lOracle = new LOracle();
+//        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
 
         assertThat( lOracle.getSingle( "ZPl-1.1" ).isPresent() ).isTrue();
     }
 
     @Test
     public void lesserOrLater() {
-        LOracle lOracle = new LOracle();
-        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
+        buildAfterExternal();
+        LOracle lOracle =
+                //new LOracle();
+                JSONStartup.start().spread();
+//        LOracle lOracle = new LOracle();
+//        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
 
         lOracle.addLongName( lOracle.getOrThrowByName( "LGPL-3.0+" ), "GNU Lesser Public License" );
 
@@ -48,8 +52,12 @@ public class BuildupTest {
 
     @Test
     public void testApache() {
-        LOracle lOracle = new LOracle();
-        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
+        buildAfterExternal();
+        LOracle lOracle =
+                //new LOracle();
+                JSONStartup.start().spread();
+//        LOracle lOracle = new LOracle();
+//        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
 
         assertThat( lOracle.getByName( "Apache Software License - Version 2.0" ) ).
                 isEqualTo( lOracle.getByName( "apache-2.0" ) );
@@ -62,9 +70,13 @@ public class BuildupTest {
 
     @Test
     public void testClasspathException() {
-        LOracle lOracle = new LOracle();
-        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
-        new ExtractSPDXExceptionsFromHTML( lOracle );
+        buildAfterExternal();
+        LOracle lOracle =
+                //new LOracle();
+                JSONStartup.start().spread();
+//        LOracle lOracle = new LOracle();
+//        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
+//        new ExtractSPDXExceptionsFromHTML( lOracle );
 
         assertThat( lOracle.getByName( "apache-2.0 with Classpath-exception-2.0" ).isPresent() ).isTrue();
 
@@ -72,9 +84,13 @@ public class BuildupTest {
 
     @Test
     public void testJavaxServlet() {
-        LOracle lOracle = new LOracle();
-        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
-        new ExtractSPDXExceptionsFromHTML( lOracle );
+        buildAfterExternal();
+        LOracle lOracle =
+                //new LOracle();
+                JSONStartup.start().spread();
+//        LOracle lOracle = new LOracle();
+//        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
+//        new ExtractSPDXExceptionsFromHTML( lOracle );
 
         lOracle.addLicenseForArtifact( new Coordinates( "javax.servlet", "javax.servlet-api", "3.1.0" ),
                                        lOracle.getOrThrowByName( "cddl-1.1 with Classpath-exception-2.0" ) );
@@ -86,8 +102,12 @@ public class BuildupTest {
 
     @Test
     public void plus() {
-        LOracle lOracle = new LOracle();
-        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
+        buildAfterExternal();
+        LOracle lOracle =
+                //new LOracle();
+                JSONStartup.start().spread();
+//        LOracle lOracle = new LOracle();
+//        new ExtractSpdxLicensesFromHTML().getLicenses( lOracle );
 
         assertThat( lOracle.getByName( "GPL-2.0+" ).isPresent() ).isTrue();
 
@@ -109,182 +129,183 @@ public class BuildupTest {
 
     public void buildAfterExternal() {
     }
-        public void buildAfterExternalo() {
-        Path dir = Paths_.get__( "" ).toAbsolutePath__().resolve_( "src/main/resources/de/pfabulist/loracle/" );
 
-//        if ( Files_.exists_( dir.resolve( "local-json-done" ))) {
+//    public void buildAfterExternalo() {
+//        Path dir = Paths_.get__( "" ).toAbsolutePath__().resolve_( "src/main/resources/de/pfabulist/loracle/" );
 //
-//            return;
+////        if ( Files_.exists_( dir.resolve( "local-json-done" ))) {
+////
+////            return;
+////        }
+//
+//        System.out.println( "----------------------- " );
+//        System.out.println( "------ spdx ----------- " );
+//        System.out.println( "----------------------- " );
+//
+//        LOracle lOracle =
+//                //new LOracle();
+//                JSONStartup.startSpdx().spreadNoexternals();
+//        // add too simple
+//
+////        lOracle.addTooSimple( "map", "par", "free", "foundation", "fsf", "initial developer", "wide", "attribution" );
+////        lOracle.addTooSimple( "only", "attribution only", "hp", "microsoft", "json", "closed", "government", "doc" );
+////        lOracle.addTooSimple( "directory", "jetty", "sequence", "fork", "open", "regexp", "berkeley" );
+////        // todo via dictionary ?
+//
+//
+//
+////        new ExtractSpdxLicensesFromJSON().go( lOracle );
+////        new ExtractSPDXExceptionsFromHTML( lOracle );
+//
+//        System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
+//
+//        //lOracle.addUrl( lOracle.getOrThrowByName( "bsd-2-clause" ), "opensource.org/licenses/bsd-2-clause" );
+//        lOracle.addUrl( lOracle.getOrThrowByName( "epl-1.0" ), "http://www.eclipse.org/org/documents/epl-v10.php" );
+//
+//        lOracle.addLongName( lOracle.getOrThrowByName( "agpl-1.0" ), "affero 1.0" );
+//        lOracle.addLongName( lOracle.getOrThrowByName( "agpl-3.0" ), "affero 3.0" );
+//        lOracle.addLongName( lOracle.getOrThrowByName( "GPL-2.0 with Classpath-exception-2.0" ), "GPL2 w/ CPE" );
+//        lOracle.addLongName( lOracle.getOrThrowByName( "isc" ), "isc bsd" );
+//        lOracle.addLongName( lOracle.getOrThrowByName( "bsd-3-clause" ), "3-clause bsd" );
+//
+//        // extra short name
+//        lOracle.addLongName( lOracle.getOrThrowByName( "lgpl-2.1" ), "GNU Lesser General Public License (LGPL), Version 2.1" ); // extra (LGPL)
+//        lOracle.addLongName( lOracle.getOrThrowByName( "gpl-3.0" ), "gnu (gpl) 3.0" );
+//        lOracle.addLongName( lOracle.getOrThrowByName( "gpl-2.0" ), "gnu (gpl) 2.0" );
+//        lOracle.addLongName( lOracle.getOrThrowByName( "gpl-1.0" ), "gnu (gpl) 1.0" );
+//        lOracle.addLongName( lOracle.getOrThrowByName( "cddl-1.0" ), "Common Development and Distribution License (CDDL) v1.0" );
+//
+//        lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL_1_1" );
+//        lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.0 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL" );
+//
+//        // gnu license urls
+//        lOracle.addUrl( lOracle.getOrThrowByName( "LGPL-3.0+" ), "gnu.org/licenses/lgpl" );
+//        lOracle.addUrl( lOracle.getOrThrowByName( "GPL-3.0+" ), "gnu.org/licenses/gpl" );
+//
+//        System.out.println( "----------------------- " );
+//        System.out.println( "------ dejacode ------- " );
+//        System.out.println( "----------------------- " );
+//
+//        new ExtractFromDejaCode().go( lOracle );
+//
+//        System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
+//
+//        // creative commons urls
+//        lOracle.addUrl( lOracle.getOrThrowByName( "cc0-1.0" ), "http://creativecommons.org/publicdomain/zero/1.0/" );
+//
+//        // new licenses
+//        try {
+//            LicenseID closed = lOracle.newSingle( "closed", false );
+//            lOracle.getMore( closed ).attributes.setGpl2Compatible( false );
+//            lOracle.getMore( closed ).attributes.setGpl3Compatible( false );
+//
+//            LicenseID hs = lOracle.newSingle( "HSQLDB", false ); // ~ BSD-4-clause , copyright ?
+//            lOracle.addUrl( hs, " http://hsqldb.org/web/hsqlLicense.html" );
+//
+//            LicenseID gs = lOracle.newSingle( "gsbase-1.0", false );
+//            lOracle.addUrl( gs, "gsbase.sourceforge.net/license.html" );
+//        } catch( IllegalArgumentException e  ) {
+//            // gibts schp
 //        }
-
-        System.out.println( "----------------------- " );
-        System.out.println( "------ spdx ----------- " );
-        System.out.println( "----------------------- " );
-
-        LOracle lOracle =
-                //new LOracle();
-                JSONStartup.startSpdx().spreadNoexternals();
-        // add too simple
-
-//        lOracle.addTooSimple( "map", "par", "free", "foundation", "fsf", "initial developer", "wide", "attribution" );
-//        lOracle.addTooSimple( "only", "attribution only", "hp", "microsoft", "json", "closed", "government", "doc" );
-//        lOracle.addTooSimple( "directory", "jetty", "sequence", "fork", "open", "regexp", "berkeley" );
-//        // todo via dictionary ?
-
-
-
-//        new ExtractSpdxLicensesFromJSON().go( lOracle );
-//        new ExtractSPDXExceptionsFromHTML( lOracle );
-
-        System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
-
-        //lOracle.addUrl( lOracle.getOrThrowByName( "bsd-2-clause" ), "opensource.org/licenses/bsd-2-clause" );
-        lOracle.addUrl( lOracle.getOrThrowByName( "epl-1.0" ), "http://www.eclipse.org/org/documents/epl-v10.php" );
-
-        lOracle.addLongName( lOracle.getOrThrowByName( "agpl-1.0" ), "affero 1.0" );
-        lOracle.addLongName( lOracle.getOrThrowByName( "agpl-3.0" ), "affero 3.0" );
-        lOracle.addLongName( lOracle.getOrThrowByName( "GPL-2.0 with Classpath-exception-2.0" ), "GPL2 w/ CPE" );
-        lOracle.addLongName( lOracle.getOrThrowByName( "isc" ), "isc bsd" );
-        lOracle.addLongName( lOracle.getOrThrowByName( "bsd-3-clause" ), "3-clause bsd" );
-
-        // extra short name
-        lOracle.addLongName( lOracle.getOrThrowByName( "lgpl-2.1" ), "GNU Lesser General Public License (LGPL), Version 2.1" ); // extra (LGPL)
-        lOracle.addLongName( lOracle.getOrThrowByName( "gpl-3.0" ), "gnu (gpl) 3.0" );
-        lOracle.addLongName( lOracle.getOrThrowByName( "gpl-2.0" ), "gnu (gpl) 2.0" );
-        lOracle.addLongName( lOracle.getOrThrowByName( "gpl-1.0" ), "gnu (gpl) 1.0" );
-        lOracle.addLongName( lOracle.getOrThrowByName( "cddl-1.0" ), "Common Development and Distribution License (CDDL) v1.0" );
-
-        lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL_1_1" );
-        lOracle.addLongName( lOracle.getOrThrowByName( "CDDl-1.0 or GPL-2.0 with Classpath-exception-2.0" ), "CDDL+GPL" );
-
-        // gnu license urls
-        lOracle.addUrl( lOracle.getOrThrowByName( "LGPL-3.0+" ), "gnu.org/licenses/lgpl" );
-        lOracle.addUrl( lOracle.getOrThrowByName( "GPL-3.0+" ), "gnu.org/licenses/gpl" );
-
-        System.out.println( "----------------------- " );
-        System.out.println( "------ dejacode ------- " );
-        System.out.println( "----------------------- " );
-
-        new ExtractFromDejaCode().go( lOracle );
-
-        System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
-
-        // creative commons urls
-        lOracle.addUrl( lOracle.getOrThrowByName( "cc0-1.0" ), "http://creativecommons.org/publicdomain/zero/1.0/" );
-
-        // new licenses
-        try {
-            LicenseID closed = lOracle.newSingle( "closed", false );
-            lOracle.getMore( closed ).attributes.setGpl2Compatible( false );
-            lOracle.getMore( closed ).attributes.setGpl3Compatible( false );
-
-            LicenseID hs = lOracle.newSingle( "HSQLDB", false ); // ~ BSD-4-clause , copyright ?
-            lOracle.addUrl( hs, " http://hsqldb.org/web/hsqlLicense.html" );
-
-            LicenseID gs = lOracle.newSingle( "gsbase-1.0", false );
-            lOracle.addUrl( gs, "gsbase.sourceforge.net/license.html" );
-        } catch( IllegalArgumentException e  ) {
-            // gibts schp
-        }
-
-
-
-//        LicenseID bouncy = lOracle.newSingle( "bouncycastle", false ); // is really mit
-//        lOracle.addUrl( bouncy, "bouncyastle.org/license.html" ); // todo
-
-        // by artifact
-        // lOracle.addLicenseForArtifact( Coordinates.valueOf( "dom4j:dom4j:1.6.1" ), lOracle.getOrThrowByName( "dom4j" ) ); found in license
-        // Copyright 2001-2005 (C) MetaStuff, Ltd. All Rights Reserved.
-        // http://dom4j.sourceforge.net/dom4j-1.6.1/license.html
-
-
-//        lOracle.addLicenseForArtifact( new Coordinates( "javax.servlet", "javax.servlet-api", "3.1.0" ),
-//                                       lOracle.getOrThrowByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ) );
-        // better with pom
-
-        // https://github.com/highsource/maven-jaxb2-plugin,
-        // https://github.com/highsource/maven-jaxb2-plugin/blob/master/LICENSE
-        // Copyright (c) 2006-2014, Alexey Valikov.
-
-//        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" ),
-//                                       lOracle.getOrThrowByName( "Eclipse Distribution License - v 1.0" )); // or epl1-0
-        // found in header
-
-        // Copyright (c) 2007, Eclipse Foundation, Inc. and its licensors.
-        // Copyright (c) 2008, 2009 Sun Microsystems, Oracle Corporation. All rights reserved.
-        // http://grepcode.com/file/repo1.maven.org/maven2/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/readme.txt?av=f
-
-        //Copyright (c) 2008, 2009 Sun Microsystems, Oracle Corporation. All rights reserved.
 //
-//        This program and the accompanying materials are made available under the
-//        terms of the Eclipse Public License v1.0 and Eclipse Distribution License v. 1.0
-//        which accompanies this distribution.
-//                The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
-//        and the Eclipse Distribution License is available at
-//        http://www.eclipse.org/org/documents/edl-v10.php.
 //
-//        Contributors:
-//        Linda DeMichiel -Java Persistence 2.0 - Proposed Final Draft, Version 2.0 (August 31, 2009)
-//        Specification available from http://jcp.org/en/jsr/detail?id=317
-//        Oracle Committers - EclipseLink specific implementations and OSGi support
-
-        // postgres
-        // Copyright (c) 1997-2011, PostgreSQL Global Development Group
-
-        // bsd-2-clause hmm
-        //http://www.opensource.org/licenses/bsd-license.php
-        //http://asm.objectweb.org/license.html
-
-        // aduna bsd ? 3-clause
-
-        // com.jcabi:jcabi-log:0.14       :  http://www.jcabi.com/LICENSE.txt
-        // com.jcabi:jcabi-manifests:1.1
-
-        // scala 2.10.5
-
-        System.out.println( "----------------------- " );
-        System.out.println( "------ fedora --------- " );
-        System.out.println( "----------------------- " );
-
-        new ExtractGoodFedoraLicensesFromHTML().addFedoraInfo( lOracle );
-        new ExtractBadFedoraLicensesFromHTML().addFedoraInfo( lOracle );
-
-        System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
-
-        // checkat
-
-//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://asm.objectweb.org/license.html", "2016-06-08" );
-////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://asm.ow2.org/license.html", "2016-06-08" ); // todo
-//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://www.opensource.org/licenses/bsd-license.php", "2016-06-08" );
-////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-4-clause" ), "http://hsqldb.org/web/hsqlLicense.html", "2016-06-08" ); // now new license
-//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/about/license.html", "2016-06-20" );
-//        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/license.html", "2016-06-20" );
-
-        lOracle.addUrl( lOracle.getOrThrowByName( "wtfpl" ), "http://www.wtfpl.net" );
-
-        System.out.println( "----------------------- " );
-        System.out.println( "------ ifross.org ----- " );
-        System.out.println( "----------------------- " );
-
-        // strong copy left
-        strongCL( lOracle );
-
-        System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
-
-        // ---
-
-        lOracle.addUrlContent( "http://www.apache.org/licenses/LICENSE-2.0", "/de/pfabulist/loracle/urls/apache-2.txt" );
-        lOracle.addUrlContent( "http://glassfish.java.net/public/CDDL+GPL_1_1.html", "/de/pfabulist/loracle/urls/glassfish_cddl+gpl_1_1" );
-        lOracle.addUrlContent( "http://glassfish.java.net/public/CDDL+GPL.html", "/de/pfabulist/loracle/urls/glassfish_cddl+gpl_1.0.txt" );
-        lOracle.addUrlContent( "http://www.eclipse.org/org/documents/epl-v10.php", "/de/pfabulist/loracle/urls/eclipse-v10.txt" );
-
-        Files_.write( Paths_.get__( "" ).toAbsolutePath__().resolve_( "src/main/resources/de/pfabulist/loracle/loracle.json" ),
-                      getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
-        Files_.write( dir.resolve( "local-json-done" ),
-                      getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
-
-
-    }
+//
+////        LicenseID bouncy = lOracle.newSingle( "bouncycastle", false ); // is really mit
+////        lOracle.addUrl( bouncy, "bouncyastle.org/license.html" ); // todo
+//
+//        // by artifact
+//        // lOracle.addLicenseForArtifact( Coordinates.valueOf( "dom4j:dom4j:1.6.1" ), lOracle.getOrThrowByName( "dom4j" ) ); found in license
+//        // Copyright 2001-2005 (C) MetaStuff, Ltd. All Rights Reserved.
+//        // http://dom4j.sourceforge.net/dom4j-1.6.1/license.html
+//
+//
+////        lOracle.addLicenseForArtifact( new Coordinates( "javax.servlet", "javax.servlet-api", "3.1.0" ),
+////                                       lOracle.getOrThrowByName( "CDDl-1.1 or GPL-2.0 with Classpath-exception-2.0" ) );
+//        // better with pom
+//
+//        // https://github.com/highsource/maven-jaxb2-plugin,
+//        // https://github.com/highsource/maven-jaxb2-plugin/blob/master/LICENSE
+//        // Copyright (c) 2006-2014, Alexey Valikov.
+//
+////        lOracle.addLicenseForArtifact( Coordinates.valueOf( "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" ),
+////                                       lOracle.getOrThrowByName( "Eclipse Distribution License - v 1.0" )); // or epl1-0
+//        // found in header
+//
+//        // Copyright (c) 2007, Eclipse Foundation, Inc. and its licensors.
+//        // Copyright (c) 2008, 2009 Sun Microsystems, Oracle Corporation. All rights reserved.
+//        // http://grepcode.com/file/repo1.maven.org/maven2/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/readme.txt?av=f
+//
+//        //Copyright (c) 2008, 2009 Sun Microsystems, Oracle Corporation. All rights reserved.
+////
+////        This program and the accompanying materials are made available under the
+////        terms of the Eclipse Public License v1.0 and Eclipse Distribution License v. 1.0
+////        which accompanies this distribution.
+////                The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+////        and the Eclipse Distribution License is available at
+////        http://www.eclipse.org/org/documents/edl-v10.php.
+////
+////        Contributors:
+////        Linda DeMichiel -Java Persistence 2.0 - Proposed Final Draft, Version 2.0 (August 31, 2009)
+////        Specification available from http://jcp.org/en/jsr/detail?id=317
+////        Oracle Committers - EclipseLink specific implementations and OSGi support
+//
+//        // postgres
+//        // Copyright (c) 1997-2011, PostgreSQL Global Development Group
+//
+//        // bsd-2-clause hmm
+//        //http://www.opensource.org/licenses/bsd-license.php
+//        //http://asm.objectweb.org/license.html
+//
+//        // aduna bsd ? 3-clause
+//
+//        // com.jcabi:jcabi-log:0.14       :  http://www.jcabi.com/LICENSE.txt
+//        // com.jcabi:jcabi-manifests:1.1
+//
+//        // scala 2.10.5
+//
+//        System.out.println( "----------------------- " );
+//        System.out.println( "------ fedora --------- " );
+//        System.out.println( "----------------------- " );
+//
+//        new ExtractGoodFedoraLicensesFromHTML().addFedoraInfo( lOracle );
+//        new ExtractBadFedoraLicensesFromHTML().addFedoraInfo( lOracle );
+//
+//        System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
+//
+//        // checkat
+//
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://asm.objectweb.org/license.html", "2016-06-08" );
+//////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "http://asm.ow2.org/license.html", "2016-06-08" ); // todo
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-2-clause" ), "http://www.opensource.org/licenses/bsd-license.php", "2016-06-08" );
+//////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-4-clause" ), "http://hsqldb.org/web/hsqlLicense.html", "2016-06-08" ); // now new license
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/about/license.html", "2016-06-20" );
+////        lOracle.addUrlCheckedAt( lOracle.getOrThrowByName( "bsd-3-clause" ), "https://jdbc.postgresql.org/license.html", "2016-06-20" );
+//
+//        lOracle.addUrl( lOracle.getOrThrowByName( "wtfpl" ), "http://www.wtfpl.net" );
+//
+//        System.out.println( "----------------------- " );
+//        System.out.println( "------ ifross.org ----- " );
+//        System.out.println( "----------------------- " );
+//
+//        // strong copy left
+//        strongCL( lOracle );
+//
+//        System.out.println( "\n\n#licenses " + lOracle.getSingleLicenseCount() + "\n\n" );
+//
+//        // ---
+//
+//        lOracle.addUrlContent( "http://www.apache.org/licenses/LICENSE-2.0", "/de/pfabulist/loracle/urls/apache-2.txt" );
+//        lOracle.addUrlContent( "http://glassfish.java.net/public/CDDL+GPL_1_1.html", "/de/pfabulist/loracle/urls/glassfish_cddl+gpl_1_1" );
+//        lOracle.addUrlContent( "http://glassfish.java.net/public/CDDL+GPL.html", "/de/pfabulist/loracle/urls/glassfish_cddl+gpl_1.0.txt" );
+//        lOracle.addUrlContent( "http://www.eclipse.org/org/documents/epl-v10.php", "/de/pfabulist/loracle/urls/eclipse-v10.txt" );
+//
+//        Files_.write( Paths_.get__( "" ).toAbsolutePath__().resolve_( "src/main/resources/de/pfabulist/loracle/loracle.json" ),
+//                      getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
+//        Files_.write( dir.resolve( "local-json-done" ),
+//                      getBytes( new GsonBuilder().setPrettyPrinting().create().toJson( lOracle ) ) );
+//
+//
+//    }
 
     public void testAll( LOracle lOracle ) {
 
@@ -585,10 +606,10 @@ public class BuildupTest {
                                              StandardCopyOption.REPLACE_EXISTING ) );
     }
 
-    @Test
-    public void testJson() {
-        new ExtractSpdxLicensesFromJSON().go( new LOracle() );
-    }
+//    @Test
+//    public void testJson() {
+//        new ExtractSpdxLicensesFromJSON().go( new LOracle() );
+//    }
 
 //    @Test
 //    public void fedora() {
