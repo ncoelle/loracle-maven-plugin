@@ -6,10 +6,10 @@ import de.pfabulist.loracle.attribution.JarAccess;
 import de.pfabulist.loracle.attribution.SrcAccess;
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.ContentToLicense;
+import de.pfabulist.loracle.license.known.LOracleKnown;
 import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.Findings;
-import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseID;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
@@ -43,7 +43,7 @@ public class LicenseCheckMojo {
 
     private final Findings log;
     private final MavenLicenseOracle mlo;
-    private final LOracle lOracle;
+    private final LOracleKnown lOracle;
     private final MavenProject mavenProject;
     private final DependencyGraphBuilder dependencyGraphBuilder;
     private final LicenseIntelligence licenseIntelligence;
@@ -60,7 +60,7 @@ public class LicenseCheckMojo {
         this.log = log;
         this.dependencyGraphBuilder = dependencyGraphBuilder;
         this.mlo = new MavenLicenseOracle( log, localRepo );
-        this.lOracle = JSONStartup.start().spread();
+        this.lOracle = JSONStartup.start(); //.spread();
         this.mavenProject = project;
 
         log.info( "---------------------------------------" );
@@ -93,20 +93,22 @@ public class LicenseCheckMojo {
 
     private void configUrlDeclarations( List<UrlDeclaration> urlDeclarations ) {
         urlDeclarations.forEach( ud -> {
-            LicenseID license = lOracle.getOrThrowByName( ud.getLicense() );
+            // todo
+       //     LicenseID license = lOracle.getOrThrowByName( ud.getLicense() );
             //          lOracle.addUrlCheckedAt( license, ud.getUrl(), ud.getCheckedAt() );
-            log.debug( "setting " + ud.getUrl() + " -> " + license + ", check at " + ud.getCheckedAt() );
+         //   log.debug( "setting " + ud.getUrl() + " -> " + license + ", check at " + ud.getCheckedAt() );
         } );
     }
 
     private void configLicenseDeclarations( List<LicenseDeclaration> licenseDeclarations ) {
         licenseDeclarations.forEach( excl -> {
-            Coordinates coo = excl.getCoordinates();
-            LicenseID license = lOracle.getOrThrowByName( excl.getLicense() );
-
-            lOracle.addLicenseForArtifact( coo, license );
-
-            log.debug( "setting " + coo + " -> " + license );
+            // todo
+//            Coordinates coo = excl.getCoordinates();
+//            LicenseID license = lOracle.getOrThrowByName( excl.getLicense() );
+//
+//            lOracle.addLicenseForArtifact( coo, license );
+//
+//            log.debug( "setting " + coo + " -> " + license );
         } );
     }
 
@@ -193,55 +195,58 @@ public class LicenseCheckMojo {
 
     public String checkCompatibility( Coordinates coo, String licenseStr ) {
 
-        LicenseID license = lOracle.getOrThrowByName( licenseStr );
+        // todo
+        return "";
 
-        AtomicReference<String> ret = new AtomicReference<>( "" );
-
-        lOracle.getAttributes( license ).isFedoraApproved().ifPresent( fed -> {
-            if( !fed ) {
-                ret.set( "bad license " + license + " used by: " + coo + "  (not approved by fedora)" );
-            }
-        } );
-
-        if( !self.isPresent() ) {
-            return "";
-        }
-
-        Optional<Coordinates2License.LiCo> info = coordinates2License.get( _nn( self.get() ) );
-
-        if( !info.isPresent() || !_nn( info.get() ).getLicense().isPresent() ) {
-            return "no license on current artifact";
-        }
-
-        LicenseID mine = lOracle.getOrThrowByName( _nn( _nn( info.get() ).getLicense().get() ) );
-
-        if( mine.equals( license ) ) {
-            return "";
-        }
-
-        if( lOracle.getAttributes( mine ).isCopyLeftDef() ) {
-            lOracle.getAttributes( license ).isGpl2Compatible().ifPresent(
-                    gc -> {
-                        if( !gc ) {
-                            ret.set( "not gpl2 compatible: " + license + " used by " + coo );
-                        }
-                    } );
-
-            lOracle.getAttributes( license ).isGpl3Compatible().ifPresent(
-                    gc -> {
-                        if( !gc ) {
-                            ret.set( "not gpl2 compatible: " + license + " used by " + coo );
-                        }
-                    } );
-        }
-
-        if( !lOracle.getAttributes( mine ).isCopyLeftDef() ) {
-            if( lOracle.getAttributes( license ).isCopyLeftDef() ) {
-                ret.set( "can't depend on a copy left license: " + license + " used by " + coo );
-            }
-        }
-
-        return _nn( ret.get() );
+//        LicenseID license = lOracle.getOrThrowByName( licenseStr );
+//
+//        AtomicReference<String> ret = new AtomicReference<>( "" );
+//
+//        lOracle.getAttributes( license ).isFedoraApproved().ifPresent( fed -> {
+//            if( !fed ) {
+//                ret.set( "bad license " + license + " used by: " + coo + "  (not approved by fedora)" );
+//            }
+//        } );
+//
+//        if( !self.isPresent() ) {
+//            return "";
+//        }
+//
+//        Optional<Coordinates2License.LiCo> info = coordinates2License.get( _nn( self.get() ) );
+//
+//        if( !info.isPresent() || !_nn( info.get() ).getLicense().isPresent() ) {
+//            return "no license on current artifact";
+//        }
+//
+//        LicenseID mine = lOracle.getOrThrowByName( _nn( _nn( info.get() ).getLicense().get() ) );
+//
+//        if( mine.equals( license ) ) {
+//            return "";
+//        }
+//
+//        if( lOracle.getAttributes( mine ).isCopyLeftDef() ) {
+//            lOracle.getAttributes( license ).isGpl2Compatible().ifPresent(
+//                    gc -> {
+//                        if( !gc ) {
+//                            ret.set( "not gpl2 compatible: " + license + " used by " + coo );
+//                        }
+//                    } );
+//
+//            lOracle.getAttributes( license ).isGpl3Compatible().ifPresent(
+//                    gc -> {
+//                        if( !gc ) {
+//                            ret.set( "not gpl2 compatible: " + license + " used by " + coo );
+//                        }
+//                    } );
+//        }
+//
+//        if( !lOracle.getAttributes( mine ).isCopyLeftDef() ) {
+//            if( lOracle.getAttributes( license ).isCopyLeftDef() ) {
+//                ret.set( "can't depend on a copy left license: " + license + " used by " + coo );
+//            }
+//        }
+//
+//        return _nn( ret.get() );
 
     }
 

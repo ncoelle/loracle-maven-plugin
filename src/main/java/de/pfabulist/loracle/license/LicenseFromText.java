@@ -1,6 +1,7 @@
 package de.pfabulist.loracle.license;
 
 import de.pfabulist.loracle.fulltext.TextToLicense;
+import de.pfabulist.loracle.license.known.LOracleKnown;
 import de.pfabulist.loracle.text.Normalizer;
 
 import java.util.ArrayList;
@@ -14,10 +15,10 @@ import java.util.Optional;
 
 public class LicenseFromText {
 
-    private final LOracle lOracle;
+    private final LOracleKnown lOracle;
     private final Findings log;
 
-    public LicenseFromText( LOracle lOracle, Findings log ) {
+    public LicenseFromText( LOracleKnown lOracle, Findings log ) {
         this.lOracle = lOracle;
         this.log = log;
     }
@@ -53,7 +54,7 @@ public class LicenseFromText {
            return MappedLicense.empty();
        }
 
-       LicenseID id = new FuzzyParser( lOracle ).getExtended( lic.get() );
+       LicenseID id = new AlternativeParser().getExtended( lic.get() );
 
         return MappedLicense.of( id, "by full license text" );
     }
@@ -105,7 +106,7 @@ public class LicenseFromText {
 //
 //        WorkOnOne<P<String, MappedLicense>> woo = new WorkOnOne<>( txts.stream() );
 //        List<P<String, MappedLicense>> ll = woo.work( t -> match3( frag, t ),
-//                                                      ( rr, t ) -> Splitter.cutMiddle( t.i0, rr.i0, rr.i1, lOracle.getByName( frag.getLicense() ) ) );
+//                                                      ( rr, t ) -> Splitter.cutMiddle( t.i0, rr.i0, rr.i1, lOracle.getExistingSingleByName( frag.getLicense() ) ) );
 //
 //        System.out.println("+++++ match 3" + frag.getLicense() + " tried ");
 //        txts.forEach( e -> System.out.println( "    =" + e.i0.substring( 0, Math.max( e.i0.length(), 100 ) ) ));

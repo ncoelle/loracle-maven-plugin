@@ -1,8 +1,8 @@
 package de.pfabulist.loracle.attribution;
 
+import de.pfabulist.loracle.license.known.LOracleKnown;
 import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
-import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.roast.nio.Files_;
 import de.pfabulist.roast.nio.Paths_;
 
@@ -55,7 +55,7 @@ public class LicenseWriter {
 
 
 
-    public static String writeLicense( LOracle lOracle, Coordinates coo, Coordinates2License.LiCo lico ) {
+    public static String writeLicense( LOracleKnown lOracle, Coordinates coo, Coordinates2License.LiCo lico ) {
 
         if ( !lico.getLicenseTxt().isEmpty()) {
             String licenseName = coo.toFilename() + "-license.txt";

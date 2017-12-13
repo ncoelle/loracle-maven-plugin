@@ -108,6 +108,7 @@ public class FindingsMaven implements Log, Findings {
         mavenLog.error( error );
     }
 
+    @Override
     public void throwOnError() {
         if( !fails.isEmpty() ) {
             throw Unchecked.u( new MojoFailureException( fails.get( 0 ) ) );

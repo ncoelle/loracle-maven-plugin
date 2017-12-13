@@ -2,6 +2,8 @@ package de.pfabulist.loracle.license;
 
 import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.attribution.CopyrightHolder;
+import de.pfabulist.loracle.license.known.ExistingLicense;
+import de.pfabulist.loracle.license.known.LOracleKnown;
 import de.pfabulist.loracle.mojo.UrlToLicense;
 
 import java.util.Optional;
@@ -32,12 +34,12 @@ public class ContentToLicense {
                     then( Frex.anyBut( Frex.txt( '\n' ) ).oneOrMore().var( CopyrightVariables.holder ) ).
                     buildCaseInsensitivePattern();
 
-    private final LOracle lOracle;
+    private final LOracleKnown lOracle;
     private final And and;
     private final Findings log;
     private final UrlToLicense urlToLicense;
 
-    public ContentToLicense( LOracle lOracle, Findings log ) {
+    public ContentToLicense( LOracleKnown lOracle, Findings log ) {
         this.lOracle = lOracle;
         this.and = new And( lOracle, log, true );
         this.log = log;
@@ -95,7 +97,8 @@ public class ContentToLicense {
 
     public MappedLicense findLicenses( String str, String dscr ) {
 
-        MappedLicense name = lOracle.findLongNames( and, str );
+        Optional<ExistingLicense> ex = lOracle.getExistingLicense( str );
+        MappedLicense name = ex.isPresent() ? MappedLicense.of( ex.get().getLicenseId(), dscr ) : MappedLicense.empty();// findLongNames( and, str );
         MappedLicense url = byUrl( str, dscr );
 
         // todo merge

@@ -1,9 +1,9 @@
 package de.pfabulist.loracle.mojo;
 
 import de.pfabulist.loracle.license.Findings;
-import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseFromText;
 import de.pfabulist.loracle.license.MappedLicense;
+import de.pfabulist.loracle.license.known.LOracleKnown;
 
 /**
  * Copyright (c) 2006 - 2016, Stephan Pfab
@@ -12,12 +12,12 @@ import de.pfabulist.loracle.license.MappedLicense;
 
 public class UrlToLicense {
 
-    private final LOracle lOracle;
+    private final LOracleKnown lOracle;
     private final Findings log;
     private final Downloader downloader;
     private final LicenseFromText lft;
 
-    public UrlToLicense( LOracle lOracle, Findings log ) {
+    public UrlToLicense( LOracleKnown lOracle, Findings log ) {
         this.lOracle = lOracle;
         this.log = log;
         this.downloader = new Downloader( log, lOracle );
@@ -25,26 +25,28 @@ public class UrlToLicense {
     }
 
     public MappedLicense getLicense( String url ) {
-        MappedLicense ret = lOracle.getByUrl( url );
-
-        if( ret.isPresent() ) {
-            return ret;
-        }
-
-        downloader.download( url );
-        String txt = downloader.get( url );
-
-        if( txt.isEmpty() ) {
-            return MappedLicense.empty();
-        }
-
-        ret = lft.getLicense( txt );
-
-        ret.ifPresent( lid -> {
-            log.debug( "added extension url for license " + url );
-            lOracle.addUrl( lid, url );
-        } );
-
-        return ret;
+        // todo
+        return MappedLicense.empty();
+//        MappedLicense ret = lOracle.getByUrl( url );
+//
+//        if( ret.isPresent() ) {
+//            return ret;
+//        }
+//
+//        downloader.download( url );
+//        String txt = downloader.get( url );
+//
+//        if( txt.isEmpty() ) {
+//            return MappedLicense.empty();
+//        }
+//
+//        ret = lft.getLicense( txt );
+//
+//        ret.ifPresent( lid -> {
+//            log.debug( "added extension url for license " + url );
+//            lOracle.addUrl( lid, url );
+//        } );
+//
+//        return ret;
     }
 }

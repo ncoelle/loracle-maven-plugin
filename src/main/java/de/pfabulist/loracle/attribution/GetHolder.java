@@ -3,9 +3,9 @@ package de.pfabulist.loracle.attribution;
 import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.Utils;
 import de.pfabulist.loracle.license.ContentToLicense;
+import de.pfabulist.loracle.license.known.LOracleKnown;
 import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
-import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.mojo.MavenLicenseOracle;
 import de.pfabulist.roast.nio.Files_;
@@ -52,11 +52,11 @@ public class GetHolder {
                     then( Frex.txt( ' ' ) ).
                     then( Frex.any().oneOrMore().var( CopyrightVariables.holder ) ).buildCaseInsensitivePattern();
 
-    private final LOracle lOracle;
+    private final LOracleKnown lOracle;
     private final MavenLicenseOracle mlo;
     private final Findings log;
 
-    public GetHolder( LOracle lOracle, MavenLicenseOracle mlo, Findings log ) {
+    public GetHolder( LOracleKnown lOracle, MavenLicenseOracle mlo, Findings log ) {
         this.lOracle = lOracle;
         this.mlo = mlo;
         this.log = log;
@@ -77,7 +77,8 @@ public class GetHolder {
             return ret;
         }
 
-        if( !lOracle.getOrThrowByName( license ).equals( lOracle.getOrThrowByName( "apache-2" ) ) ) {
+        // was ot thrown, good know
+        if( !lOracle.getExistingLicense( license ).equals( lOracle.getExistingLicense( "apache-2" ) ) ) {
             return Optional.empty();
         }
 

@@ -2,7 +2,7 @@ package de.pfabulist.loracle.urls;
 
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.FindingsDummy;
-import de.pfabulist.loracle.license.LOracle;
+import de.pfabulist.loracle.license.known.LOracleKnown;
 import de.pfabulist.loracle.mojo.Downloader;
 import de.pfabulist.loracle.license.Findings;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class UrlTest {
                 "(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\n" +
                 "SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.";
 
-        LOracle lOracle = JSONStartup.start();
+        LOracleKnown lOracle = JSONStartup.start();
 
         Downloader dl = new Downloader( log, lOracle );
         dl.download( "repo.aduna-software.org/legal/aduna-bsd" );

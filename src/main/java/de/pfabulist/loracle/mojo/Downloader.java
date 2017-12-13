@@ -3,6 +3,8 @@ package de.pfabulist.loracle.mojo;
 import com.google.gson.Gson;
 import de.pfabulist.loracle.buildup.JSONStartup;
 import de.pfabulist.loracle.license.*;
+import de.pfabulist.loracle.license.known.LOracleKnown;
+import de.pfabulist.loracle.license.known.LoUrl;
 import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.text.Normalizer;
 import de.pfabulist.roast.nio.Files_;
@@ -37,9 +39,9 @@ public class Downloader {
     private final Findings log;
     Normalizer normalizer = new Normalizer();
     //private boolean noInternet = true;
-    private final LOracle lOracle;
+    private final LOracleKnown lOracle;
 
-    public Downloader( Findings log, LOracle lOracle ) {
+    public Downloader( Findings log, LOracleKnown lOracle ) {
         this.log = log;
         this.lOracle = lOracle;
     }
@@ -91,53 +93,40 @@ public class Downloader {
     }
 
     public void download( String url ) {
-
-        log.debug( "[download?] " + url );
-
-        Path path = Paths_.get__( "" ).resolve_( "target/generated-sources/loracle/url/" + getUrlPath( url ) );
-        if( Files_.exists( path ) ) {
-            return;
-        }
-        Files_.createDirectories( path.getParent() );
-
-        Optional<String> res = lOracle.getUrlContent( url );
-        if( !res.isPresent() ) {
-            log.debug( "    url not stored: " + url );
-            return;
-        }
-
-        try( @Nullable InputStream is = getClass().getResourceAsStream( res.get() ) ) {
-            if( is == null ) {
-                log.debug( "    not found: " + getUrlPath( url ) );
-                return;
-            }
-            Files_.copy( is, path );
-            log.debug( "    found stored in loracle" );
-            return;
-        } catch( IOException e ) {
-            // not stored
-        }
-
-        log.warn( "       not found " + url );
+        log.warn( "       not IMPL " + url );
         log.warn( "[try]  add page src as resource see loracle-custom" );
         return;
 
-//        if( noInternet ) {
-//            log.warn( "       not found " + url );
-//            log.warn( "[try]  add page src as resource: /de/pfabulist/loracle/urls/" + getUrlPath( url ) );
-//            log.warn( "       see loracle-maven-plugin docu for more details" );
+//        log.debug( "[download?] " + url );
+//
+//        Path path = Paths_.get__( "" ).resolve_( "target/generated-sources/loracle/url/" + getUrlPath( url ) );
+//        if( Files_.exists( path ) ) {
+//            return;
+//        }
+//        Files_.createDirectories( path.getParent() );
+//
+//        Optional<String> res = lOracle.getUrlContent( url );
+//        if( !res.isPresent() ) {
+//            log.debug( "    url not stored: " + url );
 //            return;
 //        }
 //
-//        log.debug( "    trying " );
-//        try {
-//            Files.write( path, getBytes( _nn( _nn( _nn( Jsoup.connect( url ).get() ).body() ).text() ) ) );
-//            log.debug( "    success " );
-//        } catch( Exception e ) {
-//            e.printStackTrace();
-//            log.warn( "no internet or 404: " + url );
+//        try( @Nullable InputStream is = getClass().getResourceAsStream( res.get() ) ) {
+//            if( is == null ) {
+//                log.debug( "    not found: " + getUrlPath( url ) );
+//                return;
+//            }
+//            Files_.copy( is, path );
+//            log.debug( "    found stored in loracle" );
 //            return;
+//        } catch( IOException e ) {
+//            // not stored
 //        }
+//
+//        log.warn( "       not found " + url );
+//        log.warn( "[try]  add page src as resource see loracle-custom" );
+//        return;
+
     }
 
     private static final String urlspecial = txt( ':' ).or( txt( '/' ) ).or( txt( '*' ) ).or( txt( '"' ) ).or( txt( '<' ) ).or( txt( '>' ) ).or( txt( '?' ) ).or( txt( '\\' ) ).buildPattern().toString();
@@ -203,8 +192,8 @@ public class Downloader {
         }
 
         List<String> fnames = new ArrayList<>();
-        liCo.getLicense().ifPresent( li -> lOracle.getByName( li ).ifPresent(
-                license -> LicenseIDs.flattenToStrings( license ).
+        liCo.getLicense().ifPresent( li -> lOracle.getExistingLicense/*getByName*/( li ).ifPresent(
+                license -> LicenseIDs.flattenToStrings( license.getLicenseId() ).
                         forEach( lstr -> {
                             String fname = onPredefLicense( lstr,
                                                             ( filename, is ) -> getEmptyNoticeLicenseTarget( prefix, filename ).ifPresent( tgt -> Files_.copy( is, tgt ) ) ).
@@ -257,35 +246,36 @@ public class Downloader {
     @SuppressFBWarnings( "REC_CATCH_EXCEPTION" )
     public Optional<String> onUrldefLicense( String str, BiConsumer<String, InputStream> isConsumer ) {
 
-        Optional<LicenseID> olicense = lOracle.getByName( str ).noReason();
-
-        if( !olicense.isPresent() ) {
-            return Optional.empty();
-        }
-
-        LicenseID license = _nn( olicense.get() );
-
-        Optional<String> ourl = lOracle.getMore( license ).urls.stream().filter( u -> lOracle.getUrlContent( u ).isPresent() ).findFirst();
-
-        if( !ourl.isPresent() ) {
-            return Optional.empty();
-        }
-
-        String url = _nn( ourl.get() );
-        String fname = Normalizer.toFilename( url ) + ".txt";
-        String res = _nn( lOracle.getUrlContent( url ).get() ); // good by first stream
-
-        try( @Nullable InputStream is = Downloader.class.getResourceAsStream( res ) ) {
-            if( is == null ) {
-                log.warn( "urlcontent but no resource " + url );
-                return Optional.empty();
-            }
-            isConsumer.accept( fname, is );
-
-            return Optional.of( fname );
-        } catch( Exception e ) {
-            log.warn( "urlcontent but no resource " + url );
-        }
+        // todo fix it
+//        Optional<LicenseID> olicense = lOracle.getByName( str ).noReason();
+//
+//        if( !olicense.isPresent() ) {
+//            return Optional.empty();
+//        }
+//
+//        LicenseID license = _nn( olicense.get() );
+//
+//        Optional<String> ourl = lOracle.getMore( license ).urls.stream().filter( u -> lOracle.getUrlContent( u ).isPresent() ).findFirst();
+//
+//        if( !ourl.isPresent() ) {
+//            return Optional.empty();
+//        }
+//
+//        String url = _nn( ourl.get() );
+//        String fname = Normalizer.toFilename( url ) + ".txt";
+//        String res = _nn( lOracle.getUrlContent( url ).get() ); // good by first stream
+//
+//        try( @Nullable InputStream is = Downloader.class.getResourceAsStream( res ) ) {
+//            if( is == null ) {
+//                log.warn( "urlcontent but no resource " + url );
+//                return Optional.empty();
+//            }
+//            isConsumer.accept( fname, is );
+//
+//            return Optional.of( fname );
+//        } catch( Exception e ) {
+//            log.warn( "urlcontent but no resource " + url );
+//        }
 
         return Optional.empty();
     }

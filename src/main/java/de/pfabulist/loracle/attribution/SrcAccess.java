@@ -2,9 +2,9 @@ package de.pfabulist.loracle.attribution;
 
 import de.pfabulist.frex.Frex;
 import de.pfabulist.loracle.Utils;
+import de.pfabulist.loracle.license.known.LOracleKnown;
 import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
-import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.Findings;
 import de.pfabulist.loracle.mojo.MavenLicenseOracle;
 import de.pfabulist.roast.nio.Files_;
@@ -27,7 +27,7 @@ import static de.pfabulist.roast.NonnullCheck.n_or;
 @SuppressWarnings( {"PMD.UnusedPrivateField"} )
 public class SrcAccess {
 
-    private final LOracle lOracle;
+    private final LOracleKnown lOracle;
     private final MavenLicenseOracle mlo;
     private final Findings log;
 
@@ -35,7 +35,7 @@ public class SrcAccess {
             Frex.any().zeroOrMore().
                     then( Frex.or( Frex.txt( ".scala" ), Frex.txt( ".java" ))).buildCaseInsensitivePattern();
 
-    public SrcAccess( LOracle lOracle, MavenLicenseOracle mlo, Findings log ) {
+    public SrcAccess( LOracleKnown lOracle, MavenLicenseOracle mlo, Findings log ) {
         this.lOracle = lOracle;
         this.mlo = mlo;
         this.log = log;

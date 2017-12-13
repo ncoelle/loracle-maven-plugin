@@ -2,10 +2,10 @@ package de.pfabulist.loracle.mojo;
 
 import de.pfabulist.loracle.license.And;
 import de.pfabulist.loracle.license.ContentToLicense;
+import de.pfabulist.loracle.license.known.LOracleKnown;
 import de.pfabulist.loracle.maven.Coordinates;
 import de.pfabulist.loracle.license.Coordinates2License;
 import de.pfabulist.loracle.license.Findings;
-import de.pfabulist.loracle.license.LOracle;
 import de.pfabulist.loracle.license.LicenseFromText;
 import de.pfabulist.loracle.license.MappedLicense;
 
@@ -19,13 +19,13 @@ import java.util.Optional;
 
 public class LicenseIntelligence {
 
-    private final LOracle lOracle;
+    private final LOracleKnown lOracle;
     private final Findings log;
     private final UrlToLicense urlToLicense;
     private final LicenseFromText lft;
     private final ContentToLicense contentToLicense;
 
-    public LicenseIntelligence( LOracle lOracle, Findings log ) {
+    public LicenseIntelligence( LOracleKnown lOracle, Findings log ) {
         this.lOracle = lOracle;
         this.log = log;
         this.urlToLicense = new UrlToLicense( lOracle, log );
@@ -121,33 +121,38 @@ public class LicenseIntelligence {
     }
 
     private MappedLicense computeByCoordinates( Coordinates coordinates, Coordinates2License.LiCo liCo ) {
-        MappedLicense byCoo = lOracle.getByCoordinates( coordinates );
-        liCo.setByCoordinates( byCoo );
 
-        if( !byCoo.isPresent() ) {
-            // only set the url, to be used later
-            Optional<String> url = lOracle.getUrlFromCoordinates( coordinates );
-            url.ifPresent( u -> liCo.setMavenLicenses( Collections.singletonList( new Coordinates2License.MLicense( "", u, "" ) ) ) );
-        }
-
-        return byCoo;
+        // todo impl
+        return MappedLicense.empty();
+        //        MappedLicense byCoo = lOracle.getByCoordinates( coordinates );
+//        liCo.setByCoordinates( byCoo );
+//
+//        if( !byCoo.isPresent() ) {
+//            // only set the url, to be used later
+//            Optional<String> url = lOracle.getUrlFromCoordinates( coordinates );
+//            url.ifPresent( u -> liCo.setMavenLicenses( Collections.singletonList( new Coordinates2License.MLicense( "", u, "" ) ) ) );
+//        }
+//
+//        return byCoo;
     }
 
     public MappedLicense mavenLicenseToLicense( Coordinates2License.MLicense mavenLicense ) {
 
-        Optional<String> name = Optional.of( mavenLicense.getName() );
-        MappedLicense byName = name.map( lOracle::getByName ).orElse( MappedLicense.empty() );
-
-        Optional<String> url = Optional.of( mavenLicense.getUrl() );
-        MappedLicense byUrl = url.map( urlToLicense::getLicense ).orElse( MappedLicense.empty() );
-
-        MappedLicense byComments = contentToLicense.findLicenses( mavenLicense.getComment(), "comments" );
-
-        mavenLicense.setByName( byName );
-        mavenLicense.setByUrl( byUrl );
-        mavenLicense.setByComment( byComments );
-
-        return MappedLicense.decide( byName, byUrl, byComments );
+        // todo impl
+        return MappedLicense.empty();
+//        Optional<String> name = Optional.of( mavenLicense.getName() );
+//        MappedLicense byName = name.map( lOracle::getByName ).orElse( MappedLicense.empty() );
+//
+//        Optional<String> url = Optional.of( mavenLicense.getUrl() );
+//        MappedLicense byUrl = url.map( urlToLicense::getLicense ).orElse( MappedLicense.empty() );
+//
+//        MappedLicense byComments = contentToLicense.findLicenses( mavenLicense.getComment(), "comments" );
+//
+//        mavenLicense.setByName( byName );
+//        mavenLicense.setByUrl( byUrl );
+//        mavenLicense.setByComment( byComments );
+//
+//        return MappedLicense.decide( byName, byUrl, byComments );
     }
 
 }

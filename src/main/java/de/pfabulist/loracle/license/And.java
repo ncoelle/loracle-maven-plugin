@@ -1,6 +1,7 @@
 package de.pfabulist.loracle.license;
 
 import de.pfabulist.kleinod.collection.Ref;
+import de.pfabulist.loracle.license.known.LOracleKnown;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,11 +13,11 @@ import java.util.Set;
 
 public class And {
 
-    private final LOracle lOracle;
+    private final LOracleKnown lOracle;
     private final Findings log;
     private final boolean andIsOr;
 
-    public And( LOracle lOracle, Findings log, boolean andIsOr ) {
+    public And( LOracleKnown lOracle, Findings log, boolean andIsOr ) {
         this.lOracle = lOracle;
         this.log = log;
         this.andIsOr = andIsOr;
@@ -60,22 +61,24 @@ public class And {
             return l;
         }
 
-        Ref<MappedLicense> ret = new Ref<>( MappedLicense.empty() );
-        l.ifPresent( left -> r.ifPresent( right -> {
-            if( andIsOr ) {
-                ret.set( MappedLicense.of( lOracle.getOr( left, right ), "or'ed" ) );//  (" + l.getReason() + "), (" + r.getReason() + ")" ) );
-            } else {
-                log.warn( "is that really <" + ret + "> or should that be <" + lOracle.getOr( left, right ) + ">" );
-                ret.set( MappedLicense.of( lOracle.getAnd( left, right ), "and'ed (" + l.getReason() + "), (" + r.getReason() + ")" ) );
-            }
-        } ) );
+        return MappedLicense.of( l, r );
 
-        MappedSomeLicense rett =  (MappedSomeLicense)ret._get();
-
-//        rett.addOverFrom( l );
-//        rett.addOverFrom( r );
-
-        return rett;
+//        Ref<MappedLicense> ret = new Ref<>( MappedLicense.empty() );
+//        l.ifPresent( left -> r.ifPresent( right -> {
+//            if( andIsOr ) {
+//                ret.set( MappedLicense.of( lOracle.getOr( left, right ), "or'ed" ) );//  (" + l.getReason() + "), (" + r.getReason() + ")" ) );
+//            } else {
+//                log.warn( "is that really <" + ret + "> or should that be <" + lOracle.getOr( left, right ) + ">" );
+//                ret.set( MappedLicense.of( lOracle.getAnd( left, right ), "and'ed (" + l.getReason() + "), (" + r.getReason() + ")" ) );
+//            }
+//        } ) );
+//
+//        MappedSomeLicense rett =  (MappedSomeLicense)ret._get();
+//
+////        rett.addOverFrom( l );
+////        rett.addOverFrom( r );
+//
+//        return rett;
 
     }
 
